@@ -1,0 +1,11 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="false" android:drawable="@drawable/bg_toolbar_white_disabled"/>
+    <!-- disabled -->
+    <item android:state_enabled="true" android:state_pressed="true"
+          android:drawable="@drawable/bg_toolbar_white_pressed"/>
+    <!-- pressed -->
+    <item android:drawable="@drawable/bg_toolbar_white" android:state_enabled="true"
+          android:state_pressed="false"/>
+
+</selector><!-- From: file:/Users/yinliang/Downloads/vulture/ui/MobileApp/ainemo_open_api/src/main/res/drawable/toolbar_button_bg_style.xml -->

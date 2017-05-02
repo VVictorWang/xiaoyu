@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#ffffffff"/>
+    <stroke android:width="1px" android:color="#00000000"/>
+</shape>
+<!-- From: file:/Users/yinliang/Downloads/vulture/ui/MobileApp/ainemo_open_api/src/main/res/drawable/statistics_middle_unsel_bg.xml -->

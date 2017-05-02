@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundedImageView">
+        <attr name="corner_radius" format="dimension"/>
+        <attr name="ainemo_border_width" format="dimension"/>
+        <attr name="ainemo_border_color" format="color"/>
+        <attr name="round_background" format="boolean"/>
+        <attr name="is_oval" format="boolean"/>
+        <attr name="android:scaleType"/>
+    </declare-styleable>
+    <declare-styleable name="ChartStyle">
+        <attr name="verticalAxisPosition">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

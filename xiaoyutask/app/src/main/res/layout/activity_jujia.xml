@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.franklin.myclient.view.JujiaActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/my_background"
+        android:id="@+id/jiujia_activity_toolbar">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/back_to_main_jujia"
+            android:layout_height="match_parent">
+
+
+
+
+        <ImageView
+            android:id="@+id/back_to_main_image_background_jiujia"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="6dp"
+            android:src="@drawable/backwards_iamge" />
+
+        <TextView
+            android:id="@+id/back_to_main_image_background_contact_jiujia_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/back_to_main_image_background_jiujia"
+            android:paddingTop="12dp"
+            android:text="主页"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="居家参数查看"
+            android:paddingTop="12dp"
+            android:layout_marginLeft="145dp"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/whites"
+            android:id="@+id/update_jujia"
+            android:text="同步"
+            android:paddingTop="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:textSize="18dp"
+            />
+    </RelativeLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/shidu_line_chart"
+        android:layout_below="@+id/jiujia_activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="219dp"
+        android:background="#24d0fd">
+
+    </com.github.mikephil.charting.charts.LineChart>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_shidu_chart"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/shidu_line_chart" />
+
+    <RelativeLayout
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_below="@+id/shidu_line_chart"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@+id/bar_shidu_chart"
+        android:background="#24d0fd">
+
+        <TextView
+            android:id="@+id/current_shi_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:text="当前湿度"
+            android:textColor="#ffffff"
+            android:textSize="19sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/current_shi_text"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="10dp"
+            android:text="26%"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/bar_shidu_chart">
+
+        <RelativeLayout
+            android:id="@+id/room_status"
+            android:layout_width="110dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="15dp"
+            android:background="#24d0fd">
+
+            <ImageView
+                android:id="@+id/room_status_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/room_status" />
+
+            <TextView
+                android:id="@+id/room_status_image_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/room_status_image"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:text="房门状态"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/room_status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/room_status_image_text"
+                android:layout_marginLeft="30dp"
+                android:text="关闭"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/person_activity"
+            android:layout_width="110dp"
+            android:layout_height="120dp"
+            android:layout_toRightOf="@+id/room_status"
+            android:background="#1fc6f2">
+
+            <ImageView
+                android:id="@+id/person_activity_small"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/people_activity" />
+
+            <TextView
+                android:id="@+id/person_activity_small_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/person_activity_small"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:text="人员活动"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/person_activity_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/person_activity_small_text"
+                android:layout_marginLeft="30dp"
+                android:textColor="#ffffff"
+                android:textSize="23sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="110dp"
+            android:layout_height="120dp"
+            android:layout_toRightOf="@+id/person_activity"
+            android:background="#24d0fd">
+
+            <ImageView
+                android:id="@+id/magic_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/magic_magic" />
+
+            <TextView
+                android:id="@+id/magic_image_text_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/magic_image"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:text="魔方感应"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/magic_image_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/magic_image_text_help"
+                android:layout_marginLeft="30dp"
+                android:textColor="#ffffff"
+                android:textSize="23sp" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/bg_incoming">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
+
+        <!-- User capture -->
+
+        <RelativeLayout
+                android:id="@+id/profile_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="55dp">
+
+            <ImageView
+                    android:id="@+id/bg_turn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_imcoming_turn"/>
+
+             <util.roundedimage.RoundedImageView
+                    android:id="@+id/user_capture"
+                    android:layout_width="108dip"
+                    android:layout_height="108dip"
+                    android:layout_centerInParent="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_contact_user_capture_no_border"
+                    app:ainemo_border_color="@android:color/black"
+                    app:ainemo_border_width="0dip"
+                    app:is_oval="true"/> 
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/nemo_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:visibility="gone">
+
+            <ImageView
+                    android:id="@+id/nemo_icon"
+                    android:layout_width="108dp"
+                    android:layout_height="108dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_nemo_online"
+                    />
+        </RelativeLayout>
+
+        <!-- Text -->
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/conn_mt_dial_from_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/incoming_call"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"/>
+
+            <TextView
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/incoming_call"
+                    android:textColor="@android:color/white"
+                    android:textSize="13sp"/>
+        </LinearLayout>
+        <!-- middle place holder -->
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        <!-- button -->
+
+        <ImageButton
+                android:id="@+id/conn_mt_endcall_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="88dp"
+                android:background="@drawable/toolbar_p2p_hangup_bg"/>
+
+        <ImageButton
+                android:id="@+id/conn_mt_answer_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/incoming_button_answer_style"/>
+    </LinearLayout>
+
+</RelativeLayout><!-- From: file:/Users/yinliang/Downloads/vulture/ui/MobileApp/ainemo_open_api/src/main/res/layout/callincoming_fragment.xml -->

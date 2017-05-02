@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="theme_body">#cc22292c</color>
+    <color name="black">#000000</color>
+    <color name="status_bar">#303135</color>
+    <color name="top_bar">#9f556061</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorPrimary">#24cffc</color>
+    <color name="colorPrimaryDark">#1cbde7</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="whites">#ffffff</color>
+    <color name="gray">#AFAFAF</color>
+    <color name="yellow">#F99503</color>
+    <color name="gray_color">#ffe8ecef</color>
+    <color name="bg_sort_color">#EDEDED</color>
+    <!--<<<<<<< HEAD-->
+    <!--=======-->
+    <color name="greenWhite">#3dd3fc</color>
+    <color name="segment">#dadade</color>
+    <color name="white">#fdfdfe</color>
+
+    <color name="test">#3dd3fc</color>
+    <!--&gt;>>>>>> 92b4ee4e23a9a67dade993a740de94e78ed40872-->
+    <color name="my_background">#24d0fd</color>
+</resources>

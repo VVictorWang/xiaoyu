@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/bg_outgoing_shadow">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            <RelativeLayout
+                    android:id="@+id/profile_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="55dp"
+                    >
+
+                <ImageView
+                        android:id="@+id/bg_turn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_imcoming_turn"/>
+                <!-- User capture -->
+
+                 <ImageView
+                        android:id="@+id/user_capture"
+                        android:layout_width="108dp"
+                        android:layout_height="108dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_contact_user_capture_no_border"
+                        />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/nemo_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="55dp"
+                    android:visibility="gone">
+
+                <ImageView
+                        android:id="@+id/nemo_icon"
+                        android:layout_width="108dp"
+                        android:layout_height="108dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_nemo_online"
+                        />
+            </RelativeLayout>
+
+            <TextView
+                    android:id="@+id/conn_mt_dial_to_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/call_to"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/call_to"
+                    android:textColor="@android:color/white"
+                    android:textSize="13sp"/>
+        </LinearLayout>
+        <!-- middle place holder -->
+    </LinearLayout>
+
+    <!-- middle place holder -->
+
+    <ImageButton
+            android:id="@+id/conn_mt_cancelcall_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/toolbar_p2p_hangup_bg"/>
+
+</RelativeLayout>
