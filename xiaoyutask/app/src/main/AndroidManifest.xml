@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="demo.animen.com.xiaoyutask">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -28,6 +30,7 @@
 
     <application
         android:allowBackup="true"
+        android:name="com.example.franklin.myclient.MyApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -38,9 +41,9 @@
         <!-- android:name="AINEMO_APP_ID" -->
         <!-- android:value="B7XFT0B5M3PFO8TMPDQRQLZECHT0LJZPTK15YTUD/BO=" /> -->
 
-        <activity android:name="com.example.franklin.myclient.view.MainActivity"></activity>
+        <activity android:name="com.example.franklin.myclient.view.MainActivity" />
         <activity android:name="com.example.franklin.myclient.view.Contact.ContactActivity" />
-        <activity android:name="com.example.franklin.myclient.view.JujiaActivity" />
+        <activity android:name="com.example.franklin.myclient.view.JiuJIA.JujiaActivity" />
         <activity android:name="com.example.franklin.myclient.view.Login.LoginActivity" />
 
         <!-- 小鱼呼叫Service -->
@@ -56,14 +59,14 @@
         <!-- </intent-filter> -->
         <!-- </service> -->
 
-        <activity android:name="com.example.franklin.myclient.view.Setting_Activity" />
+        <activity android:name="com.example.franklin.myclient.view.Setting.Setting_Activity" />
         <activity android:name="com.example.franklin.myclient.view.Case.CaseListActivity" />
         <activity android:name="com.example.franklin.myclient.view.Case.CaseDetailActivity" />
         <activity android:name="com.example.franklin.myclient.view.Login.RegisterActivityFirst" />
         <activity android:name="com.example.franklin.myclient.view.Login.RegisterActivitySecond" />
         <activity android:name="com.example.franklin.myclient.view.Login.RegisterActiviootyLast" />
-        <activity android:name="com.example.franklin.myclient.view.Change.ChangeXiaoYuActivity" />
-        <activity android:name="com.example.franklin.myclient.view.Change.ChangeEmailActivity" />
+        <activity android:name="com.example.franklin.myclient.view.Setting.Change.ChangeXiaoYuActivity" />
+        <activity android:name="com.example.franklin.myclient.view.Setting.Change.ChangeEmailActivity" />
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen" />
@@ -84,7 +87,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.franklin.myclient.view.DoctorActivity"></activity>
+        <activity android:name="com.example.franklin.myclient.view.Case.DoctorActivity" />
+        <activity android:name="com.example.franklin.myclient.view.Contact.New_Contactor"></activity>
     </application>
 
 </manifest>

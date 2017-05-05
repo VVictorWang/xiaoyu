@@ -54,7 +54,7 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/login_head"
+        android:id="@+id/login_head_setting"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginEnd="8dp"
@@ -84,9 +84,9 @@
         android:background="@color/transparent"
         android:text="点击更改"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/login_head"
-        app:layout_constraintLeft_toLeftOf="@+id/login_head"
-        app:layout_constraintRight_toRightOf="@+id/login_head"
+        app:layout_constraintBottom_toBottomOf="@+id/login_head_setting"
+        app:layout_constraintLeft_toLeftOf="@+id/login_head_setting"
+        app:layout_constraintRight_toRightOf="@+id/login_head_setting"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
 
@@ -100,7 +100,8 @@
         android:background="@drawable/setting_mail"
         android:cursorVisible="false"
         android:enabled="false"
-        android:text="     绑定邮箱：123456@123.com"
+        android:paddingLeft="15dp"
+        android:text="绑定邮箱：123456@123.com"
         android:textColor="@color/whites"
         android:textSize="13dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -127,7 +128,7 @@
         android:layout_marginEnd="8dp" />
 
     <EditText
-        android:id="@+id/bangding_xiao_text"
+        android:id="@+id/change_password_text"
         android:layout_width="290dp"
         android:layout_height="55dp"
         android:layout_marginLeft="8dp"
@@ -136,17 +137,19 @@
         android:background="@drawable/setting_mail"
         android:cursorVisible="false"
         android:enabled="false"
-        android:text="     绑定小鱼：123561"
+        android:paddingLeft="15dp"
+        android:text="修改密码"
         android:textColor="@color/whites"
         android:textSize="13dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/change_mail"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.474" />
 
     <com.thinkcool.circletextimageview.CircleTextImageView
-        android:id="@+id/change_xiao_yu"
+        android:id="@+id/change_password"
         android:layout_width="43dp"
         android:layout_height="42dp"
         android:layout_marginLeft="232dp"

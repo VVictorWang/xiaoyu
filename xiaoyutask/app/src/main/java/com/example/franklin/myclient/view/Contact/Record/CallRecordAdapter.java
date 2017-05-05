@@ -10,6 +10,8 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,7 +29,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
 
   static class ViewHolder extends RecyclerView.ViewHolder {
 
-    private ImageView head;
+    private CircleImageView head;
     private TextView name;
     private TextView number;
     private String telephoneNum;
@@ -37,7 +39,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
 
     public ViewHolder(View view) {
       super(view);
-      head = (ImageView) view.findViewById(R.id.record_icon);
+      head = (CircleImageView) view.findViewById(R.id.record_icon);
       name = (TextView) view.findViewById(R.id.record_title);
       number = (TextView) view.findViewById(R.id.record_number_list);
       date = (TextView) view.findViewById(R.id.call_time);
@@ -52,9 +54,9 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
 
   public void onBindViewHolder(ViewHolder holder, int position) {
     CallRecord callRecord = callRecordList.get(position);
-    if (callRecord.getImageUrl() != null) {
-      holder.head.setImageURI(Uri.parse(callRecord.getImageUrl()));
-    }
+//    if (callRecord.getImageUrl() != null) {
+//      holder.head.setImageURI(Uri.parse(callRecord.getImageUrl()));
+//    }
 
     holder.name.setText(callRecord.getName());
     if (CallRecord.CALL_IN == callRecord.getState()) {

@@ -7,24 +7,39 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.franklin.myclient.SomeUtils.GlobalData;
 import com.example.franklin.myclient.SomeUtils.Utils;
-import com.example.franklin.myclient.UserInfor;
+import com.example.franklin.myclient.Datas.UserInfor;
+import com.example.franklin.myclient.Datas.XiaoYuNumber;
 import com.example.franklin.myclient.view.Case.CaseListActivity;
 import com.example.franklin.myclient.view.Contact.ContactActivity;
+import com.example.franklin.myclient.view.JiuJIA.JujiaActivity;
+import com.example.franklin.myclient.view.Setting.Setting_Activity;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thinkcool.circletextimageview.CircleTextImageView;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-
-import java.io.File;
-import java.util.Timer;
-import java.util.TimerTask;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by victor on 2017/4/22.
@@ -32,10 +47,7 @@ import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
     private OkHttpClient client;
-
 
     Handler handler = new Handler() {
         @Override
@@ -59,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
     private String image_url;
     private String user_name;
     private UserInfor userInfor;
+    private List<XiaoYuNumber> xiaoYuNumbers;
+
+    private boolean net_work_available,has_data;
 
     @Override
     protected void onResume() {
@@ -87,12 +102,14 @@ public class MainActivity extends AppCompatActivity {
         this.bangding_xiaoyu_number = (TextView) findViewById(R.id.bangding_xiaoyu_number);
         this.nametext = (TextView) findViewById(R.id.name_text);
         this.personimage = (CircleImageView) findViewById(R.id.person_image);
-        client = new OkHttpClient();
         if (image_url != null || image_url.equals("")) {
             this.personimage.setImageURI(Uri.fromFile(new File(image_url)));
         } else if (image_url.equals("")) {
             this.personimage.setImageDrawable(getResources().getDrawable(R.drawable.person));
         }
+        userInfor = new UserInfor();
+        xiaoYuNumbers = new ArrayList<>();
+        net_work_available= Utils.isNetWorkAvailabe(MainActivity.this);
     }
 
     private void resumeData() {
@@ -111,7 +128,9 @@ public class MainActivity extends AppCompatActivity {
         settingdefault.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(MainActivity.this, Setting_Activity.class);
+                intent.putExtra("email", userInfor.getEmail());
                 startActivity(intent);
             }
         });
@@ -149,14 +168,78 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     class GetUserInfor extends AsyncTask<String, Void, String> {
         private Gson gson = new Gson();
+        private Gson gson2 = new Gson();
 
         @Override
         protected String doInBackground(String... params) {
 //            Log.e("data ", sendRequest());
-            userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR+"FamilyName="+"admin"), UserInfor.class);
+//            if (!Utils.isNetWorkAvailabe(MainActivity.this)) {
+            if (net_work_available) {
+                userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR + "FamilyName=" + user_name), UserInfor.class);
+                String name = Utils.getValue(MainActivity.this, GlobalData.NAME);
+                if (name == null || name != userInfor.getName()) {
+                    Utils.putValue(MainActivity.this, GlobalData.NAME, userInfor.getName());
+//                Utils.putValue(MainActivity.this, GlobalData.Img_URl, userInfor.getImage());
+                    Utils.putValue(MainActivity.this, GlobalData.USer_email, userInfor.getEmail());
+                    Utils.putValue(MainActivity.this, GlobalData.User_ID, userInfor.getId());
+                    Utils.putValue(MainActivity.this, GlobalData.Phone, userInfor.getPhone());
+                    Utils.putValue(MainActivity.this, GlobalData.PWD, userInfor.getPassword());
+                    Utils.putValue(MainActivity.this, GlobalData.PATIENT_ID, userInfor.getPatientId());
+                }
+
+                MediaType MEDIA_TYPE_JPG = MediaType.parse("image/jpg");
+
+                client = new OkHttpClient();
+                MultipartBody.Builder builder = new MultipartBody.Builder();
+                File f = new File(image_url);
+                builder.addFormDataPart("id", userInfor.getId());
+                Log.e("id: ", userInfor.getId());
+                builder.addFormDataPart("patientFamilyImage", f.toString(), RequestBody.create(MEDIA_TYPE_JPG, f));
+                RequestBody requestBody = builder.build();
+                final Request request = new Request.Builder().url(GlobalData.POST_IMAGE).post(requestBody).build();
+                try {
+
+                    Response response = client.newCall(request).execute();
+                    String op = response.body().string();
+                Log.e("responce: ", op);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+                String xiaoyu = Utils.sendRequest(GlobalData.GET_XIAO_YU_NUMBER + "type=phone&data=" + "13367379725");
+
+                Log.e("xiaoyu: ", xiaoyu);
+                if (xiaoyu.contains("not")) {
+                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
+                    xiaoYuNumber.setXiaoyuNum("暂无");
+                    xiaoYuNumbers.add(xiaoYuNumber);
+                } else {
+                    xiaoYuNumbers = gson2.fromJson(xiaoyu, new TypeToken<List<XiaoYuNumber>>() {
+                            }.getType()
+                    );
+//
+                }
+                Utils.putValue(MainActivity.this, GlobalData.XIAO_YU, xiaoYuNumbers.get(0).getXiaoyuNum());
+                Log.e("xiaoyunum: ", xiaoYuNumbers.toString());
+                has_data = true;
+            } else {
+                String name = Utils.getValue(MainActivity.this, GlobalData.NAME);
+                if (name != null) {
+                    userInfor.setPatientId(Utils.getValue(MainActivity.this, GlobalData.PATIENT_ID));
+                    userInfor.setEmail(Utils.getValue(MainActivity.this, GlobalData.USer_email));
+                    userInfor.setPhone(Utils.getValue(MainActivity.this, GlobalData.Phone));
+                    userInfor.setName(name);
+                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
+                    xiaoYuNumber.setXiaoyuNum(Utils.getValue(MainActivity.this, GlobalData.XIAO_YU));
+                    xiaoYuNumbers.add(xiaoYuNumber);
+                    has_data = true;
+                } else {
+                    has_data = false;
+                }
+
+            }
 
 //
 //            try {
@@ -177,8 +260,12 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s != null) {
-                nametext.setText(userInfor.getName());
+                if (has_data) {
+                    nametext.setText(userInfor.getName());
+                    bangding_xiaoyu_number.setText("绑定小鱼号: "+xiaoYuNumbers.get(0).getXiaoyuNum());
+                }
 
+//                Log.e("iamge: ", userInfor.getImage());
             }
         }
 

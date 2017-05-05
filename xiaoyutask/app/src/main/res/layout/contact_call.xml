@@ -329,5 +329,5 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/number_call_0"
         app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintHorizontal_bias="0.028" />
+        app:layout_constraintHorizontal_bias="0.008" />
 </android.support.constraint.ConstraintLayout>

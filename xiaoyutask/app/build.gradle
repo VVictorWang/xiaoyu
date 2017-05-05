@@ -31,20 +31,21 @@ dependencies {
 //        all*.exclude module: 'okio'
 //        all*.exclude module: 'gson'
 //    }
-    compile 'com.github.markushi:circlebutton:1.1'
 
 
     compile project(':imagepicker')
 
+    compile 'org.litepal.android:core:1.5.1'
     compile 'com.github.markushi:circlebutton:1.1'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.github.markushi:circlebutton:1.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.github.markushi:circlebutton:1.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
-    compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:recyclerview-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'

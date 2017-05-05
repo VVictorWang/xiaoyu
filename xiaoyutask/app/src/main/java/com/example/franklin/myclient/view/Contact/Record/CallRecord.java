@@ -1,12 +1,14 @@
 package com.example.franklin.myclient.view.Contact.Record;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.Date;
 
 /**
  * Created by 小武哥 on 2017/4/29.
  */
 
-public class CallRecord  {
+public class CallRecord  extends DataSupport{
   public static final int CALL_IN=0;
   public static final int CALL_OUT=1;
   public static final int CALL_REJECT=2;
@@ -27,8 +29,11 @@ public class CallRecord  {
     this.hangUpTime = hangUpTime;
   }
 
+  public CallRecord() {
+  }
+
   public CallRecord(String name, String telephoneNum, String xiaoyuId, int state, Date date,
-      Date hangUpTime,String imageUrl) {
+                    Date hangUpTime, String imageUrl) {
     this.name = name;
     this.telephoneNum = telephoneNum;
     this.xiaoyuId = xiaoyuId;

@@ -22,12 +22,16 @@ public class ConstactUtil {
         Map<String,String> temp = new HashMap<String, String>();
         ContactDBhelper contactDBhelper = new ContactDBhelper(context);
         Cursor c = contactDBhelper.getAllItems();
-        c.moveToFirst();
-       while (c.moveToNext()){
-                String name =c.getString(c.getColumnIndex(ContactDBhelper.DB_COLUMN_NAME));
-                String number = c.getString(c.getColumnIndex(ContactDBhelper.DB_COLUMN_NUMBER));
+
+
+        if (c.moveToFirst()) {
+            do {
+                String name = c.getString(c.getColumnIndex(ContactDBhelper.DB_COLUMN_NAME));
+                String number = c.getString(c.getColumnIndex(ContactDBhelper.DB_COLUMN_XIAOYU));
                 temp.put(name, number);
-            }
+            } while (c.moveToNext());
+        }
+
 
         c.close();
         return temp;

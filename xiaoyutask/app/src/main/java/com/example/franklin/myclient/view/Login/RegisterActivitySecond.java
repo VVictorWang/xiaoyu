@@ -1,6 +1,8 @@
 package com.example.franklin.myclient.view.Login;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -36,6 +38,52 @@ public class RegisterActivitySecond extends AppCompatActivity {
     private RadioButton selectwoman;
 
     private OkHttpClient client;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            String message;
+            switch (msg.what) {
+                case 1:
+                    message = "注册成功";
+                    break;
+                case 2:
+                    message = "参数错误 为空";
+                    break;
+                case 3:
+                    message = "身份证长度过长";
+                    break;
+                case 4:
+                    message = "身份证号不存在";
+                    break;
+                case 5:
+                    message = "用户名长度过长";
+                    break;
+                case 6:
+                    message = "用户名已注册";
+                    break;
+                case 7:
+                    message = "两次密码不一致";
+                    break;
+                case 8:
+                    message = "内部错误";
+                    break;
+                case 9:
+                    message = "电话格式不正确";
+                    break;
+                case 10:
+                    message = "邮箱格式不正确";
+                    break;
+                case 11:
+                    message = "性别错误";
+                    break;
+                default:
+                    message = "错误";
+                    break;
+            }
+            Utils.showLongToast(RegisterActivitySecond.this, message);
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,9 +127,7 @@ public class RegisterActivitySecond extends AppCompatActivity {
                     Toast.makeText(RegisterActivitySecond.this, "请选择你的性别", Toast.LENGTH_SHORT);
                 } else if (email.isEmpty()) {
                     registeremail.setError("邮箱不能为空");
-                } else if (Utils.isEmail(email)) {
-                    registeremail.setError("请输入正确的邮箱格式");
-                } else {
+                }  else {
                     if (id_card.isEmpty()) {
                         registeridcard.setError("身份证号不能为空");
                     } else {
@@ -119,13 +165,49 @@ public class RegisterActivitySecond extends AppCompatActivity {
                     //是http://139.196.40.97/OSAdmin-master/uploads/interface/regloginpost.php?
                     Request request = new Request.Builder().url(GlobalData.MAIN_ENGINE).post(requestBody).build();
                     Response response = client.newCall(request).execute();
-                    Log.e("response: second ", response.body().string());
+//                    Log.e("response: second ", response.body().string());
                     String op = response.body().string();
                     Log.e("response, register:", op);
-                    if (op.equals("1")) {
-                        Utils.showShortToast(RegisterActivitySecond.this, "注册成");
-                        Utils.startActivity(RegisterActivitySecond.this, MainActivity.class);
+                    switch (op) {
+                        case "1":
+                            handler.sendEmptyMessage(1);
+                            Utils.putValue(RegisterActivitySecond.this, GlobalData.NAME, information.getUsername());
+                            Utils.startActivity(RegisterActivitySecond.this, MainActivity.class);
+                            break;
+                        case "0":
+                            handler.sendEmptyMessage(2);
+                            break;
+                        case "-1":
+                            handler.sendEmptyMessage(3);
+                            break;
+                        case "-2":
+                            handler.sendEmptyMessage(4);
+                            break;
+                        case "-3":
+                            handler.sendEmptyMessage(5);
+                            break;
+                        case "-4":
+                            handler.sendEmptyMessage(6);
+                            break;
+                        case "-5":
+                            handler.sendEmptyMessage(7);
+                            break;
+                        case "-6":
+                            handler.sendEmptyMessage(8);
+                            break;
+                        case "-7":
+                            handler.sendEmptyMessage(9);
+                            break;
+                        case "-8":
+                            handler.sendEmptyMessage(10);
+                            break;
+                        case "-9":
+                            handler.sendEmptyMessage(11);
+                            break;
+                        default:
+                            break;
                     }
+
                 } catch (Exception p) {
                     p.printStackTrace();
                 }

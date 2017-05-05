@@ -2,6 +2,8 @@ package com.example.franklin.myclient.view.Contact;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
+import android.log.L;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +22,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.franklin.myclient.Datas.ContactListData;
+import com.example.franklin.myclient.SomeUtils.Utils;
 import com.example.franklin.myclient.view.Contact.sortlist.SortModel;
 
 import java.util.ArrayList;
@@ -31,6 +35,9 @@ import java.util.Map;
 import com.example.franklin.myclient.view.Contact.sortlist.CharacterParser;
 import com.example.franklin.myclient.view.Contact.sortlist.SideBar;
 import com.example.franklin.myclient.DataBase.ContactDBhelper;
+
+import org.litepal.crud.DataSupport;
+import org.litepal.tablemanager.Connector;
 
 import demo.animen.com.xiaoyutask.R;
 
@@ -51,7 +58,6 @@ public class FragmentContactList extends Fragment {
     private Contact_Adapter adapter;
     private RelativeLayout back;
     private ClearEditText mClearEditText;
-    private Map<String, String> callRecords;
 
     private CharacterParser characterParser;
     private List<SortModel> SourceDateList;
@@ -59,11 +65,14 @@ public class FragmentContactList extends Fragment {
     private PinyinComparator pinyinComparator;
     private RecyclerView.LayoutManager layoutManager;
     private ContactDBhelper contactDBhelper;
+    private TextView add_new;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x123) {
-                initData();
+               initData();
+            } else if (msg.what == 0x124) {
+                Utils.showShortToast(activity, "没有数据");
             }
         }
     };
@@ -83,13 +92,17 @@ public class FragmentContactList extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        new ConstactAsyncTask().execute(0);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
         characterParser = CharacterParser.getInstance();
-
         pinyinComparator = new PinyinComparator();
-
         new ConstactAsyncTask().execute(0);
 
     }
@@ -99,6 +112,7 @@ public class FragmentContactList extends Fragment {
         dialog = (TextView) view.findViewById(R.id.dialog);
 
         sideBar.setTextView(dialog);
+        add_new = (TextView) view.findViewById(R.id.add_new_contact);
         back = (RelativeLayout) view.findViewById(R.id.back_to_main_contact_list);
         sortView = (RecyclerView) view.findViewById(R.id.sortlist);
         layoutManager = new LinearLayoutManager(activity);
@@ -106,21 +120,6 @@ public class FragmentContactList extends Fragment {
 
         mClearEditText = (ClearEditText)view
                 .findViewById(R.id.filter_edit);
-        contactDBhelper = new ContactDBhelper(activity);
-        contactDBhelper.insert("小明", "12432898", 3242345, "4523","hisldj", 4);
-        contactDBhelper.insert("小花", "72398", 23432, "desaf", "dqwd", 2);
-        contactDBhelper.insert("阿里", "748273", 94903, "dhweihdo", "lejdw", 1);
-        contactDBhelper.insert("腾讯", "56687090", 89080, "chdisoch", "jiocj", 2);
-    }
-    private void initEvent(){
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.finish();
-            }
-        });
-    }
-    private void initData() {
         // 实例化汉字转拼音类
         sideBar.setTextView(dialog);
         // 设置右侧触摸监听
@@ -137,8 +136,7 @@ public class FragmentContactList extends Fragment {
                 }
             }
         });
-        adapter = new Contact_Adapter(activity, SourceDateList);
-        sortView.setAdapter(adapter);
+
         mClearEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
@@ -147,6 +145,24 @@ public class FragmentContactList extends Fragment {
 
             }
         });
+    }
+    private void initEvent(){
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.finish();
+            }
+        });
+        add_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.startActivity(activity, New_Contactor.class);
+            }
+        });
+    }
+    private void initData() {
+        adapter = new Contact_Adapter(activity, SourceDateList);
+        sortView.setAdapter(adapter);
         // 根据输入框输入值的改变来过滤搜索
         mClearEditText.addTextChangedListener(new TextWatcher() {
 
@@ -168,20 +184,7 @@ public class FragmentContactList extends Fragment {
             }
         });
 
-//       sortView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//                // 这里要利用adapter.getItem(position)来获取当前position所对应的对象
-//                // Toast.makeText(getApplication(),
-//                // ((SortModel)adapter.getItem(position)).getName(),
-//                // Toast.LENGTH_SHORT).show();
-//                String number = callRecords.get(((SortModel) adapter
-//                        .getItem(position)).getName());
-//                Toast.makeText(ContactActivity.this, number, Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
     }
 
 
@@ -189,44 +192,33 @@ public class FragmentContactList extends Fragment {
 
         @Override
         protected Integer doInBackground(Integer... arg0) {
-            int result = -1;
-            callRecords = ConstactUtil.getAllCallRecords(activity);
-            result = 1;
-            return result;
+            if (DataSupport.isExist(ContactListData.class)) {
+                List<ContactListData> contactListDatas = DataSupport.findAll(ContactListData.class);
+                List<String> names = new ArrayList<>();
+                List<String> numbers = new ArrayList<>();
+                for (ContactListData contactListData : contactListDatas) {
+                    names.add(contactListData.getName());
+                    numbers.add(contactListData.getNumber());
+                }
+                String[] names_list = new String[] {};
+                String[] numbers_list = new String[]{};
+                numbers_list = numbers.toArray(numbers_list);
+                names_list = names.toArray(names_list);
+                SourceDateList = filledData(names_list,numbers_list);
+
+                // 根据a-z进行排序源数据
+                Collections.sort(SourceDateList, pinyinComparator);
+                handler.sendEmptyMessage(0x123);
+            }else
+                handler.sendEmptyMessage(0x124);
+            return 1;
         }
         @Override
         protected void onPostExecute(Integer result) {
             super.onPostExecute(result);
 
 
-            if (result == 1) {
-                List<String> constact = new ArrayList<String>();
-                List<String> numbers = new ArrayList<>();
 
-                for (Iterator<String> keys = callRecords.keySet().iterator(); keys
-                        .hasNext();) {
-                    String key = keys.next();
-
-                    String number = callRecords.get(key);
-                    if (number == null) {
-                        numbers.add("暂无");
-                    } else {
-                        numbers.add(number);
-                    }
-                    constact.add(key);
-                }
-
-                String[] names = new String[] {};
-                String[] numbers_list = new String[]{};
-                numbers_list = numbers.toArray(numbers_list);
-                names = constact.toArray(names);
-                SourceDateList = filledData(names,numbers_list);
-
-                // 根据a-z进行排序源数据
-                Collections.sort(SourceDateList, pinyinComparator);
-                handler.sendEmptyMessage(0x123);
-
-            }
         }
 
         @Override

@@ -56,7 +56,7 @@
         android:layout_marginLeft="46dp"
         android:layout_marginTop="71dp"
         android:paddingTop="10dp"
-        android:text="小鱼端绑定"
+        android:text="更改密码"
         android:textColor="@color/whites"
         android:textSize="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -69,7 +69,7 @@
         android:layout_height="70dp"
         android:layout_marginLeft="38dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="130dp"
         app:hintEnabled="false"
         android:paddingRight="10dp"
         app:errorTextAppearance="@color/whites"
@@ -77,17 +77,76 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/change_bind_name_layout"
         android:layout_marginStart="38dp"
-        android:layout_marginEnd="8dp">
+        android:layout_marginEnd="8dp"
+        android:id="@+id/textInputLayout">
 
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/change_bind_idcard"
+            android:id="@+id/change_password_new"
             android:layout_width="320dp"
             android:layout_height="60dp"
             android:background="@drawable/sign_xiao_yu_background"
-            android:cursorVisible="false"
             android:textColorHint="@color/white"
-            android:hint="请输入小鱼终端申请人身份证号"
+            android:hint="请输入新密码"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/whites"
+            android:textSize="14dp" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="340dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="196dp"
+        app:hintEnabled="false"
+        android:paddingRight="10dp"
+        app:errorTextAppearance="@color/whites"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/change_bind_name_layout"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="8dp"
+        >
+
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/change_password_new_confirm"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:background="@drawable/sign_xiao_yu_background"
+            android:textColorHint="@color/white"
+            android:hint="请再次输入新密码"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/whites"
+            android:textSize="14dp" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="340dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="65dp"
+        app:hintEnabled="false"
+        android:paddingRight="10dp"
+        app:errorTextAppearance="@color/whites"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/change_bind_name_layout"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="8dp"
+        >
+
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/change_password_old"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:background="@drawable/sign_xiao_yu_background"
+            android:textColorHint="@color/white"
+            android:hint="请输入原密码"
+
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:textColor="@color/whites"
@@ -95,13 +154,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/change_xiao_yu_number"
+        android:id="@+id/change_password_finish"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="320dp"
         android:layout_height="60dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="259dp"
+        android:layout_marginTop="400dp"
         android:background="@drawable/sign_xiao_yu_background"
         android:text="完成"
         android:textColor="@color/whites"
@@ -119,7 +178,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="114dp"
         android:paddingRight="10dp"
-        app:errorTextAppearance="@color/whites"
         app:hintEnabled="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -129,13 +187,13 @@
 
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/change_bind_name"
+            android:id="@+id/change_password_username"
             android:layout_width="320dp"
             android:layout_height="60dp"
             android:textColorHint="@color/white"
             android:background="@drawable/sign_xiao_yu_background"
             android:cursorVisible="false"
-            android:hint="请输入小鱼终端申请人姓名"
+            android:hint="请输入用户名"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:textColor="@color/whites"

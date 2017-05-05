@@ -4,13 +4,12 @@ package com.example.franklin.myclient.view.Case.CaseLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.franklin.myclient.CaseInfor;
+import com.example.franklin.myclient.Datas.CaseInfor;
 import com.example.franklin.myclient.SomeUtils.Utils;
 import com.example.franklin.myclient.view.Case.CaseDetailActivity;
 
@@ -63,9 +62,9 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
     @Override
 
     public void onBindViewHolder(ViewHolder holder, int position) {
-        CaseInfor aCase = caseList.get(position);
+        final CaseInfor aCase = caseList.get(position);
         holder.patientName.setText(aCase.getName());
-        holder.doctorName.setText(aCase.getDoctorId());
+        holder.doctorName.setText("主治医生: "+aCase.getDoctorName());
 
         holder.illnessName.setText(aCase.getIllproblem());
 
@@ -75,7 +74,7 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CaseDetailActivity.class);
-//                intent.putExtra()
+                intent.putExtra("id", aCase.getId());
                 context.startActivity(intent);
             }
         });

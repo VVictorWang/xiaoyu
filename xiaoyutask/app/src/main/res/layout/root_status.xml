@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/room_status"
+        android:layout_width="110dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="15dp"
+        android:background="#24d0fd">
+
+        <ImageView
+            android:id="@+id/room_status_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/room_status" />
+
+        <TextView
+            android:id="@+id/room_status_image_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/room_status_image"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"
+            android:text="房门状态"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/room_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/room_status_image_text"
+            android:layout_marginLeft="30dp"
+            android:text="关闭"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+</LinearLayout>

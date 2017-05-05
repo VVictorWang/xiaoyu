@@ -48,7 +48,13 @@
   <include
     layout="@layout/person_detail"
     android:layout_width="fill_parent"
+      android:id="@+id/case_detail_person_part"
     android:layout_height="wrap_content" />
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+    android:background="@color/segment"/>
+
   <include
     layout="@layout/doctor_part"
       android:id="@+id/doctor_part_case_detail"
@@ -99,6 +105,7 @@
           android:layout_height="wrap_content"
           android:text="诊断结果"
           android:textSize="15dp"
+          android:textColor="@color/gray"
           android:layout_marginTop="10dp"
           android:layout_marginLeft="10dp"
           android:id="@+id/case_detail_result_above"/>
@@ -108,7 +115,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/case_detail_result_above"
         android:layout_marginTop="10dp"
-        android:textSize="12dp"
+        android:textSize="17dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/black"
         android:layout_weight="1" />
     </RelativeLayout>
   </LinearLayout>

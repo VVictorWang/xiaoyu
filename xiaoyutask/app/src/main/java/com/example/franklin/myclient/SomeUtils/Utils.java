@@ -71,7 +71,7 @@ public class Utils {
                 NetworkInfo[] infos = connectivityManager.getAllNetworkInfo();
                 if (infos != null) {
                     for (int i = 0; i < infos.length; i++) {
-                        if (infos[i].isAvailable()) {
+                        if (infos[i].getState() == NetworkInfo.State.CONNECTED) {
                             return true;
                         }
                     }

@@ -48,11 +48,10 @@
                 android:text="王小二"
                 android:textColor="#ffffff"
                 android:textSize="17sp"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="74dp"
-                android:layout_marginRight="130dp"
-                android:layout_marginEnd="130dp" />
+                android:layout_marginTop="65dp"
+                android:layout_marginLeft="176dp"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,11 +63,10 @@
                 android:textColor="#ffffff"
                 android:textSize="17sp"
                 android:id="@+id/bangding_xiaoyu_number"
-                android:layout_marginRight="96dp"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="95dp"
-                android:layout_marginEnd="96dp" />
+                android:layout_marginTop="88dp"
+                android:layout_marginLeft="176dp"
+                app:layout_constraintLeft_toLeftOf="parent" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,11 +77,10 @@
                 android:layout_below="@+id/bangding_xiaoyu_number"
                 android:layout_toRightOf="@+id/person_image"
                 android:layout_toEndOf="@+id/person_image"
-                android:layout_marginRight="79dp"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="133dp"
-                android:layout_marginEnd="79dp" />
+                android:layout_marginTop="126dp"
+                android:layout_marginLeft="176dp"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
         <com.thinkcool.circletextimageview.CircleTextImageView
             android:id="@+id/case_for_patient"
@@ -104,29 +101,6 @@
             android:layout_marginEnd="105dp" />
 
 
-        <FrameLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/main_infor"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp">
-
-
-            <!--<TextView-->
-            <!--android:id="@+id/textView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignBottom="@+id/frameLayout"-->
-            <!--android:layout_marginEnd="28dp"-->
-            <!--android:layout_marginRight="28dp"-->
-            <!--android:paddingLeft="90dp"-->
-            <!--android:paddingTop="78dp"-->
-            <!--android:text="病例\n查看"-->
-            <!--android:textColor="#ffffff"-->
-            <!--android:textSize="30sp" />-->
-
-        </FrameLayout>
 
         <com.thinkcool.circletextimageview.CircleTextImageView
             android:id="@+id/call_others"
@@ -138,7 +112,6 @@
             app:citv_text_size="23sp"
             app:citv_text_text="呼叫"
             android:layout_marginEnd="10dp"
-            android:layout_alignBottom="@+id/frameLayout"
             android:layout_alignRight="@+id/setting_default"
             android:layout_alignEnd="@+id/setting_default"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -179,7 +152,6 @@
             app:citv_text_color="#ffffff"
             app:citv_text_size="20sp"
             app:citv_text_text="设置"
-            android:layout_below="@+id/frameLayout"
             android:layout_toRightOf="@+id/jujia_main"
             android:layout_toEndOf="@+id/jujia_main"
             android:layout_marginStart="36dp"

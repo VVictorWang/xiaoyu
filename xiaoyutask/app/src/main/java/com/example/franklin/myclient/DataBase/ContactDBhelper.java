@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class ContactDBhelper extends SQLiteOpenHelper {
 
   public static final String DATABASE_NAME = "contact_list.db";
-  private static final int DATABASE_VERSION = 3;
+  private static final int DATABASE_VERSION = 5;
   public static final String DB_TABLE_NAME = "contacts";
   public static final String DB_TABLE_RECORD_NAME = "recordlist";
   public static final String DB_COLUMN_ID = "_id";    //标识名
@@ -57,6 +57,11 @@ public class ContactDBhelper extends SQLiteOpenHelper {
     onCreate(db);
   }
 
+  public void updata(SQLiteDatabase db) {
+    db.execSQL("DROP TABLE IF EXISTS " + DB_TABLE_RECORD_NAME);
+    db.execSQL(CREATE_RECORD);
+  }
+
   public long insertRecordList(String number,String xiaoyu, String name, long time, String imageUrl,int status) {
     SQLiteDatabase db = getWritableDatabase();
     ContentValues values = new ContentValues();
@@ -69,16 +74,12 @@ public class ContactDBhelper extends SQLiteOpenHelper {
     return db.insert(DB_TABLE_RECORD_NAME, null, values);
   }
 
-  public long insert(String name, String number, long time, String xiaoyu_number, String image_url,
-      int status) {
+  public long insert(String name, String xiaoyu_number
+     ) {
     SQLiteDatabase db = getWritableDatabase();
     ContentValues values = new ContentValues();
     values.put(DB_COLUMN_NAME, name);
-    values.put(DB_COLUMN_NUMBER, number);
-    values.put(DB_COLUMN_TIME, time);
     values.put(DB_COLUMN_XIAOYU, xiaoyu_number);
-    values.put(DB_COLUMN_IMAGE_URL, image_url);
-    values.put(DB_COLUMN_STATUS, status);
     return db.insert(DB_TABLE_NAME, null, values);
   }
 

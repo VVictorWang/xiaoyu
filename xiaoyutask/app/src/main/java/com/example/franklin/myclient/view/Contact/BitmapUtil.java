@@ -38,12 +38,13 @@ public class BitmapUtil {
                 if (!file.exists()) {
                     file.mkdirs();
                 }
-                File f = new File(filePath + fileName);
-                if (f.exists()) {
-                    f.delete();
-                }
-                BufferedOutputStream outputStream = new BufferedOutputStream(
-                        new FileOutputStream(f));
+                File f = new File(filePath ,fileName);
+//                if (f.exists()) {
+//                    f.delete();
+//                }
+                FileOutputStream outputStream = new FileOutputStream(f);
+//                BufferedOutputStream outputStream = new BufferedOutputStream(
+//                        new FileOutputStream(f));
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
                 outputStream.flush();
                 outputStream.close();
@@ -56,6 +57,14 @@ public class BitmapUtil {
         }
         return flag;
 
+    }
+
+    public static Bitmap getBitmap(String path) {
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inPreferredConfig = Bitmap.Config.RGB_565;
+        opt.inPurgeable = true;
+        opt.inInputShareable = true;
+        return BitmapFactory.decodeFile(path, opt);
     }
 
     /**
