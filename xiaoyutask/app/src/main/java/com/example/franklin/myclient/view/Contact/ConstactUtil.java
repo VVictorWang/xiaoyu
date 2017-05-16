@@ -31,8 +31,6 @@ public class ConstactUtil {
                 temp.put(name, number);
             } while (c.moveToNext());
         }
-
-
         c.close();
         return temp;
     }

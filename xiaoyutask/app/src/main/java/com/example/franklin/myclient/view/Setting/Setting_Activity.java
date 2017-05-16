@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.franklin.myclient.SomeUtils.GlobalData;
 import com.example.franklin.myclient.SomeUtils.Utils;
+import com.example.franklin.myclient.view.Contact.BitmapUtil;
 import com.example.franklin.myclient.view.Setting.Change.ChangeEmailActivity;
 import com.example.franklin.myclient.view.Setting.Change.ChangeXiaoYuActivity;
 import com.example.franklin.myclient.view.Login.LoginActivity;
@@ -29,6 +30,12 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
@@ -66,13 +73,14 @@ public class Setting_Activity extends AppCompatActivity {
         initEvent();
     }
 
-    private void resumeView(){
+    private void resumeView() {
 
         imagePath = Utils.getValue(Setting_Activity.this, GlobalData.Img_URl);
         if (imagePath != null) {
             loginhead.setImageURI(Uri.fromFile(new File(imagePath)));
         }
     }
+
     private void initView() {
         this.logoutoutbutton = (TextView) findViewById(R.id.logout_out_button);
         this.changepassword = (CircleTextImageView) findViewById(R.id.change_password);
@@ -82,10 +90,11 @@ public class Setting_Activity extends AppCompatActivity {
         this.loginhead = (CircleImageView) findViewById(R.id.login_head_setting);
         this.settingback = (RelativeLayout) findViewById(R.id.setting_back);
         changemail.setText("绑定邮箱: " + email);
-        imagePath = Utils.getValue(Setting_Activity.this, GlobalData.Img_URl);
-        if (imagePath != null) {
-            loginhead.setImageURI(Uri.fromFile(new File(imagePath)));
-        }
+        loginhead.setImageBitmap(BitmapUtil.getBitmap(GlobalData.DoctorIMage + Utils.getValue(Setting_Activity.this, GlobalData.PATIENTFAMILY_ID)));
+//        imagePath = Utils.getValue(Setting_Activity.this, GlobalData.Img_URl);
+//        if (imagePath != null) {
+//            loginhead.setImageURI(Uri.fromFile(new File(imagePath)));
+//        }
     }
 
     private void initEvent() {
@@ -155,6 +164,7 @@ public class Setting_Activity extends AppCompatActivity {
                         if (images.get(0).path != null) {
                             Utils.putValue(Setting_Activity.this, GlobalData.Img_URl, images.get(0).path);
                             loginhead.setImageURI(Uri.fromFile(new File(images.get(0).path)));
+                            uploadImage(images.get(0).path);
                         }
                     } else {
                         Log.i(TAG, "onActivityResult: 没有数据");
@@ -163,5 +173,33 @@ public class Setting_Activity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    private void uploadImage(final String imageurl) {
+        new Thread(new Runnable() {
+            OkHttpClient client = new OkHttpClient();
+            @Override
+            public void run() {
+                MediaType MEDIA_TYPE_JPG = MediaType.parse("image/png");
+                client = new OkHttpClient();
+                MultipartBody.Builder builder = new MultipartBody.Builder();
+                File f = new File(imageurl);
+                String id = Utils.getValue(Setting_Activity.this, GlobalData.PATIENTFAMILY_ID);
+                builder.addFormDataPart("patientFamilyImage", f.toString(), RequestBody.create(MEDIA_TYPE_JPG, f));
+                builder.addFormDataPart("id", id);
+                builder.setType(MultipartBody.FORM);
+                Log.e("id: ", id);
+                RequestBody requestBody = builder.build();
+                final Request request = new Request.Builder().url(GlobalData.POST_IMAGE).post(requestBody).build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    String op = response.body().string();
+                    Log.e("responce: ", op);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }).start();
     }
 }

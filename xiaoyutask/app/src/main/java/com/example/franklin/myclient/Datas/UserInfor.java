@@ -22,7 +22,6 @@ public class UserInfor {
 
     private String id;
     private String name;
-    private String password;
     private String patientId;
     private String email;
     private String phone;
@@ -52,13 +51,6 @@ public class UserInfor {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getPatientId() {
         return patientId;

@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -39,9 +40,9 @@ public class BitmapUtil {
                     file.mkdirs();
                 }
                 File f = new File(filePath ,fileName);
-//                if (f.exists()) {
-//                    f.delete();
-//                }
+                if (f.exists()) {
+                    f.delete();
+                }
                 FileOutputStream outputStream = new FileOutputStream(f);
 //                BufferedOutputStream outputStream = new BufferedOutputStream(
 //                        new FileOutputStream(f));
@@ -57,6 +58,21 @@ public class BitmapUtil {
         }
         return flag;
 
+    }
+
+    public static void saveDrawble(Context context,int id, String path) {
+        Drawable drawable = context.getResources().getDrawable(id);
+        Bitmap bitmap = drawableToBitmap(drawable);
+        File file = new File(Environment.getExternalStorageDirectory(), path);
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(file);
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static Bitmap getBitmap(String path) {

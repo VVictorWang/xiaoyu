@@ -2,6 +2,8 @@ package com.example.franklin.myclient.view.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +34,33 @@ public class LoginActivity extends AppCompatActivity {
     private Response response;
     private String URL = "http://139.196.40.97/OSAdmin-master/uploads/interface/regloginpost.php?";
 
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            String message;
+            switch (msg.what) {
+                case 1:
+                    message = "登录成功";
+                    break;
+                case 0:
+                    message = "参数错误";
+                    break;
+                case -1:
+                    message = "用户名长度过大";
+                    break;
+                case -2:
+                    message = "用户名不存在";
+                    break;
+                case -3:
+                    message = "密码错误";
+                    break;
+                default:
+                    message = "错误";
+                    break;
+            }
+            Utils.showShortToast(LoginActivity.this, message);
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +144,14 @@ public class LoginActivity extends AppCompatActivity {
                         Utils.putValue(LoginActivity.this, GlobalData.NAME, username);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
+                    } else if (op.equals("0")) {
+                        handler.sendEmptyMessage(0);
+                    } else if (op.equals("-1")) {
+                        handler.sendEmptyMessage(-1);
+                    } else if (op.equals("-2")) {
+                        handler.sendEmptyMessage(-2);
+                    } else if (op.equals("-3")) {
+                        handler.sendEmptyMessage(-3);
                     }
                 } catch (Exception p) {
                     p.printStackTrace();

@@ -7,15 +7,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import com.example.franklin.myclient.Datas.HomeInfor;
 import com.example.franklin.myclient.view.JiuJIA.drawSmoothLine.BesselChart;
 import com.example.franklin.myclient.view.JiuJIA.drawSmoothLine.Point;
 import com.github.mikephil.charting.charts.BarChart;
-
+import demo.animen.com.xiaoyutask.R;
 import java.util.ArrayList;
 import java.util.List;
-
-import demo.animen.com.xiaoyutask.R;
 
 /**
  * Created by victor on 2017/4/24.
@@ -39,6 +37,8 @@ public class JujiaActivity extends FragmentActivity{
 
     private JiuJiaViewPageAdapter viewPageAdapter;
     private TabLayout.Tab one,two, three;
+
+    private HomeInfor homeInfor = new HomeInfor();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class JujiaActivity extends FragmentActivity{
         initView();
         initTab();
 
-
+//        new GetHomeInforTask().execute();
     }
 
     private void initView() {
@@ -71,7 +71,6 @@ public class JujiaActivity extends FragmentActivity{
 
 //        getSupportFragmentManager().beginTransaction().add(R.id.frag, fragmentContactList).show(fragmentContactList).commit();
     }
-
 
 }
 

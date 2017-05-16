@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname value="xiaoyuab" ></dbname>
+    <dbname value="xiaoyuabcd" ></dbname>
 
     <version value="2" >
 
@@ -10,5 +10,6 @@
         <mapping class="com.example.franklin.myclient.Datas.DoctorInfor"></mapping>
         <mapping class="com.example.franklin.myclient.Datas.ContactListData"></mapping>
         <mapping class="com.example.franklin.myclient.view.Contact.Record.CallRecord"/>
+        <mapping class="com.example.franklin.myclient.Datas.CaseInfor"/>
     </list>
 </litepal>

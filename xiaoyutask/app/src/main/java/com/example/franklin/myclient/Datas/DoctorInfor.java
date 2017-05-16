@@ -43,7 +43,7 @@ public class DoctorInfor extends DataSupport{
      */
 
 
-    private String id;
+    private int id;
     private String phone;
     private String name;
     private String mail;
@@ -57,11 +57,11 @@ public class DoctorInfor extends DataSupport{
     private String cases;
     private String creationDate;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
