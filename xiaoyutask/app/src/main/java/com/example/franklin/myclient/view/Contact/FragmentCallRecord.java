@@ -1,14 +1,12 @@
 package com.example.franklin.myclient.view.Contact;
 
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.database.Cursor;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,23 +14,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-
+import com.example.franklin.myclient.SomeUtils.Utils;
 import com.example.franklin.myclient.view.Contact.Record.CallRecord;
 import com.example.franklin.myclient.view.Contact.Record.CallRecordAdapter;
-import com.example.franklin.myclient.view.Contact.sortlist.SideBar;
-import com.example.franklin.myclient.DataBase.ContactDBhelper;
-import com.example.franklin.myclient.SomeUtils.Utils;
-
-import org.litepal.crud.DataSupport;
-
 import demo.animen.com.xiaoyutask.R;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import org.litepal.crud.DataSupport;
 
 /**
  * Created by 小武哥 on 2017/4/29.
@@ -131,7 +122,6 @@ public class FragmentCallRecord extends Fragment {
                     }
 
                 });
-
             }
             return 1;
         }

@@ -47,7 +47,6 @@ public class BusinessActivity extends Activity {
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     manager.beginTransaction().add(R.id.content_frame,videoFragment).commitAllowingStateLoss();
 
-
     Intent intent = getIntent();
     boolean isIncomingCall = intent.getBooleanExtra("isIncomingCall", false);
     if (true == isIncomingCall) {
