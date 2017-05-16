@@ -1,10 +1,12 @@
 package com.example.franklin.myclient.Datas;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Created by victor on 17-4-30.
  */
 
-public class CaseInfor {
+public class CaseInfor extends DataSupport{
 
     /**
      * id:病例id
@@ -33,6 +35,9 @@ public class CaseInfor {
      */
     private int id;
     private String name;
+    private String sex;
+    private String age;
+    private String image;
     private String creationDate;
     private String patientId;
     private String doctorId;
@@ -41,6 +46,29 @@ public class CaseInfor {
     private String temperature;
     private String blood_pressure;
     private String doctorName;
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public String getImage() {
+        return image;
+    }
 
     public int getId() {
         return id;

@@ -112,22 +112,25 @@ public class DoctorActivity extends AppCompatActivity {
             if (net_work_available) {
                 doctorInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_DOCTOR_INFOR + doctor_id), DoctorInfor.class);
                 bitmap = BitmapDownLoader.getBitmap("http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
-
-                bitmapDownLoader.addBitmapToMemory(doctorInfor.getName(), bitmap);
+//
+                BitmapUtil.saveBitmapToSDCard(bitmap, GlobalData.DoctorIMage, doctorInfor.getName());
+//                bitmapDownLoader.addBitmapToMemory(doctorInfor.getName(), bitmap);
+                DataSupport.deleteAll(DoctorInfor.class);
                 if (!doctorInfor.isSaved()) {
-                    doctorInfor.save();
+                   doctorInfor.save();
                 }
                 name = doctorInfor.getName();
                 Utils.putValue(DoctorActivity.this, GlobalData.DoctorName, name);
                 has_data = true;
             } else {
                 if (DataSupport.isExist(DoctorInfor.class)) {
+                    Log.e("exud", "dawrdfw");
                     List<DoctorInfor> doctorInfors = DataSupport.findAll(DoctorInfor.class);
                     name = Utils.getValue(DoctorActivity.this, GlobalData.DoctorName);
                     for (DoctorInfor doctorInfora : doctorInfors) {
                         if (doctorInfora.getName().equals(name)) {
                             doctorInfor = doctorInfora;
-                            bitmap = bitmapDownLoader.getBitmapFromMemCache(doctorInfora.getName());
+                            bitmap = BitmapUtil.getBitmap(GlobalData.DoctorIMage + "/" + doctorInfora.getName() + ".jpg");
                             break;
                         }
                     }

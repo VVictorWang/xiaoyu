@@ -1,8 +1,11 @@
 package com.example.franklin.myclient.SomeUtils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.util.LruCache;
+import android.utils.ImageLoader;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -33,7 +36,10 @@ public class BitmapDownLoader {
 
     private static final String TAG = "DownLoad";
     private LruCache<String, Bitmap> lruCache;
-    public BitmapDownLoader(){
+    private Context context;
+
+    public BitmapDownLoader() {
+
         long maxMemory = Runtime.getRuntime().maxMemory();
         int cacheSize = (int) (maxMemory / 8);
         lruCache = new LruCache<String, Bitmap>(cacheSize) {
@@ -52,7 +58,10 @@ public class BitmapDownLoader {
 
     // 从缓存中得到Bitmap对象
     public Bitmap getBitmapFromMemCache(String key) {
-        return lruCache.get(key);
+        Bitmap bitmap = lruCache.get(key);
+        boolean c = bitmap == null;
+        Log.e("bimap", "he " + c);
+        return bitmap;
     }
 
     // 从缓存中删除指定的Bitmap

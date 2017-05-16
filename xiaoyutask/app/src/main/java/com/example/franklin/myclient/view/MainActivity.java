@@ -1,9 +1,12 @@
 package com.example.franklin.myclient.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +14,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.franklin.myclient.SomeUtils.BitmapDownLoader;
 import com.example.franklin.myclient.SomeUtils.GlobalData;
 import com.example.franklin.myclient.SomeUtils.Utils;
 import com.example.franklin.myclient.Datas.UserInfor;
 import com.example.franklin.myclient.Datas.XiaoYuNumber;
 import com.example.franklin.myclient.view.Case.CaseListActivity;
+import com.example.franklin.myclient.view.Contact.BitmapUtil;
 import com.example.franklin.myclient.view.Contact.ContactActivity;
 import com.example.franklin.myclient.view.JiuJIA.JujiaActivity;
 import com.example.franklin.myclient.view.Setting.Setting_Activity;
@@ -34,6 +39,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -74,13 +81,15 @@ public class MainActivity extends AppCompatActivity {
     private List<XiaoYuNumber> xiaoYuNumbers;
 
     private boolean net_work_available,has_data;
+    private Bitmap bitmap;
+    private BitmapDownLoader  downLoader = new BitmapDownLoader();
 
     @Override
     protected void onResume() {
         super.onResume();
+        net_work_available = Utils.isNetWorkAvailabe(MainActivity.this);
         resumeData();
-        initData();
-        new GetUserInfor().execute(user_name);
+//        new GetUserInfor().execute(user_name);
     }
 
     @Override
@@ -102,26 +111,28 @@ public class MainActivity extends AppCompatActivity {
         this.bangding_xiaoyu_number = (TextView) findViewById(R.id.bangding_xiaoyu_number);
         this.nametext = (TextView) findViewById(R.id.name_text);
         this.personimage = (CircleImageView) findViewById(R.id.person_image);
-        if (image_url != null || image_url.equals("")) {
-            this.personimage.setImageURI(Uri.fromFile(new File(image_url)));
-        } else if (image_url.equals("")) {
-            this.personimage.setImageDrawable(getResources().getDrawable(R.drawable.person));
-        }
+//        if (image_url != null || image_url.equals("")) {
+//            this.personimage.setImageURI(Uri.fromFile(new File(image_url)));
+//        } else if (image_url.equals("")) {
+//            this.personimage.setImageDrawable(getResources().getDrawable(R.drawable.person));
+//        }
         userInfor = new UserInfor();
         xiaoYuNumbers = new ArrayList<>();
         net_work_available= Utils.isNetWorkAvailabe(MainActivity.this);
     }
 
     private void resumeData() {
-        image_url = Utils.getValue(MainActivity.this, GlobalData.Img_URl);
-        if (image_url != null) {
-            this.personimage.setImageURI(Uri.fromFile(new File(image_url)));
-        }
+
+        user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
+        personimage.setImageURI(Uri.fromFile(new File(Utils.getValue(MainActivity.this, GlobalData.Img_URl))));
+//        personimage.setImageBitmap(BitmapUtil.getBitmap(GlobalData.DoctorIMage + Utils.getValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID)));
     }
 
     private void initData() {
-        image_url = Utils.getValue(MainActivity.this, GlobalData.Img_URl);
+//        image_url = Utils.getValue(MainActivity.this, GlobalData.Img_URl);
         user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
+
+//        personimage.setImageBitmap(BitmapUtil.getBitmap(GlobalData.DoctorIMage + Utils.getValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID)));
     }
 
     private void initEvent() {
@@ -185,31 +196,19 @@ public class MainActivity extends AppCompatActivity {
                     Utils.putValue(MainActivity.this, GlobalData.USer_email, userInfor.getEmail());
                     Utils.putValue(MainActivity.this, GlobalData.User_ID, userInfor.getId());
                     Utils.putValue(MainActivity.this, GlobalData.Phone, userInfor.getPhone());
-                    Utils.putValue(MainActivity.this, GlobalData.PWD, userInfor.getPassword());
                     Utils.putValue(MainActivity.this, GlobalData.PATIENT_ID, userInfor.getPatientId());
-                }
-
-                MediaType MEDIA_TYPE_JPG = MediaType.parse("image/jpg");
-
-                client = new OkHttpClient();
-                MultipartBody.Builder builder = new MultipartBody.Builder();
-                File f = new File(image_url);
-                builder.addFormDataPart("id", userInfor.getId());
-                Log.e("id: ", userInfor.getId());
-                builder.addFormDataPart("patientFamilyImage", f.toString(), RequestBody.create(MEDIA_TYPE_JPG, f));
-                RequestBody requestBody = builder.build();
-                final Request request = new Request.Builder().url(GlobalData.POST_IMAGE).post(requestBody).build();
-                try {
-
-                    Response response = client.newCall(request).execute();
-                    String op = response.body().string();
-                Log.e("responce: ", op);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    Utils.putValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID, userInfor.getId());
 
                 }
+                String image_url = userInfor.getImage();
+                if (image_url != null && !image_url.equals("null")) {
+
+                        bitmap = BitmapDownLoader.getBitmap(GlobalData.GET_PATIENT_FAMILY_IMAGE + image_url);
+                    BitmapUtil.saveBitmapToSDCard(bitmap, GlobalData.DoctorIMage, "familyimage" + userInfor.getId());
+                    downLoader.addBitmapToMemory("familyimage" + userInfor.getId(), bitmap);
+                }
+
                 String xiaoyu = Utils.sendRequest(GlobalData.GET_XIAO_YU_NUMBER + "type=phone&data=" + "13367379725");
-
                 Log.e("xiaoyu: ", xiaoyu);
                 if (xiaoyu.contains("not")) {
                     XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
@@ -234,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
                     XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
                     xiaoYuNumber.setXiaoyuNum(Utils.getValue(MainActivity.this, GlobalData.XIAO_YU));
                     xiaoYuNumbers.add(xiaoYuNumber);
+                    bitmap = downLoader.getBitmapFromMemCache("familyimage" + Utils.getValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID));
                     has_data = true;
                 } else {
                     has_data = false;
@@ -263,9 +263,25 @@ public class MainActivity extends AppCompatActivity {
                 if (has_data) {
                     nametext.setText(userInfor.getName());
                     bangding_xiaoyu_number.setText("绑定小鱼号: "+xiaoYuNumbers.get(0).getXiaoyuNum());
+                    if (bitmap != null) {
+                        personimage.setImageBitmap(bitmap);
+                    } else {
+                        bitmap = BitmapUtil.getBitmap(GlobalData.DoctorIMage + "familyimage" + userInfor.getName());
+                        if (bitmap != null) {
+
+                            personimage.setImageBitmap(bitmap);
+                        }
+                        else{
+                            BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.person);
+                            bitmap = drawable.getBitmap();
+                            personimage.setImageBitmap(bitmap);
+                            BitmapUtil.saveDrawble(MainActivity.this, R.drawable.person, "familyimage" + userInfor.getName());
+                            Utils.putValue(MainActivity.this, GlobalData.Img_URl, Environment.getExternalStorageDirectory() + "familyimage" + userInfor.getName());
+                        }
+                    }
+
                 }
 
-//                Log.e("iamge: ", userInfor.getImage());
             }
         }
 

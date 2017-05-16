@@ -7,6 +7,7 @@ package com.example.franklin.myclient.SomeUtils;
 public interface GlobalData {
     String Login_status = "login_status";
     String Phone = "phone";
+    String PATIENTFAMILY_ID = "patient_family_image";
     String Img_URl = "tou_xiang";
     String UserInfo = "UserInfo";
     String NAME = "NAME";
@@ -16,7 +17,7 @@ public interface GlobalData {
     String PATIENT_ID = "patient_id";
     String XIAO_YU = "xiaoyu";
     String DoctorName = "doctor_name";
-    String DoctorIMage = "./DCIM/xiangce";
+    String DoctorIMage = "./sdcard/DCIM/xiangce";
     String USER_IMAGE = "image";
     // JSON status
     String Info = "info";
@@ -28,6 +29,7 @@ public interface GlobalData {
     String GET_USR_INFOR = "http://139.196.40.97/OSAdmin-master/uploads/interface/getPatientFamily.php?";
     String GET_PATIENT_CASE = "http://139.196.40.97/OSAdmin-master/uploads/interface/patientcases.php?patientId=";
     String GET_DOCTOR_INFOR = "http://139.196.40.97/OSAdmin-master/uploads/interface/doctorinfo.php?doctorId=";
+    String GET_HOME_INFOR = "http://139.196.40.97/OSAdmin-master/uploads/interface/homeinfo.php?patientId=";
     /******************************************************************
      getXiaoyuNum.php         根据数据类型和信息获取小鱼设备号
 
@@ -51,6 +53,8 @@ public interface GlobalData {
      */
     String POST_IMAGE = "http://139.196.40.97/OSAdmin-master/uploads/interface/uploadPatientFamilyImage.php?";
     String CHANGE_PASSWORD = "http://139.196.40.97/OSAdmin-master/uploads/interface/userinfomgr.php?";
+    String GET_PATIENT_IMAGE = "http://139.196.40.97/upload/patientimage/";
+    String GET_PATIENT_FAMILY_IMAGE = "http://139.196.40.97/upload/patientfamilyimage/";
     // 发送验证码 codeType 1注册 2修改密码
     String SendCodeURL = "";
     // 用户注册

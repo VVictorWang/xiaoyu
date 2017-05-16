@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +22,8 @@ import com.example.franklin.myclient.view.Case.CaseLayout.CustomLayoutManager;
 import com.example.franklin.myclient.view.Case.CaseLayout.DisplayUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.litepal.crud.DataSupport;
 
 import demo.animen.com.xiaoyutask.R;
 
@@ -37,12 +41,18 @@ public class CaseListActivity extends AppCompatActivity {
     private String patientId;
 
     private List<CaseInfor> caseInfors;
-    private CaseAdapter adapter ;
+    private CaseAdapter adapter;
     private ProgressDialog progressDialog;
-    private boolean status;
-    private CaseListDataBase dataBase;
 
-    private boolean net_work_available,has_data;
+    private boolean net_work_available, has_data;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0x123) {
+                Utils.showShortToast(CaseListActivity.this, "没有数据");
+            }
+        }
+    };
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +76,6 @@ public class CaseListActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         CustomLayoutManager manager = new CustomLayoutManager();
         recyclerView.setLayoutManager(manager);
-        dataBase = new CaseListDataBase(CaseListActivity.this);
-        status = false;
         caseInfors = new ArrayList<>();
         net_work_available = Utils.isNetWorkAvailabe(CaseListActivity.this);
         progressDialog = new ProgressDialog(this);
@@ -78,15 +86,15 @@ public class CaseListActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Utils.finishActivity(CaseListActivity.this);
+                Utils.finishActivity(CaseListActivity.this);
             }
         });
     }
 
 
-
     class CaseListTask extends AsyncTask<String, Void, String> {
         private Gson gson = new Gson();
+
         @Override
 
         protected void onPostExecute(String s) {
@@ -95,49 +103,45 @@ public class CaseListActivity extends AppCompatActivity {
                 adapter = new CaseAdapter(CaseListActivity.this, caseInfors);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                for (CaseInfor caseInfor : caseInfors) {
+                    Log.e("id ", "hello " + caseInfor.getId());
+                }
 
+            } else {
+                handler.sendEmptyMessage(0x123);
             }
             progressDialog.dismiss();
         }
 
         @Override
         protected String doInBackground(String... params) {
-            if (!net_work_available && !dataBase.isEmpty()) {
-                Cursor c = dataBase.getAllItems();
-                c.moveToFirst();
-                do {
-                    CaseInfor caseInfor = new CaseInfor();
-                    caseInfor.setId(c.getInt(c.getColumnIndex(CaseListDataBase.DB_COLUMN_ID)));
-                    caseInfor.setDoctorId(c.getString(c.getColumnIndex(CaseListDataBase.DB_COLUMN_DOCTOR_ID)));
-                    caseInfor.setPatientId(c.getString(c.getColumnIndex(CaseListDataBase.DB_COLUNM_PATIETENT_ID)));
-                    caseInfor.setBlood_pressure(c.getString(c.getColumnIndex(CaseListDataBase.DB_COLUMN_BLODD_PRESSURE)));
-                    caseInfor.setCreationDate(c.getString(c.getColumnIndex(CaseListDataBase.DB_COLUMN_CREATE_TIME)));
-                    caseInfor.setDoctorName(c.getString(c.getColumnIndex(CaseListDataBase.DB_COLUMN_DOCTOR_NAME)));
-                    caseInfor.setName(c.getString(c.getColumnIndex(CaseListDataBase.DB_COLUMN_PATIENTEN_NAME)));
-                    caseInfor.setIllproblem(c.getString(c.getColumnIndex(CaseListDataBase.DB_COLUMN_ILL_PROBLEM)));
-                    caseInfor.setIllresult(c.getString(c.getColumnIndex(CaseListDataBase.DB_COLUMN_ILL_RESULT)));
-                    caseInfors.add(caseInfor);
-                } while (c.moveToNext());
-                has_data = true;
-            } else if (net_work_available) {
+            if (net_work_available) {
                 caseInfors = gson.fromJson(Utils.sendRequest(GlobalData.GET_PATIENT_CASE + patientId), new TypeToken<List<CaseInfor>>() {
                 }.getType());
-
-                dataBase.update();
+                DataSupport.deleteAll(CaseInfor.class);
                 for (CaseInfor caseInfor : caseInfors) {
-                    dataBase.insert(caseInfor.getId(), caseInfor.getName(), caseInfor.getCreationDate(), caseInfor.getPatientId(), caseInfor.getDoctorId(), caseInfor.getIllproblem(), caseInfor.getIllresult(), caseInfor.getTemperature(), caseInfor.getBlood_pressure(), caseInfor.getDoctorName());
+                    if (!caseInfor.isSaved()) {
+                          caseInfor.save();
+                    }
                 }
                 has_data = true;
-            } else if (!net_work_available && dataBase.isEmpty()) {
-                has_data = false;
+
+            } else {
+                if (DataSupport.isExist(CaseInfor.class)) {
+                    caseInfors = DataSupport.findAll(CaseInfor.class);
+                    has_data = true;
+                } else {
+                    has_data = false;
+                }
             }
+
             return "ok";
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           progressDialog.show();
+            progressDialog.show();
         }
     }
 }

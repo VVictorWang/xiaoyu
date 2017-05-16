@@ -1,16 +1,22 @@
 package com.example.franklin.myclient.view.JiuJIA;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.franklin.myclient.Datas.HomeInfor;
+import com.example.franklin.myclient.SomeUtils.GlobalData;
+import com.example.franklin.myclient.SomeUtils.Utils;
 import com.example.franklin.myclient.view.JiuJIA.drawSmoothLine.BesselChart;
 import com.example.franklin.myclient.view.JiuJIA.drawSmoothLine.Point;
 import com.github.mikephil.charting.charts.BarChart;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +45,8 @@ public class JujiaActivity extends FragmentActivity{
 
     private JiuJiaViewPageAdapter viewPageAdapter;
     private TabLayout.Tab one,two, three;
+
+    private HomeInfor homeInfor = new HomeInfor();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +54,7 @@ public class JujiaActivity extends FragmentActivity{
         initView();
         initTab();
 
-
+//        new GetHomeInforTask().execute();
     }
 
     private void initView() {
@@ -71,6 +79,8 @@ public class JujiaActivity extends FragmentActivity{
 
 //        getSupportFragmentManager().beginTransaction().add(R.id.frag, fragmentContactList).show(fragmentContactList).commit();
     }
+
+
 
 
 }

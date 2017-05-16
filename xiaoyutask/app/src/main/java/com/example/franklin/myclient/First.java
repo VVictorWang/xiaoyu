@@ -24,11 +24,11 @@ public class First extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             Intent intent = new Intent();
-            if (isLogin) {
+//            if (isLogin) {
                 intent.setClass(First.this, MainActivity.class);
-            } else {
-                intent.setClass(First.this, LoginActivity.class);
-            }
+//            } else {
+//                intent.setClass(First.this, LoginActivity.class);
+//            }
             startActivity(intent);
             overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
             finish();
@@ -39,12 +39,12 @@ public class First extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         initData();
-        if (isLogin) {
+//        if (isLogin) {
 
             getLogin();
-        } else {
-            handler.sendEmptyMessage(0);
-        }
+//        } else {
+//            handler.sendEmptyMessage(0);
+//        }
     }
 
     private void initData(){

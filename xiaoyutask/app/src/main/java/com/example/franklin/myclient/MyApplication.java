@@ -28,6 +28,7 @@ public class MyApplication extends Application{
 //        nemoSDK.init(this,settings);
     }
 
+
     public static Context getContext() {
         return context;
 

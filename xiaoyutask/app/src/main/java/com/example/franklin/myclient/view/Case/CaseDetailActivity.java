@@ -2,6 +2,9 @@ package com.example.franklin.myclient.view.Case;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,8 +15,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.franklin.myclient.DataBase.CaseListDataBase;
+import com.example.franklin.myclient.Datas.CaseInfor;
+import com.example.franklin.myclient.SomeUtils.BitmapDownLoader;
+import com.example.franklin.myclient.SomeUtils.GlobalData;
 import com.example.franklin.myclient.SomeUtils.Utils;
 
+import org.litepal.crud.DataSupport;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 
@@ -27,12 +36,22 @@ public class CaseDetailActivity extends AppCompatActivity {
     private TextView date;
     private TextView name;
     private TextView sex_age,ill_problem,ill_detail,ill_result;
+    private CircleImageView imageView;
+    private Bitmap bitmap;
 
     private CaseListDataBase dataBase;
     private int id;
     private String doctor_id;
 
 
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0x123) {
+                imageView.setImageBitmap(bitmap);
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +73,7 @@ public class CaseDetailActivity extends AppCompatActivity {
         sex_age = (TextView) person_part.findViewById(R.id.person_detail_info);
         ill_problem = (TextView) person_part.findViewById(R.id.person_detail_reason);
         ill_result = (TextView) findViewById(R.id.case_detail_result);
+        imageView = (CircleImageView) person_part.findViewById(R.id.person_detail_image);
         dataBase = new CaseListDataBase(CaseDetailActivity.this);
     }
 
@@ -75,23 +95,34 @@ public class CaseDetailActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        Cursor co = dataBase.getAllItems();
+        if (DataSupport.isExist(CaseInfor.class)) {
+            CaseInfor caseInfor = DataSupport.find(CaseInfor.class, (long) id);
+            doctor_name.setText("主治医生  " + caseInfor.getDoctorName());
+            date.setText(caseInfor.getCreationDate());
+            name.setText(caseInfor.getName());
+            ill_problem.setText("病情: " + caseInfor.getIllproblem());
+            ill_result.setText(caseInfor.getIllresult());
+            doctor_id = caseInfor.getDoctorId();
+            DownLoadImage(GlobalData.GET_PATIENT_IMAGE + caseInfor.getImage());
+            Log.e("bitmap: ", caseInfor.getImage());
+            Log.e("id: ", "" + id);
+        } else {
+            Utils.showShortToast(CaseDetailActivity.this, "没有数据");
+        }
 
-        co.moveToFirst();
-        do {
-            int m = co.getInt(co.getColumnIndex(CaseListDataBase.DB_COLUMN_ID));
-            if (m == id) {
-                break;
+    }
+
+    private void DownLoadImage(final String url) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    bitmap = BitmapDownLoader.getBitmap(url);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(0x123);
             }
-
-        } while (co.moveToNext());
-
-        doctor_name.setText("主治医生  " + co.getString(co.getColumnIndex(CaseListDataBase.DB_COLUMN_DOCTOR_NAME)));
-        date.setText(co.getString(co.getColumnIndex(CaseListDataBase.DB_COLUMN_CREATE_TIME)));
-        name.setText(co.getString(co.getColumnIndex(CaseListDataBase.DB_COLUMN_PATIENTEN_NAME)));
-        ill_problem.setText("病情: " + co.getString(co.getColumnIndex(CaseListDataBase.DB_COLUMN_ILL_PROBLEM)));
-        ill_result.setText(co.getString(co.getColumnIndex(CaseListDataBase.DB_COLUMN_ILL_RESULT)));
-        doctor_id = co.getString(co.getColumnIndex(CaseListDataBase.DB_COLUMN_DOCTOR_ID));
-        Log.e("id: ", "" + id);
+        }).start();
     }
 }
