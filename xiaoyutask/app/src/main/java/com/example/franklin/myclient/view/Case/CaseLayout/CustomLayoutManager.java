@@ -20,7 +20,7 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
 
   public int totalHeight = 0;
   private int verticalScrollOffset;
-  int rightPartOffset=0;
+  private int rightPartOffset=0;
 
 
 
@@ -29,7 +29,6 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
     return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
         ViewGroup.LayoutParams.WRAP_CONTENT);
   }
-
 
   @Override
   public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
@@ -49,7 +48,7 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
       View view = recycler.getViewForPosition(i);
       addView(view);
       // 我们自己指定ItemView的尺寸。
-      measureChildWithMargins(view, DisplayUtils.getScreenWidth() / 2, 0);
+      measureChildWithMargins(view, getWidth() / 2, 0);
       calculateItemDecorationsForChild(view, new Rect());
 
 
@@ -63,10 +62,10 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
 
       if (i % 2 == 0) { // 当i能被2整除时，是左，否则是右。
         // 左
-        mTmpRect.set(0, totalHeight, DisplayUtils.getScreenWidth() / 2, totalHeight + height);
+        mTmpRect.set(0, totalHeight, getWidth() / 2, totalHeight + height);
       } else {
         // 右，需要换行
-        mTmpRect.set(DisplayUtils.getScreenWidth() / 2, totalHeight+rightPartOffset,DisplayUtils.getScreenWidth(),
+        mTmpRect.set(getWidth() / 2, totalHeight+rightPartOffset,getWidth(),
             totalHeight + height+rightPartOffset);
         totalHeight = totalHeight + height;
       }
@@ -75,6 +74,9 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
       allItemRects.put(i, mTmpRect);
       // 由于之前调用过detachAndScrapAttachedViews(recycler)，所以此时item都是不可见的
       itemStates.put(i, false);
+    }
+    if(getItemCount()%2==0&&getItemCount()>0){
+      totalHeight+=rightPartOffset;
     }
   }
 
@@ -114,7 +116,7 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
       if (Rect.intersects(displayRect, allItemRects.get(i))) {
         //获得Recycler中缓存的View
         View itemView = recycler.getViewForPosition(i);
-        measureChildWithMargins(itemView, DisplayUtils.getScreenWidth() / 2, 0);
+        measureChildWithMargins(itemView, getWidth() / 2, 0);
         //添加View到RecyclerView上
         addView(itemView);
         //取出先前存好的ItemView的位置矩形
@@ -137,13 +139,14 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
     // 返回true表示可以纵向滑动
     return true;
   }
+ 
 
   @Override
   public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
     //每次滑动时先释放掉所有的View，因为后面调用recycleAndFillView()时会重新addView()。
 
 
-    if(totalHeight>DisplayUtils.getScreenHeight()) {
+    if(totalHeight> getHeight()) {
         detachAndScrapAttachedViews(recycler);
       // 列表向下滚动dy为正，列表向上滚动dy为负，这点与Android坐标系保持一致。
       // 实际要滑动的距离
@@ -154,8 +157,8 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
 
         if (verticalScrollOffset + dy < 0) {
           travel = -verticalScrollOffset;
-        } else if (verticalScrollOffset + dy > totalHeight+ rightPartOffset- getVerticalSpace()) {// 如果滑动到最底部
-          travel = totalHeight + rightPartOffset- getVerticalSpace() - verticalScrollOffset;
+        } else if (verticalScrollOffset + dy > totalHeight- getVerticalSpace()) {// 如果滑动到最底部
+          travel = totalHeight- getVerticalSpace() - verticalScrollOffset;
         }
 
       // 调用该方法通知view在y方向上移动指定距离

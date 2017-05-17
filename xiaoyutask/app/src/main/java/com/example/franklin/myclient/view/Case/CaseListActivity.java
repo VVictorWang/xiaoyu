@@ -1,7 +1,6 @@
 package com.example.franklin.myclient.view.Case;
 
 import android.app.ProgressDialog;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,13 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
-import com.example.franklin.myclient.DataBase.CaseListDataBase;
 import com.example.franklin.myclient.Datas.CaseInfor;
 import com.example.franklin.myclient.SomeUtils.GlobalData;
 import com.example.franklin.myclient.SomeUtils.Utils;
 import com.example.franklin.myclient.view.Case.CaseLayout.CaseAdapter;
 import com.example.franklin.myclient.view.Case.CaseLayout.CustomLayoutManager;
-import com.example.franklin.myclient.view.Case.CaseLayout.DisplayUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -61,7 +58,7 @@ public class CaseListActivity extends AppCompatActivity {
             Utils.finishActivity(CaseListActivity.this);
         } else {
             Log.e("patientid", patientId);
-            DisplayUtils.init(this);//获取屏幕宽度高度信息
+//            DisplayUtils.init(this);//获取屏幕宽度高度信息
             initView();
             initEvent();
             new CaseListTask().execute(patientId);
