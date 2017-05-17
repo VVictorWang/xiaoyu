@@ -14,14 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.victor.myclient.Datas.HomeInfor;
-import com.victor.myclient.SomeUtils.GlobalData;
-import com.victor.myclient.SomeUtils.Utils;
-import com.victor.myclient.view.JiuJIA.drawSmoothLine.BesselChart;
-import com.victor.myclient.view.JiuJIA.drawSmoothLine.ChartData;
-import com.victor.myclient.view.JiuJIA.drawSmoothLine.Point;
-import com.victor.myclient.view.JiuJIA.drawSmoothLine.Series;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
@@ -31,17 +23,23 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.victor.myclient.Datas.HomeInfor;
+import com.victor.myclient.SomeUtils.GlobalData;
+import com.victor.myclient.SomeUtils.Utils;
+import com.victor.myclient.view.JiuJIA.drawSmoothLine.BesselChart;
+import com.victor.myclient.view.JiuJIA.drawSmoothLine.ChartData;
+import com.victor.myclient.view.JiuJIA.drawSmoothLine.Point;
+import com.victor.myclient.view.JiuJIA.drawSmoothLine.Series;
 
 import demo.animen.com.xiaoyutask.R;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by victor on 17-5-3.
  */
 
-public class Framgment_tempera extends Fragment implements BesselChart.ChartListener {
+public class Framgment_tempera extends Fragment implements BesselChart.ChartListener{
 
     BesselChart chart;
     private Activity activity;
@@ -52,16 +50,13 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
     private HomeInfor homeInfor;
     private TextView current_shi;
     private List<Point> points=new ArrayList<>();
-
-    private boolean network_available;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x1234) {
                 List<Series> seriess = new ArrayList<Series>();
                 for(int i=0;i<8;i++){
-                    points.add(new Point(i, homeInfor.getTemperatures().get(i)));
-//                Log.e("value:", "" + Float.parseFloat(homeInfor.getTemperatures().get(i)));
+                    points.add(new Point((float)i, homeInfor.getTemperatures().get(i),true));
                 }
                 seriess.add(new Series("温度",Color.WHITE,points));
                 chart.getData().setLabelTransform(new ChartData.LabelTransform() {
@@ -69,18 +64,21 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
                     public String verticalTransform(int valueY) {
                         return String.format("%d", valueY);
                     }
+
                     @Override
                     public String horizontalTransform(int valueX) {
-                        return String.format("%s", valueX*3+3 );
+                        return String.format("%s", valueX );
                     }
                     @Override
                     public boolean labelDrawing(int valueX) {
                         return true;
                     }
                 });
+
+                initData();
                 chart.getData().setSeriesList(seriess);
                 chart.refresh(true);
-                initData();
+
             }
         }
     };
@@ -105,7 +103,6 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-        network_available = Utils.isNetWorkAvailabe(activity);
     }
 
     private void initData(){
@@ -118,15 +115,9 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
             }
         };
         List<BarEntry> barEntries = new ArrayList<>();
-        int j=0;
         for (int i = 0; i < 8; i++) {
-            while (homeInfor.getHumidityies().get(j) == 0 && j<homeInfor.getHumidityies().size()) {
-                j++;
-            }
-            barEntries.add(new BarEntry((float) i, homeInfor.getHumidityies().get(j)));
-//            Log.e("daat: ", "" + homeInfor.getHumidityies().get(j));
+            barEntries.add(new BarEntry((float) i, homeInfor.getHumidityies().get(i)));
         }
-
         BarDataSet barDataSet = new BarDataSet(barEntries, "");
         barDataSet.setBarShadowColor(0xb1b2b288);
         barDataSet.setDrawValues(false);
@@ -149,9 +140,7 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         barChart.setDrawBarShadow(true);
         barChart.getLegend().setEnabled(false);
         barChart.invalidate();
-
-        float humidty = homeInfor.getHumidity();
-        current_shi.setText((int)humidty + "%");
+        current_shi.setText((int) homeInfor.getHumidity() + "%");
     }
 
     private void initView(){
@@ -197,7 +186,6 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         if (willDrawing) {
             new GetHomeInforTask().execute();
         }
-
     }
 
     class GetHomeInforTask extends AsyncTask<Void, Void, Void> {

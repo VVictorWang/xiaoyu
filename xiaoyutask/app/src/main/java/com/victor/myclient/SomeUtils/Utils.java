@@ -1,5 +1,6 @@
 package com.victor.myclient.SomeUtils;
 
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.Notification;
@@ -7,15 +8,14 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
-
-import android.content.SharedPreferences.Editor;
-
+import demo.animen.com.xiaoyutask.R;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,19 +28,28 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import demo.animen.com.xiaoyutask.R;
-
 /**
  * Created by victor on 17-4-29.
  */
 
 public class Utils {
+    private static Toast mToast=null;
     public static void showLongToast(Context context, String msg) {
-        Toast.makeText(context, msg,Toast.LENGTH_LONG).show();
+        if(mToast!=null){
+            mToast.makeText(context,msg,Toast.LENGTH_LONG);
+        }else {
+            mToast=Toast.makeText(context,msg,Toast.LENGTH_LONG);
+        }
+        mToast.show();
     }
 
     public static void showShortToast(Context context, String msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        if(mToast!=null){
+            mToast.makeText(context,msg,Toast.LENGTH_SHORT);
+        }else {
+            mToast=Toast.makeText(context,msg,Toast.LENGTH_SHORT);
+        }
+        mToast.show();
     }
 
     public static void finishActivity(Activity activity) {

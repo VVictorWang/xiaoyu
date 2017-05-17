@@ -23,30 +23,29 @@ public class Point {
     /**
      * 实际的X数值
      */
-    public int valueX;
+    public float valueX;
     /**
      * 实际的Y数值
      */
-    public int valueY;
+    public float valueY;
 
     public Point() {
     }
 
-    public Point(float x, float y, boolean willDrawing) {
-        this.x = x;
-        this.y = y;
+    public Point( float valueX, float valueY,boolean willDrawing) {
         this.willDrawing = willDrawing;
-    }
-
-    public Point(int valueX, int valueY, boolean willDrawing) {
         this.valueX = valueX;
         this.valueY = valueY;
-        this.willDrawing = willDrawing;
     }
+
+    //    public Point(int valueX, int valueY, boolean willDrawing) {
+//        this.valueX = valueX;
+//        this.valueY = valueY;
+//        this.willDrawing = willDrawing;
+//    }
 
     public Point(float x, float y) {
         this.x = x;
         this.y = y;
     }
-
 }

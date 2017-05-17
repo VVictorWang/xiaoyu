@@ -155,7 +155,7 @@ class BesselChartView extends View {
 
 
     /**
-     * 绘制曲线图中的房源
+     * 绘制曲线图中的maker
      */
     private void drawMarker(Canvas canvas) {
         Marker marker = data.getMarker();
