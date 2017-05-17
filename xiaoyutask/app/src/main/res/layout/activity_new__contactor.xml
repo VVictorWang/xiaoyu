@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/my_background"
-    tools:context="com.example.franklin.myclient.view.Contact.New_Contactor">
+    tools:context="com.victor.myclient.view.Contact.New_Contactor">
 
     <RelativeLayout
         android:layout_width="match_parent"

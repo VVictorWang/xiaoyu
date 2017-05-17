@@ -1,284 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical"
-  tools:layout_editor_absoluteY="25dp"
-  tools:layout_editor_absoluteX="0dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.ainemo.sample.SimpleVideoView
-      android:id="@+id/remote_video_view"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:layout_constraintTop_creator="1"
-      tools:layout_constraintRight_creator="1"
-      tools:layout_constraintBottom_creator="1"
-      tools:layout_constraintLeft_creator="1" />
+        android:id="@+id/remote_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <Button
-      android:id="@+id/drop_call"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="hang up"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      android:layout_marginBottom="16dp"
-      tools:layout_constraintRight_creator="1"
-      tools:layout_constraintLeft_creator="1" />
+        android:id="@+id/drop_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hang up" />
 
     <Button
-      android:id="@+id/switch_camera"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_toRightOf="@id/drop_call"
-      android:text="switch camera"
-      android:layout_marginRight="8dp"
-      app:layout_constraintRight_toRightOf="parent"
-      android:layout_marginLeft="8dp"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintHorizontal_bias="0.387"
-      android:layout_marginStart="8dp"
-      android:layout_marginEnd="8dp" />
+        android:id="@+id/switch_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/drop_call"
+        android:text="switch camera" />
 
     <Button
-      android:id="@+id/switch_mic_mute"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_toRightOf="@id/switch_camera"
-      android:text="switch mic mute"
-      android:layout_marginRight="8dp"
-      app:layout_constraintRight_toRightOf="parent"
-      android:layout_marginLeft="8dp"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginTop="101dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginEnd="8dp" />
+        android:id="@+id/switch_mic_mute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/switch_camera"
+        android:text="switch mic mute" />
 
     <Button
-      android:id="@+id/switch_call_module"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/drop_call"
-      android:text="switch call mode"
-      android:layout_marginLeft="8dp"
-      app:layout_constraintLeft_toLeftOf="parent"
-      android:layout_marginRight="8dp"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      android:layout_marginStart="8dp"
-      android:layout_marginEnd="8dp" />
+        android:id="@+id/switch_call_module"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drop_call"
+        android:text="switch call mode" />
 
     <Button
-      android:id="@+id/switch_video_stream"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/switch_mic_mute"
-      android:layout_toRightOf="@id/switch_call_module"
-      android:text="set layout force target"
-      android:layout_marginRight="8dp"
-      app:layout_constraintRight_toRightOf="parent"
-      android:layout_marginLeft="8dp"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintHorizontal_bias="0.871"
-      android:layout_marginStart="8dp"
-      android:layout_marginEnd="8dp" />
+        android:id="@+id/switch_video_stream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/switch_mic_mute"
+        android:layout_toRightOf="@id/switch_call_module"
+        android:text="set layout force target" />
 
     <TextView
-      android:id="@+id/remote_video_state"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginRight="8dp"
-      android:layout_below="@id/switch_call_module"
-      android:text=""
-      app:layout_constraintRight_toRightOf="@+id/remote_audio_state"
-      tools:layout_constraintTop_creator="1"
-      android:layout_marginEnd="8dp"
-      android:layout_marginTop="2dp"
-      app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/remote_video_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/switch_call_module"
+        android:text="" />
+
     <TextView
-      android:id="@+id/remote_audio_state"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/switch_call_module"
-      android:layout_toRightOf="@id/remote_video_state"
-      android:text=""
-      app:layout_constraintRight_toLeftOf="parent"
-      tools:layout_constraintTop_creator="1"
-      tools:layout_constraintRight_creator="1"
-      tools:layout_constraintBottom_creator="1"
-      app:layout_constraintBottom_toBottomOf="@+id/remote_video_state"
-      app:layout_constraintTop_toBottomOf="@+id/remote_video_state"
-      tools:layout_constraintLeft_creator="1"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintVertical_bias="0.0" />
+        android:id="@+id/remote_audio_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/switch_call_module"
+        android:layout_toRightOf="@id/remote_video_state"
+        android:text="" />
 
     <ImageView
-      android:id="@+id/shared_content"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true"
-      android:visibility="gone"
-      app:layout_constraintRight_toLeftOf="parent"
-      tools:layout_constraintTop_creator="1"
-      tools:layout_constraintRight_creator="1"
-      tools:layout_constraintBottom_creator="1"
-      app:layout_constraintBottom_toTopOf="parent"
-      tools:layout_constraintLeft_creator="1"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/shared_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
 
     <!--<LinearLayout-->
-    <!--android:background="#ff000000"-->
-    <!--android:id="@+id/in_coming_call"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:visibility="gone"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/caller_name"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:layout_marginTop="120dp" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/caller_number"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center_horizontal" />-->
-
-    <!--<Button-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:id="@+id/accept"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="accept" />-->
-
-    <!--<Button-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:id="@+id/refuse"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="refuse" />-->
-    <!--</LinearLayout>-->
-</android.support.constraint.ConstraintLayout>
-
-  <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<com.ainemo.sample.SimpleVideoView-->
-        <!--android:id="@+id/remote_video_view"-->
+        <!--android:background="#ff000000"-->
+        <!--android:id="@+id/in_coming_call"-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:visibility="gone"-->
+        <!--android:orientation="vertical">-->
 
-    <!--<Button-->
-        <!--android:id="@+id/drop_call"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="hang up" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/caller_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="120dp" />-->
 
-    <!--<Button-->
-        <!--android:id="@+id/switch_camera"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_toRightOf="@id/drop_call"-->
-        <!--android:text="switch camera" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/caller_number"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal" />-->
 
-    <!--<Button-->
-        <!--android:id="@+id/switch_mic_mute"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_toRightOf="@id/switch_camera"-->
-        <!--android:text="switch mic mute" />-->
+        <!--<Button-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:id="@+id/accept"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="accept" />-->
 
-    <!--<Button-->
-        <!--android:id="@+id/switch_call_module"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/drop_call"-->
-        <!--android:text="switch call mode" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/switch_video_stream"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/switch_mic_mute"-->
-        <!--android:layout_toRightOf="@id/switch_call_module"-->
-        <!--android:text="set layout force target" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/remote_video_state"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/switch_call_module"-->
-        <!--android:text="" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/remote_audio_state"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/switch_call_module"-->
-        <!--android:layout_toRightOf="@id/remote_video_state"-->
-        <!--android:text="" />-->
-
-    <!--<ImageView-->
-        <!--android:id="@+id/shared_content"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:visibility="gone" />-->
-
-    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
-        <!--&lt;!&ndash;android:background="#ff000000"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:id="@+id/in_coming_call"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:visibility="gone"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:orientation="vertical">&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/caller_name"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_gravity="center_horizontal"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_marginTop="120dp" />&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/caller_number"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_gravity="center_horizontal" />&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<Button&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_gravity="center_horizontal"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/accept"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:text="accept" />&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<Button&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_gravity="center_horizontal"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/refuse"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:text="refuse" />&ndash;&gt;-->
-    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
-<!--</RelativeLayout>-->
+        <!--<Button-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:id="@+id/refuse"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="refuse" />-->
+    <!--</LinearLayout>-->
+</RelativeLayout>

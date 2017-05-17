@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.franklin.myclient.view.JiuJIA.JujiaActivity">
+    tools:context="com.victor.myclient.view.JiuJIA.JujiaActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             />
     </RelativeLayout>
 
-    <com.example.franklin.myclient.view.JiuJIA.drawSmoothLine.BesselChart
+    <com.victor.myclient.view.JiuJIA.drawSmoothLine.BesselChart
         android:id="@+id/shidu_line_chart"
         android:layout_below="@+id/jiujia_activity_toolbar"
         android:layout_width="match_parent"
@@ -96,6 +96,7 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:id="@+id/current_shidu_text"
             android:layout_height="wrap_content"
             android:layout_below="@+id/current_shi_text"
             android:layout_marginLeft="28dp"

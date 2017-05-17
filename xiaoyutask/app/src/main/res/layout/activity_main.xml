@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#24d0fd"
     android:orientation="vertical"
-    tools:context="com.example.franklin.myclient.view.MainActivity">
+    tools:context="com.victor.myclient.view.MainActivity">
   <TextView
     android:layout_width="wrap_content"
       android:layout_height="30dp"
@@ -61,7 +61,7 @@
                 android:paddingTop="8dp"
                 android:text="绑定小鱼号"
                 android:textColor="#ffffff"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:id="@+id/bangding_xiaoyu_number"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="88dp"
@@ -71,9 +71,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/time_call"
-                android:text="小鱼通话时长"
+                android:text="小鱼通话时长："
                 android:textColor="#ffffff"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:layout_below="@+id/bangding_xiaoyu_number"
                 android:layout_toRightOf="@+id/person_image"
                 android:layout_toEndOf="@+id/person_image"
