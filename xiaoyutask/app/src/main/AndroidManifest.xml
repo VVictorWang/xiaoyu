@@ -45,15 +45,13 @@
         <activity android:name="com.victor.myclient.view.Contact.ContactActivity" />
         <activity android:name="com.victor.myclient.view.JiuJIA.JujiaActivity" />
         <activity android:name="com.victor.myclient.view.Login.LoginActivity" />
-
         <activity
             android:name="com.victor.myclient.xiaoyu.BusinessActivity"
             android:configChanges="screenSize|orientation"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
 
-        <service android:name="com.victor.myclient.xiaoyu.IncomingCallService"/>
-
+        <service android:name="com.victor.myclient.xiaoyu.IncomingCallService" />
 
         <activity android:name="com.victor.myclient.view.Setting.Setting_Activity" />
         <activity android:name="com.victor.myclient.view.Case.CaseListActivity" />
@@ -66,8 +64,6 @@
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen" />
-
-
         <activity android:name="com.victor.myclient.First">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,6 +73,8 @@
         </activity>
         <activity android:name="com.victor.myclient.view.Case.DoctorActivity" />
         <activity android:name="com.victor.myclient.view.Contact.New_Contactor" />
+        <activity android:name="com.victor.myclient.xiaoyu.VideoActivity" />
+        <activity android:name="com.victor.myclient.xiaoyu.IncommingAcivity"></activity>
     </application>
 
 </manifest>

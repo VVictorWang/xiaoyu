@@ -33,18 +33,18 @@ import rx.schedulers.Schedulers;
 
 public class BusinessActivity extends Activity {
     private static final String TAG = "BusinessActivity";
-    private DialFragment mDialFragment;
+//    private DialFragment mDialFragment;
     private VideoFragment mVideoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business);
+//        setContentView(R.layout.activity_business);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        mDialFragment = new DialFragment();
+//        mDialFragment = new DialFragment();
         mVideoFragment = new VideoFragment();
         final FragmentManager manager = getFragmentManager();
-        manager.beginTransaction().add(R.id.content_frame, mDialFragment).commitAllowingStateLoss();
+//        manager.beginTransaction().add(R.id.content_frame, mDialFragment).commitAllowingStateLoss();
 
         Intent intent = getIntent();
         boolean isIncomingCall = intent.getBooleanExtra("isIncomingCall", false);
@@ -100,10 +100,10 @@ public class BusinessActivity extends Activity {
                                         hideSoftKeyboard();
                                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
                                         if (mVideoFragment.isAdded()) {
-                                            manager.beginTransaction().hide(mDialFragment).show(mVideoFragment).commitAllowingStateLoss();
+//                                            manager.beginTransaction().hide(mDialFragment).show(mVideoFragment).commitAllowingStateLoss();
                                         } else {
-                                            manager.beginTransaction().add(R.id.content_frame,
-                                                    mVideoFragment).hide(mDialFragment).commitAllowingStateLoss();
+//                                            manager.beginTransaction().add(R.id.content_frame,
+//                                                    mVideoFragment).hide(mDialFragment).commitAllowingStateLoss();
                                         }
                                         break;
                                     case CONNECTED:
@@ -120,7 +120,7 @@ public class BusinessActivity extends Activity {
                                         if (mVideoFragment.isAdded()) {
                                             Log.i(TAG, "reason is " + reason);
                                             mVideoFragment.releaseResource();
-                                            manager.beginTransaction().hide(mVideoFragment).show(mDialFragment).commitAllowingStateLoss();
+//                                            manager.beginTransaction().hide(mVideoFragment).show(mDialFragment).commitAllowingStateLoss();
                                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                                         }
 

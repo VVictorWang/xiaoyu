@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ainemo.sample.SimpleVideoView
+    <com.victor.myclient.xiaoyu.SimpleVideoView
         android:id="@+id/remote_video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -68,38 +68,38 @@
         android:visibility="gone" />
 
     <!--<LinearLayout-->
-        <!--android:background="#ff000000"-->
-        <!--android:id="@+id/in_coming_call"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:visibility="gone"-->
-        <!--android:orientation="vertical">-->
+    <!--android:background="#ff000000"-->
+    <!--android:id="@+id/in_coming_call"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:visibility="gone"-->
+    <!--android:orientation="vertical">-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/caller_name"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginTop="120dp" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/caller_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:layout_marginTop="120dp" />-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/caller_number"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/caller_number"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal" />-->
 
-        <!--<Button-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:id="@+id/accept"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="accept" />-->
+    <!--<Button-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:id="@+id/accept"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="accept" />-->
 
-        <!--<Button-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:id="@+id/refuse"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="refuse" />-->
+    <!--<Button-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:id="@+id/refuse"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="refuse" />-->
     <!--</LinearLayout>-->
 </RelativeLayout>

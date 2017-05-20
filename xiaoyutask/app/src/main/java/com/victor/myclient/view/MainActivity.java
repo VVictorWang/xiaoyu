@@ -1,6 +1,7 @@
 package com.victor.myclient.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ainemo.sdk.otf.ConnectNemoCallback;
+import com.ainemo.sdk.otf.NemoSDK;
+import com.ainemo.sdk.otf.NemoSDKListener;
+import com.ainemo.sdk.otf.VideoInfo;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.MyBitmapUtils;
 import com.victor.myclient.SomeUtils.Utils;
@@ -108,9 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
         personimage.setImageURI(Uri.fromFile(new File(Utils.getValue(MainActivity.this, GlobalData.Img_URl))));
-        if (net_work_available) {
-            new GetUserInfor().execute();
-        }
+        bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(MainActivity.this, GlobalData.FAMILY_IMage));
     }
 
     private void initData() {
@@ -139,8 +142,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 50);
 
-                Intent intent = new Intent(MainActivity.this, ContactActivity.class);
-                startActivity(intent);
+                NemoSDK.getInstance().connectNemo("victor", "18774259685", new ConnectNemoCallback() {
+                    @Override
+                    public void onFailed(int i) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(String s) {
+                        Intent intent = new Intent(MainActivity.this, ContactActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
             }
         });
         jujiamain.setOnClickListener(new View.OnClickListener() {

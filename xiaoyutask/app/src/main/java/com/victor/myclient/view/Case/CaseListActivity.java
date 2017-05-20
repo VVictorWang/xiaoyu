@@ -28,7 +28,7 @@ import java.util.List;
 import demo.animen.com.xiaoyutask.R;
 
 /**
- * Created by 小武哥 on 2017/4/27.
+ * Created by victor on 2017/4/27.
  */
 
 public class CaseListActivity extends AppCompatActivity {
@@ -60,12 +60,11 @@ public class CaseListActivity extends AppCompatActivity {
             Utils.finishActivity(CaseListActivity.this);
         } else {
             Log.e("patientid", patientId);
-            DisplayUtils.init(this);//获取屏幕宽度高度信息
+//            DisplayUtils.init(this);//获取屏幕宽度高度信息
             initView();
             initEvent();
             new CaseListTask().execute(patientId);
         }
-
     }
 
     private void initView() {
@@ -73,9 +72,6 @@ public class CaseListActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         CustomLayoutManager manager = new CustomLayoutManager();
         recyclerView.setLayoutManager(manager);
-//        LinearLayoutManager manager1 = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(manager1);
-
         caseInfors = new ArrayList<>();
         net_work_available = Utils.isNetWorkAvailabe(CaseListActivity.this);
         progressDialog = new ProgressDialog(this);
@@ -118,16 +114,10 @@ public class CaseListActivity extends AppCompatActivity {
             if (net_work_available) {
                 caseInfors = gson.fromJson(Utils.sendRequest(GlobalData.GET_PATIENT_CASE + patientId), new TypeToken<List<CaseInfor>>() {
                 }.getType());
-                CaseInfor caseInfor = new CaseInfor();
-                caseInfor.setName("流云");
-                caseInfor.setCreationDate("20170518");
-                caseInfor.setDoctorName("孙里");
-                caseInfor.setIllproblem("咳嗽");
-                caseInfors.add(caseInfor);
                 DataSupport.deleteAll(CaseInfor.class);
-                for (CaseInfor caseInfora : caseInfors) {
-                    if (!caseInfora.isSaved()) {
-                          caseInfora.save();
+                for (CaseInfor caseInfor : caseInfors) {
+                    if (!caseInfor.isSaved()) {
+                        caseInfor.save();
                     }
                 }
                 has_data = true;

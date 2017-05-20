@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.victor.myclient.Datas.UserInfor;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.MyBitmapUtils;
 import com.victor.myclient.SomeUtils.Utils;
@@ -58,6 +60,9 @@ public class Setting_Activity extends AppCompatActivity {
     private TextView logoutoutbutton;
     private String email;
 
+    private boolean networkavailable;
+
+    private UserInfor userInfor;
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
     @Override
     protected void onResume() {
@@ -90,6 +95,7 @@ public class Setting_Activity extends AppCompatActivity {
         this.settingback = (RelativeLayout) findViewById(R.id.setting_back);
         changemail.setText("绑定邮箱: " + email);
         bitmapUtils.disPlay(loginhead, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(Setting_Activity.this, GlobalData.FAMILY_IMage));
+        networkavailable = Utils.isNetWorkAvailabe(Setting_Activity.this);
 //        loginhead.setImageBitmap(BitmapUtil.getBitmap(GlobalData.DoctorIMage + Utils.getValue(Setting_Activity.this, GlobalData.PATIENTFAMILY_ID)));
 //        imagePath = Utils.getValue(Setting_Activity.this, GlobalData.Img_URl);
 //        if (imagePath != null) {
@@ -168,7 +174,6 @@ public class Setting_Activity extends AppCompatActivity {
                         }
                     } else {
                         Log.i(TAG, "onActivityResult: 没有数据");
-                        // Toast.makeText(this, "沒有數據", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
@@ -194,6 +199,11 @@ public class Setting_Activity extends AppCompatActivity {
                 try {
                     Response response = client.newCall(request).execute();
                     String op = response.body().string();
+                    if (op.contains("success") && networkavailable) {
+                        Gson gson = new Gson();
+                        userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR + "FamilyName=" + Utils.getValue(Setting_Activity.this, GlobalData.NAME)), UserInfor.class);
+                        Utils.putValue(Setting_Activity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
+                    }
                     Log.e("responce: ", op);
                 } catch (Exception e) {
                     e.printStackTrace();

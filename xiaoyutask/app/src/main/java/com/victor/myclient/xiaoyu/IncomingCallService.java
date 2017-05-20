@@ -27,7 +27,7 @@ public class IncomingCallService extends Service{
       @Override
       public void onReceivedCall(String s, String s1, int i) {
         Log.i(TAG, "onReceivedCall: name is "+s+" number is "+s1+" call index is "+i);
-        Intent inComingCall=new Intent(IncomingCallService.this, BusinessActivity.class);
+        Intent inComingCall=new Intent(IncomingCallService.this, IncommingAcivity.class);
         inComingCall.putExtra("callerName",s);
         inComingCall.putExtra("callerNumber",s1);
         inComingCall.putExtra("callIndex",i);

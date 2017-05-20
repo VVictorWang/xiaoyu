@@ -1,13 +1,17 @@
 package com.victor.myclient.view.Contact;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ainemo.sdk.otf.NemoSDK;
 import com.victor.myclient.view.Contact.sortlist.SortModel;
+import com.victor.myclient.xiaoyu.VideoActivity;
+import com.victor.myclient.xiaoyu.VideoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,7 @@ import demo.animen.com.xiaoyutask.R;
 public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyViewHoler> {
     private Context context;
     private List<SortModel> list = new ArrayList<>();
+    private VideoFragment videoFragment = new VideoFragment();
     public void updateListView(List<SortModel> list){
         this.list = list;
         notifyDataSetChanged();
@@ -57,9 +62,18 @@ public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyView
 
     @Override
     public MyViewHoler onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+        final Context context = parent.getContext();
+        final LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_phone_constacts, parent, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, VideoActivity.class);
+                intent.putExtra("number", "740746");
+                context.startActivity(intent);
+//                NemoSDK.getInstance().makeCall("740746");
+            }
+        });
         MyViewHoler viewHoler = new MyViewHoler(view);
         return viewHoler;
     }
