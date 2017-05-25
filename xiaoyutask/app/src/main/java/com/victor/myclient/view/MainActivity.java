@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private String image_url;
     private String user_name;
     private UserInfor userInfor;
-    private List<XiaoYuNumber> xiaoYuNumbers;
 
+    private String xiaoyuNumber;
     private boolean net_work_available,has_data;
 
     @Override
@@ -97,7 +97,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String s) {
                 Log.e(TAG, "success");
-                Log.e(TAG, s);
+                xiaoyuNumber = s;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        bangding_xiaoyu_number.setText("绑定小鱼号: "+xiaoyuNumber);
+                    }
+                });
             }
         });
         new GetUserInfor().execute(user_name);
@@ -112,24 +118,22 @@ public class MainActivity extends AppCompatActivity {
         this.nametext = (TextView) findViewById(R.id.name_text);
         this.personimage = (CircleImageView) findViewById(R.id.person_image);
         time_call = (TextView) findViewById(R.id.time_call);
-        int during = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION);
-        time_call.setText("小鱼通话时长: " + during + "分钟");
-//        if (image_url != null ) {
-//            this.personimage.setImageURI(Uri.fromFile(new File(image_url)));
-//        } else{
-//            this.personimage.setImageDrawable(getResources().getDrawable(R.drawable.person));
-//        }
+        int hour = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION_HOUR);
+        int minute = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION_MINITE);
+        int second = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION_SECOND);
+        minute = minute + hour * 60 + second / 60;
+        time_call.setText("小鱼通话时长: " + minute + "分钟");
         userInfor = new UserInfor();
-        xiaoYuNumbers = new ArrayList<>();
         net_work_available= Utils.isNetWorkAvailabe(MainActivity.this);
     }
-
     private void resumeData() {
-
         user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
         bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(MainActivity.this, GlobalData.FAMILY_IMage));
-        int during = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION);
-        time_call.setText("小鱼通话时长: " + during + "分钟");
+        int hour = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION_HOUR);
+        int minute = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION_MINITE);
+        int second = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION_SECOND);
+        minute = minute + hour * 60 + second / 60;
+        time_call.setText("小鱼通话时长: " + minute + "分钟");
     }
 
     private void initData() {
@@ -198,19 +202,19 @@ public class MainActivity extends AppCompatActivity {
                     Utils.putValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID, userInfor.getId());
                     Utils.putValue(MainActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
                 }
-                String xiaoyu = Utils.sendRequest(GlobalData.GET_XIAO_YU_NUMBER + "type=phone&data=" + "13367379725");
-                if (xiaoyu.contains("not")) {
-                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
-                    xiaoYuNumber.setXiaoyuNum("暂无");
-                    xiaoYuNumbers.add(xiaoYuNumber);
-                } else {
-                    xiaoYuNumbers = gson2.fromJson(xiaoyu, new TypeToken<List<XiaoYuNumber>>() {
-                            }.getType()
-                    );
+//                String xiaoyu = Utils.sendRequest(GlobalData.GET_XIAO_YU_NUMBER + "type=phone&data=" + "13367379725");
+//                if (xiaoyu.contains("not")) {
+//                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
+//                    xiaoYuNumber.setXiaoyuNum("暂无");
+//                    xiaoYuNumbers.add(xiaoYuNumber);
+//                } else {
+//                    xiaoYuNumbers = gson2.fromJson(xiaoyu, new TypeToken<List<XiaoYuNumber>>() {
+//                            }.getType()
+//                    );
 //
-                }
-                Utils.putValue(MainActivity.this, GlobalData.XIAO_YU, xiaoYuNumbers.get(0).getXiaoyuNum());
-                Log.e("xiaoyunum: ", xiaoYuNumbers.toString());
+//                }
+//                Utils.putValue(MainActivity.this, GlobalData.XIAO_YU, xiaoYuNumbers.get(0).getXiaoyuNum());
+//                Log.e("xiaoyunum: ", xiaoYuNumbers.toString());
                 has_data = true;
             } else {
                 String name = Utils.getValue(MainActivity.this, GlobalData.NAME);
@@ -219,9 +223,9 @@ public class MainActivity extends AppCompatActivity {
                     userInfor.setEmail(Utils.getValue(MainActivity.this, GlobalData.USer_email));
                     userInfor.setPhone(Utils.getValue(MainActivity.this, GlobalData.Phone));
                     userInfor.setName(name);
-                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
-                    xiaoYuNumber.setXiaoyuNum(Utils.getValue(MainActivity.this, GlobalData.XIAO_YU));
-                    xiaoYuNumbers.add(xiaoYuNumber);
+//                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
+//                    xiaoYuNumber.setXiaoyuNum(Utils.getValue(MainActivity.this, GlobalData.XIAO_YU));
+//                    xiaoYuNumbers.add(xiaoYuNumber);
                     has_data = true;
                 } else {
                     has_data = false;
@@ -236,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
             if (s != null) {
                 if (has_data) {
                     nametext.setText(userInfor.getName());
-                    bangding_xiaoyu_number.setText("绑定小鱼号: "+xiaoYuNumbers.get(0).getXiaoyuNum());
+                    bangding_xiaoyu_number.setText("绑定小鱼号: "+xiaoyuNumber);
                     if (userInfor.getImage()!=null) {
                         bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + userInfor.getImage());
                     }

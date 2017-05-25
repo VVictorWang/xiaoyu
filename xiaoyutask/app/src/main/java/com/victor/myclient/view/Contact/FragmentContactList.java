@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +65,7 @@ public class FragmentContactList extends Fragment {
             }
         }
     };
+    private static final String TAG = "FragmentContactList";
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (view == null) {
@@ -114,10 +116,15 @@ public class FragmentContactList extends Fragment {
             public void onTouchingLetterChanged(String s) {
                 // 该字母首次出现的位置
 
-                int position = adapter.getPositionForSection(s.charAt(0));
-                if (position != -1) {
-                    sortView.scrollToPosition(position);
+//                if (adapter.getItemCount()) {
+//                }
+                if (adapter != null) {
+                    int position = adapter.getPositionForSection(s.charAt(0));
+                    if (position != -1) {
+                        sortView.scrollToPosition(position);
+                    }
                 }
+
             }
         });
 

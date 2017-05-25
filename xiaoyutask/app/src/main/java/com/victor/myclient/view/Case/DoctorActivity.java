@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -40,10 +41,12 @@ public class DoctorActivity extends AppCompatActivity {
     private TextView doctorpartgoodat;
     private TextView doctorinfointrodetail;
     private ProgressDialog dialog;
+    private Button make_call;
 
     private boolean net_work_available,has_data;
     private String name;
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
+    private static final String TAG = "DoctorActivity";
     @Override
     protected void onResume() {
         super.onResume();
@@ -74,6 +77,7 @@ public class DoctorActivity extends AppCompatActivity {
         this.persondetailnamedoctor = (TextView) findViewById(R.id.person_detail_name_doctor);
         this.persondetailimagedoctor = (CircleImageView) findViewById(R.id.person_detail_image_doctor);
         this.backdoctordetail = (RelativeLayout) findViewById(R.id.back_doctor_detail);
+        make_call = (Button) findViewById(R.id.doctor_part_button_doctor);
         net_work_available = Utils.isNetWorkAvailabe(DoctorActivity.this);
     }
 
@@ -82,6 +86,12 @@ public class DoctorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Utils.finishActivity(DoctorActivity.this);
+            }
+        });
+        make_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.showShortToast(DoctorActivity.this, "因为医生电话不正确，无法发起呼救");
             }
         });
     }
@@ -140,7 +150,8 @@ public class DoctorActivity extends AppCompatActivity {
                 doctorpartnamedoctor.setText("所在医院: " + doctorInfor.getHospital());
                 doctorparttimedoctor.setText("联系邮箱: " + doctorInfor.getMail());
                 doctorpartgoodat.setText("擅长方向: " + doctorInfor.getGood_at());
-                doctorinfointrodetail.setText(doctorInfor.getCases());
+                doctorinfointrodetail.setText("职称: "+doctorInfor.getJob_title()+"\n其他: "+doctorInfor.getCases());
+                Log.e(TAG, "http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
                 bitmapUtils.disPlay(persondetailimagedoctor,"http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
             }
 

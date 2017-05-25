@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.ainemo.sdk.otf.NemoSDK;
 import com.thinkcool.circletextimageview.CircleTextImageView;
+import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.xiaoyu.VideoActivity;
 
 import java.util.Timer;
@@ -138,9 +139,14 @@ public class FragmentCall extends Fragment {
 //                hander.sendEmptyMessage(12);
                 checkPermission();
                 //呼叫用户，以及没有密码的会议
-                Intent intent = new Intent(activity, VideoActivity.class);
-                intent.putExtra("number", textView.getText().toString());
-                startActivity(intent);
+                String number = textView.getText().toString();
+                if (number.isEmpty() | number == null) {
+                    Utils.showShortToast(activity, "请输入号码！");
+                } else {
+                    Intent intent = new Intent(activity, VideoActivity.class);
+                    intent.putExtra("number", number);
+                    startActivity(intent);
+                }
             }
         });
         back.setOnClickListener(new View.OnClickListener() {

@@ -217,10 +217,12 @@ public class IncommingAcivity extends AppCompatActivity {
                 callRecord.setState(CallRecord.CALL_IN);
                 callRecord.setXiaoyuId(number);
                 callRecord.save();
-                int during = hour * 60 + minute + time / 60;
-                int befor = Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION);
-                during += befor;
-                Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION, during);
+                int during_hour  = hour +Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_HOUR);;
+                int during_minute = minute + Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_MINITE);;
+                int during_second = time + Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_SECOND);
+                Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_HOUR, during_hour);
+                Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_MINITE, during_minute);
+                Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_SECOND, during_second);
                 Log.e(TAG, NemoSDK.getInstance().getStatisticsInfo());
                 finish();
             }

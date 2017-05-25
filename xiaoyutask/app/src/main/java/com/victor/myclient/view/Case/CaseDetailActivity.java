@@ -33,7 +33,7 @@ public class CaseDetailActivity extends AppCompatActivity {
     private TextView doctor_name;
     private TextView date;
     private TextView name;
-    private TextView sex_age, ill_problem, ill_detail, ill_result;
+    private TextView sex_age, ill_problem,  ill_result;
     private CircleImageView imageView;
     private Bitmap bitmap;
 
@@ -70,7 +70,7 @@ public class CaseDetailActivity extends AppCompatActivity {
         date = (TextView) doctor_part.findViewById(R.id.doctor_part_time);
         name = (TextView) person_part.findViewById(R.id.person_detail_name);
         sex_age = (TextView) person_part.findViewById(R.id.person_detail_info);
-        ill_problem = (TextView) person_part.findViewById(R.id.person_detail_reason);
+        ill_problem = (TextView) findViewById(R.id.case_detail_detail);
         ill_result = (TextView) findViewById(R.id.case_detail_result);
         imageView = (CircleImageView) person_part.findViewById(R.id.person_detail_image);
     }
@@ -98,8 +98,9 @@ public class CaseDetailActivity extends AppCompatActivity {
             doctor_name.setText("主治医生  " + caseInfor.getDoctorName());
             date.setText(caseInfor.getCreationDate());
             name.setText(caseInfor.getName());
-            ill_problem.setText("病情: " + caseInfor.getIllproblem());
+            ill_problem.setText("病情: " + caseInfor.getIllproblem() + "\n体温: " + caseInfor.getTemperature() + "°C\n血压: " + caseInfor.getBlood_pressure() + "mmHg");
             ill_result.setText(caseInfor.getIllresult());
+            sex_age.setText(caseInfor.getSex() + "    " + caseInfor.getAge()+"岁");
             doctor_id = caseInfor.getDoctorId();
             bitmapUtils.disPlay(imageView, GlobalData.GET_PATIENT_IMAGE + caseInfor.getImage());
         } else {

@@ -345,10 +345,10 @@ class BesselCalculator {
                 maxPoints.add(temp.get(i));
                 i++;
             }
-            maxTemperature = String.valueOf(temp.get(0).valueY) + "℃";
-            minTemperature = String.valueOf(temp.get(temp.size() - 1).valueY) + "℃";
+            maxTemperature = String.format("%.1f",temp.get(0).valueY)+ "℃";
+            minTemperature =  String.format("%.1f",temp.get(temp.size() - 1).valueY) + "℃";
             raiseTemperature =
-                    String.valueOf(temp.get(0).valueY - temp.get(temp.size() - 1).valueY) + "℃";
+                    String.format("%.1f",temp.get(0).valueY - temp.get(temp.size() - 1).valueY) + "℃";
             for (Point point : series.getPoints()) {
                 int index = series.getPoints().indexOf(point);
                 if (gridPoints[index] == null || gridPoints[index].valueY < point.valueY) {

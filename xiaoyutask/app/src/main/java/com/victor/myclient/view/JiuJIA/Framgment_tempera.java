@@ -165,7 +165,7 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         choose_right = (ImageView) layout.findViewById(R.id.choose_data_jiujia_right);
         chart.setSmoothness(0.4f);
         chart.setChartListener(this);
-        new GetHomeInforTask().execute("da");
+        new GetHomeInforTask().execute("DA");
         chart.setSmoothness(0.33f);
     }
 

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import com.victor.myclient.SomeUtils.Utils;
+
 import demo.animen.com.xiaoyutask.R;
 
 
@@ -64,9 +66,9 @@ public class RegisterActivityFirst extends AppCompatActivity {
                 if (phone_number.isEmpty()) {
                     enterphonenumber.setError("手机号不能为空");
                 }
-//                else if (!Utils.isMobileNO(phone_number)) {
-//                    enterphonenumber.setError("请输入正确格式的手机号");
-//                }
+                else if (!Utils.isMobileNO(phone_number)) {
+                    enterphonenumber.setError("请输入正确格式的手机号");
+                }
                 else {
                     if (password.isEmpty()) {
                         enterpassword.setError("密码不能为空");

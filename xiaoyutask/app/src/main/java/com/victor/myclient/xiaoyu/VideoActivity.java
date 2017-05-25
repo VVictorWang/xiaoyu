@@ -202,10 +202,12 @@ public class VideoActivity extends AppCompatActivity {
                 callRecord.setXiaoyuId(number);
                 callRecord.setState(CallRecord.CALL_OUT);
                 callRecord.save();
-                int during = hour * 60 + minute + time / 60;
-                int before = Utils.getIntValue(VideoActivity.this, GlobalData.DRURATION);
-                during += before;
-                Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION, during);
+                int during_hour  = hour +Utils.getIntValue(VideoActivity.this, GlobalData.DRURATION_HOUR);;
+                int during_minute = minute + Utils.getIntValue(VideoActivity.this, GlobalData.DRURATION_MINITE);;
+                int during_second = time + Utils.getIntValue(VideoActivity.this, GlobalData.DRURATION_SECOND);
+                Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION_HOUR, during_hour);
+                Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION_MINITE, during_minute);
+                Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION_SECOND, during_second);
                 finish();
             }
         });

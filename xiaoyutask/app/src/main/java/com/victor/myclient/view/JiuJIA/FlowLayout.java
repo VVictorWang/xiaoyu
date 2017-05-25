@@ -12,7 +12,7 @@ import java.util.List;
 import demo.animen.com.xiaoyutask.R;
 
 /**
- * Created by Pinger on 2016/10/6.
+ * Created by victor on 17-5-24.
  */
 
 public class FlowLayout extends ViewGroup {

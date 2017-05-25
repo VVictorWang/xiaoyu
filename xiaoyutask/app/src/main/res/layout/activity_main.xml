@@ -47,10 +47,10 @@
                 android:layout_height="wrap_content"
                 android:text="王小二"
                 android:textColor="#ffffff"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="65dp"
-                android:layout_marginLeft="176dp"
+                android:layout_marginLeft="170dp"
                 app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
@@ -61,11 +61,11 @@
                 android:paddingTop="8dp"
                 android:text="绑定小鱼号"
                 android:textColor="#ffffff"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:id="@+id/bangding_xiaoyu_number"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="88dp"
-                android:layout_marginLeft="176dp"
+                android:layout_marginLeft="170dp"
                 app:layout_constraintLeft_toLeftOf="parent" />
             <TextView
                 android:layout_width="wrap_content"
@@ -73,13 +73,13 @@
                 android:id="@+id/time_call"
                 android:text="小鱼通话时长："
                 android:textColor="#ffffff"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:layout_below="@+id/bangding_xiaoyu_number"
                 android:layout_toRightOf="@+id/person_image"
                 android:layout_toEndOf="@+id/person_image"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="126dp"
-                android:layout_marginLeft="176dp"
+                android:layout_marginLeft="170dp"
                 app:layout_constraintLeft_toLeftOf="parent" />
 
         <com.thinkcool.circletextimageview.CircleTextImageView
