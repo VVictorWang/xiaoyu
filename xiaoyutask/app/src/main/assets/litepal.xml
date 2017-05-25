@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname value="xiaoyuabcd" ></dbname>
+    <dbname value="xiaoyub" ></dbname>
 
     <version value="2" >
 
@@ -11,5 +11,6 @@
         <mapping class="com.victor.myclient.Datas.ContactListData"></mapping>
         <mapping class="com.victor.myclient.view.Contact.Record.CallRecord"/>
         <mapping class="com.victor.myclient.Datas.CaseInfor"/>
+        <mapping class="com.victor.myclient.Datas.HomeInfor"/>
     </list>
 </litepal>

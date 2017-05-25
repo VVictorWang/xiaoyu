@@ -14,9 +14,9 @@
 
     <android.support.design.widget.TabLayout
         android:id="@+id/frag_jiujia"
+        style="@style/MyTabLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:layout_marginBottom="10dp"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp"
 

@@ -16,8 +16,6 @@ public interface GlobalData {
     String XIAO_YU = "xiaoyu";
     String DoctorName = "doctor_name";
     String FAMILY_IMage = "family_image";
-
-
     String MAIN_ENGINE = "http://139.196.40.97/OSAdmin-master/uploads/interface/regloginpost.php?";
     String GET_USR_INFOR = "http://139.196.40.97/OSAdmin-master/uploads/interface/getPatientFamily.php?";
     String GET_PATIENT_CASE = "http://139.196.40.97/OSAdmin-master/uploads/interface/patientcases.php?patientId=";
@@ -30,5 +28,6 @@ public interface GlobalData {
     String CHANGE_PASSWORD = "http://139.196.40.97/OSAdmin-master/uploads/interface/userinfomgr.php?";
     String GET_PATIENT_IMAGE = "http://139.196.40.97/upload/patientimage/";
     String GET_PATIENT_FAMILY_IMAGE = "http://139.196.40.97/upload/patientfamilyimage/";
+    String FORGET_PASSWOD = "http://139.196.40.97/OSAdmin-master/uploads/interface/send_password_mail.php?id=";
 
 }

@@ -53,17 +53,14 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
 
   public void onBindViewHolder(ViewHolder holder, int position) {
     CallRecord callRecord = callRecordList.get(position);
-//    if (callRecord.getImageUrl() != null) {
-//      holder.head.setImageURI(Uri.parse(callRecord.getImageUrl()));
-//    }
 
     holder.name.setText(callRecord.getName());
     if (CallRecord.CALL_IN == callRecord.getState()) {
-      holder.callType.setImageResource(R.drawable.call_image);
+      holder.callType.setImageResource(R.drawable.contact_call_in);
     } else if (CallRecord.CALL_OUT == callRecord.getState()) {
-      holder.callType.setImageResource(R.drawable.call_image);
+      holder.callType.setImageResource(R.drawable.contact_call_out);
     } else {
-      holder.callType.setImageResource(R.drawable.call_image);
+      holder.callType.setImageResource(R.drawable.contact_hang_off);
     }
     holder.telephoneNum = callRecord.getTelephoneNum();
     holder.xiaoyuNum = callRecord.getXiaoyuId();

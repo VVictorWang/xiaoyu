@@ -14,6 +14,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.textservice.TextInfo;
 import android.widget.Toast;
 import demo.animen.com.xiaoyutask.R;
 import java.io.BufferedReader;
@@ -95,6 +96,40 @@ public class Utils {
         manager.notify(0, notification);
     }
 
+    public static class Counter implements Runnable {
+        private int time = 0;
+        private Activity activity;
+        private String message;
+        public Counter(Activity activity,String message) {
+            this.activity = activity;
+            this.message = message;
+        }
+
+        public Counter(int time, Activity activity, String message) {
+            this.time = time;
+            this.activity = activity;
+            this.message = message;
+        }
+
+        public Counter(int start) {
+            this.time = start;
+        }
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+                time++;
+                if (time > 10) {
+                    showShortToast(activity,message);
+                    activity.finish();
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /**
      * 移除SharedPreference
      *

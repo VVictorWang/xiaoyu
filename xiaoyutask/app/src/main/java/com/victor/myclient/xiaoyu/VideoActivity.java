@@ -1,6 +1,7 @@
 package com.victor.myclient.xiaoyu;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -8,13 +9,17 @@ import android.log.L;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +29,9 @@ import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.view.Contact.ContactActivity;
+import com.victor.myclient.view.Contact.Record.CallRecord;
 
+import java.util.Date;
 import java.util.List;
 
 import demo.animen.com.xiaoyutask.R;
@@ -47,9 +54,14 @@ public class VideoActivity extends AppCompatActivity {
     private android.widget.ImageButton switchcamera;
     private android.widget.ImageButton mutebtn;
     private android.widget.ImageButton audioonlybtn;
+    private RelativeLayout user_pic_layout;
+    private ImageView user_pic;
     private TextView time_call;
     private NemoSDK nemoSDK;
-    private String number;
+    private String number,name;
+    private boolean visible=true;
+    private int start_time = 0;
+
 
     private int time=0,minute = 0,hour=0;
     Handler handler = new Handler(){
@@ -79,6 +91,7 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(R.layout.calloutgoing_fragment);
         nemoSDK = NemoSDK.getInstance();
          number = getIntent().getStringExtra("number");
+        name = "victor";
         InitView();
         InitEvent();
         InitData();
@@ -86,12 +99,14 @@ public class VideoActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        mVideoView.requestLocalFrame();
         super.onStart();
     }
 
+
     @Override
     protected void onDestroy() {
-        NemoSDK.getInstance().setNemoSDKListener(null);
+       nemoSDK.setNemoSDKListener(null);
         super.onDestroy();
 
     }
@@ -99,6 +114,7 @@ public class VideoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
     }
 
     private void InitView() {
@@ -110,6 +126,8 @@ public class VideoActivity extends AppCompatActivity {
         this.connmtcancelcallbtn = (ImageButton) findViewById(R.id.conn_mt_cancelcall_btn);
         this.connmtdialtotext = (TextView) findViewById(R.id.conn_mt_dial_to_text);
         this.bgturn = (ImageView) findViewById(R.id.bg_turn);
+        user_pic = (ImageView) findViewById(R.id.user_capture);
+        user_pic_layout = (RelativeLayout) findViewById(R.id.profile_pic);
         time_call = (TextView) findViewById(R.id.call_time_text);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
     }
@@ -140,7 +158,34 @@ public class VideoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nemoSDK.hangup();
-                Utils.startActivity(VideoActivity.this, ContactActivity.class);
+
+                CallRecord callRecord = new CallRecord();
+                Date date = new Date(System.currentTimeMillis());
+                callRecord.setDate(date);
+                callRecord.setName(name);
+                callRecord.setXiaoyuId(number);
+                callRecord.setState(CallRecord.CALL_OUT);
+                callRecord.save();
+                finish();
+            }
+        });
+        mVideoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (visible) {
+                    connmtcancelcallbtn.setVisibility(View.GONE);
+                    time_call.setVisibility(View.GONE);
+                    connmtdialtotext.setVisibility(View.GONE);
+                    user_pic_layout.setVisibility(View.GONE);
+                    visible = !visible;
+                } else {
+                    connmtdialtotext.setVisibility(View.VISIBLE);
+                    connmtcancelcallbtn.setVisibility(View.VISIBLE);
+                    time_call.setVisibility(View.VISIBLE);
+                    user_pic_layout.setVisibility(View.VISIBLE);
+                    visible = !visible;
+                }
+
             }
         });
     }
@@ -171,13 +216,28 @@ public class VideoActivity extends AppCompatActivity {
                             public void call(Integer integer) {
                                 L.e("ContactActivity", "error code is " + integer);
                                 if (NemoSDKErrorCode.WRONG_PASSWORD == integer) {
-                                    Toast.makeText(VideoActivity.this, "wrong password", Toast.LENGTH_SHORT).show();
+                                    final EditText editText  =new EditText(VideoActivity.this);
+                                    new AlertDialog.Builder(VideoActivity.this).setTitle("请输入密码").setView(editText).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            String password = editText.getText().toString();
+                                            nemoSDK.makeCall(number, password);
+                                            dialog.dismiss();
+                                        }
+                                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            finish();
+                                        }
+                                    }).show();
+                                    Toast.makeText(VideoActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
                                 } else if (NemoSDKErrorCode.INVALID_PARAM == integer) {
-                                    Toast.makeText(VideoActivity.this, "wrong param", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(VideoActivity.this, "错误的号码", Toast.LENGTH_SHORT).show();
                                 } else if (NemoSDKErrorCode.NETWORK_UNAVAILABLE == integer) {
-                                    Toast.makeText(VideoActivity.this, "net work unavailable", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(VideoActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                                 } else if (NemoSDKErrorCode.HOST_ERROR == integer) {
-                                    Toast.makeText(VideoActivity.this, "host error", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(VideoActivity.this, "主机错误", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -190,6 +250,7 @@ public class VideoActivity extends AppCompatActivity {
 
             @Override
             public void onCallStateChange(CallState callState, final String s) {
+                final Thread myThread = new Thread(new CountTime());
                 Observable.just(callState)
                         .subscribeOn(Schedulers.immediate())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -199,24 +260,30 @@ public class VideoActivity extends AppCompatActivity {
                                 switch (callState) {
                                     case CONNECTING:
                                         hideSoftKeyboard();
+                                        myThread.start();
                                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
                                         break;
                                     case CONNECTED:
                                         new Thread(new TimeThread()).start();
+                                        connmtdialtotext.setText("通话进行中...");
+                                        connmtcancelcallbtn.setVisibility(View.GONE);
+                                        time_call.setVisibility(View.GONE);
+                                        connmtdialtotext.setVisibility(View.GONE);
+                                        user_pic_layout.setVisibility(View.GONE);
+                                        visible = !visible;
                                         break;
                                     case DISCONNECTED:
                                         if (s.equals("CANCEL")) {
-                                            Toast.makeText(VideoActivity.this, "call canceled", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(VideoActivity.this, "通话取消", Toast.LENGTH_SHORT).show();
                                         }
 
                                         if (s.equals("BUSY")) {
-                                            Toast.makeText(VideoActivity.this, "the side is busy, please call later", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(VideoActivity.this, "对方忙", Toast.LENGTH_SHORT).show();
+                                            releaseResource();
+                                            finish();
                                         }
-
-                                        releaseResource();
-                                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-
+//                                        releaseResource();
+                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                                         break;
                                     default:
                                         break;
@@ -243,6 +310,7 @@ public class VideoActivity extends AppCompatActivity {
             }
         });
     }
+
     private void releaseResource() {
         mVideoView.destroy();
     }
@@ -286,4 +354,26 @@ public class VideoActivity extends AppCompatActivity {
         }
     }
 
+    class CountTime implements Runnable {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    Thread.sleep(1000);
+                    start_time++;
+                    if (start_time > 10) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Utils.showShortToast(VideoActivity.this, "对方无法接听!");
+                            }
+                        });
+                        finish();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

@@ -29,7 +29,6 @@ public class RegisterActivitySecond extends AppCompatActivity {
 
 
     private UserInformation information;
-    private CircleImageView loginhead;
     private TextInputEditText registername;
     private TextInputEditText registeremail;
     private TextInputEditText registeridcard;
@@ -103,7 +102,6 @@ public class RegisterActivitySecond extends AppCompatActivity {
         this.registeridcard = (TextInputEditText) findViewById(R.id.register_id_card);
         this.registeremail = (TextInputEditText) findViewById(R.id.register_email);
         this.registername = (TextInputEditText) findViewById(R.id.register_name);
-        this.loginhead = (CircleImageView) findViewById(R.id.login_head);
         client = new OkHttpClient();
     }
     private void initEvent(){

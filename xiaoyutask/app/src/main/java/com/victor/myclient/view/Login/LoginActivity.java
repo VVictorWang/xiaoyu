@@ -75,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
         loginid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                loginid.setSelection(5);
                 loginid.setCursorVisible(true);
             }
         });
@@ -85,8 +84,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = loginid.getText().toString();
                 String password = loginpassword.getText().toString();
-
-//                GetResponse(username,password);
 
                 GetResponseBYOKhttp(username,password);
             }
@@ -99,25 +96,15 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-    }
-
-    private void GetResponse(final String username,final String password) {
-        new Thread(new Runnable() {
+        loginforgetpsw.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                try {
-                    Request request = new Request.Builder().url("http://139.196.40.97/OSAdmin-master/uploads/interface/reglogin.php?reqType"
-                            +"=login&username="+username+"&password="+password).build();
-                    Response response = client.newCall(request).execute();
-                    Log.e("response:first ", response.body().string());
-                } catch (Exception op) {
-                    op.printStackTrace();
-                }
-
+            public void onClick(View v) {
+                Utils.startActivity(LoginActivity.this, ForgetPassword.class);
             }
-        }).start();
+        });
+
     }
+
 
     private void GetResponseBYOKhttp(final String username,final String password) {
         new Thread(new Runnable() {

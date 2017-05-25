@@ -1,12 +1,14 @@
 package com.victor.myclient.Datas;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.List;
 
 /**
  * Created by victor on 17-5-16.
  */
 
-public class HomeInfor {
+public class HomeInfor extends DataSupport{
     /**
      *
      * id：设备排序

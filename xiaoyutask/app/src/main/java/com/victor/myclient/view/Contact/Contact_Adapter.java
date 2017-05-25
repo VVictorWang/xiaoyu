@@ -69,9 +69,8 @@ public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, VideoActivity.class);
-                intent.putExtra("number", "740746");
+                intent.putExtra("number", "217098");
                 context.startActivity(intent);
-//                NemoSDK.getInstance().makeCall("740746");
             }
         });
         MyViewHoler viewHoler = new MyViewHoler(view);

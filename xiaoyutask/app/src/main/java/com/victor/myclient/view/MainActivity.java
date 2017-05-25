@@ -47,6 +47,7 @@ import okhttp3.OkHttpClient;
 public class MainActivity extends AppCompatActivity {
     private OkHttpClient client;
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
+    private static final String TAG = "MainActivity";
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     private de.hdodenhof.circleimageview.CircleImageView personimage;
     private android.widget.TextView nametext;
     private android.widget.TextView bangding_xiaoyu_number;
-    private android.widget.TextView timecall;
     private CircleTextImageView caseforpatient;
     private CircleTextImageView callothers;
     private CircleTextImageView jujiamain;
@@ -87,6 +87,17 @@ public class MainActivity extends AppCompatActivity {
         initData();
         initView();
         initEvent();
+        NemoSDK.getInstance().connectNemo("victor", "18774259685", new ConnectNemoCallback() {
+            @Override
+            public void onFailed(int i) {
+                Log.e(TAG,"fail");
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                Log.e(TAG, "success");
+            }
+        });
         new GetUserInfor().execute(user_name);
     }
 
@@ -95,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
         this.jujiamain = (CircleTextImageView) findViewById(R.id.jujia_main);
         this.callothers = (CircleTextImageView) findViewById(R.id.call_others);
         this.caseforpatient = (CircleTextImageView) findViewById(R.id.case_for_patient);
-        this.timecall = (TextView) findViewById(R.id.time_call);
         this.bangding_xiaoyu_number = (TextView) findViewById(R.id.bangding_xiaoyu_number);
         this.nametext = (TextView) findViewById(R.id.name_text);
         this.personimage = (CircleImageView) findViewById(R.id.person_image);
@@ -141,19 +151,8 @@ public class MainActivity extends AppCompatActivity {
                         handler.sendEmptyMessage(0x124);
                     }
                 }, 50);
-
-                NemoSDK.getInstance().connectNemo("victor", "18774259685", new ConnectNemoCallback() {
-                    @Override
-                    public void onFailed(int i) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(String s) {
                         Intent intent = new Intent(MainActivity.this, ContactActivity.class);
                         startActivity(intent);
-                    }
-                });
 
             }
         });

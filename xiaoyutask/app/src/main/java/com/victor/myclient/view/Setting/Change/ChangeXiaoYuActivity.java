@@ -27,16 +27,12 @@ import okhttp3.Response;
 public class ChangeXiaoYuActivity extends AppCompatActivity {
 
 
-    private ImageView backtomainimagebackgroundlastregister;
-    private TextView backtomainimagebackgroundcontactlisttext;
     private RelativeLayout changexiaoyunumberback;
     private TextInputEditText changepasswordnew;
-    private TextInputLayout textInputLayout;
     private TextInputEditText changepasswordnewconfirm;
     private TextInputEditText changepasswordold;
     private Button changepasswordfinish;
     private TextInputEditText changepasswordusername;
-    private TextInputLayout changebindnamelayout;
     private OkHttpClient client;
 
 
@@ -83,16 +79,12 @@ public class ChangeXiaoYuActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        this.changebindnamelayout = (TextInputLayout) findViewById(R.id.change_bind_name_layout);
         this.changepasswordusername = (TextInputEditText) findViewById(R.id.change_password_username);
         this.changepasswordfinish = (Button) findViewById(R.id.change_password_finish);
         this.changepasswordold = (TextInputEditText) findViewById(R.id.change_password_old);
         this.changepasswordnewconfirm = (TextInputEditText) findViewById(R.id.change_password_new_confirm);
-        this.textInputLayout = (TextInputLayout) findViewById(R.id.textInputLayout);
         this.changepasswordnew = (TextInputEditText) findViewById(R.id.change_password_new);
         this.changexiaoyunumberback = (RelativeLayout) findViewById(R.id.change_xiao_yu_number_back);
-        this.backtomainimagebackgroundcontactlisttext = (TextView) findViewById(R.id.back_to_main_image_background_contact_list_text);
-        this.backtomainimagebackgroundlastregister = (ImageView) findViewById(R.id.back_to_main_image_background_last_register);
         client = new OkHttpClient();
     }
 

@@ -25,7 +25,6 @@ import com.ainemo.sdk.otf.VideoInfo;
 
 import java.util.List;
 
-import demo.animen.com.xiaoyutask.R;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -33,19 +32,12 @@ import rx.schedulers.Schedulers;
 
 public class BusinessActivity extends Activity {
     private static final String TAG = "BusinessActivity";
-//    private DialFragment mDialFragment;
     private VideoFragment mVideoFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_business);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-//        mDialFragment = new DialFragment();
         mVideoFragment = new VideoFragment();
-        final FragmentManager manager = getFragmentManager();
-//        manager.beginTransaction().add(R.id.content_frame, mDialFragment).commitAllowingStateLoss();
-
         Intent intent = getIntent();
         boolean isIncomingCall = intent.getBooleanExtra("isIncomingCall", false);
         if (isIncomingCall) {
@@ -99,12 +91,6 @@ public class BusinessActivity extends Activity {
                                     case CONNECTING:
                                         hideSoftKeyboard();
                                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
-                                        if (mVideoFragment.isAdded()) {
-//                                            manager.beginTransaction().hide(mDialFragment).show(mVideoFragment).commitAllowingStateLoss();
-                                        } else {
-//                                            manager.beginTransaction().add(R.id.content_frame,
-//                                                    mVideoFragment).hide(mDialFragment).commitAllowingStateLoss();
-                                        }
                                         break;
                                     case CONNECTED:
                                         break;
@@ -150,7 +136,6 @@ public class BusinessActivity extends Activity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-//        final FragmentManager manager = getFragmentManager();
         boolean isIncomingCall = intent.getBooleanExtra("isIncomingCall", false);
         if (isIncomingCall) {
             int callIndex = intent.getIntExtra("callIndex", -1);

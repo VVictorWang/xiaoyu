@@ -101,13 +101,6 @@ public class FragmentCallRecord extends Fragment {
                 Utils.finishActivity(activity);
             }
         });
-//        DataSupport.deleteAll(CallRecord.class);
-//        CallRecord callRecord = new CallRecord();
-//        callRecord.setName("新浪");
-//        callRecord.setTelephoneNum("2233256");
-//        callRecord.setState(1);
-//        callRecord.setDate(new Date(2017, 02, 15));
-//        callRecord.save();
     }
 
     public class FindRecordsTask extends AsyncTask<Integer, Integer, Integer> {

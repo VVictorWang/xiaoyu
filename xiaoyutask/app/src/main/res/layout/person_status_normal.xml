@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/person_activity"
+        android:layout_width="110dp"
+        android:layout_height="120dp"
+        android:background="@color/my_background">
+
+        <ImageView
+            android:id="@+id/person_activity_small"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/people_activity_normal" />
+
+        <TextView
+            android:id="@+id/person_activity_small_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/person_activity_small"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"
+            android:text="人员活动"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/person_activity_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/person_activity_small_text"
+            android:layout_marginLeft="30dp"
+            android:textColor="#ffffff"
+            android:textSize="23sp" />
+    </RelativeLayout>
+</LinearLayout>

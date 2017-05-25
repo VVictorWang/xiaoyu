@@ -24,7 +24,7 @@ public class JiuJiaViewPageAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return new Framgment_tempera();
         } else if (position == 1) {
-            return new Framgment_tempera();
+            return new Fragment_room();
         } else if (position == 2) {
             return new Fragment_BaoJIng();
         }

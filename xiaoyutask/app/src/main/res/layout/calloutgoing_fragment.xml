@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone" />
+        />
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -31,6 +31,7 @@
                     android:id="@+id/profile_pic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                android:visibility="visible"
                     android:layout_marginTop="55dp"
                     >
 
@@ -48,6 +49,7 @@
                         android:layout_height="108dp"
                         android:layout_centerInParent="true"
                         android:scaleType="fitXY"
+                        android:visibility="visible"
                         android:src="@drawable/ic_contact_user_capture_no_border"
                         />
             </RelativeLayout>
@@ -74,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/call_to"
+                android:visibility="visible"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"/>
 
@@ -82,6 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="@string/call_to"
+                android:visibility="visible"
                     android:id="@+id/call_time_text"
                     android:textColor="@android:color/white"
                     android:textSize="13sp"/>
@@ -97,6 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+        android:visibility="visible"
             android:layout_marginBottom="32dp"
             android:background="@drawable/toolbar_p2p_hangup_bg"/>
     <ImageButton
@@ -106,7 +111,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/toolbar_button_bg_style"
         android:scaleType="center"
-        android:layout_marginLeft="510dp"
+        android:layout_marginLeft="590dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/ic_svc_toolbar_switch_camera"/>
     <ImageButton

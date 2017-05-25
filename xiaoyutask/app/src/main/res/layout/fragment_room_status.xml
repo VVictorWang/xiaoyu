@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/person"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+   <com.victor.myclient.view.JiuJIA.FlowLayout
+       android:paddingBottom="50dp"
+       android:paddingTop="50dp"
+       android:paddingLeft="30dp"
+       android:paddingRight="30dp"
+       android:layout_marginTop="60dp"
+       android:layout_marginLeft="50dp"
+       android:layout_marginRight="50dp"
+       android:layout_marginBottom="60dp"
+       app:width_space="10dp"
+       app:height_space="10dp"
+       android:id="@+id/flow_layout"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:padding="5dp"
+       />
+
+
+</RelativeLayout>

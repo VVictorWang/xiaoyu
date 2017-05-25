@@ -33,13 +33,11 @@ dependencies {
 //        exclude group: 'com.android.support', module: 'support-annotations'
 //    })
 
-//    configurations {
+    configurations {
 //        all*.exclude module: 'okhttp'
 //        all*.exclude module: 'okio'
-//        all*.exclude module: 'gson'
-//    }
-
-
+        all*.exclude module: 'gson'
+    }
     compile project(':imagepicker')
 
     compile 'com.github.markushi:circlebutton:1.1'

@@ -51,7 +51,6 @@ public class Setting_Activity extends AppCompatActivity {
 
 
     final static int IMAGE_PICKER = 1;
-    private String imagePath;
     private RelativeLayout settingback;
     private Button settingchangeimage;
     private EditText changemail;

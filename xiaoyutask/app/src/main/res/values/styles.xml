@@ -17,6 +17,9 @@
     <style name="CustomRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/checkbox_strle</item>
     </style>
-
+    <style name="MyTabLayoutStyle" parent="Widget.Design.TabLayout">
+    <item name="tabPaddingStart">0dp</item>
+    <item name="tabPaddingEnd">0dp</item>
+    </style>
 
 </resources>

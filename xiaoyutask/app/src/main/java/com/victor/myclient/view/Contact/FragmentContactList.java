@@ -78,13 +78,11 @@ public class FragmentContactList extends Fragment {
         initEvent();
         return view;
     }
-
     @Override
     public void onResume() {
         super.onResume();
         new ConstactAsyncTask().execute(0);
     }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,9 +90,7 @@ public class FragmentContactList extends Fragment {
         characterParser = CharacterParser.getInstance();
         pinyinComparator = new PinyinComparator();
         new ConstactAsyncTask().execute(0);
-
     }
-
     private void initView() {
         sideBar = (SideBar)view.findViewById(R.id.sidrbar);
         dialog = (TextView) view.findViewById(R.id.dialog);
@@ -153,7 +149,6 @@ public class FragmentContactList extends Fragment {
         sortView.setAdapter(adapter);
         // 根据输入框输入值的改变来过滤搜索
         mClearEditText.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
@@ -166,13 +161,10 @@ public class FragmentContactList extends Fragment {
                                           int count, int after) {
 
             }
-
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
-
-
     }
 
 
@@ -193,7 +185,6 @@ public class FragmentContactList extends Fragment {
                 numbers_list = numbers.toArray(numbers_list);
                 names_list = names.toArray(names_list);
                 SourceDateList = filledData(names_list,numbers_list);
-
                 // 根据a-z进行排序源数据
                 Collections.sort(SourceDateList, pinyinComparator);
                 handler.sendEmptyMessage(0x123);
@@ -204,16 +195,11 @@ public class FragmentContactList extends Fragment {
         @Override
         protected void onPostExecute(Integer result) {
             super.onPostExecute(result);
-
-
-
         }
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
-
     }
 
     /**
@@ -243,9 +229,7 @@ public class FragmentContactList extends Fragment {
             mSortList.add(sortModel);
         }
         return mSortList;
-
     }
-
     /**
      * 根据输入框中的值来过滤数据并更新recyclerview
      *
@@ -267,7 +251,6 @@ public class FragmentContactList extends Fragment {
                 }
             }
         }
-
         // 根据a-z进行排序
         Collections.sort(filterDateList, pinyinComparator);
         adapter.updateListView(filterDateList);

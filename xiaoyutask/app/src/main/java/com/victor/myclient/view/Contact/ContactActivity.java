@@ -40,9 +40,7 @@ public class ContactActivity extends FragmentActivity {
     private ViewPager viewPager;
     private ViewPageAdapter viewPageAdapter;
     private TabLayout tabLayout;
-    private TabLayout.Tab one,two, three;
-    private VideoFragment videoFragment ;
-
+    private TabLayout.Tab one, two, three;
     @Override
     protected void onResume() {
         super.onResume();
@@ -54,95 +52,10 @@ public class ContactActivity extends FragmentActivity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_fragment_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.contact_toolbar_sample);
-//        toolbar.inflateMenu(R.menu.contact_menu);
-//        setSupportActionBar(toolbar);
-
-//        layoutManager = new LinearLayoutManager(ContactActivity.this);
-
         initTab();
         initEvent();
-//        videoFragment = new VideoFragment();
-//        final FragmentManager manager = getSupportFragmentManager();
-//        NemoSDK.getInstance().setNemoSDKListener(new NemoSDKListener() {
-//            @Override
-//            public void onContentStateChanged(ContentState contentState) {
-//                videoFragment.onContentStateChanged(contentState);
-//            }
-//
-//            @Override
-//            public void onCallFailed(int i) {
-//
-//            }
-//
-//            @Override
-//            public void onNewContentReceive(Bitmap bitmap) {
-//                videoFragment.onNewContentReceive(bitmap);
-//            }
-//
-//            @Override
-//            public void onCallStateChange(CallState callState, final String s) {
-//                Observable.just(callState)
-//                        .subscribeOn(Schedulers.immediate())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new Action1<CallState>() {
-//                            @Override
-//                            public void call(CallState callState) {
-//                                switch (callState) {
-//                                    case CONNECTING:
-//                                        hideSoftKeyboard();
-//                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
-//                                        Utils.startActivity(ContactActivity.this, VideoActivity.class);
-//                                        finish();
-//                                        if (videoFragment.isAdded()) {
-//                                            manager.beginTransaction().show(videoFragment).commitAllowingStateLoss();
-//                                            viewPager.setVisibility(View.GONE);
-//                                        } else {
-//                                            manager.beginTransaction().add(R.id.content_frame,
-//                                                    videoFragment).commitAllowingStateLoss();
-//                                        }
-//                                        break;
-//                                    case CONNECTED:
-//                                        break;
-//                                    case DISCONNECTED:
-//                                        if (s.equals("CANCEL")) {
-//                                            Toast.makeText(ContactActivity.this, "call canceled", Toast.LENGTH_SHORT).show();
-//                                        }
-//
-//                                        if (s.equals("BUSY")) {
-//                                            Toast.makeText(ContactActivity.this, "the side is busy, please call later", Toast.LENGTH_SHORT).show();
-//                                        }
+    }
 
-//                                        if (videoFragment.isAdded()) {
-//                                            Log.i("contact", "reason is " + s);
-//                                           videoFragment.releaseResource();
-//                                            manager.beginTransaction().hide(videoFragment).commitAllowingStateLoss();
-//                                            viewPager.setVisibility(View.VISIBLE);
-//                                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//                                        }
-
-//                                        break;
-//                                    default:
-//                                        break;
-//                                }
-//                            }
-//                        });
-//            }
-//
-//            @Override
-//            public void onVideoDataSourceChange(List<VideoInfo> list) {
-//                Observable.just(list)
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new Action1<List<VideoInfo>>() {
-//                            @Override
-//                            public void call(List<VideoInfo> videoInfos) {
-//                                videoFragment.onVideoDataSourceChange(videoInfos);
-//                            }
-//                        });
-            }
-//
-//        });
-//    }
 
     private void hideSoftKeyboard() {
         if (getCurrentFocus() != null) {
@@ -150,8 +63,7 @@ public class ContactActivity extends FragmentActivity {
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
-
-    private void  initEvent(){
+    private void initEvent() {
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -178,14 +90,14 @@ public class ContactActivity extends FragmentActivity {
                 }
 
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
     }
-
-    private void  initTab(){
+    private void initTab() {
         viewPager = (ViewPager) findViewById(R.id.contact_view_pager);
         viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPageAdapter);
@@ -198,10 +110,7 @@ public class ContactActivity extends FragmentActivity {
         viewPager.setCurrentItem(0);
         two.setIcon(getResources().getDrawable(R.drawable.contact_bottom_second_nor));
         three.setIcon(getResources().getDrawable(R.drawable.contact_bottom_third_nor));
-
-//        getSupportFragmentManager().beginTransaction().add(R.id.frag, fragmentContactList).show(fragmentContactList).commit();
     }
-
 
 
 }

@@ -22,7 +22,6 @@ public class MyBitmapUtils {
     }
 
     public void disPlay(ImageView ivPic, String url) {
-//        ivPic.setImageResource(R.mipmap.pic_item_list_default);
         Bitmap bitmap;
         //内存缓存
         bitmap=mMemoryCacheUtils.getBitmapFromMemory(url);

@@ -58,7 +58,6 @@
         <activity android:name="com.victor.myclient.view.Case.CaseDetailActivity" />
         <activity android:name="com.victor.myclient.view.Login.RegisterActivityFirst" />
         <activity android:name="com.victor.myclient.view.Login.RegisterActivitySecond" />
-        <activity android:name="com.victor.myclient.view.Login.RegisterActiviootyLast" />
         <activity android:name="com.victor.myclient.view.Setting.Change.ChangeXiaoYuActivity" />
         <activity android:name="com.victor.myclient.view.Setting.Change.ChangeEmailActivity" />
         <activity
@@ -74,7 +73,8 @@
         <activity android:name="com.victor.myclient.view.Case.DoctorActivity" />
         <activity android:name="com.victor.myclient.view.Contact.New_Contactor" />
         <activity android:name="com.victor.myclient.xiaoyu.VideoActivity" />
-        <activity android:name="com.victor.myclient.xiaoyu.IncommingAcivity"></activity>
+        <activity android:name="com.victor.myclient.xiaoyu.IncommingAcivity" />
+        <activity android:name="com.victor.myclient.view.Login.ForgetPassword" />
     </application>
 
 </manifest>

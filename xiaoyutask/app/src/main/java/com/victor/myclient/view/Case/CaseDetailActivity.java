@@ -33,7 +33,7 @@ public class CaseDetailActivity extends AppCompatActivity {
     private TextView doctor_name;
     private TextView date;
     private TextView name;
-    private TextView sex_age,ill_problem,ill_detail,ill_result;
+    private TextView sex_age, ill_problem, ill_detail, ill_result;
     private CircleImageView imageView;
     private Bitmap bitmap;
 
@@ -42,7 +42,7 @@ public class CaseDetailActivity extends AppCompatActivity {
 
 
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x123) {
@@ -50,6 +50,7 @@ public class CaseDetailActivity extends AppCompatActivity {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +102,6 @@ public class CaseDetailActivity extends AppCompatActivity {
             ill_result.setText(caseInfor.getIllresult());
             doctor_id = caseInfor.getDoctorId();
             bitmapUtils.disPlay(imageView, GlobalData.GET_PATIENT_IMAGE + caseInfor.getImage());
-            Log.e("bitmap: ", caseInfor.getImage());
-            Log.e("id: ", "" + id);
         } else {
             Utils.showShortToast(CaseDetailActivity.this, "没有数据");
         }

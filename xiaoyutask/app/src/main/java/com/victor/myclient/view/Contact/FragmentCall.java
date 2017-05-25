@@ -3,6 +3,7 @@ package com.victor.myclient.view.Contact;
 import android.Manifest;
 import android.app.Activity;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.ainemo.sdk.otf.NemoSDK;
 import com.thinkcool.circletextimageview.CircleTextImageView;
+import com.victor.myclient.xiaoyu.VideoActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,7 +39,6 @@ public class FragmentCall extends Fragment {
     private TextView textView;
     private CircleImageView backspace_number;
     private RelativeLayout back;
-
     Handler hander = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -56,10 +57,7 @@ public class FragmentCall extends Fragment {
             } else if (msg.what > 11) {
                 circleTextImageViews[msg.what-12].setImageDrawable(getResources().getDrawable(R.drawable.call_number_image));
                 //权限检查
-                checkPermission();
 
-                //呼叫用户，以及没有密码的会议
-                NemoSDK.getInstance().makeCall(textView.getText().toString());
 
             }
         }
@@ -78,7 +76,6 @@ public class FragmentCall extends Fragment {
         init();
         return layout;
     }
-
     private void init() {
         circleTextImageViews[0] = (CircleTextImageView) layout.findViewById(R.id.number_call_0);
         circleTextImageViews[1] = (CircleTextImageView) layout.findViewById(R.id.number_call_1);
@@ -127,13 +124,25 @@ public class FragmentCall extends Fragment {
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
-                                hander.sendEmptyMessage(j + 12);
+                                hander.sendEmptyMessage(j +12);
                             }
                         },150);
                     }
                 }
             });
+
         }
+        circleTextImageViews[12].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                hander.sendEmptyMessage(12);
+                checkPermission();
+                //呼叫用户，以及没有密码的会议
+                Intent intent = new Intent(activity, VideoActivity.class);
+                intent.putExtra("number", textView.getText().toString());
+                startActivity(intent);
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

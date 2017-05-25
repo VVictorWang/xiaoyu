@@ -18,28 +18,28 @@ public class CallRecord  extends DataSupport{
   private String xiaoyuId;
   private int state;
   private Date date;
-  private Date hangUpTime;
+  private String during_time;
   private String imageUrl;
 
-  public Date getHangUpTime() {
-    return hangUpTime;
+  public String getHangUpTime() {
+    return during_time;
   }
 
-  public void setHangUpTime(Date hangUpTime) {
-    this.hangUpTime = hangUpTime;
+  public void setHangUpTime(String during_time) {
+    this.during_time = during_time;
   }
 
   public CallRecord() {
   }
 
   public CallRecord(String name, String telephoneNum, String xiaoyuId, int state, Date date,
-                    Date hangUpTime, String imageUrl) {
+                   String during_time, String imageUrl) {
     this.name = name;
     this.telephoneNum = telephoneNum;
     this.xiaoyuId = xiaoyuId;
     this.state = state;
     this.date = date;
-    this.hangUpTime = hangUpTime;
+    this.during_time =during_time ;
     this.imageUrl=imageUrl;
   }
 

@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:background="@color/my_background"
         android:id="@+id/jiujia_activity_toolbar">
         <RelativeLayout
@@ -59,10 +59,33 @@
             android:textSize="18dp"
             />
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/jiujia_activity_toolbar"
+        android:id="@+id/choose_data_jiujia"
+        android:background="@color/my_background"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/choose_data_jiujia_right"
+            android:src="@drawable/choose_date_right"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/choose_data_jiujia_left"
+            android:src="@drawable/choose_date_left"
+            android:layout_marginLeft="5dp"/>
+    </RelativeLayout>
 
     <com.victor.myclient.view.JiuJIA.drawSmoothLine.BesselChart
         android:id="@+id/shidu_line_chart"
-        android:layout_below="@+id/jiujia_activity_toolbar"
+        android:layout_below="@+id/choose_data_jiujia"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:background="#24d0fd"

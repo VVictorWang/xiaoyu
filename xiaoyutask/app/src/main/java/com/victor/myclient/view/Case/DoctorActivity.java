@@ -28,12 +28,8 @@ import demo.animen.com.xiaoyutask.R;
 
 public class DoctorActivity extends AppCompatActivity {
 
-    private LinearLayout person_part;
-
     private String doctor_id;
     private DoctorInfor doctorInfor;
-    private android.widget.ImageView backtomainimagebackgrounddoctorinfor;
-    private TextView backtomainimagebackgrounddoctorinfortext;
     private RelativeLayout backdoctordetail;
     private de.hdodenhof.circleimageview.CircleImageView persondetailimagedoctor;
     private TextView persondetailnamedoctor;
@@ -44,8 +40,6 @@ public class DoctorActivity extends AppCompatActivity {
     private TextView doctorpartgoodat;
     private TextView doctorinfointrodetail;
     private ProgressDialog dialog;
-
-    private Bitmap bitmap;
 
     private boolean net_work_available,has_data;
     private String name;
@@ -80,8 +74,6 @@ public class DoctorActivity extends AppCompatActivity {
         this.persondetailnamedoctor = (TextView) findViewById(R.id.person_detail_name_doctor);
         this.persondetailimagedoctor = (CircleImageView) findViewById(R.id.person_detail_image_doctor);
         this.backdoctordetail = (RelativeLayout) findViewById(R.id.back_doctor_detail);
-        this.backtomainimagebackgrounddoctorinfortext = (TextView) findViewById(R.id.back_to_main_image_background_doctor_infor_text);
-        this.backtomainimagebackgrounddoctorinfor = (ImageView) findViewById(R.id.back_to_main_image_background_doctor_infor);
         net_work_available = Utils.isNetWorkAvailabe(DoctorActivity.this);
     }
 
@@ -109,8 +101,6 @@ public class DoctorActivity extends AppCompatActivity {
 
             if (net_work_available) {
                 doctorInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_DOCTOR_INFOR + doctor_id), DoctorInfor.class);
-
-//
                 DataSupport.deleteAll(DoctorInfor.class);
                 if (!doctorInfor.isSaved()) {
                    doctorInfor.save();
@@ -120,7 +110,6 @@ public class DoctorActivity extends AppCompatActivity {
                 has_data = true;
             } else {
                 if (DataSupport.isExist(DoctorInfor.class)) {
-                    Log.e("exud", "dawrdfw");
                     List<DoctorInfor> doctorInfors = DataSupport.findAll(DoctorInfor.class);
                     name = Utils.getValue(DoctorActivity.this, GlobalData.DoctorName);
                     for (DoctorInfor doctorInfora : doctorInfors) {
@@ -137,12 +126,7 @@ public class DoctorActivity extends AppCompatActivity {
                         has_data = false;
                 }else
                     has_data = false;
-
-
             }
-
-//
-
             return null;
         }
 
@@ -158,7 +142,6 @@ public class DoctorActivity extends AppCompatActivity {
                 doctorpartgoodat.setText("擅长方向: " + doctorInfor.getGood_at());
                 doctorinfointrodetail.setText(doctorInfor.getCases());
                 bitmapUtils.disPlay(persondetailimagedoctor,"http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
-                Log.e("bitmap: ", "http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
             }
 
             dialog.dismiss();

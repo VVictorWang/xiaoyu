@@ -16,7 +16,6 @@ public class RegisterActivityFirst extends AppCompatActivity {
 
     private TextInputEditText enterpassword;
     private TextInputEditText enterpasswordagain;
-    private CheckBox checkBox;
     private Button firsttosecondregister;
     private TextInputEditText enterphonenumber;
 
@@ -32,7 +31,6 @@ public class RegisterActivityFirst extends AppCompatActivity {
     private void  initView() {
         this.enterphonenumber = (TextInputEditText) findViewById(R.id.enter_phone_number);
         this.firsttosecondregister = (Button) findViewById(R.id.first_to_second_register);
-        this.checkBox = (CheckBox) findViewById(R.id.checkBox);
         this.enterpasswordagain = (TextInputEditText) findViewById(R.id.enter_password_again);
         this.enterpassword = (TextInputEditText) findViewById(R.id.enter_password);
 

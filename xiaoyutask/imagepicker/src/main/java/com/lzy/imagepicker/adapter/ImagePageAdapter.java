@@ -36,7 +36,6 @@ public class ImagePageAdapter extends PagerAdapter {
     public ImagePageAdapter(Activity activity, ArrayList<ImageItem> images) {
         this.mActivity = activity;
         this.images = images;
-
         DisplayMetrics dm = Utils.getScreenPix(activity);
         screenWidth = dm.widthPixels;
         screenHeight = dm.heightPixels;

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.github.mikephil.charting.charts.BarChart;
@@ -31,6 +32,8 @@ import com.victor.myclient.view.JiuJIA.drawSmoothLine.ChartData;
 import com.victor.myclient.view.JiuJIA.drawSmoothLine.Point;
 import com.victor.myclient.view.JiuJIA.drawSmoothLine.Series;
 
+import org.litepal.crud.DataSupport;
+
 import demo.animen.com.xiaoyutask.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,16 +52,18 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
     private TextView update;
     private HomeInfor homeInfor;
     private TextView current_shi;
+    private ImageView choose_left, choose_right;
     private List<Point> points=new ArrayList<>();
+    private boolean network_ava,has_data=false;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x1234) {
                 List<Series> seriess = new ArrayList<Series>();
-                for(int i=0;i<8;i++){
-                    points.add(new Point((float)i, homeInfor.getTemperatures().get(i),true));
+                for (int i = 0; i < 8; i++) {
+                    points.add(new Point((float) i, homeInfor.getTemperatures().get(i), true));
                 }
-                seriess.add(new Series("温度",Color.WHITE,points));
+                seriess.add(new Series("温度", Color.WHITE, points));
                 chart.getData().setLabelTransform(new ChartData.LabelTransform() {
                     @Override
                     public String verticalTransform(int valueY) {
@@ -67,8 +72,9 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
 
                     @Override
                     public String horizontalTransform(int valueX) {
-                        return String.format("%s", valueX );
+                        return String.format("%s", valueX);
                     }
+
                     @Override
                     public boolean labelDrawing(int valueX) {
                         return true;
@@ -79,6 +85,8 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
                 chart.getData().setSeriesList(seriess);
                 chart.refresh(true);
 
+            } else if (msg.what == 0x123) {
+                Utils.showShortToast(activity, "没有数据");
             }
         }
     };
@@ -121,11 +129,14 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         BarDataSet barDataSet = new BarDataSet(barEntries, "");
         barDataSet.setBarShadowColor(0xb1b2b288);
         barDataSet.setDrawValues(false);
-        barDataSet.setColor(Color.BLUE);
+        int background = activity.getResources().getColor(R.color.my_background);
+        barDataSet.setColor(background);
+        int shadow = activity.getResources().getColor(R.color.line_top);
+        barDataSet.setBarShadowColor(shadow);
         XAxis xAxis1 = barChart.getXAxis();
         xAxis1.setValueFormatter(iAxisValueFormatter);
         xAxis1.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis1.setTextColor(Color.BLUE);
+        xAxis1.setTextColor(background);
         xAxis1.setTextSize(10);
         barChart.getAxisRight().setEnabled(false);
         barChart.getAxisLeft().setEnabled(false);
@@ -144,21 +155,18 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
     }
 
     private void initView(){
+        network_ava = Utils.isNetWorkAvailabe(activity);
         chart = (BesselChart) layout.findViewById(R.id.shidu_line_chart);
         current_shi = (TextView) layout.findViewById(R.id.current_shidu_text);
         barChart = (BarChart) layout.findViewById(R.id.bar_shidu_chart);
         back = (RelativeLayout) layout.findViewById(R.id.back_to_main_jujia);
         update = (TextView) layout.findViewById(R.id.update_jujia);
+        choose_left = (ImageView) layout.findViewById(R.id.choose_data_jiujia_left);
+        choose_right = (ImageView) layout.findViewById(R.id.choose_data_jiujia_right);
         chart.setSmoothness(0.4f);
         chart.setChartListener(this);
-        new GetHomeInforTask().execute();
+        new GetHomeInforTask().execute("da");
         chart.setSmoothness(0.33f);
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                new GetHomeInforTask().execute();
-//            }
-//        }, 500);
     }
 
     private void initEvent() {
@@ -174,32 +182,52 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
 
             }
         });
+        choose_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        choose_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
-
-    /**
-     * Point 点的值（x,y）  x为横轴的值，y为纵轴的值，willingDrawing 为使用此点
-     *
-     * @param willDrawing true(draw) false(don't draw)
-     */
-
-    private void getSeriesList(boolean willDrawing) {
-        if (willDrawing) {
-            new GetHomeInforTask().execute();
-        }
-    }
-
-    class GetHomeInforTask extends AsyncTask<Void, Void, Void> {
+    class GetHomeInforTask extends AsyncTask<String, Void, Void> {
         private Gson gson = new Gson();
+
         @Override
-        protected Void doInBackground(Void... params) {
-            String infor = Utils.sendRequest(GlobalData.GET_HOME_INFOR + Utils.getValue(activity, GlobalData.PATIENT_ID));
-            homeInfor = gson.fromJson(infor, HomeInfor.class);
+        protected Void doInBackground(String... params) {
+            if (network_ava) {
+                String date = params[0];
+                String infor = Utils.sendRequest(GlobalData.GET_HOME_INFOR + Utils.getValue(activity, GlobalData.PATIENT_ID));
+                homeInfor = gson.fromJson(infor, HomeInfor.class);
+                homeInfor.save();
+                has_data = true;
+            } else {
+                if (DataSupport.isExist(HomeInfor.class)) {
+                    List<HomeInfor> homeInfors = new ArrayList<>();
+                    homeInfors = DataSupport.findAll(HomeInfor.class);
+                    if (homeInfors != null) {
+                        homeInfor = homeInfors.get(0);
+                        has_data = true;
+                    }
+                } else {
+                    has_data = false;
+                }
+            }
+
             return null;
         }
-
         @Override
         protected void onPostExecute(Void aVoid) {
-            handler.sendEmptyMessage(0x1234);
+            if (has_data) {
+                handler.sendEmptyMessage(0x1234);
+            } else {
+                handler.sendEmptyMessage(0x123);
+            }
             super.onPostExecute(aVoid);
         }
 

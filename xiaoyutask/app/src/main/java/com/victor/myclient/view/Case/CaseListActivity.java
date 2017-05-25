@@ -11,14 +11,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.Datas.CaseInfor;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.view.Case.CaseLayout.CaseAdapter;
 import com.victor.myclient.view.Case.CaseLayout.CustomLayoutManager;
-import com.victor.myclient.view.Case.CaseLayout.DisplayUtils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.litepal.crud.DataSupport;
 
@@ -42,7 +41,7 @@ public class CaseListActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private boolean net_work_available, has_data;
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x123) {
@@ -59,8 +58,6 @@ public class CaseListActivity extends AppCompatActivity {
             Utils.showShortToast(CaseListActivity.this, "此用户没有绑定患者");
             Utils.finishActivity(CaseListActivity.this);
         } else {
-            Log.e("patientid", patientId);
-//            DisplayUtils.init(this);//获取屏幕宽度高度信息
             initView();
             initEvent();
             new CaseListTask().execute(patientId);
@@ -99,9 +96,6 @@ public class CaseListActivity extends AppCompatActivity {
                 adapter = new CaseAdapter(CaseListActivity.this, caseInfors);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-                for (CaseInfor caseInfor : caseInfors) {
-                    Log.e("id ", "hello " + caseInfor.getId());
-                }
 
             } else {
                 handler.sendEmptyMessage(0x123);
@@ -130,7 +124,6 @@ public class CaseListActivity extends AppCompatActivity {
                     has_data = false;
                 }
             }
-
             return "ok";
         }
 
