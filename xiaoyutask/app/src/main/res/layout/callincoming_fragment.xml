@@ -111,12 +111,12 @@
                 android:textSize="24sp" />
 
             <TextView
+                android:id="@+id/time_call_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="2dp"
                 android:text="@string/incoming_call"
-                android:id="@+id/time_call_text"
                 android:textColor="@android:color/white"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -137,13 +137,21 @@
             android:id="@+id/conn_mt_endcall_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="88dp"
+           android:layout_marginLeft="10dp"
+            android:background="@drawable/toolbar_p2p_hangup_bg" />
+
+        <ImageButton
+            android:id="@+id/conn_mt_endcall_btn_calling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
             android:background="@drawable/toolbar_p2p_hangup_bg" />
 
         <ImageButton
             android:id="@+id/conn_mt_answer_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/incoming_button_answer_style" />
     </LinearLayout>
 

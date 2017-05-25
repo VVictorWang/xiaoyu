@@ -5,15 +5,21 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.log.L;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -27,6 +33,7 @@ import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.NemoSDKErrorCode;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
+import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.view.Contact.ContactActivity;
 import com.victor.myclient.view.Contact.Record.CallRecord;
@@ -70,9 +77,17 @@ public class VideoActivity extends AppCompatActivity {
             if (msg.what == 1) {
                 time++;
                 if (time < 10) {
-                    time_call.setText("通话时长: 00:0" + time);
+                    if (minute >= 10) {
+                        time_call.setText("通话时长: " + minute + ":0" + time);
+                    } else {
+                        time_call.setText("通话时长: 0" + minute + ":0" + time);
+                    }
                 } else if (time < 60) {
-                    time_call.setText("通话时长: 00:" + time);
+                    if (minute >= 10) {
+                        time_call.setText("通话时长: " + minute + ":" + time);
+                    } else {
+                        time_call.setText("通话时长: 0" + minute + ":" + time);
+                    }
                 } else if ( time>=60) {
                     minute++;
                     time -= 60;
@@ -141,10 +156,21 @@ public class VideoActivity extends AppCompatActivity {
             }
         });
         mutebtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 micMute = !micMute;
                 nemoSDK.enableMic(micMute);
+                if (micMute) {
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.no_voice_bitmap);
+                    Bitmap bitmap = drawable.getBitmap();
+                    mutebtn.setImageBitmap(bitmap);
+                } else {
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.ic_toolbar_mic);
+                    Bitmap bitmap = drawable.getBitmap();
+                    mutebtn.setImageBitmap(bitmap);
+                }
+
             }
         });
         audioonlybtn.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +178,16 @@ public class VideoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 audioMode = !audioMode;
                 nemoSDK.switchCallMode(audioMode);
+                if (audioMode) {
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.audio_multi);
+                    Bitmap bitmap = drawable.getBitmap();
+                    audioonlybtn.setImageBitmap(bitmap);
+                } else {
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.ic_toolbar_audio_only);
+                    Bitmap bitmap = drawable.getBitmap();
+                    audioonlybtn.setImageBitmap(bitmap);
+                }
+
             }
         });
         connmtcancelcallbtn.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +202,10 @@ public class VideoActivity extends AppCompatActivity {
                 callRecord.setXiaoyuId(number);
                 callRecord.setState(CallRecord.CALL_OUT);
                 callRecord.save();
+                int during = hour * 60 + minute + time / 60;
+                int before = Utils.getIntValue(VideoActivity.this, GlobalData.DRURATION);
+                during += before;
+                Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION, during);
                 finish();
             }
         });
@@ -206,7 +246,6 @@ public class VideoActivity extends AppCompatActivity {
                     mContent.setVisibility(View.GONE);
                 }
             }
-
             @Override
             public void onCallFailed(int i) {
                 Observable.just(i)
@@ -250,7 +289,7 @@ public class VideoActivity extends AppCompatActivity {
 
             @Override
             public void onCallStateChange(CallState callState, final String s) {
-                final Thread myThread = new Thread(new CountTime());
+
                 Observable.just(callState)
                         .subscribeOn(Schedulers.immediate())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -260,7 +299,7 @@ public class VideoActivity extends AppCompatActivity {
                                 switch (callState) {
                                     case CONNECTING:
                                         hideSoftKeyboard();
-                                        myThread.start();
+//                                        new Thread(new CountTime()).start();
                                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
                                         break;
                                     case CONNECTED:
@@ -276,7 +315,6 @@ public class VideoActivity extends AppCompatActivity {
                                         if (s.equals("CANCEL")) {
                                             Toast.makeText(VideoActivity.this, "通话取消", Toast.LENGTH_SHORT).show();
                                         }
-
                                         if (s.equals("BUSY")) {
                                             Toast.makeText(VideoActivity.this, "对方忙", Toast.LENGTH_SHORT).show();
                                             releaseResource();

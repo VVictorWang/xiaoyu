@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
+import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.view.Contact.Record.CallRecord;
 
@@ -35,6 +37,7 @@ public class IncommingAcivity extends AppCompatActivity {
     private android.widget.TextView connmtdialfromtext;
     private android.widget.ImageButton connmtendcallbtn;
     private android.widget.ImageButton connmtanswerbtn;
+    private ImageButton finishcall;
     private ImageView usercapture;
     private SimpleVideoView videoView;
     private boolean isIncoming;
@@ -62,10 +65,18 @@ public class IncommingAcivity extends AppCompatActivity {
             if (msg.what == 1) {
                 time++;
                 if (time < 10) {
-                    time_call.setText("通话时长: 00:0" + time);
+                    if (minute >= 10) {
+                        time_call.setText("通话时长: " + minute + ":0" + time);
+                    } else {
+                        time_call.setText("通话时长: 0" + minute + ":0" + time);
+                    }
                 } else if (time < 60) {
-                    time_call.setText("通话时长: 00:" + time);
-                } else if (time >= 60) {
+                    if (minute >= 10) {
+                        time_call.setText("通话时长: " + minute + ":" + time);
+                    } else {
+                        time_call.setText("通话时长: 0" + minute + ":" + time);
+                    }
+                } else if ( time>=60) {
                     minute++;
                     time -= 60;
                     if (minute >= 10) {
@@ -77,6 +88,7 @@ public class IncommingAcivity extends AppCompatActivity {
             }
         }
     };
+    private static final String TAG = "IncommingAcivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +123,15 @@ public class IncommingAcivity extends AppCompatActivity {
         this.mutebtn = (ImageButton) findViewById(R.id.mute_btn);
         this.audioonlybtn = (ImageButton) findViewById(R.id.audio_only_btn);
         this.time_call = (TextView) findViewById(R.id.time_call_text);
+        finishcall = (ImageButton) findViewById(R.id.conn_mt_endcall_btn_calling);
+        finishcall.setVisibility(View.GONE);
         videoView = (SimpleVideoView) findViewById(R.id.incoming_view);
+    }
+
+    @Override
+    protected void onStart() {
+        videoView.requestLocalFrame();
+        super.onStart();
     }
 
     private void showIncomingCall(final int callIndex, final String callerNumber, final String callerName) {
@@ -128,10 +148,11 @@ public class IncommingAcivity extends AppCompatActivity {
                 NemoSDK.getInstance().hangup();
                 CallRecord callRecord = new CallRecord();
                 callRecord.setState(CallRecord.CALL_REJECT);
-                callRecord.setXiaoyuId(callerNumber);
-                callRecord.setName(callerName);
+                callRecord.setXiaoyuId(callerName);
+                callRecord.setName(callerNumber);
                 callRecord.setDate(new Date(System.currentTimeMillis()));
                 callRecord.save();
+
                 finish();
             }
         });
@@ -145,20 +166,22 @@ public class IncommingAcivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (visible) {
                     connmtdialfromtext.setVisibility(View.GONE);
-                    connmtendcallbtn.setVisibility(View.GONE);
+//                    connmtendcallbtn.setVisibility(View.GONE);
                     time_call.setVisibility(View.GONE);
                     profilepic.setVisibility(View.GONE);
                     audioonlybtn.setVisibility(View.GONE);
                     mutebtn.setVisibility(View.GONE);
                     switchcamera.setVisibility(View.GONE);
+                    finishcall.setVisibility(View.GONE);
                 } else {
                     connmtdialfromtext.setVisibility(View.VISIBLE);
-                    connmtendcallbtn.setVisibility(View.VISIBLE);
+//                    connmtendcallbtn.setVisibility(View.VISIBLE);
                     time_call.setVisibility(View.VISIBLE);
                     profilepic.setVisibility(View.VISIBLE);
                     audioonlybtn.setVisibility(View.VISIBLE);
                     mutebtn.setVisibility(View.VISIBLE);
                     switchcamera.setVisibility(View.VISIBLE);
+                    finishcall.setVisibility(View.VISIBLE);
                 }
                 visible = !visible;
             }
@@ -184,21 +207,27 @@ public class IncommingAcivity extends AppCompatActivity {
                 NemoSDK.getInstance().switchCallMode(audioMode);
             }
         });
-        connmtendcallbtn.setOnClickListener(new View.OnClickListener() {
+        finishcall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NemoSDK.getInstance().hangup();
-//                CallRecord callRecord = new CallRecord();
-//                callRecord.setDate(new Date(System.currentTimeMillis()));
-//                callRecord.setName();
+                CallRecord callRecord = new CallRecord();
+                callRecord.setDate(new Date(System.currentTimeMillis()));
+                callRecord.setName(name);
+                callRecord.setState(CallRecord.CALL_IN);
+                callRecord.setXiaoyuId(number);
+                callRecord.save();
+                int during = hour * 60 + minute + time / 60;
+                int befor = Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION);
+                during += befor;
+                Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION, during);
+                Log.e(TAG, NemoSDK.getInstance().getStatisticsInfo());
                 finish();
-                onDestroy();
             }
         });
     }
 
     private void InitData() {
-        final Thread myThread = new Thread(new Counter());
         NemoSDK.getInstance().setNemoSDKListener(new NemoSDKListener() {
             @Override
             public void onContentStateChanged(ContentState contentState) {
@@ -225,10 +254,10 @@ public class IncommingAcivity extends AppCompatActivity {
                             public void call(CallState callState) {
                                 switch (callState) {
                                     case CONNECTING:
-                                        myThread.start();
+//                                        myThread.start();
                                         break;
                                     case CONNECTED:
-                                        myThread.stop();
+//                                        myThread.stop();
                                         new Thread(new IncommingAcivity.TimeThread()).start();
                                         profilepic.setVisibility(View.GONE);
                                         connmtdialfromtext.setText("通话中");

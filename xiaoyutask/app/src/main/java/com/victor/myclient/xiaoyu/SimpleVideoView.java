@@ -58,10 +58,11 @@ public class SimpleVideoView extends ViewGroup {
     }
 
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    protected void onLayout(boolean changed, final int l, final int t, final int r, final int b) {
         int size = Math.min(mVideoViews.size(), 5); //最多取5个view显示
         Log.i(TAG, "layout cell count " + size);
         for (int i = 0; i < size; i++) {
+            final int j = i;
             if (i == 0) {
                 Log.i(TAG, "layout full screen child");
                 mVideoViews.get(0).layout(l, t, r, b);  //取第一个view全屏显示
@@ -70,11 +71,26 @@ public class SimpleVideoView extends ViewGroup {
                 mVideoViews.get(i).layout(l + 20 + (r - l) / 5 * (i), (b * 3 / 4 - t / 4), l + 20 + (r - l) / 5 * (i + 1), b)
                 ;
                 mVideoViews.get(i).bringToFront();
+//                mVideoViews.get(i).setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        mVideoViews.get(j).layout(l, t, r, b);
+//                        mVideoViews.get(0).layout(l + 20 + (r - l) / 5 * (j), (b * 3 / 4 - t / 4), l + 20 + (r - l) / 5 * (j + 1), b);
+//                    }
+//                });
             }
         }
         Log.i(TAG, "layout local item");
         localVideoView.layout(l, (b * 3 / 4 - t / 4), (r + l) / 5, b);
         localVideoView.bringToFront();
+//        localVideoView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                localVideoView.layout(l, t, r, b);
+//                mVideoViews.get(0).layout(l, (b * 3 / 4 - t / 4), (r + l) / 5, b);
+//            }
+//        });
+
     }
 
 

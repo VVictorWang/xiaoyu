@@ -30,4 +30,5 @@ public interface GlobalData {
     String GET_PATIENT_FAMILY_IMAGE = "http://139.196.40.97/upload/patientfamilyimage/";
     String FORGET_PASSWOD = "http://139.196.40.97/OSAdmin-master/uploads/interface/send_password_mail.php?id=";
 
+    String DRURATION = "xiaoyu_duration";
 }

@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private CircleTextImageView jujiamain;
     private CircleTextImageView settingdefault;
 
+    private TextView time_call;
     private String image_url;
     private String user_name;
     private UserInfor userInfor;
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String s) {
                 Log.e(TAG, "success");
+                Log.e(TAG, s);
             }
         });
         new GetUserInfor().execute(user_name);
@@ -109,11 +111,14 @@ public class MainActivity extends AppCompatActivity {
         this.bangding_xiaoyu_number = (TextView) findViewById(R.id.bangding_xiaoyu_number);
         this.nametext = (TextView) findViewById(R.id.name_text);
         this.personimage = (CircleImageView) findViewById(R.id.person_image);
-        if (image_url != null ) {
-            this.personimage.setImageURI(Uri.fromFile(new File(image_url)));
-        } else{
-            this.personimage.setImageDrawable(getResources().getDrawable(R.drawable.person));
-        }
+        time_call = (TextView) findViewById(R.id.time_call);
+        int during = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION);
+        time_call.setText("小鱼通话时长: " + during + "分钟");
+//        if (image_url != null ) {
+//            this.personimage.setImageURI(Uri.fromFile(new File(image_url)));
+//        } else{
+//            this.personimage.setImageDrawable(getResources().getDrawable(R.drawable.person));
+//        }
         userInfor = new UserInfor();
         xiaoYuNumbers = new ArrayList<>();
         net_work_available= Utils.isNetWorkAvailabe(MainActivity.this);
@@ -122,12 +127,12 @@ public class MainActivity extends AppCompatActivity {
     private void resumeData() {
 
         user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
-        personimage.setImageURI(Uri.fromFile(new File(Utils.getValue(MainActivity.this, GlobalData.Img_URl))));
         bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(MainActivity.this, GlobalData.FAMILY_IMage));
+        int during = Utils.getIntValue(MainActivity.this, GlobalData.DRURATION);
+        time_call.setText("小鱼通话时长: " + during + "分钟");
     }
 
     private void initData() {
-        image_url = Utils.getValue(MainActivity.this, GlobalData.Img_URl);
         user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
     }
 
