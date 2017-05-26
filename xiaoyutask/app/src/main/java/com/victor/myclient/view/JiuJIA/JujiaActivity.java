@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.victor.myclient.ActivityManage;
+
 import demo.animen.com.xiaoyutask.R;
 /**
  * Created by victor on 2017/4/24.
@@ -27,11 +29,12 @@ public class JujiaActivity extends FragmentActivity {
     private RelativeLayout room_status,person_status, warning_infor;
     private Drawable jiujia_normal, jiujia_selected;
     private int color_normal, color_selected;
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jujia);
-
+        ActivityManage.getInstance().pushActivity(JujiaActivity.this);
         initView();
         initTab();
     InitEvent();

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
 
@@ -71,7 +72,8 @@ public class ChangeEmailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_bind_email);
-
+        ActivityManage activityManage = ActivityManage.getInstance();
+        activityManage.pushActivity(ChangeEmailActivity.this);
         initView();
         initEvent();
     }

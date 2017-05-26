@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.view.MainActivity;
 import com.victor.myclient.SomeUtils.Utils;
@@ -65,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ActivityManage.getInstance().pushActivity(LoginActivity.this);
         this.loginbutton = (Button) findViewById(R.id.login_button);
         this.loginsignup = (Button) findViewById(R.id.login_sign_up);
         this.loginforgetpsw = (Button) findViewById(R.id.login_forget_psw);

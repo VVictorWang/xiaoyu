@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
 
@@ -51,8 +52,15 @@ public class ForgetPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
+        ActivityManage.getInstance().pushActivity(ForgetPassword.this);
         InitViiew();
         InitEvent();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Utils.finishActivity(ForgetPassword.this);
+        super.onBackPressed();
     }
 
     private void InitViiew() {

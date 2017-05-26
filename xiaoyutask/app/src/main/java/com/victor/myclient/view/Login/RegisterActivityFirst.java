@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.Utils;
 
 import demo.animen.com.xiaoyutask.R;
@@ -25,7 +26,7 @@ public class RegisterActivityFirst extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_verifcode);
-
+        ActivityManage.getInstance().pushActivity(RegisterActivityFirst.this);
 
         initView();
         initEvent();
@@ -38,6 +39,13 @@ public class RegisterActivityFirst extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Utils.finishActivity(RegisterActivityFirst.this);
+        super.onBackPressed();
+    }
+
     private void initEvent(){
         enterphonenumber.setOnClickListener(new View.OnClickListener() {
             @Override

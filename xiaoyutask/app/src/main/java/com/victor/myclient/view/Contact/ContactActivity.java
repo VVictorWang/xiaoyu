@@ -17,6 +17,7 @@ import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.NemoSDKErrorCode;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.xiaoyu.BusinessActivity;
 import com.victor.myclient.xiaoyu.VideoActivity;
@@ -52,6 +53,7 @@ public class ContactActivity extends FragmentActivity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_fragment_main);
+        ActivityManage.getInstance().pushActivity(ContactActivity.this);
         initTab();
         initEvent();
     }

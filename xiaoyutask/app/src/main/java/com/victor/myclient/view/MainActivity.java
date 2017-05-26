@@ -16,6 +16,7 @@ import com.ainemo.sdk.otf.ConnectNemoCallback;
 import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.MyBitmapUtils;
 import com.victor.myclient.SomeUtils.Utils;
@@ -85,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActivityManage activityManage = ActivityManage.getInstance();
+        activityManage.pushActivity(MainActivity.this);
         initData();
         initView();
         initEvent();
@@ -148,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, Setting_Activity.class);
                 intent.putExtra("email", userInfor.getEmail());
                 startActivity(intent);
+
             }
         });
         callothers.setOnClickListener(new View.OnClickListener() {

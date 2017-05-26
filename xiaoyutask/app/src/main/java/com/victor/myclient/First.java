@@ -31,13 +31,14 @@ public class First extends AppCompatActivity {
             }
             startActivity(intent);
             overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-            finish();
+            Utils.finishActivity(First.this);
         }
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+        ActivityManage.getInstance().pushActivity(First.this);
         initData();
         if (isLogin) {
 

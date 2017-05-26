@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.view.MainActivity;
@@ -87,7 +88,7 @@ public class RegisterActivitySecond extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_setdata);
-
+        ActivityManage.getInstance().pushActivity(RegisterActivitySecond.this);
         initView();
         initEvent();
         Intent intent = getIntent();
@@ -160,10 +161,8 @@ public class RegisterActivitySecond extends AppCompatActivity {
                 builder.add("sex", information.getSex());
                 RequestBody requestBody = builder.build();
                 try {
-                    //是http://139.196.40.97/OSAdmin-master/uploads/interface/regloginpost.php?
                     Request request = new Request.Builder().url(GlobalData.MAIN_ENGINE).post(requestBody).build();
                     Response response = client.newCall(request).execute();
-//                    Log.e("response: second ", response.body().string());
                     String op = response.body().string();
                     Log.e("response, register:", op);
                     switch (op) {
@@ -171,6 +170,7 @@ public class RegisterActivitySecond extends AppCompatActivity {
                             handler.sendEmptyMessage(1);
                             Utils.putValue(RegisterActivitySecond.this, GlobalData.NAME, information.getUsername());
                             Utils.startActivity(RegisterActivitySecond.this, MainActivity.class);
+                            ActivityManage.getInstance().popAllActivity();
                             break;
                         case "0":
                             handler.sendEmptyMessage(2);

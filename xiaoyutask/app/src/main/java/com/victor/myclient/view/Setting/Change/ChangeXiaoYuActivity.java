@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.view.Login.LoginActivity;
@@ -73,7 +74,8 @@ public class ChangeXiaoYuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_xiao_yu);
-
+        ActivityManage activityManage = ActivityManage.getInstance();
+        activityManage.pushActivity(ChangeXiaoYuActivity.this);
         initView();
         initEvent();
     }
@@ -95,12 +97,7 @@ public class ChangeXiaoYuActivity extends AppCompatActivity {
                 Utils.finishActivity(ChangeXiaoYuActivity.this);
             }
         });
-        changepasswordusername.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changepasswordusername.setCursorVisible(true);
-            }
-        });
+
         changepasswordfinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

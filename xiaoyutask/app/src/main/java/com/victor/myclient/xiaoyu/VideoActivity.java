@@ -33,6 +33,7 @@ import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.NemoSDKErrorCode;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.view.Contact.ContactActivity;
@@ -104,6 +105,8 @@ public class VideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calloutgoing_fragment);
+        ActivityManage activityManage = ActivityManage.getInstance();
+        activityManage.pushActivity(VideoActivity.this);
         nemoSDK = NemoSDK.getInstance();
          number = getIntent().getStringExtra("number");
         name = "victor";
@@ -130,6 +133,7 @@ public class VideoActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+        ActivityManage.getInstance().popActivity(VideoActivity.this);
     }
 
     private void InitView() {
@@ -208,7 +212,7 @@ public class VideoActivity extends AppCompatActivity {
                 Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION_HOUR, during_hour);
                 Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION_MINITE, during_minute);
                 Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION_SECOND, during_second);
-                finish();
+                Utils.finishActivity(VideoActivity.this);
             }
         });
         mVideoView.setOnClickListener(new View.OnClickListener() {
@@ -269,7 +273,7 @@ public class VideoActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             dialog.dismiss();
-                                            finish();
+                                            Utils.finishActivity(VideoActivity.this);
                                         }
                                     }).show();
                                     Toast.makeText(VideoActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
@@ -320,7 +324,7 @@ public class VideoActivity extends AppCompatActivity {
                                         if (s.equals("BUSY")) {
                                             Toast.makeText(VideoActivity.this, "对方忙", Toast.LENGTH_SHORT).show();
                                             releaseResource();
-                                            finish();
+                                           Utils.finishActivity(VideoActivity.this);
                                         }
 //                                        releaseResource();
                                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -394,26 +398,5 @@ public class VideoActivity extends AppCompatActivity {
         }
     }
 
-    class CountTime implements Runnable {
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    Thread.sleep(1000);
-                    start_time++;
-                    if (start_time > 10) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Utils.showShortToast(VideoActivity.this, "对方无法接听!");
-                            }
-                        });
-                        finish();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+
 }

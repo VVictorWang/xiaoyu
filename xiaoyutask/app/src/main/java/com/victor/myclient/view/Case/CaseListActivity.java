@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.Datas.CaseInfor;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
@@ -53,6 +54,7 @@ public class CaseListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.case_list);
+        ActivityManage.getInstance().pushActivity(CaseListActivity.this);
         patientId = getIntent().getStringExtra("id");
         if (patientId == null || patientId.equals("")) {
             Utils.showShortToast(CaseListActivity.this, "此用户没有绑定患者");

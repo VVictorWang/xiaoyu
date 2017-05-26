@@ -16,6 +16,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.textservice.TextInfo;
 import android.widget.Toast;
+
+import com.victor.myclient.ActivityManage;
+
 import demo.animen.com.xiaoyutask.R;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -54,7 +57,8 @@ public class Utils {
     }
 
     public static void finishActivity(Activity activity) {
-        activity.finish();
+        ActivityManage activityManage = ActivityManage.getInstance();
+        activityManage.popActivity(activity);
         activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 

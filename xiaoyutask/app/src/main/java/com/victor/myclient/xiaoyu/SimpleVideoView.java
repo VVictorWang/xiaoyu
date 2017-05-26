@@ -14,7 +14,6 @@ import java.util.List;
 
 public class SimpleVideoView extends ViewGroup {
 
-
     private static final String TAG = SimpleVideoView.class.getSimpleName();
 
     public static final int LOCAL_VIEW_ID = 99;
@@ -54,7 +53,6 @@ public class SimpleVideoView extends ViewGroup {
         localVideoView.setSourceID(NemoSDK.getInstance().getLocalVideoStreamID());
         localVideoView.setContent(false);
         addView(localVideoView);
-//        setClipChildren(false);
     }
 
     @Override

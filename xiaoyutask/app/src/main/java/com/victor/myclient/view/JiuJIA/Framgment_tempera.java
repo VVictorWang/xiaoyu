@@ -218,7 +218,6 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
                     has_data = false;
                 }
             }
-
             return null;
         }
         @Override

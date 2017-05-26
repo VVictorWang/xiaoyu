@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ainemo.sdk.otf.NemoSDK;
@@ -38,9 +39,11 @@ public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyView
         private TextView tvTitle;
         private CircleImageView icon;
        private TextView number_text;
+        private LinearLayout layout;
 
         public MyViewHoler(View itemView) {
             super(itemView);
+            this.layout = (LinearLayout) itemView.findViewById(R.id.contact_list_recycler_view);
             this.tvLetter =(TextView) itemView.findViewById(R.id.catalog);
             this.tvTitle = (TextView) itemView.findViewById(R.id.title);
             this.icon = (CircleImageView) itemView.findViewById(R.id.icon);
@@ -65,20 +68,14 @@ public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyView
         final Context context = parent.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_phone_constacts, parent, false);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, VideoActivity.class);
-                intent.putExtra("number", "217098");
-                context.startActivity(intent);
-            }
-        });
+
         MyViewHoler viewHoler = new MyViewHoler(view);
+
         return viewHoler;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHoler holder, int position) {
+    public void onBindViewHolder(MyViewHoler holder, final int position) {
         int section = getSectionForPosition(position);
         final SortModel mContent = list.get(position);
 
@@ -90,6 +87,14 @@ public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyView
             holder.tvLetter.setVisibility(View.GONE);
         }
 
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, VideoActivity.class);
+                intent.putExtra("number", list.get(position).getNumber());
+                context.startActivity(intent);
+            }
+        });
         holder.tvTitle.setText(this.list.get(position).getName());
 //        holder.icon.setText(this.list.get(position).getName());
 //        holder.icon.setIconText(context,this.list.get(position).getName());

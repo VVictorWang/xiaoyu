@@ -1,5 +1,6 @@
 package com.victor.myclient.view.Setting;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.Datas.UserInfor;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.MyBitmapUtils;
@@ -65,14 +67,16 @@ public class Setting_Activity extends AppCompatActivity {
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
     @Override
     protected void onResume() {
-        super.onResume();
         resumeView();
+        super.onResume();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        ActivityManage activityManage = ActivityManage.getInstance();
+        activityManage.pushActivity(Setting_Activity.this);
         email = Utils.getValue(Setting_Activity.this, GlobalData.USer_email);
         initView();
         initEvent();
@@ -80,7 +84,6 @@ public class Setting_Activity extends AppCompatActivity {
 
     private void resumeView() {
 
-//        bitmapUtils.disPlay(loginhead, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(Setting_Activity.this, GlobalData.FAMILY_IMage));
         changemail.setText("绑定邮箱: " + Utils.getValue(Setting_Activity.this, GlobalData.USer_email));
     }
 
@@ -95,11 +98,6 @@ public class Setting_Activity extends AppCompatActivity {
         changemail.setText("绑定邮箱: " + email);
         bitmapUtils.disPlay(loginhead, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(Setting_Activity.this, GlobalData.FAMILY_IMage));
         networkavailable = Utils.isNetWorkAvailabe(Setting_Activity.this);
-//        loginhead.setImageBitmap(BitmapUtil.getBitmap(GlobalData.DoctorIMage + Utils.getValue(Setting_Activity.this, GlobalData.PATIENTFAMILY_ID)));
-//        imagePath = Utils.getValue(Setting_Activity.this, GlobalData.Img_URl);
-//        if (imagePath != null) {
-//            loginhead.setImageURI(Uri.fromFile(new File(imagePath)));
-//        }
     }
 
     private void initEvent() {
@@ -124,6 +122,9 @@ public class Setting_Activity extends AppCompatActivity {
                 Utils.putBooleanValue(Setting_Activity.this, GlobalData.Login_status, false);
                 Intent intent = new Intent(Setting_Activity.this, LoginActivity.class);
                 startActivity(intent);
+                ActivityManage activityManage = ActivityManage.getInstance();
+                activityManage.popAllActivity();
+
             }
         });
 

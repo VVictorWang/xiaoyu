@@ -3,6 +3,7 @@ package com.victor.myclient.xiaoyu;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.view.Contact.Record.CallRecord;
@@ -94,7 +96,7 @@ public class IncommingAcivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.callincoming_fragment);
-
+        ActivityManage.getInstance().pushActivity(IncommingAcivity.this);
         initView();
         Intent intent = getIntent();
         isIncoming = intent.getBooleanExtra("isIncomingCall", false);
@@ -153,7 +155,7 @@ public class IncommingAcivity extends AppCompatActivity {
                 callRecord.setDate(new Date(System.currentTimeMillis()));
                 callRecord.save();
 
-                finish();
+                Utils.finishActivity(IncommingAcivity.this);
             }
         });
         connmtdialfromtext.setText(callerName + " (" + callerNumber + ")");
@@ -166,7 +168,6 @@ public class IncommingAcivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (visible) {
                     connmtdialfromtext.setVisibility(View.GONE);
-//                    connmtendcallbtn.setVisibility(View.GONE);
                     time_call.setVisibility(View.GONE);
                     profilepic.setVisibility(View.GONE);
                     audioonlybtn.setVisibility(View.GONE);
@@ -175,7 +176,6 @@ public class IncommingAcivity extends AppCompatActivity {
                     finishcall.setVisibility(View.GONE);
                 } else {
                     connmtdialfromtext.setVisibility(View.VISIBLE);
-//                    connmtendcallbtn.setVisibility(View.VISIBLE);
                     time_call.setVisibility(View.VISIBLE);
                     profilepic.setVisibility(View.VISIBLE);
                     audioonlybtn.setVisibility(View.VISIBLE);
@@ -198,6 +198,15 @@ public class IncommingAcivity extends AppCompatActivity {
             public void onClick(View v) {
                 micMute = !micMute;
                 NemoSDK.getInstance().enableMic(micMute);
+                if (micMute) {
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.no_voice_bitmap);
+                    Bitmap bitmap = drawable.getBitmap();
+                    mutebtn.setImageBitmap(bitmap);
+                } else {
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.ic_toolbar_mic);
+                    Bitmap bitmap = drawable.getBitmap();
+                    mutebtn.setImageBitmap(bitmap);
+                }
             }
         });
         audioonlybtn.setOnClickListener(new View.OnClickListener() {
@@ -205,6 +214,15 @@ public class IncommingAcivity extends AppCompatActivity {
             public void onClick(View v) {
                 audioMode = !audioMode;
                 NemoSDK.getInstance().switchCallMode(audioMode);
+                if (audioMode) {
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.audio_multi);
+                    Bitmap bitmap = drawable.getBitmap();
+                    audioonlybtn.setImageBitmap(bitmap);
+                } else {
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.ic_toolbar_audio_only);
+                    Bitmap bitmap = drawable.getBitmap();
+                    audioonlybtn.setImageBitmap(bitmap);
+                }
             }
         });
         finishcall.setOnClickListener(new View.OnClickListener() {
@@ -224,7 +242,7 @@ public class IncommingAcivity extends AppCompatActivity {
                 Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_MINITE, during_minute);
                 Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_SECOND, during_second);
                 Log.e(TAG, NemoSDK.getInstance().getStatisticsInfo());
-                finish();
+                Utils.finishActivity(IncommingAcivity.this);
             }
         });
     }

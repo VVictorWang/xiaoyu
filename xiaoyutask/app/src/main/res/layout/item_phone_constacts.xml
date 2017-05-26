@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:background="#ffffff"
+    android:id="@+id/contact_list_recycler_view"
     android:orientation="vertical" >
 
     <TextView

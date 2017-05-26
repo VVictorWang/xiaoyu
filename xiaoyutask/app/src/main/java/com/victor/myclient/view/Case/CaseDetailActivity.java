@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.Datas.CaseInfor;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.MyBitmapUtils;
@@ -55,6 +56,7 @@ public class CaseDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.case_detail);
+        ActivityManage.getInstance().pushActivity(CaseDetailActivity.this);
         id = getIntent().getIntExtra("id", 1);
         initView();
         initEvent();
