@@ -94,7 +94,14 @@ public class MainActivity extends AppCompatActivity {
         NemoSDK.getInstance().connectNemo("victor", "18774259685", new ConnectNemoCallback() {
             @Override
             public void onFailed(int i) {
+
                 Log.e(TAG,"fail");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        bangding_xiaoyu_number.setText("登录失败");
+                    }
+                });
             }
 
             @Override

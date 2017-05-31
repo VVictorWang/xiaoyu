@@ -47,16 +47,26 @@ public class RecView extends View {
         paint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawRect(0,0,width,height,paint);
-        paint.setTextSize(28);
-        canvas.drawText("房间编号：" + roomid, 10, 20, paint);
+        Paint paint2 = new Paint();
+        paint2.setTextSize(38);
+        paint2.setColor(Color.BLACK);
+        canvas.drawText( roomid, 10, 30, paint2);
         Paint paint1 = new Paint();
         paint1.setColor(Color.RED);
         paint1.setStyle(Paint.Style.FILL);
-        for (int i = 1; i <=number ; i++) {
+        for (int i = 0; i <number ; i++) {
             float x = (float) Math.random() * width;
             float y = (float) Math.random() * height;
-            if (y < 30) {
-                y += 30;
+
+            if (x <= 10) {
+                x += 10;
+            } else if (x >= width - 10) {
+                x -= 10;
+            }
+            if (y <= 40) {
+                y += 40;
+            } else if (y >= height - 10) {
+                y -= 10;
             }
             canvas.drawCircle(x,y,10,paint1);
         }

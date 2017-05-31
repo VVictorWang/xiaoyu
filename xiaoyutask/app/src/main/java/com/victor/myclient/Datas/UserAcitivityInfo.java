@@ -7,8 +7,17 @@ import org.litepal.crud.DataSupport;
  */
 
 public class UserAcitivityInfo extends DataSupport {
+    private int id;
     private String room;
     private String num;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public void setRoom(String room) {
         this.room = room;

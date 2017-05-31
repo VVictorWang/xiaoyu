@@ -1,25 +1,24 @@
 package com.victor.myclient.xiaoyu;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.log.L;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
+import android.os.Process;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -33,10 +32,11 @@ import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.NemoSDKErrorCode;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
+import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
+import com.victor.myclient.SomeUtils.MyBitmapUtils;
 import com.victor.myclient.SomeUtils.Utils;
-import com.victor.myclient.view.Contact.ContactActivity;
 import com.victor.myclient.view.Contact.Record.CallRecord;
 
 import java.util.Date;
@@ -71,7 +71,10 @@ public class VideoActivity extends AppCompatActivity {
     private int start_time = 0;
 
 
+    private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
+    private ImageView user_image;
     private int time=0,minute = 0,hour=0;
+    private ImageInfor imageInfor = new ImageInfor();
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -111,6 +114,8 @@ public class VideoActivity extends AppCompatActivity {
          number = getIntent().getStringExtra("number");
         name = "victor";
         InitView();
+       // getImageUrl();
+
         InitEvent();
         InitData();
     }
@@ -136,6 +141,16 @@ public class VideoActivity extends AppCompatActivity {
         ActivityManage.getInstance().popActivity(VideoActivity.this);
     }
 
+    private void getImageUrl() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Gson gson = new Gson();
+                imageInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_CALLING_IMAGE), ImageInfor.class);
+                bitmapUtils.disPlay(user_image, imageInfor.getImage());
+            }
+        }).start();
+    }
     private void InitView() {
         mVideoView = (SimpleVideoView) findViewById(R.id.remote_video_view);
         mContent = (ImageView) findViewById(R.id.shared_content);
@@ -148,6 +163,7 @@ public class VideoActivity extends AppCompatActivity {
         user_pic = (ImageView) findViewById(R.id.user_capture);
         user_pic_layout = (RelativeLayout) findViewById(R.id.profile_pic);
         time_call = (TextView) findViewById(R.id.call_time_text);
+        user_image = (ImageView) findViewById(R.id.user_capture);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
     }
 
@@ -243,6 +259,7 @@ public class VideoActivity extends AppCompatActivity {
         hour = 0;
         checkPermission();
         nemoSDK.makeCall(number);
+
        nemoSDK.setNemoSDKListener(new NemoSDKListener() {
             @Override
             public void onContentStateChanged(ContentState contentState) {
@@ -259,7 +276,6 @@ public class VideoActivity extends AppCompatActivity {
                         .subscribe(new Action1<Integer>() {
                             @Override
                             public void call(Integer integer) {
-                                L.e("ContactActivity", "error code is " + integer);
                                 if (NemoSDKErrorCode.WRONG_PASSWORD == integer) {
                                     final EditText editText  =new EditText(VideoActivity.this);
                                     new AlertDialog.Builder(VideoActivity.this).setTitle("请输入密码").setView(editText).setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -295,7 +311,6 @@ public class VideoActivity extends AppCompatActivity {
 
             @Override
             public void onCallStateChange(CallState callState, final String s) {
-
                 Observable.just(callState)
                         .subscribeOn(Schedulers.immediate())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -305,7 +320,6 @@ public class VideoActivity extends AppCompatActivity {
                                 switch (callState) {
                                     case CONNECTING:
                                         hideSoftKeyboard();
-//                                        new Thread(new CountTime()).start();
                                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
                                         break;
                                     case CONNECTED:
@@ -319,14 +333,23 @@ public class VideoActivity extends AppCompatActivity {
                                         break;
                                     case DISCONNECTED:
                                         if (s.equals("CANCEL")) {
-                                            Toast.makeText(VideoActivity.this, "通话取消", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(VideoActivity.this, "通话取消", Toast.LENGTH_SHORT).show();
                                         }
                                         if (s.equals("BUSY")) {
                                             Toast.makeText(VideoActivity.this, "对方忙", Toast.LENGTH_SHORT).show();
                                             releaseResource();
                                            Utils.finishActivity(VideoActivity.this);
                                         }
-//                                        releaseResource();
+                                        if (s.equals("CONF_FULL")) {
+                                            Utils.showShortToast(VideoActivity.this, "会议室已满");
+                                            releaseResource();
+                                            Utils.finishActivity(VideoActivity.this);
+                                        }
+                                        if (s.equals("NET_WORK_ERROR")) {
+                                            Utils.showShortToast(VideoActivity.this, "网络错误");
+                                            releaseResource();
+                                            Utils.finishActivity(VideoActivity.this);
+                                        }
                                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                                         break;
                                     default:

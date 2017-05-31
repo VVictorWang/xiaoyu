@@ -24,7 +24,6 @@ public class MyApplication extends Application{
         super.onCreate();
         context = getApplicationContext();
         LitePal.initialize(context);
-
       Settings settings = new Settings("995ffeda2b164757fdd923d5211d5fd45f761303"); //请使用自己的企业i，否则无法运行demo
         NemoSDK nemoSDK = NemoSDK.getInstance();
         nemoSDK.init(this, settings);

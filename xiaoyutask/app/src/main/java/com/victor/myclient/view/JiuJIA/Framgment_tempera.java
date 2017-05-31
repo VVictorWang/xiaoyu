@@ -229,7 +229,6 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
 
                 homeInfor = gson.fromJson(infor, HomeInfor.class);
 
-                homeInfor.save();
                 has_data = true;
             } else {
                 if (DataSupport.isExist(HomeInfor.class)) {

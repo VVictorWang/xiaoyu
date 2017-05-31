@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname value="xiaoyuab" ></dbname>
+    <dbname value="xiaoyuabdc" ></dbname>
 
-    <version value="2" >
+    <version value="3" >
 
     </version>
 

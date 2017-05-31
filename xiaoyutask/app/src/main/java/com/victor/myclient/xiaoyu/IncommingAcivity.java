@@ -17,10 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ainemo.sdk.otf.NemoSDK;
+import com.ainemo.sdk.otf.NemoSDKErrorCode;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.SomeUtils.GlobalData;
+import com.victor.myclient.SomeUtils.MyBitmapUtils;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.view.Contact.Record.CallRecord;
 
@@ -40,23 +42,18 @@ public class IncommingAcivity extends AppCompatActivity {
     private android.widget.ImageButton connmtendcallbtn;
     private android.widget.ImageButton connmtanswerbtn;
     private ImageButton finishcall;
-    private ImageView usercapture;
     private SimpleVideoView videoView;
     private boolean isIncoming;
     private ImageButton audioonlybtn;
     private ImageButton mutebtn;
     private ImageButton switchcamera;
-    private ImageView bgturn;
+    private ImageView user_image;
     private android.widget.RelativeLayout profilepic;
-    private ImageView nemoicon;
-    private android.widget.RelativeLayout nemopic;
     private TextView time_call;
     private String name,number;
-
     private boolean foregroundCamera = true;
     private boolean micMute = false;
     private boolean audioMode = false;
-
     private int time = 0, minute = 0, hour = 0;
 
     private int start_time;
@@ -91,6 +88,7 @@ public class IncommingAcivity extends AppCompatActivity {
         }
     };
     private static final String TAG = "IncommingAcivity";
+    private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,18 +111,15 @@ public class IncommingAcivity extends AppCompatActivity {
     }
 
     private void initView() {
-        this.usercapture = (ImageView) findViewById(R.id.user_capture);
         this.connmtanswerbtn = (ImageButton) findViewById(R.id.conn_mt_answer_btn);
         this.connmtendcallbtn = (ImageButton) findViewById(R.id.conn_mt_endcall_btn);
         this.connmtdialfromtext = (TextView) findViewById(R.id.conn_mt_dial_from_text);
-        this.nemopic = (RelativeLayout) findViewById(R.id.nemo_pic);
-        this.nemoicon = (ImageView) findViewById(R.id.nemo_icon);
         this.profilepic = (RelativeLayout) findViewById(R.id.profile_pic);
-        this.bgturn = (ImageView) findViewById(R.id.bg_turn);
         this.switchcamera = (ImageButton) findViewById(R.id.switch_camera);
         this.mutebtn = (ImageButton) findViewById(R.id.mute_btn);
         this.audioonlybtn = (ImageButton) findViewById(R.id.audio_only_btn);
         this.time_call = (TextView) findViewById(R.id.time_call_text);
+        user_image = (ImageView) findViewById(R.id.user_capture);
         finishcall = (ImageButton) findViewById(R.id.conn_mt_endcall_btn_calling);
         finishcall.setVisibility(View.GONE);
         videoView = (SimpleVideoView) findViewById(R.id.incoming_view);
@@ -159,7 +154,7 @@ public class IncommingAcivity extends AppCompatActivity {
             }
         });
         connmtdialfromtext.setText(callerName + " (" + callerNumber + ")");
-
+        bitmapUtils.disPlay(user_image, GlobalData.GET_CALLING_IMAGE);
     }
 
     private void InitEvent() {
@@ -257,6 +252,22 @@ public class IncommingAcivity extends AppCompatActivity {
             @Override
             public void onCallFailed(int i) {
 
+                Observable.just(i)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<Integer>() {
+                            @Override
+                            public void call(Integer integer) {
+                                if (NemoSDKErrorCode.WRONG_PASSWORD == integer) {
+                                    Toast.makeText(IncommingAcivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                                } else if (NemoSDKErrorCode.INVALID_PARAM == integer) {
+                                    Toast.makeText(IncommingAcivity.this, "错误的号码", Toast.LENGTH_SHORT).show();
+                                } else if (NemoSDKErrorCode.NETWORK_UNAVAILABLE == integer) {
+                                    Toast.makeText(IncommingAcivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
+                                } else if (NemoSDKErrorCode.HOST_ERROR == integer) {
+                                    Toast.makeText(IncommingAcivity.this, "主机错误", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
             }
 
             @Override
@@ -274,10 +285,8 @@ public class IncommingAcivity extends AppCompatActivity {
                             public void call(CallState callState) {
                                 switch (callState) {
                                     case CONNECTING:
-//                                        myThread.start();
                                         break;
                                     case CONNECTED:
-//                                        myThread.stop();
                                         new Thread(new IncommingAcivity.TimeThread()).start();
                                         profilepic.setVisibility(View.GONE);
                                         connmtdialfromtext.setText("通话中");
@@ -289,12 +298,24 @@ public class IncommingAcivity extends AppCompatActivity {
                                         break;
                                     case DISCONNECTED:
                                         if (s.equals("CANCEL")) {
-                                            Toast.makeText(IncommingAcivity.this, "call canceled", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(IncommingAcivity.this, "通话取消", Toast.LENGTH_SHORT).show();
+                                            Utils.finishActivity(IncommingAcivity.this);
                                         }
 
                                         if (s.equals("BUSY")) {
                                             Toast.makeText(IncommingAcivity.this, "对方忙", Toast.LENGTH_SHORT).show();
-                                            finish();
+                                            releaseResource();
+                                            Utils.finishActivity(IncommingAcivity.this);
+                                        }
+                                        if (s.equals("CONF_FULL")) {
+                                            Utils.showShortToast(IncommingAcivity.this,"会议室已满");
+                                            releaseResource();
+                                            Utils.finishActivity(IncommingAcivity.this);
+                                        }
+                                        if (s.equals("NET_WORK_ERROR")) {
+                                            Utils.showShortToast(IncommingAcivity.this, "网络错误");
+                                            releaseResource();
+                                            Utils.finishActivity(IncommingAcivity.this);
                                         }
                                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                                         break;
@@ -323,6 +344,9 @@ public class IncommingAcivity extends AppCompatActivity {
         });
     }
 
+    private void releaseResource() {
+        videoView.destroy();
+    }
     class TimeThread implements Runnable {
         @Override
         public void run() {
@@ -337,29 +361,5 @@ public class IncommingAcivity extends AppCompatActivity {
         }
     }
 
-    class Counter implements Runnable {
-        @Override
-        public void run() {
-            try {
-                Thread.sleep(1000);
-                start_time++;
-                if (start_time > 10) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Utils.showShortToast(IncommingAcivity.this, "未接听");
-                        }
-                    });
-                    finish();
-                    CallRecord callRecord = new CallRecord();
-                    callRecord.setName(name);
-                    callRecord.setDate(new Date(System.currentTimeMillis()));
-                    callRecord.setState(CallRecord.CALL_REJECT);
-                    callRecord.save();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
 }

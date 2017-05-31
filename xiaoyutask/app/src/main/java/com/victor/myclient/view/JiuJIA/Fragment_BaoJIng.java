@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,6 +38,7 @@ public class Fragment_BaoJIng extends Fragment {
     private RecyclerView recyclerView;
     private BaojingAdapter adapter;
     private List<OneKeyWarning> oneKeyWarnings;
+    private RelativeLayout back;
 
     private boolean net_work,has_data = false;
     Handler handler = new Handler(){
@@ -68,6 +70,7 @@ public class Fragment_BaoJIng extends Fragment {
             }
         }
         InitView();
+
         new FindBaojingListTask().execute();
         return view;
     }
@@ -77,6 +80,13 @@ public class Fragment_BaoJIng extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         oneKeyWarnings = new ArrayList<>();
+        back = (RelativeLayout) view.findViewById(R.id.fragment_baojing_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.finishActivity(activity);
+            }
+        });
     }
 
     private void InitData() {

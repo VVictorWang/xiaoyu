@@ -38,7 +38,7 @@ public class HomeInfor extends DataSupport{
      * humidityies : [0,0,0,0,0,0,0,"6752","6637","6503","6432","6417","6345","6185","6128",0,0,0,0,0,0,0,0,0]
      */
 
-    private String id;
+    private int id;
     private String model;
     private String short_id;
     private String sid;
@@ -48,11 +48,11 @@ public class HomeInfor extends DataSupport{
     private List<Float> temperatures;
     private List<Float> humidityies;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

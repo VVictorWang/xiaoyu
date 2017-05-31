@@ -340,7 +340,6 @@ public class Utils {
             string =format.format(date);
         }catch (Exception e){
             e.printStackTrace();
-//            Log.d(TAG, "dateToString: dateToString failed");
         }
         return string;
     }
