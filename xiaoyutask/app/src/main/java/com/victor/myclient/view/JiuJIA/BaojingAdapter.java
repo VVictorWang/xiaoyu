@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.victor.myclient.Datas.OneKeyWarning;
+
 import java.util.List;
 
 import demo.animen.com.xiaoyutask.R;
@@ -17,7 +19,7 @@ import demo.animen.com.xiaoyutask.R;
 
 public class BaojingAdapter extends RecyclerView.Adapter<BaojingAdapter.ViewHolder> {
     private Context context;
-    private List<BaojingInfor> baojingInfors;
+    private List<OneKeyWarning> oneKeyWarnings;
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView number;
@@ -29,9 +31,9 @@ public class BaojingAdapter extends RecyclerView.Adapter<BaojingAdapter.ViewHold
         }
     }
 
-    public BaojingAdapter(Context context, List<BaojingInfor> baojingInfors) {
+    public BaojingAdapter(Context context, List<OneKeyWarning> oneKeyWarnings) {
         this.context = context;
-        this.baojingInfors = baojingInfors;
+        this.oneKeyWarnings = oneKeyWarnings;
     }
 
     @Override
@@ -45,13 +47,13 @@ public class BaojingAdapter extends RecyclerView.Adapter<BaojingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        BaojingInfor baojingInfor = baojingInfors.get(position);
-        holder.time.setText("报警时间: " + baojingInfor.getTime());
-        holder.number.setText("设备编号: " + baojingInfor.getNumber());
+       OneKeyWarning oneKeyWarning = oneKeyWarnings.get(position);
+        holder.time.setText("报警时间: " + oneKeyWarning.getAdd_date());
+        holder.number.setText("设备编号: " + oneKeyWarning.getSid());
     }
 
     @Override
     public int getItemCount() {
-        return baojingInfors.size();
+        return oneKeyWarnings.size();
     }
 }

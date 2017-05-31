@@ -13,6 +13,7 @@ public interface GlobalData {
     String User_ID = "User_ID";
     String USer_email = "email";
     String PATIENT_ID = "patient_id";
+    String DOOR_STATUS = "door_status";
     String XIAO_YU = "xiaoyu";
     String DoctorName = "doctor_name";
     String FAMILY_IMage = "family_image";
@@ -30,7 +31,10 @@ public interface GlobalData {
     String GET_PATIENT_FAMILY_IMAGE = "http://139.196.40.97/upload/patientfamilyimage/";
     String FORGET_PASSWOD = "http://139.196.40.97/OSAdmin-master/uploads/interface/send_password_mail.php?id=";
 
+    String GET_ACTIVITIES = "http://139.196.40.97/OSAdmin-master/uploads/interface/getActivities.php?patientId=";
+    String GET_ROOM_STATUS = "http://139.196.40.97/OSAdmin-master/uploads/interface/doorinfo.php?patientId=";
     String DRURATION_HOUR = "xiaoyu_duration_hour";
     String DRURATION_MINITE = "xiaoyu_duration_minute";
     String DRURATION_SECOND = "xiaoyu_duration_second";
+    String GET_ONEKEY_WARNING = "http://139.196.40.97/OSAdmin-master/uploads/interface/getOnekeyWaring.php?patientId=";
 }

@@ -269,6 +269,81 @@ public class Utils {
         return date;
     }
 
+    public static long parsedataNumber(long data_number,boolean isadd) {
+        int year, month, day;
+        day = (int) data_number % 100;
+        month = (int) (data_number / 100) % 100;
+        year = (int)(data_number / 10000);
+        if (isadd) {
+            if (isRun(year) && month == 2 && day >= 29) {
+                day = 1;
+                month++;
+            } else if (month >= 1 && month <= 7 && month % 2 != 0 && day >= 32) {
+                day = 1;
+                month++;
+                if (month >= 13) {
+                    month = 1;
+                    year++;
+                }
+            } else if (month >= 8 && month <= 12 && month % 2 == 0 && day >= 32) {
+                day = 1;
+                month++;
+                if (month >= 13) {
+                    month = 1;
+                    year++;
+                }
+            } else if (day >= 31) {
+                day = 1;
+                month++;
+                if (month >= 13) {
+                    month = 1;
+                    year++;
+                }
+            }
+        } else {
+            if (isRun(year) && month == 3 && day <= 0) {
+                day = 29;
+                month--;
+            } else if (month >= 1 && month <= 7 && month % 2 == 0 && day <= 0) {
+                day = 31;
+                month--;
+            } else if (month >= 8 && month <= 12 && month % 2 != 0 && day <= 0 ) {
+                day = 31;
+                month--;
+            } else if (month == 1 && day <= 0) {
+                day = 31;
+                month = 12;
+                year--;
+            } else {
+                if (day <= 0) {
+                    day = 30;
+                    month--;
+                    if (month <= 0) {
+                        month = 12;
+                        year--;
+                    }
+                }
+            }
+        }
+
+        return (long) (year * 10000 + month * 100 + day);
+        }
+
+
+    private static boolean isRun(int year) {
+        return ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0)));
+    }
+    public static String dataTostringtem(Date date) {
+        DateFormat format=new SimpleDateFormat("yyyyMMdd");
+        String string=null;
+        try{
+            string =format.format(date);
+        }catch (Exception e){
+            e.printStackTrace();
+//            Log.d(TAG, "dateToString: dateToString failed");
+        }
+        return string;
+    }
     public static String dateToString(Date date){
         DateFormat format=new SimpleDateFormat("yyyy/MM/dd");
         String string=null;

@@ -24,6 +24,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.google.gson.Gson;
+import com.victor.myclient.Datas.DoorInfor;
 import com.victor.myclient.Datas.HomeInfor;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.Utils;
@@ -36,6 +37,7 @@ import org.litepal.crud.DataSupport;
 
 import demo.animen.com.xiaoyutask.R;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,13 +57,18 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
     private ImageView choose_left, choose_right;
     private List<Point> points=new ArrayList<>();
     private boolean network_ava,has_data=false;
+    private static final String TAG = "Framgment_tempera";
+    private String data_string;
+    private long data_number;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x1234) {
                 List<Series> seriess = new ArrayList<Series>();
+                points.clear();
+                float a[] = {3, 6, 9, 12, 15, 18, 21, 24};
                 for (int i = 0; i < 8; i++) {
-                    points.add(new Point((float) i, homeInfor.getTemperatures().get(i), true));
+                    points.add(new Point( a[i], homeInfor.getTemperatures().get((int)(a[i]-1)), true));
                 }
                 seriess.add(new Series("温度", Color.WHITE, points));
                 chart.getData().setLabelTransform(new ChartData.LabelTransform() {
@@ -165,7 +172,11 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         choose_right = (ImageView) layout.findViewById(R.id.choose_data_jiujia_right);
         chart.setSmoothness(0.4f);
         chart.setChartListener(this);
-        new GetHomeInforTask().execute("DA");
+        Date date = new Date(System.currentTimeMillis());
+        data_string = Utils.dataTostringtem(date);
+        data_number = Long.parseLong(data_string);
+        Log.e(TAG, data_string);
+        new GetHomeInforTask().execute(data_string);
         chart.setSmoothness(0.33f);
     }
 
@@ -179,19 +190,31 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                data_number = Long.parseLong(Utils.dataTostringtem(new Date(System.currentTimeMillis())));
+                new GetHomeInforTask().execute("" + data_number);
             }
         });
         choose_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                data_number++;
+                data_number = Utils.parsedataNumber(data_number,true);
+                Log.e(TAG, "data_number:  " + data_number);
+                long current = Long.parseLong(Utils.dataTostringtem(new Date(System.currentTimeMillis())));
+                if (data_number >= current) {
+                    Utils.showShortToast(activity, "已经是今天的数据了");
+                } else {
+                    new GetHomeInforTask().execute("" + data_number);
+                }
             }
         });
         choose_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                data_number--;
+                data_number = Utils.parsedataNumber(data_number, false);
+                Log.e(TAG, "data_number:  " + data_number);
+                new GetHomeInforTask().execute("" + data_number);
             }
         });
     }
@@ -202,8 +225,10 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         protected Void doInBackground(String... params) {
             if (network_ava) {
                 String date = params[0];
-                String infor = Utils.sendRequest(GlobalData.GET_HOME_INFOR + Utils.getValue(activity, GlobalData.PATIENT_ID));
+                String infor = Utils.sendRequest(GlobalData.GET_HOME_INFOR + Utils.getValue(activity, GlobalData.PATIENT_ID) + "&data=" + date);
+
                 homeInfor = gson.fromJson(infor, HomeInfor.class);
+
                 homeInfor.save();
                 has_data = true;
             } else {

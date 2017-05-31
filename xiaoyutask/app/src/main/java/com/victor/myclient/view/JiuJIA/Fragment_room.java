@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.victor.myclient.Datas.UserAcitivityInfo;
+
+import java.util.List;
 import java.util.Random;
 
 import demo.animen.com.xiaoyutask.R;
@@ -26,6 +30,7 @@ public class Fragment_room extends Fragment {
     private View view;
     private FlowLayout layout;
 
+    private List<UserAcitivityInfo> userAcitivityInfos;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +48,6 @@ public class Fragment_room extends Fragment {
             if (parent != null) {
                 parent.removeView(view);
             }
-
         }
         InitView();
         return view;
@@ -78,6 +82,24 @@ public class Fragment_room extends Fragment {
 
         }
 
+    }
+
+    class GetActivity extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
     }
 }
 
