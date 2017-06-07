@@ -14,5 +14,6 @@
         <mapping class="com.victor.myclient.Datas.HomeInfor"/>
         <mapping class="com.victor.myclient.Datas.UserAcitivityInfo"/>
         <mapping class="com.victor.myclient.Datas.OneKeyWarning"/>
+        <mapping class="com.victor.myclient.Datas.DoctorXiaoYu"/>
     </list>
 </litepal>

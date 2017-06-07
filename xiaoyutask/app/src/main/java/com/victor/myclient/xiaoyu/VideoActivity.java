@@ -1,19 +1,15 @@
 package com.victor.myclient.xiaoyu;
 
 import android.Manifest;
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.log.L;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Process;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -50,7 +46,6 @@ import rx.schedulers.Schedulers;
 
 
 public class VideoActivity extends AppCompatActivity {
-    private static final String TAG = VideoFragment.class.getSimpleName();
     private SimpleVideoView mVideoView;
     private ImageView mContent;
     private boolean foregroundCamera = true;
@@ -66,15 +61,17 @@ public class VideoActivity extends AppCompatActivity {
     private ImageView user_pic;
     private TextView time_call;
     private NemoSDK nemoSDK;
-    private String number,name;
+    private String number,name,type;
     private boolean visible=true;
     private int start_time = 0;
-
+    private String my_threadname;
+    private Thread mv;
 
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
     private ImageView user_image;
     private int time=0,minute = 0,hour=0;
-    private ImageInfor imageInfor = new ImageInfor();
+    private PatientImageInfor patientImageInfor = new PatientImageInfor();
+    private DoctorImage doctorImage = new DoctorImage();
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -101,6 +98,10 @@ public class VideoActivity extends AppCompatActivity {
                         time_call.setText("通话时长: 0" + minute + ":0" + time);
                     }
                 }
+            } else if (msg.what == 2) {
+                bitmapUtils.disPlay(user_image, GlobalData.GET_PATIENT_IMAGE + patientImageInfor.getImage());
+            } else if (msg.what == 3) {
+                bitmapUtils.disPlay(user_image, GlobalData.GET_DOCTOR_IMAGE + doctorImage.getDoctorimage());
             }
         }
     };
@@ -112,10 +113,23 @@ public class VideoActivity extends AppCompatActivity {
         activityManage.pushActivity(VideoActivity.this);
         nemoSDK = NemoSDK.getInstance();
          number = getIntent().getStringExtra("number");
+        type = getIntent().getStringExtra("type");
         name = "victor";
         InitView();
-       // getImageUrl();
 
+//        int pid = Process.myPid();
+//        String poccessname = new String();
+//        ActivityManager am = (ActivityManager) (VideoActivity.this).getSystemService(ACTIVITY_SERVICE);
+//        List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfos = am.getRunningAppProcesses();
+//        for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : runningAppProcessInfos) {
+//            if (runningAppProcessInfo.pid == pid) {
+//                poccessname = runningAppProcessInfo.processName;
+//                break;
+//            }
+//        }
+//        if (poccessname.equals(my_threadname)) {
+//            mv.start();
+//        }
         InitEvent();
         InitData();
     }
@@ -142,14 +156,30 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     private void getImageUrl() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Gson gson = new Gson();
-                imageInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_CALLING_IMAGE), ImageInfor.class);
-                bitmapUtils.disPlay(user_image, imageInfor.getImage());
-            }
-        }).start();
+        if (type.equals("patient")) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    patientImageInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_CALLING_IMAGE+"&identity=patient"), PatientImageInfor.class);
+                    handler.sendEmptyMessage(2);
+
+                }
+            }).start();
+        } else if (type.equals("doctor")) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    doctorImage = gson.fromJson(Utils.sendRequest(GlobalData.GET_CALLING_IMAGE + "&identity=doctor"), DoctorImage.class);
+                    handler.sendEmptyMessage(3);
+
+                }
+            }).start();
+        }
+
+
+
     }
     private void InitView() {
         mVideoView = (SimpleVideoView) findViewById(R.id.remote_video_view);
@@ -259,7 +289,6 @@ public class VideoActivity extends AppCompatActivity {
         hour = 0;
         checkPermission();
         nemoSDK.makeCall(number);
-
        nemoSDK.setNemoSDKListener(new NemoSDKListener() {
             @Override
             public void onContentStateChanged(ContentState contentState) {
@@ -282,8 +311,8 @@ public class VideoActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             String password = editText.getText().toString();
-                                            nemoSDK.makeCall(number, password);
                                             dialog.dismiss();
+                                            nemoSDK.makeCall(number, password);
                                         }
                                     }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                         @Override
@@ -320,6 +349,7 @@ public class VideoActivity extends AppCompatActivity {
                                 switch (callState) {
                                     case CONNECTING:
                                         hideSoftKeyboard();
+                                        getImageUrl();
                                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
                                         break;
                                     case CONNECTED:
@@ -333,7 +363,7 @@ public class VideoActivity extends AppCompatActivity {
                                         break;
                                     case DISCONNECTED:
                                         if (s.equals("CANCEL")) {
-                                                Toast.makeText(VideoActivity.this, "通话取消", Toast.LENGTH_SHORT).show();
+//                                                Toast.makeText(VideoActivity.this, "通话取消", Toast.LENGTH_SHORT).show();
                                         }
                                         if (s.equals("BUSY")) {
                                             Toast.makeText(VideoActivity.this, "对方忙", Toast.LENGTH_SHORT).show();

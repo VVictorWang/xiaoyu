@@ -1,6 +1,7 @@
 package com.victor.myclient.view.Case;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,10 +16,12 @@ import android.widget.TextView;
 
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.Datas.DoctorInfor;
+import com.victor.myclient.Datas.DoctorXiaoYu;
 import com.victor.myclient.SomeUtils.GlobalData;
 import com.victor.myclient.SomeUtils.MyBitmapUtils;
 import com.victor.myclient.SomeUtils.Utils;
 import com.google.gson.Gson;
+import com.victor.myclient.xiaoyu.VideoActivity;
 
 import org.litepal.crud.DataSupport;
 
@@ -47,6 +50,7 @@ public class DoctorActivity extends AppCompatActivity {
     private boolean net_work_available,has_data;
     private String name;
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
+    private DoctorXiaoYu doctorXiaoYu = new DoctorXiaoYu();
     private static final String TAG = "DoctorActivity";
     @Override
     protected void onResume() {
@@ -62,7 +66,6 @@ public class DoctorActivity extends AppCompatActivity {
         doctor_id = getIntent().getStringExtra("doctor_id");
         initView();
         initEvent();
-        initData();
         new GetDoctorInfor().execute();
     }
 
@@ -92,16 +95,17 @@ public class DoctorActivity extends AppCompatActivity {
         make_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.showShortToast(DoctorActivity.this, "因为医生电话不正确，无法发起呼救");
+                Intent intent = new Intent(DoctorActivity.this, VideoActivity.class);
+                if (doctorXiaoYu.getXiaoyuNum().equals("000")) {
+                    Utils.showShortToast(DoctorActivity.this, "医生小鱼号不存在");
+                } else {
+                    intent.putExtra("number", doctorXiaoYu.getXiaoyuNum());
+                    intent.putExtra("type", "doctor");
+                    startActivity(intent);
+                }
             }
         });
     }
-
-    private void initData() {
-
-
-    }
-
 
     class GetDoctorInfor extends AsyncTask<Void, Void, Void> {
         private Gson gson = new Gson();
@@ -112,9 +116,18 @@ public class DoctorActivity extends AppCompatActivity {
 
             if (net_work_available) {
                 doctorInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_DOCTOR_INFOR + doctor_id), DoctorInfor.class);
+                String xiaoyu = Utils.sendRequest(GlobalData.GET_DOCTOR_XIAO_YU + doctor_id);
+                if (xiaoyu.contains("not_exist")) {
+                    doctorXiaoYu.setXiaoyuNum("000");
+                } else {
+                    doctorXiaoYu = gson.fromJson(Utils.sendRequest(GlobalData.GET_DOCTOR_XIAO_YU + doctor_id), DoctorXiaoYu.class);
+                }
                 DataSupport.deleteAll(DoctorInfor.class);
                 if (!doctorInfor.isSaved()) {
-                   doctorInfor.save();
+                   doctorInfor.saveAsync();
+                }
+                if (!doctorXiaoYu.isSaved()) {
+                    doctorXiaoYu.saveAsync();
                 }
                 name = doctorInfor.getName();
                 Utils.putValue(DoctorActivity.this, GlobalData.DoctorName, name);

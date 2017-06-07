@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -45,6 +46,7 @@ public class Fragment_room extends Fragment {
     private List<UserAcitivityInfo> userAcitivityInfos;
     private boolean net_work, has_data = false;
     private String[] room_name = {"卧室1", "客厅", "厨房", "卧室2", "卫生间", "卧室3", "储物间", "饭厅", "其他"};
+    private TextView bedroom1,bedroom2,bedroom3,washingroom,living_room,store_room,dining_room, other,kitchen_room;
     Handler handler = new Handler(){
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @Override
@@ -53,26 +55,34 @@ public class Fragment_room extends Fragment {
                 for (UserAcitivityInfo userAcitivityInfo : userAcitivityInfos) {
                     int room = Integer.parseInt(userAcitivityInfo.getRoom());
                     int number = Integer.parseInt(userAcitivityInfo.getNum());
-                    if (number != 0) {
-                        RecView recView = new RecView(activity, room_name[room], number);
-//                        Random random = new Random();
-                        // 设置彩色背景
-                        GradientDrawable normalDrawable = new GradientDrawable();
-                        normalDrawable.setShape(GradientDrawable.RECTANGLE);
-                        int background = activity.getResources().getColor(R.color.my_background);
-                        normalDrawable.setColor(background);
-
-                        // 设置按下的灰色背景
-                        GradientDrawable pressedDrawable = new GradientDrawable();
-                        pressedDrawable.setShape(GradientDrawable.RECTANGLE);
-                        pressedDrawable.setColor(Color.GRAY);
-
-                        // 背景选择器
-                        StateListDrawable stateDrawable = new StateListDrawable();
-                        stateDrawable.addState(new int[]{android.R.attr.state_pressed}, pressedDrawable);
-                        stateDrawable.addState(new int[]{}, normalDrawable);
-                        recView.setBackground(stateDrawable);
-                        layout.addView(recView);
+                    switch (room) {
+                        case 0:
+                            bedroom1.setText("" + number);
+                            break;
+                        case 1:
+                            living_room.setText("" + number);
+                            break;
+                        case 2:
+                            kitchen_room.setText("" + number);
+                            break;
+                        case 3:
+                            bedroom2.setText("" + number);
+                            break;
+                        case 4:
+                            washingroom.setText("" + number);
+                            break;
+                        case 5:
+                            bedroom3.setText("" + number);
+                            break;
+                        case 6:
+                            store_room.setText("" + number);
+                            break;
+                        case 7:
+                            dining_room.setText("" + number);
+                            break;
+                        case 8:
+                            other.setText("" + number);
+                            break;
                     }
                 }
             } else if (msg.what == 0x124) {
@@ -104,15 +114,25 @@ public class Fragment_room extends Fragment {
     }
 
     private void InitView() {
-        layout = (FlowLayout) view.findViewById(R.id.flow_layout);
+//        layout = (FlowLayout) view.findViewById(R.id.flow_layout);
       userAcitivityInfos = new ArrayList<>();
         back = (RelativeLayout) view.findViewById(R.id.fragment_room_back);
+        bedroom1 = (TextView) view.findViewById(R.id.bed_room1_text);
+        bedroom2 = (TextView) view.findViewById(R.id.bed_room2_text);
+        bedroom3 = (TextView) view.findViewById(R.id.bed_room3_text);
+        washingroom = (TextView) view.findViewById(R.id.washing_room_text);
+        living_room = (TextView) view.findViewById(R.id.living_room_text);
+        store_room = (TextView) view.findViewById(R.id.store_room_text);
+        dining_room = (TextView) view.findViewById(R.id.dinig_room_text);
+        other = (TextView) view.findViewById(R.id.other_room_text);
+        kitchen_room = (TextView) view.findViewById(R.id.kitchen_room_text);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Utils.finishActivity(activity);
             }
         });
+
 
     }
 
@@ -131,23 +151,39 @@ public class Fragment_room extends Fragment {
         protected Void doInBackground(Void... params) {
             if (net_work) {
                 String info = Utils.sendRequest(GlobalData.GET_ACTIVITIES + Utils.getValue(activity, GlobalData.PATIENT_ID));
-                userAcitivityInfos = gson.fromJson(info, new TypeToken<List<UserAcitivityInfo>>() {
-                }.getType());
-                for (UserAcitivityInfo userAcitivityInfo : userAcitivityInfos) {
-                    userAcitivityInfo.save();
-                }
-                has_data = true;
-            } else if (DataSupport.isExist(UserAcitivityInfo.class)) {
+                if (!info.contains("not_exist")) {
+                    userAcitivityInfos = gson.fromJson(info, new TypeToken<List<UserAcitivityInfo>>() {
+                    }.getType());
+                    DataSupport.deleteAll(UserAcitivityInfo.class);
+                    for (UserAcitivityInfo userAcitivityInfo : userAcitivityInfos) {
+                        userAcitivityInfo.save();
+                    }
+                    has_data = true;
+                } else if (DataSupport.isExist(UserAcitivityInfo.class)) {
+                    List<UserAcitivityInfo> userAcitivityInfos1 = DataSupport.findAll(UserAcitivityInfo.class);
+                    for (UserAcitivityInfo userAcitivityInfo : userAcitivityInfos1) {
+                        boolean addabe = true;
+                        for (UserAcitivityInfo userAcitivityInfo1 : userAcitivityInfos) {
+                            if (userAcitivityInfo.getRoom().equals(userAcitivityInfo1.getRoom())) {
+                                addabe = false;
+                                break;
+                            }
+                        }
+                        if (addabe) {
+                            userAcitivityInfos.add(userAcitivityInfo);
+                        }
+                    }
+            }} else if (DataSupport.isExist(UserAcitivityInfo.class)) {
                 List<UserAcitivityInfo> userAcitivityInfos1 = DataSupport.findAll(UserAcitivityInfo.class);
                 for (UserAcitivityInfo userAcitivityInfo : userAcitivityInfos1) {
-                    boolean addabe = true;
+                    boolean addable = true;
                     for (UserAcitivityInfo userAcitivityInfo1 : userAcitivityInfos) {
                         if (userAcitivityInfo.getRoom().equals(userAcitivityInfo1.getRoom())) {
-                            addabe = false;
+                            addable = false;
                             break;
                         }
                     }
-                    if (addabe) {
+                    if (addable) {
                         userAcitivityInfos.add(userAcitivityInfo);
                     }
                 }

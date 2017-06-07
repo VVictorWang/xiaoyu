@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         initData();
         initView();
         initEvent();
-        NemoSDK.getInstance().connectNemo("victor", "18774259685", new ConnectNemoCallback() {
+        NemoSDK.getInstance().connectNemo("vic", "18774259685", new ConnectNemoCallback() {
             @Override
             public void onFailed(int i) {
 

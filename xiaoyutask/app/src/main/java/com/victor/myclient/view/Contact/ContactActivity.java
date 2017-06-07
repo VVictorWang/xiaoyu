@@ -1,35 +1,15 @@
 package com.victor.myclient.view.Contact;
 
-import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.log.L;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
-import com.ainemo.sdk.otf.NemoSDK;
-import com.ainemo.sdk.otf.NemoSDKErrorCode;
-import com.ainemo.sdk.otf.NemoSDKListener;
-import com.ainemo.sdk.otf.VideoInfo;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.SomeUtils.Utils;
-import com.victor.myclient.xiaoyu.BusinessActivity;
-import com.victor.myclient.xiaoyu.VideoActivity;
-import com.victor.myclient.xiaoyu.VideoFragment;
-
-import java.util.List;
 
 import demo.animen.com.xiaoyutask.R;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by victor on 2017/4/24.
@@ -47,7 +27,6 @@ public class ContactActivity extends FragmentActivity {
         super.onResume();
         viewPager.setVisibility(View.VISIBLE);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub

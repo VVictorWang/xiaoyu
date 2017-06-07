@@ -36,21 +36,12 @@ public class CaseDetailActivity extends AppCompatActivity {
     private TextView name;
     private TextView sex_age, ill_problem,  ill_result;
     private CircleImageView imageView;
-    private Bitmap bitmap;
 
     private int id;
     private String doctor_id;
 
 
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0x123) {
-                imageView.setImageBitmap(bitmap);
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

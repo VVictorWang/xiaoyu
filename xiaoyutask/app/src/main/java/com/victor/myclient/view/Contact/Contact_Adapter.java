@@ -6,19 +6,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ainemo.sdk.otf.NemoSDK;
+import com.victor.myclient.Datas.ContactListData;
 import com.victor.myclient.view.Contact.sortlist.SortModel;
 import com.victor.myclient.xiaoyu.VideoActivity;
-import com.victor.myclient.xiaoyu.VideoFragment;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
 import demo.animen.com.xiaoyutask.R;
 
 /**
@@ -27,8 +26,8 @@ import demo.animen.com.xiaoyutask.R;
 
 public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyViewHoler> {
     private Context context;
+    private RecyclerView recyclerView;
     private List<SortModel> list = new ArrayList<>();
-    private VideoFragment videoFragment = new VideoFragment();
     public void updateListView(List<SortModel> list){
         this.list = list;
         notifyDataSetChanged();
@@ -39,11 +38,9 @@ public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyView
         private TextView tvTitle;
         private CircleImageView icon;
        private TextView number_text;
-        private LinearLayout layout;
 
         public MyViewHoler(View itemView) {
             super(itemView);
-            this.layout = (LinearLayout) itemView.findViewById(R.id.contact_list_recycler_view);
             this.tvLetter =(TextView) itemView.findViewById(R.id.catalog);
             this.tvTitle = (TextView) itemView.findViewById(R.id.title);
             this.icon = (CircleImageView) itemView.findViewById(R.id.icon);
@@ -58,19 +55,42 @@ public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyView
 
 
 
-    public Contact_Adapter(Context context, List<SortModel> list) {
+    public Contact_Adapter(Context context, List<SortModel> list,RecyclerView recyclerView) {
         this.context = context;
         this.list = list;
+        this.recyclerView = recyclerView;
     }
 
     @Override
     public MyViewHoler onCreateViewHolder(ViewGroup parent, int viewType) {
         final Context context = parent.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_phone_constacts, parent, false);
+        final View view = inflater.inflate(R.layout.item_phone_constacts, parent, false);
 
         MyViewHoler viewHoler = new MyViewHoler(view);
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = recyclerView.getChildAdapterPosition(view);
+                Intent intent = new Intent(context, VideoActivity.class);
+                intent.putExtra("number", list.get(position).getNumber());
+                intent.putExtra("type", "patient");
+                context.startActivity(intent);
+            }
+        });
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int position = recyclerView.getChildAdapterPosition(view);
+                SortModel sortModel = list.get(position);
+                String name = sortModel.getName();
+                DataSupport.deleteAll(ContactListData.class, "name = ?", name);
+                recyclerView.removeView(view);
+                notifyDataSetChanged();
+                return true;
+            }
+        });
         return viewHoler;
     }
 
@@ -87,17 +107,8 @@ public class Contact_Adapter extends RecyclerView.Adapter<Contact_Adapter.MyView
             holder.tvLetter.setVisibility(View.GONE);
         }
 
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, VideoActivity.class);
-                intent.putExtra("number", list.get(position).getNumber());
-                context.startActivity(intent);
-            }
-        });
+
         holder.tvTitle.setText(this.list.get(position).getName());
-//        holder.icon.setText(this.list.get(position).getName());
-//        holder.icon.setIconText(context,this.list.get(position).getName());
         holder.number_text.setText(this.list.get(position).getNumber());
 
     }

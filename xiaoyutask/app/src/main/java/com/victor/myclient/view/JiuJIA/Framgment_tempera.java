@@ -1,6 +1,7 @@
 package com.victor.myclient.view.JiuJIA;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -60,6 +61,8 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
     private static final String TAG = "Framgment_tempera";
     private String data_string;
     private long data_number;
+    private TextView time_text;
+    private String current_data;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -170,12 +173,15 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         update = (TextView) layout.findViewById(R.id.update_jujia);
         choose_left = (ImageView) layout.findViewById(R.id.choose_data_jiujia_left);
         choose_right = (ImageView) layout.findViewById(R.id.choose_data_jiujia_right);
+        time_text = (TextView) layout.findViewById(R.id.time_temparature);
         chart.setSmoothness(0.4f);
         chart.setChartListener(this);
         Date date = new Date(System.currentTimeMillis());
         data_string = Utils.dataTostringtem(date);
         data_number = Long.parseLong(data_string);
         Log.e(TAG, data_string);
+        current_data = Utils.dataToStringWithChinese(date);
+        time_text.setText(current_data);
         new GetHomeInforTask().execute(data_string);
         chart.setSmoothness(0.33f);
     }
@@ -191,21 +197,26 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
             @Override
             public void onClick(View v) {
                 data_number = Long.parseLong(Utils.dataTostringtem(new Date(System.currentTimeMillis())));
+                time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100));
                 new GetHomeInforTask().execute("" + data_number);
             }
         });
         choose_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                data_number++;
-                data_number = Utils.parsedataNumber(data_number,true);
-                Log.e(TAG, "data_number:  " + data_number);
                 long current = Long.parseLong(Utils.dataTostringtem(new Date(System.currentTimeMillis())));
-                if (data_number >= current) {
+                if (data_number == current) {
                     Utils.showShortToast(activity, "已经是今天的数据了");
                 } else {
-                    new GetHomeInforTask().execute("" + data_number);
+                    data_number++;
+                    data_number = Utils.parsedataNumber(data_number,true);
+                    Log.e(TAG, "data_number:  " + data_number);
+
+                        time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100));
+                        new GetHomeInforTask().execute("" + data_number);
+
                 }
+
             }
         });
         choose_right.setOnClickListener(new View.OnClickListener() {
@@ -214,6 +225,7 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
                 data_number--;
                 data_number = Utils.parsedataNumber(data_number, false);
                 Log.e(TAG, "data_number:  " + data_number);
+                time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100));
                 new GetHomeInforTask().execute("" + data_number);
             }
         });
@@ -221,14 +233,16 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
     class GetHomeInforTask extends AsyncTask<String, Void, Void> {
         private Gson gson = new Gson();
 
+        private ProgressDialog dialog = new ProgressDialog(activity);
         @Override
         protected Void doInBackground(String... params) {
             if (network_ava) {
                 String date = params[0];
-                String infor = Utils.sendRequest(GlobalData.GET_HOME_INFOR + Utils.getValue(activity, GlobalData.PATIENT_ID) + "&data=" + date);
+                String infor = Utils.sendRequest(GlobalData.GET_HOME_INFOR + Utils.getValue(activity, GlobalData.PATIENT_ID) + "&date=" + date);
 
                 homeInfor = gson.fromJson(infor, HomeInfor.class);
-
+                DataSupport.deleteAll(HomeInfor.class);
+                homeInfor.saveAsync();
                 has_data = true;
             } else {
                 if (DataSupport.isExist(HomeInfor.class)) {
@@ -251,11 +265,15 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
             } else {
                 handler.sendEmptyMessage(0x123);
             }
+            dialog.dismiss();
             super.onPostExecute(aVoid);
         }
 
         @Override
         protected void onPreExecute() {
+            dialog = new ProgressDialog(activity);
+            dialog.setMessage("正在加载中...");
+            dialog.show();
             super.onPreExecute();
         }
     }

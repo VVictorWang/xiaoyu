@@ -27,7 +27,6 @@ public interface GlobalData {
     String GET_XIAO_YU_NUMBER = "http://139.196.40.97/OSAdmin-master/uploads/interface/getXiaoyuNum.php?";
     String POST_IMAGE = "http://139.196.40.97/OSAdmin-master/uploads/interface/uploadPatientFamilyImage.php?";
     String CHANGE_PASSWORD = "http://139.196.40.97/OSAdmin-master/uploads/interface/userinfomgr.php?";
-    String GET_PATIENT_IMAGE = "http://139.196.40.97/upload/patientimage/";
     String GET_PATIENT_FAMILY_IMAGE = "http://139.196.40.97/upload/patientfamilyimage/";
     String FORGET_PASSWOD = "http://139.196.40.97/OSAdmin-master/uploads/interface/send_password_mail.php?id=";
     String GET_ACTIVITIES = "http://139.196.40.97/OSAdmin-master/uploads/interface/getActivities.php?patientId=";
@@ -36,5 +35,8 @@ public interface GlobalData {
     String DRURATION_MINITE = "xiaoyu_duration_minute";
     String DRURATION_SECOND = "xiaoyu_duration_second";
     String GET_ONEKEY_WARNING = "http://139.196.40.97/OSAdmin-master/uploads/interface/getOnekeyWaring.php?patientId=";
-    String GET_CALLING_IMAGE = "http://139.196.40.97/OSAdmin-master/uploads/interface/getCallingImage.php?xiaoyuNum=125";
+        String GET_CALLING_IMAGE = "http://139.196.40.97/OSAdmin-master/uploads/interface/getCallingImage.php?xiaoyuNum=125";
+    String GET_DOCTOR_XIAO_YU = "http://139.196.40.97/OSAdmin-master/uploads/interface/getDoctorXiaoyuNum.php?doctorId=";
+    String GET_PATIENT_IMAGE = "http://139.196.40.97/upload/patientimage/";
+    String GET_DOCTOR_IMAGE = "http://139.196.40.97/upload/doctorimage/";
 }

@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,12 +101,19 @@ public class Fragment_BaoJIng extends Fragment {
         protected Void doInBackground(Void... params) {
             if (net_work) {
                 String infor = Utils.sendRequest(GlobalData.GET_ONEKEY_WARNING + Utils.getValue(activity, GlobalData.PATIENT_ID));
-                oneKeyWarnings = gson.fromJson(infor, new TypeToken<List<OneKeyWarning>>() {
-                }.getType());
-                for (OneKeyWarning oneKeyWarning : oneKeyWarnings) {
-                    oneKeyWarning.save();
+                if (!infor.contains("not_exist")) {
+                    oneKeyWarnings = gson.fromJson(infor, new TypeToken<List<OneKeyWarning>>() {
+                    }.getType());
+                    DataSupport.deleteAll(OneKeyWarning.class);
+                    for (OneKeyWarning oneKeyWarning : oneKeyWarnings) {
+                        oneKeyWarning.save();
+                    }
+                    has_data = true;
+                } else if (DataSupport.isExist(OneKeyWarning.class)) {
+                    oneKeyWarnings = DataSupport.findAll(OneKeyWarning.class);
+                    has_data = true;
                 }
-                has_data = true;
+
             } else if (DataSupport.isExist(OneKeyWarning.class)) {
                 oneKeyWarnings = DataSupport.findAll(OneKeyWarning.class);
                 has_data = true;

@@ -252,17 +252,17 @@ class BesselChartView extends View {
                         paint.setAlpha(255);
                     }
                 }
-            }else {
-                for (Point point : calculator.maxPoints ) {
-                    if (point.willDrawing) {
-                        paint.setAlpha(80);
-                        canvas.drawCircle(point.x, point.y, 10, paint);
-                        paint.setAlpha(180);
-                        canvas.drawCircle(point.x, point.y, 15, paint);
-                        paint.setAlpha(255);
-                    }
+            }else {Point pointMax =calculator.maxPoints.get(0);
+                if (pointMax.willDrawing) {
+                    paint.setAlpha(80);
+                    canvas.drawCircle(pointMax.x, pointMax.y, 10, paint);
+                    paint.setAlpha(180);
+                    canvas.drawCircle(pointMax.x, pointMax.y, 15, paint);
+                    paint.setAlpha(255);
                 }
+
             }// 绘制结点
+
             if (drawBesselPoint) {
                 for (Point point : series.getPoints()) {
                     if (!series.getPoints().contains(point)) {

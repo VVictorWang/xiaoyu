@@ -73,14 +73,22 @@
             android:src="@drawable/choose_date_right"
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"/>
-
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/choose_data_jiujia_left"
             android:src="@drawable/choose_date_left"
             android:layout_marginLeft="5dp"/>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/choose_data_jiujia_left"
+    android:id="@+id/time_temparature"
+    android:textColor="@color/whites"
+    android:textSize="15dp"
+    android:layout_marginLeft="110dp" />
+
+
     </RelativeLayout>
 
     <com.victor.myclient.view.JiuJIA.drawSmoothLine.BesselChart

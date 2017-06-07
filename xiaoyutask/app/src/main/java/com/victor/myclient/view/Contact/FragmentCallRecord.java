@@ -52,7 +52,7 @@ public class FragmentCallRecord extends Fragment {
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             } else if (msg.what == 0x124) {
-                Utils.showShortToast(activity, "没有数据");
+//                Utils.showShortToast(activity, "没有数据");
             }
         }
     };
@@ -138,7 +138,7 @@ public class FragmentCallRecord extends Fragment {
                 handler.sendEmptyMessage(0x123);
 
             } else if (integer == 0) {
-                handler.sendEmptyMessage(0x124);
+//                handler.sendEmptyMessage(0x124);
             }
         }
 

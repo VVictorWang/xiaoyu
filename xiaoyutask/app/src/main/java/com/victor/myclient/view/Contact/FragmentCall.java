@@ -145,6 +145,7 @@ public class FragmentCall extends Fragment {
                 } else {
                     Intent intent = new Intent(activity, VideoActivity.class);
                     intent.putExtra("number", number);
+                    intent.putExtra("type", "patient");
                     startActivity(intent);
                 }
             }

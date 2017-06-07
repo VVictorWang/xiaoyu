@@ -48,9 +48,8 @@ public class JujiaActivity extends FragmentActivity {
         initView();
         net_work = Utils.isNetWorkAvailabe(JujiaActivity.this);
         initTab();
-        new GetDoorInfor().execute();
-    InitEvent();
-
+//        new GetDoorInfor().execute();
+       InitEvent();
     }
 
     private void initView() {

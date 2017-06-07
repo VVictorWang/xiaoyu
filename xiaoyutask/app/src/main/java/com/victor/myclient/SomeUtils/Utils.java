@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.victor.myclient.ActivityManage;
 
 import demo.animen.com.xiaoyutask.R;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -37,22 +38,21 @@ import java.util.regex.Pattern;
  */
 
 public class Utils {
-    private static Toast mToast=null;
+    private static Toast mToast = null;
+
     public static void showLongToast(Context context, String msg) {
-        if(mToast!=null){
-            mToast.makeText(context,msg,Toast.LENGTH_LONG);
-        }else {
-            mToast=Toast.makeText(context,msg,Toast.LENGTH_LONG);
+        if (mToast != null) {
+            mToast.makeText(context, msg, Toast.LENGTH_LONG);
+        } else {
+            mToast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
         }
         mToast.show();
     }
 
     public static void showShortToast(Context context, String msg) {
-        if(mToast!=null){
-            mToast.makeText(context,msg,Toast.LENGTH_SHORT);
-        }else {
-            mToast=Toast.makeText(context,msg,Toast.LENGTH_SHORT);
-        }
+
+        mToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+
         mToast.show();
     }
 
@@ -104,7 +104,8 @@ public class Utils {
         private int time = 0;
         private Activity activity;
         private String message;
-        public Counter(Activity activity,String message) {
+
+        public Counter(Activity activity, String message) {
             this.activity = activity;
             this.message = message;
         }
@@ -125,7 +126,7 @@ public class Utils {
                 Thread.sleep(1000);
                 time++;
                 if (time > 10) {
-                    showShortToast(activity,message);
+                    showShortToast(activity, message);
                     activity.finish();
 
                 }
@@ -134,6 +135,7 @@ public class Utils {
             }
         }
     }
+
     /**
      * 移除SharedPreference
      *
@@ -148,6 +150,7 @@ public class Utils {
             Log.e("移除Shared", "save " + key + " failed");
         }
     }
+
     private static final SharedPreferences getSharedPreference(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
@@ -162,6 +165,7 @@ public class Utils {
     public static final String getValue(Context context, String key) {
         return getSharedPreference(context).getString(key, "");
     }
+
     public static final Boolean getBooleanValue(Context context, String key) {
         return getSharedPreference(context).getBoolean(key, false);
     }
@@ -269,11 +273,11 @@ public class Utils {
         return date;
     }
 
-    public static long parsedataNumber(long data_number,boolean isadd) {
+    public static long parsedataNumber(long data_number, boolean isadd) {
         int year, month, day;
         day = (int) data_number % 100;
         month = (int) (data_number / 100) % 100;
-        year = (int)(data_number / 10000);
+        year = (int) (data_number / 10000);
         if (isadd) {
             if (isRun(year) && month == 2 && day >= 29) {
                 day = 1;
@@ -292,7 +296,14 @@ public class Utils {
                     month = 1;
                     year++;
                 }
-            } else if (day >= 31) {
+            } else if (month >= 1 && month <= 7 && month % 2 == 0 && day >= 31) {
+                day = 1;
+                month++;
+                if (month >= 13) {
+                    month = 1;
+                    year++;
+                }
+            } else if (month >= 8 && month <= 12 && month % 2 != 0 && day >= 31) {
                 day = 1;
                 month++;
                 if (month >= 13) {
@@ -307,54 +318,75 @@ public class Utils {
             } else if (month >= 1 && month <= 7 && month % 2 == 0 && day <= 0) {
                 day = 31;
                 month--;
-            } else if (month >= 8 && month <= 12 && month % 2 != 0 && day <= 0 ) {
+            } else if (month >= 8 && month <= 12 && month % 2 != 0 && day <= 0) {
                 day = 31;
                 month--;
             } else if (month == 1 && day <= 0) {
                 day = 31;
                 month = 12;
                 year--;
-            } else {
-                if (day <= 0) {
-                    day = 30;
-                    month--;
-                    if (month <= 0) {
-                        month = 12;
-                        year--;
-                    }
+            } else if (month >= 1 && month <= 7 && month % 2 != 0 && day <= 0) {
+                day = 30;
+                month--;
+                if (month <= 0) {
+                    month = 12;
+                    year--;
+                }
+            } else if (month >= 8 && month <= 12 && month % 2 == 0 && day <= 0) {
+                day = 30;
+                month--;
+                if (month <= 0) {
+                    month = 12;
+                    year--;
                 }
             }
         }
 
         return (long) (year * 10000 + month * 100 + day);
-        }
+    }
 
 
     private static boolean isRun(int year) {
         return ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0)));
     }
+
     public static String dataTostringtem(Date date) {
-        DateFormat format=new SimpleDateFormat("yyyyMMdd");
-        String string=null;
-        try{
-            string =format.format(date);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return string;
-    }
-    public static String dateToString(Date date){
-        DateFormat format=new SimpleDateFormat("yyyy/MM/dd");
-        String string=null;
-        try{
-            string =format.format(date);
-        }catch (Exception e){
+        DateFormat format = new SimpleDateFormat("yyyyMMdd");
+        String string = null;
+        try {
+            string = format.format(date);
+        } catch (Exception e) {
             e.printStackTrace();
 //            Log.d(TAG, "dateToString: dateToString failed");
         }
         return string;
     }
-    public static Date stringToDateWithChinese(String str){
+
+    public static String dateToString(Date date) {
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        String string = null;
+        try {
+            string = format.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+//            Log.d(TAG, "dateToString: dateToString failed");
+        }
+        return string;
+    }
+
+    public static String dataToStringWithChinese(Date date) {
+        DateFormat format = new SimpleDateFormat("yyyy年MM月dd");
+        String string = null;
+        try {
+            string = format.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+//            Log.d(TAG, "dateToString: dateToString failed");
+        }
+        return string;
+    }
+
+    public static Date stringToDateWithChinese(String str) {
         DateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         Date date = null;
         try {
@@ -409,8 +441,6 @@ public class Utils {
             return true;
         }
     }
-
-
 
 
 }
