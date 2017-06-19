@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingTop="20dp"
+  android:paddingBottom="30dp"
+  android:orientation="horizontal"
+  android:weightSum="2">
+  <LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:gravity="center_horizontal"
+    android:weightSum="1">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/person_detail_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.17"
+        android:src="@drawable/login_top" />
+  </LinearLayout>
+  <LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
+    <TextView
+      android:id="@+id/person_detail_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="20dp"
+        android:textSize="18dp"
+      android:text="王小二" />
+    <TextView
+      android:id="@+id/person_detail_info"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="18dp"
+      android:text="男     48岁" />
+    <!--<TextView-->
+      <!--android:id="@+id/person_detail_reason"-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="5dp"-->
+      <!--android:text="病情： 原发性高血压" />-->
+
+  </LinearLayout>
+
+</LinearLayout>
