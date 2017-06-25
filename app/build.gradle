@@ -36,10 +36,10 @@ dependencies {
     configurations {
 //        all*.exclude module: 'okhttp'
 //        all*.exclude module: 'okio'
-        all*.exclude module: 'gson'
+//        all*.exclude module: 'gson'
     }
-    compile project(':imagepicker')
-
+//    compile project(':imagepicker')
+    compile 'com.lzy.widget:imagepicker:0.5.5'
     compile 'com.github.markushi:circlebutton:1.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'

@@ -1,0 +1,6 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/ic_toolbar_hangup" android:state_pressed="false"/>
+    <item android:drawable="@drawable/ic_toolbar_hangup_pressed" android:state_pressed="true"/>
+
+</selector><!-- From: file:/Users/yinliang/Downloads/vulture/ui/MobileApp/ainemo_open_api/src/main/res/drawable/toolbar_button_hangup_style.xml -->

@@ -39,7 +39,6 @@ import demo.animen.com.xiaoyutask.R;
 public class Fragment_room extends Fragment {
     private Activity activity;
     private View view;
-    private FlowLayout layout;
 
     private RelativeLayout back;
 
@@ -86,7 +85,6 @@ public class Fragment_room extends Fragment {
                     }
                 }
             } else if (msg.what == 0x124) {
-                Utils.showShortToast(activity, "没有数据");
             }
         }
     };

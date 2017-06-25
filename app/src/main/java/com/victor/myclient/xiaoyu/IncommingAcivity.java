@@ -50,13 +50,12 @@ public class IncommingAcivity extends AppCompatActivity {
     private ImageView user_image;
     private android.widget.RelativeLayout profilepic;
     private TextView time_call;
-    private String name,number;
+    private String name, number;
     private boolean foregroundCamera = true;
     private boolean micMute = false;
     private boolean audioMode = false;
     private int time = 0, minute = 0, hour = 0;
-
-    private int start_time;
+    private List<VideoCellView> videoCellViews;
     private boolean visible = true;
     Handler handler = new Handler() {
         @Override
@@ -75,7 +74,7 @@ public class IncommingAcivity extends AppCompatActivity {
                     } else {
                         time_call.setText("通话时长: 0" + minute + ":" + time);
                     }
-                } else if ( time>=60) {
+                } else if (time >= 60) {
                     minute++;
                     time -= 60;
                     if (minute >= 10) {
@@ -96,6 +95,7 @@ public class IncommingAcivity extends AppCompatActivity {
         setContentView(R.layout.callincoming_fragment);
         ActivityManage.getInstance().pushActivity(IncommingAcivity.this);
         initView();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
         Intent intent = getIntent();
         isIncoming = intent.getBooleanExtra("isIncomingCall", false);
         if (isIncoming) {
@@ -161,24 +161,7 @@ public class IncommingAcivity extends AppCompatActivity {
         videoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (visible) {
-                    connmtdialfromtext.setVisibility(View.GONE);
-                    time_call.setVisibility(View.GONE);
-                    profilepic.setVisibility(View.GONE);
-                    audioonlybtn.setVisibility(View.GONE);
-                    mutebtn.setVisibility(View.GONE);
-                    switchcamera.setVisibility(View.GONE);
-                    finishcall.setVisibility(View.GONE);
-                } else {
-                    connmtdialfromtext.setVisibility(View.VISIBLE);
-                    time_call.setVisibility(View.VISIBLE);
-                    profilepic.setVisibility(View.VISIBLE);
-                    audioonlybtn.setVisibility(View.VISIBLE);
-                    mutebtn.setVisibility(View.VISIBLE);
-                    switchcamera.setVisibility(View.VISIBLE);
-                    finishcall.setVisibility(View.VISIBLE);
-                }
-                visible = !visible;
+
             }
         });
         switchcamera.setOnClickListener(new View.OnClickListener() {
@@ -230,8 +213,10 @@ public class IncommingAcivity extends AppCompatActivity {
                 callRecord.setState(CallRecord.CALL_IN);
                 callRecord.setXiaoyuId(number);
                 callRecord.save();
-                int during_hour  = hour +Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_HOUR);;
-                int during_minute = minute + Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_MINITE);;
+                int during_hour = hour + Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_HOUR);
+
+                int during_minute = minute + Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_MINITE);
+
                 int during_second = time + Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_SECOND);
                 Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_HOUR, during_hour);
                 Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_MINITE, during_minute);
@@ -240,6 +225,12 @@ public class IncommingAcivity extends AppCompatActivity {
                 Utils.finishActivity(IncommingAcivity.this);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        NemoSDK.getInstance().setNemoSDKListener(null);
+        super.onDestroy();
     }
 
     private void InitData() {
@@ -299,6 +290,7 @@ public class IncommingAcivity extends AppCompatActivity {
                                     case DISCONNECTED:
                                         if (s.equals("CANCEL")) {
                                             Toast.makeText(IncommingAcivity.this, "通话取消", Toast.LENGTH_SHORT).show();
+                                            releaseResource();
                                             Utils.finishActivity(IncommingAcivity.this);
                                         }
 
@@ -308,7 +300,7 @@ public class IncommingAcivity extends AppCompatActivity {
                                             Utils.finishActivity(IncommingAcivity.this);
                                         }
                                         if (s.equals("CONF_FULL")) {
-                                            Utils.showShortToast(IncommingAcivity.this,"会议室已满");
+                                            Utils.showShortToast(IncommingAcivity.this, "会议室已满");
                                             releaseResource();
                                             Utils.finishActivity(IncommingAcivity.this);
                                         }
@@ -338,6 +330,42 @@ public class IncommingAcivity extends AppCompatActivity {
                                 } else {
                                     videoView.stopRender();
                                 }
+                                videoCellViews = videoView.getmVideoViews();
+                                videoView.getLocalVideoView().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        videoView.indexTag = 0;
+                                        videoView.requestLayout();
+                                        if (visible) {
+                                            connmtdialfromtext.setVisibility(View.GONE);
+                                            time_call.setVisibility(View.GONE);
+                                            profilepic.setVisibility(View.GONE);
+                                            audioonlybtn.setVisibility(View.GONE);
+                                            mutebtn.setVisibility(View.GONE);
+                                            switchcamera.setVisibility(View.GONE);
+                                            finishcall.setVisibility(View.GONE);
+                                        } else {
+                                            connmtdialfromtext.setVisibility(View.VISIBLE);
+                                            time_call.setVisibility(View.VISIBLE);
+                                            profilepic.setVisibility(View.VISIBLE);
+                                            audioonlybtn.setVisibility(View.VISIBLE);
+                                            mutebtn.setVisibility(View.VISIBLE);
+                                            switchcamera.setVisibility(View.VISIBLE);
+                                            finishcall.setVisibility(View.VISIBLE);
+                                        }
+                                        visible = !visible;
+                                    }
+                                });
+                                for (int i = 0; i < videoCellViews.size(); i++) {
+                                    videoCellViews.get(i).setTag(i + 1);
+                                    videoCellViews.get(i).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            videoView.indexTag = (Integer) v.getTag();
+                                            videoView.requestLayout();
+                                        }
+                                    });
+                                }
                             }
                         });
             }
@@ -347,6 +375,7 @@ public class IncommingAcivity extends AppCompatActivity {
     private void releaseResource() {
         videoView.destroy();
     }
+
     class TimeThread implements Runnable {
         @Override
         public void run() {

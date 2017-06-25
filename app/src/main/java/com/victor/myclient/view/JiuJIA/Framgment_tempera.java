@@ -261,7 +261,11 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         @Override
         protected void onPostExecute(Void aVoid) {
             if (has_data) {
-                handler.sendEmptyMessage(0x1234);
+                if (homeInfor.getHumidityies() != null && homeInfor.getTemperatures() != null) {
+                    handler.sendEmptyMessage(0x1234);
+                } else {
+                    handler.sendEmptyMessage(0x123);
+                }
             } else {
                 handler.sendEmptyMessage(0x123);
             }

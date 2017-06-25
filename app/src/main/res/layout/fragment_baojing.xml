@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/fragment_baojing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/my_background">
+
+        <RelativeLayout
+            android:id="@+id/fragment_baojing_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/fragment_baojing_back_image"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="6dp"
+                android:src="@drawable/backwards_iamge" />
+
+            <TextView
+                android:id="@+id/fragment_baojing_back_image_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/fragment_baojing_back_image"
+                android:paddingTop="12dp"
+                android:text="主页"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="130dp"
+
+            android:paddingTop="12dp"
+            android:text="一键报警信息查看"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/baojing_information_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_baojing_toolbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="无数据"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:id="@+id/fragment_baojing_no_data"
+        android:visibility="invisible"
+        android:layout_below="@+id/fragment_baojing_toolbar"/>
+
+</RelativeLayout>

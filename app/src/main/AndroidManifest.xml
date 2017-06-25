@@ -37,20 +37,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- <meta-data -->
-        <!-- android:name="AINEMO_APP_ID" -->
-        <!-- android:value="B7XFT0B5M3PFO8TMPDQRQLZECHT0LJZPTK15YTUD/BO=" /> -->
-
         <activity android:name="com.victor.myclient.view.MainActivity" />
         <activity android:name="com.victor.myclient.view.Contact.ContactActivity" />
         <activity android:name="com.victor.myclient.view.JiuJIA.JujiaActivity" />
         <activity android:name="com.victor.myclient.view.Login.LoginActivity" />
 
-
         <service android:name="com.victor.myclient.xiaoyu.IncomingCallService" />
 
         <activity android:name="com.victor.myclient.view.Setting.Setting_Activity" />
-        <activity android:name="com.victor.myclient.view.Case.CaseListActivity" />
+        <activity android:name="com.victor.myclient.view.Case.CaseListActivity"/>
         <activity android:name="com.victor.myclient.view.Case.CaseDetailActivity"/>
         <activity android:name="com.victor.myclient.view.Login.RegisterActivityFirst" />
         <activity android:name="com.victor.myclient.view.Login.RegisterActivitySecond" />

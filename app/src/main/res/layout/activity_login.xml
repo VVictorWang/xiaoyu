@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/my_background">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/login_head"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="73dp"
+        android:src="@drawable/login_top"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+    <!--android:id="@+id/login_user_image"-->
+    <!--android:layout_width="58dp"-->
+    <!--android:layout_height="39dp"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginTop="302dp"-->
+    <!--android:src="@drawable/login_username"-->
+    <!--app:layout_constraintHorizontal_bias="0.151"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <EditText
+        android:id="@+id/login_id"
+        android:layout_width="240dp"
+        android:layout_height="58dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="304dp"
+        android:background="@drawable/login_user"
+        android:cursorVisible="false"
+        android:paddingLeft="55dp"
+        android:hint="请输入您的账号"
+        android:textColorHint="@color/whites"
+        android:textColor="@color/whites"
+        android:singleLine="true"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--android:id="@+id/login_password_image"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:layout_marginTop="28dp"-->
+        <!--android:src="@drawable/login_password"-->
+        <!--app:layout_constraintHorizontal_bias="0.18"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/login_id" />-->
+
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="240dp"
+        android:layout_height="58dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/login_passwd"
+        android:singleLine="true"
+        android:paddingLeft="55dp"
+        android:hint="请输入您的密码"
+        android:textColorHint="@color/whites"
+        android:textSize="15sp"
+        android:textColor="@color/whites"
+        app:layout_constraintTop_toTopOf="@id/login_id"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/login_sign_in"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="64dp"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:backgroundTint="#00000000"-->
+    <!--android:src="@drawable/login_top"-->
+    <!--android:visibility="visible"-->
+    <!--app:backgroundTint="#00000000"-->
+
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent">-->
+    <!--</android.support.design.widget.FloatingActionButton>-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="136dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="73dp"
+    android:id="@+id/login_button"
+        android:background="@drawable/circle"
+        android:elevation="10dp"
+        android:text="登录"
+        android:textColor="@color/whites"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/login_password"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/login_forget_psw"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="69dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#00000000"
+        android:text="忘记密码"
+        android:textColor="@color/whites"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/login_sign_up"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="69dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#00000000"
+        android:text="新用户"
+        android:textColor="@color/whites"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toRightOf="@+id/login_forget_psw"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+</android.support.constraint.ConstraintLayout>

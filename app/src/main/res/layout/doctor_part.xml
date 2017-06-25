@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="2">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/doctor_part_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="主治医生"
+
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/doctor_part_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/doctor_part_name"
+            android:paddingTop="3dp"
+            android:text="2006"
+            android:textColor="@color/gray"
+            android:textSize="13dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+
+        android:padding="13dp">
+
+        <Button
+            android:id="@+id/doctor_part_button"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+
+            android:background="@color/my_background"
+            android:text="查看医生信息"
+            android:textColor="@color/white"
+            android:textSize="13dp" />
+    </LinearLayout>
+</LinearLayout>

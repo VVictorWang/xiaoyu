@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -40,15 +41,19 @@ public class Fragment_BaoJIng extends Fragment {
     private BaojingAdapter adapter;
     private List<OneKeyWarning> oneKeyWarnings;
     private RelativeLayout back;
+    private TextView no_data;
 
     private boolean net_work,has_data = false;
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x123) {
+                no_data.setVisibility(View.INVISIBLE);
+                recyclerView.setVisibility(View.VISIBLE);
                 InitData();
             } else if (msg.what == 0x124) {
-                Utils.showShortToast(activity, "没有数据");
+                no_data.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
             }
         }
     };
@@ -78,6 +83,7 @@ public class Fragment_BaoJIng extends Fragment {
 
     private void InitView() {
         recyclerView = (RecyclerView) view.findViewById(R.id.baojing_information_list);
+        no_data = (TextView) view.findViewById(R.id.fragment_baojing_no_data);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         oneKeyWarnings = new ArrayList<>();
@@ -88,6 +94,7 @@ public class Fragment_BaoJIng extends Fragment {
                 Utils.finishActivity(activity);
             }
         });
+        oneKeyWarnings = new ArrayList<>();
     }
 
     private void InitData() {

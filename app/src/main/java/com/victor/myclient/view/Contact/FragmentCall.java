@@ -2,7 +2,6 @@ package com.victor.myclient.view.Contact;
 
 import android.Manifest;
 import android.app.Activity;
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.ainemo.sdk.otf.NemoSDK;
 import com.thinkcool.circletextimageview.CircleTextImageView;
 import com.victor.myclient.SomeUtils.Utils;
 import com.victor.myclient.xiaoyu.VideoActivity;
@@ -136,16 +134,16 @@ public class FragmentCall extends Fragment {
         circleTextImageViews[12].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                hander.sendEmptyMessage(12);
                 checkPermission();
                 //呼叫用户，以及没有密码的会议
                 String number = textView.getText().toString();
-                if (number.isEmpty() | number == null) {
+                if (number.isEmpty() || number == null) {
                     Utils.showShortToast(activity, "请输入号码！");
                 } else {
                     Intent intent = new Intent(activity, VideoActivity.class);
                     intent.putExtra("number", number);
                     intent.putExtra("type", "patient");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
             }

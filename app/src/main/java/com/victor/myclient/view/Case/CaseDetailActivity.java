@@ -89,7 +89,7 @@ public class CaseDetailActivity extends AppCompatActivity {
         if (DataSupport.isExist(CaseInfor.class)) {
             CaseInfor caseInfor = DataSupport.find(CaseInfor.class, (long) id);
             doctor_name.setText("主治医生  " + caseInfor.getDoctorName());
-            date.setText(caseInfor.getCreationDate());
+            date.setText(caseInfor.getDate());
             name.setText(caseInfor.getName());
             ill_problem.setText("病情: " + caseInfor.getIllproblem() + "\n体温: " + caseInfor.getTemperature() + "°C\n血压: " + caseInfor.getBlood_pressure() + "mmHg");
             ill_result.setText(caseInfor.getIllresult());

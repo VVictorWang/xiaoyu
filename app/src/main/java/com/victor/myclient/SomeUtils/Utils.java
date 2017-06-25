@@ -52,7 +52,6 @@ public class Utils {
     public static void showShortToast(Context context, String msg) {
 
         mToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
-
         mToast.show();
     }
 

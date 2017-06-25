@@ -68,7 +68,7 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
 
         holder.illnessName.setText(aCase.getIllproblem());
 
-        Date date = Utils.stringToDate(aCase.getCreationDate());
+        Date date = Utils.stringToDate(aCase.getDate());
         holder.dateText.setText(Utils.dateToString(date));
         holder.circleButton.setOnClickListener(new View.OnClickListener() {
             @Override

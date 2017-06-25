@@ -1,6 +1,6 @@
 package com.victor.myclient.xiaoyu;
-
 import android.content.Context;
+
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -12,12 +12,25 @@ import com.ainemo.sdk.otf.VideoInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class SimpleVideoView extends ViewGroup {
 
-    private static final String TAG = SimpleVideoView.class.getSimpleName();
 
+    private static final String TAG = "SimpleVideoView";
+
+
+    public int indexTag = 0;
     public static final int LOCAL_VIEW_ID = 99;
     private OpenGLTextureView localVideoView;
+
+    public List<VideoCellView> getmVideoViews() {
+        return mVideoViews;
+    }
+
+    public void setmVideoViews(List<VideoCellView> mVideoViews) {
+        this.mVideoViews = mVideoViews;
+    }
+
     private List<VideoCellView> mVideoViews = new ArrayList<>();
     private Handler handler = new Handler();
     private Runnable drawVideoFrameRunnable = new Runnable() {
@@ -48,6 +61,10 @@ public class SimpleVideoView extends ViewGroup {
         init();
     }
 
+    public OpenGLTextureView getLocalVideoView() {
+        return localVideoView;
+    }
+
     private void init() {
         localVideoView = new OpenGLTextureView(getContext());
         localVideoView.setSourceID(NemoSDK.getInstance().getLocalVideoStreamID());
@@ -56,47 +73,47 @@ public class SimpleVideoView extends ViewGroup {
     }
 
     @Override
-    protected void onLayout(boolean changed, final int l, final int t, final int r, final int b) {
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+//      mVideoViews.add((VideoCellView) localVideoView);
         int size = Math.min(mVideoViews.size(), 5); //最多取5个view显示
         Log.i(TAG, "layout cell count " + size);
+        Log.d(TAG, "onLayout: mVideoViews " + mVideoViews);
+        if (indexTag == 0) {
+            localVideoView.layout(l, t, r, b);
+            localVideoView.bringToFront();
+        } else {
+            mVideoViews.get(indexTag-1).layout(l, t, r, b);
+            mVideoViews.get(indexTag-1).bringToFront();
+            localVideoView.layout(l, (b * 3 / 4 - t / 4), (r + l) / 5, b);
+            localVideoView.bringToFront();
+        }
+
         for (int i = 0; i < size; i++) {
-            final int j = i;
-            if (i == 0) {
-                Log.i(TAG, "layout full screen child");
-                mVideoViews.get(0).layout(l, t, r, b);  //取第一个view全屏显示
-            } else {
+            if (i > indexTag - 1||indexTag==0) {
                 Log.i(TAG, "layout item at " + i);
-                mVideoViews.get(i).layout(l + 20 + (r - l) / 5 * (i), (b * 3 / 4 - t / 4), l + 20 + (r - l) / 5 * (i + 1), b)
+                mVideoViews.get(i).layout(l + 20 + (r - l) / 5 * (i), (b * 3 / 4 - t / 4),
+                        l + 20 + (r - l) / 5 * (i + 1), b)
                 ;
                 mVideoViews.get(i).bringToFront();
-//                mVideoViews.get(i).setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        mVideoViews.get(j).layout(l, t, r, b);
-//                        mVideoViews.get(0).layout(l + 20 + (r - l) / 5 * (j), (b * 3 / 4 - t / 4), l + 20 + (r - l) / 5 * (j + 1), b);
-//                    }
-//                });
+            }else if(i!=indexTag-1){
+                mVideoViews.get(i).layout(l + 20 + (r - l) / 5 * (i+1), (b * 3 / 4 - t / 4),
+                        l + 20 + (r - l) / 5 * (i + 2), b)
+                ;
+                mVideoViews.get(i).bringToFront();
             }
-        }
-        Log.i(TAG, "layout local item");
-        localVideoView.layout(l, (b * 3 / 4 - t / 4), (r + l) / 5, b);
-        localVideoView.bringToFront();
-//        localVideoView.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                localVideoView.layout(l, t, r, b);
-//                mVideoViews.get(0).layout(l, (b * 3 / 4 - t / 4), (r + l) / 5, b);
-//            }
-//        });
+            Log.i(TAG, "layout local item");
+//        localVideoView.layout(l, (b * 3 / 4 - t / 4), (r + l) / 5, b);
 
+        }
     }
 
-
-    public void setLayoutInfos(List<VideoInfo> videoInfos) {
+    public void setLayoutInfos (List < VideoInfo > videoInfos) {
 
         Log.i(TAG, "video info size is " + videoInfos.size());
 
         List<VideoCellView> toDel = new ArrayList<>();
+
+        Log.d(TAG, "setLayoutInfos: true");
 
         l:
         for (VideoCellView videoCellView : mVideoViews) {
@@ -131,35 +148,35 @@ public class SimpleVideoView extends ViewGroup {
         requestRender();
     }
 
-    public void destroy() {
+    public void destroy () {
         destroyDrawingCache();
         mVideoViews.clear();
         handler.removeCallbacksAndMessages(null);
     }
 
-    public void stopRender() {
+    public void stopRender () {
         handler.removeCallbacks(drawVideoFrameRunnable);
     }
 
-    private void requestRender() {
+    private void requestRender () {
         handler.postDelayed(drawVideoFrameRunnable, 1000 / 15);
     }
 
-    public void requestLocalFrame() {
+    public void requestLocalFrame () {
         handler.removeCallbacks(drawLocalVideoFrameRunnable);
         requestLocalVideoRender();
     }
 
-    public void stopLocalFrameRender() {
+    public void stopLocalFrameRender () {
         handler.removeCallbacks(drawLocalVideoFrameRunnable);
     }
 
-    private void requestLocalVideoRender() {
+    private void requestLocalVideoRender () {
         handler.postDelayed(drawLocalVideoFrameRunnable, 1000 / 15);
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure ( int widthMeasureSpec, int heightMeasureSpec){
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = getMeasuredWidth();
         int height = getMeasuredHeight();

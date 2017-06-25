@@ -81,7 +81,7 @@ public class RegisterActivitySecond extends AppCompatActivity {
                     message = "错误";
                     break;
             }
-            Utils.showLongToast(RegisterActivitySecond.this, message);
+            Utils.showShortToast(RegisterActivitySecond.this, message);
         }
     };
     @Override

@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
     private CircleTextImageView settingdefault;
 
     private TextView time_call;
-    private String image_url;
     private String user_name;
     private UserInfor userInfor;
 

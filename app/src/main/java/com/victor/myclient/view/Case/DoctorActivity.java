@@ -115,23 +115,30 @@ public class DoctorActivity extends AppCompatActivity {
 
 
             if (net_work_available) {
-                doctorInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_DOCTOR_INFOR + doctor_id), DoctorInfor.class);
-                String xiaoyu = Utils.sendRequest(GlobalData.GET_DOCTOR_XIAO_YU + doctor_id);
-                if (xiaoyu.contains("not_exist")) {
-                    doctorXiaoYu.setXiaoyuNum("000");
+                String infor = Utils.sendRequest(GlobalData.GET_DOCTOR_INFOR + doctor_id);
+                if (!infor.contains("not_exist")) {
+
+                    doctorInfor = gson.fromJson(infor, DoctorInfor.class);
+                    String xiaoyu = Utils.sendRequest(GlobalData.GET_DOCTOR_XIAO_YU + doctor_id);
+                    if (xiaoyu.contains("not_exist")) {
+                        doctorXiaoYu.setXiaoyuNum("000");
+                    } else {
+                        doctorXiaoYu = gson.fromJson(Utils.sendRequest(GlobalData.GET_DOCTOR_XIAO_YU + doctor_id), DoctorXiaoYu.class);
+                    }
+                    DataSupport.deleteAll(DoctorInfor.class);
+                    if (!doctorInfor.isSaved()) {
+                        doctorInfor.saveAsync();
+                    }
+                    if (!doctorXiaoYu.isSaved()) {
+                        doctorXiaoYu.saveAsync();
+                    }
+                    name = doctorInfor.getName();
+                    Utils.putValue(DoctorActivity.this, GlobalData.DoctorName, name);
+                    has_data = true;
                 } else {
-                    doctorXiaoYu = gson.fromJson(Utils.sendRequest(GlobalData.GET_DOCTOR_XIAO_YU + doctor_id), DoctorXiaoYu.class);
+                    has_data = false;
                 }
-                DataSupport.deleteAll(DoctorInfor.class);
-                if (!doctorInfor.isSaved()) {
-                   doctorInfor.saveAsync();
-                }
-                if (!doctorXiaoYu.isSaved()) {
-                    doctorXiaoYu.saveAsync();
-                }
-                name = doctorInfor.getName();
-                Utils.putValue(DoctorActivity.this, GlobalData.DoctorName, name);
-                has_data = true;
+
             } else {
                 if (DataSupport.isExist(DoctorInfor.class)) {
                     List<DoctorInfor> doctorInfors = DataSupport.findAll(DoctorInfor.class);
@@ -142,7 +149,6 @@ public class DoctorActivity extends AppCompatActivity {
                             break;
                         }
                     }
-
                     if (doctorInfor != null) {
                         has_data = true;
                     }
@@ -153,7 +159,6 @@ public class DoctorActivity extends AppCompatActivity {
             }
             return null;
         }
-
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -171,12 +176,10 @@ public class DoctorActivity extends AppCompatActivity {
 
             dialog.dismiss();
         }
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             dialog.show();
         }
     }
-
 }
