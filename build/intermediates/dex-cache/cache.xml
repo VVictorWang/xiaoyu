@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c6835d68111c65ecfd446b464ff54e3f01ebb961">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_6c93c4dd1f013b0df3f2c5cc7981abf72ef60c84/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/libs/rxbus-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="93fe0ef9f75d35ae25bd7d7b1cb0edeb3432fcde">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/rxbus-1.0.0_26691dc89f7ab66b58de1b236316fab87a4361e7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/libs/nemo-java-utils-2.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b6a1de849e2e32b9a80596dc9ca11bca82f5e6bb">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/nemo-java-utils-2.0.0_7097ec49a9a94d5c198e6d290ef0e32bd5b300a4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_25af3944c4c5db1284f78654776664b8581ed0b9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/libs/nemo-websocket.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a4ed2b0f6b15861281016cedcc09b5523707df39">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/nemo-websocket_88087f337886e8d4b5139b7aba106bcad9b3443c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/libs/signature.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="376df33874367b8b5e22ea926b2902a87d7f33a5">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/signature_fb58a6984973ddf6dc324bf99591d5f2c7a81c0f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/libs/nemo-json-gson-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="86bc9a5192765e1dd00e21a3bee40a371e008578">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/nemo-json-gson-1.0.0_d1f2edb9ae86b7b9e743a06482bff03ecf22194c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/libs/rxandroid.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4c4b83de2f6412072d2a29b1b7a5b03edaad5ff">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/rxandroid_2dbe9cc0ed8e75830cd2ff37a3601f360d908d79/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/libs/nemosdk.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b510d14c0330502a4374b043517b2eb402cc3a68">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/nemosdk_8e626cdbc99ac601e143ad9963e2af6d651c7003/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/xiaoyu/app/libs/rxjava-1.1.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5a1aef6a9d56efb473b8be6b66689077e7317c45">
+        <dex dex="/home/victor/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/rxjava-1.1.3_784b8e0a2e9ee7d957a501c50b93dae0afd5d354/classes.dex" />
+    </item>
+
+</items>
