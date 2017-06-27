@@ -9,7 +9,7 @@
     <list>
         <mapping class="com.victor.myclient.Datas.DoctorInfor"/>
         <mapping class="com.victor.myclient.Datas.ContactListData"/>
-        <mapping class="com.victor.myclient.view.Contact.Record.CallRecord"/>
+        <mapping class="com.victor.myclient.Datas.CallRecord"/>
         <mapping class="com.victor.myclient.Datas.CaseInfor"/>
         <mapping class="com.victor.myclient.Datas.HomeInfor"/>
         <mapping class="com.victor.myclient.Datas.UserAcitivityInfo"/>

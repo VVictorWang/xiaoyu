@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#24d0fd"
     android:orientation="vertical"
-    tools:context="com.victor.myclient.view.MainActivity">
+    tools:context="com.victor.myclient.activity.MainActivity">
   <TextView
     android:layout_width="wrap_content"
       android:layout_height="30dp"
@@ -99,6 +99,7 @@
             android:layout_marginRight="109dp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginEnd="105dp" />
+
 
 
 

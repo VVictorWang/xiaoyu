@@ -10,7 +10,6 @@ import org.litepal.crud.DataSupport;
 
 public class CaseInfor extends DataSupport{
 
-
     /**
      * id : 1
      * 0 : 1
@@ -39,7 +38,6 @@ public class CaseInfor extends DataSupport{
      * doctorName : 孙立人
      * 12 : 孙立人
      */
-
     private int id;
     @SerializedName("0")
     private String _$0;

@@ -48,28 +48,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<de.hdodenhof.circleimageview.CircleImageView-->
-        <!--android:id="@+id/login_password_image"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="38dp"-->
-        <!--android:layout_marginLeft="5dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginTop="28dp"-->
-        <!--android:src="@drawable/login_password"-->
-        <!--app:layout_constraintHorizontal_bias="0.18"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/login_id" />-->
-
     <EditText
         android:id="@+id/login_password"
         android:layout_width="240dp"
         android:layout_height="58dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="69dp"
         android:background="@drawable/login_passwd"
         android:singleLine="true"
         android:paddingLeft="55dp"
+        android:inputType="textPassword"
         android:hint="请输入您的密码"
         android:textColorHint="@color/whites"
         android:textSize="15sp"

@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:background="@drawable/bg_incoming">
 
-    <com.victor.myclient.xiaoyu.SimpleVideoView
+    <com.victor.myclient.view.SimpleVideoView
         android:id="@+id/incoming_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
