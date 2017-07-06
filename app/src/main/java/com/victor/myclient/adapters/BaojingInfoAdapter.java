@@ -24,7 +24,7 @@ public class BaojingInfoAdapter extends RecyclerView.Adapter<BaojingInfoAdapter.
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView number;
         private TextView time;
-        public ViewHolder(View itemView) {
+         ViewHolder(View itemView) {
             super(itemView);
             number = (TextView) itemView.findViewById(R.id.baojing_she_bei_number);
             time = (TextView) itemView.findViewById(R.id.baojing_time);

@@ -35,7 +35,7 @@ public interface GlobalData {
     String DRURATION_MINITE = "xiaoyu_duration_minute";
     String DRURATION_SECOND = "xiaoyu_duration_second";
     String GET_ONEKEY_WARNING = "http://139.196.40.97/OSAdmin-master/uploads/interface/getOnekeyWaring.php?patientId=";
-        String GET_CALLING_IMAGE = "http://139.196.40.97/OSAdmin-master/uploads/interface/getCallingImage.php?xiaoyuNum=125";
+    String GET_CALLING_IMAGE = "http://139.196.40.97/OSAdmin-master/uploads/interface/getCallingImage.php?xiaoyuNum=125";
     String GET_DOCTOR_XIAO_YU = "http://139.196.40.97/OSAdmin-master/uploads/interface/getDoctorXiaoyuNum.php?doctorId=";
     String GET_PATIENT_IMAGE = "http://139.196.40.97/upload/patientimage/";
     String GET_DOCTOR_IMAGE = "http://139.196.40.97/upload/doctorimage/";

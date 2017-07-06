@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Case;
+package com.victor.myclient.activity.cases;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -80,6 +80,8 @@ public class CaseDetailActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void initData() {
         if (DataSupport.isExist(CaseInfor.class)) {

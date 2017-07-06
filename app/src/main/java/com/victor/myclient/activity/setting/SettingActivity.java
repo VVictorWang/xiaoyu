@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Setting;
+package com.victor.myclient.activity.setting;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,7 +18,7 @@ import com.victor.myclient.datas.UserInfor;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.activity.Login.LoginActivity;
+import com.victor.myclient.activity.login.LoginActivity;
 import com.victor.myclient.utils.GlideImageLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -44,7 +44,7 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
  * Created by victor on 2017/4/24.
  */
 
-public class Setting_Activity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity {
 
     private de.hdodenhof.circleimageview.CircleImageView loginhead;
 
@@ -73,15 +73,15 @@ public class Setting_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ActivityManage activityManage = ActivityManage.getInstance();
-        activityManage.pushActivity(Setting_Activity.this);
-        email = Utils.getValue(Setting_Activity.this, GlobalData.USer_email);
+        activityManage.pushActivity(SettingActivity.this);
+        email = Utils.getValue(SettingActivity.this, GlobalData.USer_email);
         initView();
         initEvent();
     }
 
     private void resumeView() {
 
-        changemail.setText("绑定邮箱: " + Utils.getValue(Setting_Activity.this, GlobalData.USer_email));
+        changemail.setText("绑定邮箱: " + Utils.getValue(SettingActivity.this, GlobalData.USer_email));
     }
 
     private void initView() {
@@ -93,22 +93,22 @@ public class Setting_Activity extends AppCompatActivity {
         this.loginhead = (CircleImageView) findViewById(R.id.login_head_setting);
         this.settingback = (RelativeLayout) findViewById(R.id.setting_back);
         changemail.setText("绑定邮箱: " + email);
-        bitmapUtils.disPlay(loginhead, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(Setting_Activity.this, GlobalData.FAMILY_IMage));
-        networkavailable = Utils.isNetWorkAvailabe(Setting_Activity.this);
+        bitmapUtils.disPlay(loginhead, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(SettingActivity.this, GlobalData.FAMILY_IMage));
+        networkavailable = Utils.isNetWorkAvailabe(SettingActivity.this);
     }
 
     private void initEvent() {
         changemailbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Setting_Activity.this, ChangeEmailActivity.class);
+                Intent intent = new Intent(SettingActivity.this, ChangeEmailActivity.class);
                 startActivity(intent);
             }
         });
         changepassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Setting_Activity.this, ChangeXiaoYuActivity.class);
+                Intent intent = new Intent(SettingActivity.this, ChangeXiaoYuActivity.class);
                 startActivity(intent);
             }
         });
@@ -116,8 +116,8 @@ public class Setting_Activity extends AppCompatActivity {
         logoutoutbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.putBooleanValue(Setting_Activity.this, GlobalData.Login_status, false);
-                Intent intent = new Intent(Setting_Activity.this, LoginActivity.class);
+                Utils.putBooleanValue(SettingActivity.this, GlobalData.Login_status, false);
+                Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
                 startActivity(intent);
                 ActivityManage activityManage = ActivityManage.getInstance();
                 activityManage.popAllActivity();
@@ -147,7 +147,7 @@ public class Setting_Activity extends AppCompatActivity {
                 imagePicker.setFocusHeight(800); //裁剪框的高度。  單位像素（圓形自動取寬高最小值）
                 imagePicker.setOutPutX(1000); //保存文件的寬度。  單位像素
                 imagePicker.setOutPutY(1000); //保存文件的高度。  單位像素
-                Intent intent = new Intent(Setting_Activity.this, ImageGridActivity.class);
+                Intent intent = new Intent(SettingActivity.this, ImageGridActivity.class);
                 startActivityForResult(intent, IMAGE_PICKER);
             }
         });
@@ -165,7 +165,7 @@ public class Setting_Activity extends AppCompatActivity {
                         Log.i(TAG, "onActivityResult: 有数据");
                         // Toast.makeText(this, "有数据", Toast.LENGTH_SHORT).show();
                         if (images.get(0).path != null) {
-                            Utils.putValue(Setting_Activity.this, GlobalData.Img_URl, images.get(0).path);
+                            Utils.putValue(SettingActivity.this, GlobalData.Img_URl, images.get(0).path);
                             loginhead.setImageURI(Uri.fromFile(new File(images.get(0).path)));
                             uploadImage(images.get(0).path);
                         }
@@ -186,7 +186,7 @@ public class Setting_Activity extends AppCompatActivity {
                 client = new OkHttpClient();
                 MultipartBody.Builder builder = new MultipartBody.Builder();
                 File f = new File(imageurl);
-                String id = Utils.getValue(Setting_Activity.this, GlobalData.PATIENTFAMILY_ID);
+                String id = Utils.getValue(SettingActivity.this, GlobalData.PATIENTFAMILY_ID);
                 builder.addFormDataPart("patientFamilyImage", f.toString(), RequestBody.create(MEDIA_TYPE_JPG, f));
                 builder.addFormDataPart("id", id);
                 builder.setType(MultipartBody.FORM);
@@ -198,8 +198,8 @@ public class Setting_Activity extends AppCompatActivity {
                     String op = response.body().string();
                     if (op.contains("success") && networkavailable) {
                         Gson gson = new Gson();
-                        userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR + "FamilyName=" + Utils.getValue(Setting_Activity.this, GlobalData.NAME)), UserInfor.class);
-                        Utils.putValue(Setting_Activity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
+                        userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR + "FamilyName=" + Utils.getValue(SettingActivity.this, GlobalData.NAME)), UserInfor.class);
+                        Utils.putValue(SettingActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
                     }
                     Log.e("responce: ", op);
                 } catch (Exception e) {

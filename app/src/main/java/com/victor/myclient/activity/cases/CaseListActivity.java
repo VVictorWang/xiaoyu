@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Case;
+package com.victor.myclient.activity.cases;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;

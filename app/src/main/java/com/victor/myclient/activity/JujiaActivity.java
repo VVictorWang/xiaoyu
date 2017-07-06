@@ -17,9 +17,9 @@ import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.adapters.FragmentAdapter;
 import com.victor.myclient.datas.DoorInfor;
-import com.victor.myclient.fragments.Fragment_BaoJIng;
-import com.victor.myclient.fragments.Fragment_room;
-import com.victor.myclient.fragments.Framgment_tempera;
+import com.victor.myclient.fragments.BaoJingFragment;
+import com.victor.myclient.fragments.RoomFragment;
+import com.victor.myclient.fragments.TemperatureFramgmentt;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
@@ -59,7 +59,7 @@ public class JujiaActivity extends FragmentActivity {
         this.fragjiujia = (TabLayout) findViewById(R.id.frag_jiujia);
         this.jiujiaviewpager = (ViewPager) findViewById(R.id.jiujia_view_pager);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-        room_status_parent= layoutInflater.inflate(R.layout.root_status,null);
+        room_status_parent= layoutInflater.inflate(R.layout.room_status,null);
         person_status_parent = layoutInflater.inflate(R.layout.person_activity_status, null);
         warning_infor_parent = layoutInflater.inflate(R.layout.magic_status, null);
         room_status =(RelativeLayout) room_status_parent.findViewById(R.id.room_status);
@@ -72,9 +72,9 @@ public class JujiaActivity extends FragmentActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void initTab() {
         viewPageAdapter = new FragmentAdapter(getSupportFragmentManager());
-        viewPageAdapter.addFragment(new Framgment_tempera());
-        viewPageAdapter.addFragment(new Fragment_room());
-        viewPageAdapter.addFragment(new Fragment_BaoJIng());
+        viewPageAdapter.addFragment(new TemperatureFramgmentt());
+        viewPageAdapter.addFragment(new RoomFragment());
+        viewPageAdapter.addFragment(new BaoJingFragment());
         jiujiaviewpager.setAdapter(viewPageAdapter);
         fragjiujia.setupWithViewPager(jiujiaviewpager);
         one = fragjiujia.getTabAt(0);

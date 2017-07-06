@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Login;
+package com.victor.myclient.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -76,10 +76,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 getResponse(loginid.getText().toString(), loginpassword.getText().toString());
                 break;
             case R.id.login_sign_up:
-                Utils.startActivity(LoginActivity.this, RegisterActivityFirst.class);
+                Utils.startActivity(LoginActivity.this, RegisterFirstActivity.class);
                 break;
             case R.id.login_forget_psw:
-                Utils.startActivity(LoginActivity.this, ForgetPassword.class);
+                Utils.startActivity(LoginActivity.this, ForgetPwdActivity.class);
                 break;
             case R.id.login_id:
                 loginid.setCursorVisible(true);

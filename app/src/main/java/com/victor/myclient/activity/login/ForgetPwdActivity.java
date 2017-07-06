@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Login;
+package com.victor.myclient.activity.login;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +15,7 @@ import com.victor.myclient.utils.Utils;
 import demo.animen.com.xiaoyutask.R;
 
 
-public class ForgetPassword extends AppCompatActivity {
+public class ForgetPwdActivity extends AppCompatActivity {
 
     private android.widget.RelativeLayout forgetpasswordback;
     private Button forget;
@@ -41,7 +41,7 @@ public class ForgetPassword extends AppCompatActivity {
                     message = "错误";
                     break;
             }
-            Utils.showShortToast(ForgetPassword.this, message);
+            Utils.showShortToast(ForgetPwdActivity.this, message);
         }
     };
 
@@ -49,14 +49,14 @@ public class ForgetPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
-        ActivityManage.getInstance().pushActivity(ForgetPassword.this);
+        ActivityManage.getInstance().pushActivity(ForgetPwdActivity.this);
         InitViiew();
         InitEvent();
     }
 
     @Override
     public void onBackPressed() {
-        Utils.finishActivity(ForgetPassword.this);
+        Utils.finishActivity(ForgetPwdActivity.this);
         super.onBackPressed();
     }
 
@@ -69,7 +69,7 @@ public class ForgetPassword extends AppCompatActivity {
         forgetpasswordback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.finishActivity(ForgetPassword.this);
+                Utils.finishActivity(ForgetPwdActivity.this);
             }
         });
         forget.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class ForgetPassword extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String reply = Utils.sendRequest(GlobalData.FORGET_PASSWOD + Utils.getValue(ForgetPassword.this, GlobalData.User_ID));
+                    String reply = Utils.sendRequest(GlobalData.FORGET_PASSWOD + Utils.getValue(ForgetPwdActivity.this, GlobalData.User_ID));
                     if (reply.contains("Error")) {
                         handler.sendEmptyMessage(1);
                     } else if (reply.contains("Found")) {

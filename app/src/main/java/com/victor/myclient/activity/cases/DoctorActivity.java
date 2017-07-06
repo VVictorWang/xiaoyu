@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Case;
+package com.victor.myclient.activity.cases;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -104,7 +104,7 @@ public class DoctorActivity extends AppCompatActivity {
         });
     }
 
-    class GetDoctorInfor extends AsyncTask<Void, Void, Void> {
+    private class GetDoctorInfor extends AsyncTask<Void, Void, Void> {
         private Gson gson = new Gson();
 
         @Override
@@ -114,7 +114,6 @@ public class DoctorActivity extends AppCompatActivity {
             if (net_work_available) {
                 String infor = Utils.sendRequest(GlobalData.GET_DOCTOR_INFOR + doctor_id);
                 if (!infor.contains("not_exist")) {
-
                     doctorInfor = gson.fromJson(infor, DoctorInfor.class);
                     String xiaoyu = Utils.sendRequest(GlobalData.GET_DOCTOR_XIAO_YU + doctor_id);
                     if (xiaoyu.contains("not_exist")) {
@@ -146,9 +145,8 @@ public class DoctorActivity extends AppCompatActivity {
                             break;
                         }
                     }
-                    if (doctorInfor != null) {
+                    if (doctorInfor != null)
                         has_data = true;
-                    }
                     else
                         has_data = false;
                 }else
@@ -170,7 +168,6 @@ public class DoctorActivity extends AppCompatActivity {
                 Log.e(TAG, "http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
                 bitmapUtils.disPlay(persondetailimagedoctor,"http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
             }
-
             dialog.dismiss();
         }
         @Override

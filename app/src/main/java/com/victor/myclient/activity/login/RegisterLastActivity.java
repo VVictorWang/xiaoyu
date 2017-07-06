@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Login;
+package com.victor.myclient.activity.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,7 +25,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class RegisterActivitySecond extends AppCompatActivity {
+public class RegisterLastActivity extends AppCompatActivity {
 
 
 
@@ -81,14 +81,14 @@ public class RegisterActivitySecond extends AppCompatActivity {
                     message = "错误";
                     break;
             }
-            Utils.showShortToast(RegisterActivitySecond.this, message);
+            Utils.showShortToast(RegisterLastActivity.this, message);
         }
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_setdata);
-        ActivityManage.getInstance().pushActivity(RegisterActivitySecond.this);
+        ActivityManage.getInstance().pushActivity(RegisterLastActivity.this);
         initView();
         initEvent();
         Intent intent = getIntent();
@@ -123,7 +123,7 @@ public class RegisterActivitySecond extends AppCompatActivity {
                 if (name.isEmpty()) {
                     registername.setError("姓名不能为空");
                 } else if ((!(selectman.isChecked())) && (!selectwoman.isChecked())) {
-                    Toast.makeText(RegisterActivitySecond.this, "请选择你的性别", Toast.LENGTH_SHORT);
+                    Toast.makeText(RegisterLastActivity.this, "请选择你的性别", Toast.LENGTH_SHORT);
                 } else if (email.isEmpty()) {
                     registeremail.setError("邮箱不能为空");
                 }else if (!Utils.isEmail(email)) {
@@ -165,8 +165,8 @@ public class RegisterActivitySecond extends AppCompatActivity {
                     switch (op) {
                         case "1":
                             handler.sendEmptyMessage(1);
-                            Utils.putValue(RegisterActivitySecond.this, GlobalData.NAME, information.getUsername());
-                            Utils.startActivity(RegisterActivitySecond.this, MainActivity.class);
+                            Utils.putValue(RegisterLastActivity.this, GlobalData.NAME, information.getUsername());
+                            Utils.startActivity(RegisterLastActivity.this, MainActivity.class);
                             ActivityManage.getInstance().popAllActivity();
                             break;
                         case "0":

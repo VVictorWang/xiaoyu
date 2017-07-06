@@ -33,7 +33,7 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 17-5-4.
  */
 
-public class Fragment_BaoJIng extends Fragment {
+public class BaoJingFragment extends Fragment {
     private Activity activity;
     private View view;
 
@@ -75,13 +75,13 @@ public class Fragment_BaoJIng extends Fragment {
                 parent.removeView(view);
             }
         }
-        InitView();
+        initView();
 
         new FindBaojingListTask().execute();
         return view;
     }
 
-    private void InitView() {
+    private void initView() {
         recyclerView = (RecyclerView) view.findViewById(R.id.baojing_information_list);
         no_data = (TextView) view.findViewById(R.id.fragment_baojing_no_data);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);

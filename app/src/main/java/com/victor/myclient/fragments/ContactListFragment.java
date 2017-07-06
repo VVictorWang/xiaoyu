@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.victor.myclient.datas.ContactListData;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.activity.Contact.NewContactorActivity;
+import com.victor.myclient.activity.contact.NewContactorActivity;
 import com.victor.myclient.utils.sortlist.PinyinComparator;
 import com.victor.myclient.utils.sortlist.CharacterParser;
 import com.victor.myclient.utils.sortlist.SideBar;
@@ -43,7 +43,7 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 2017/4/24.
  */
 
-public class FragmentContactList extends Fragment {
+public class ContactListFragment extends Fragment {
     private Activity activity;
     private View view;
     private RecyclerView sortView;
@@ -69,7 +69,7 @@ public class FragmentContactList extends Fragment {
             }
         }
     };
-    private static final String TAG = "FragmentContactList";
+    private static final String TAG = "ContactListFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

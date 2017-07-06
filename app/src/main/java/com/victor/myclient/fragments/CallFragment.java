@@ -31,7 +31,7 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 2017/4/24.
  */
 
-public class FragmentCall extends Fragment {
+public class CallFragment extends Fragment {
     private Activity activity;
     private View layout;
     private CircleTextImageView[] circleTextImageViews = new CircleTextImageView[13];

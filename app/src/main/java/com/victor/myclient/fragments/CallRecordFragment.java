@@ -33,7 +33,7 @@ import demo.animen.com.xiaoyutask.R;
  * Created by 小武哥 on 2017/4/29.
  */
 
-public class FragmentCallRecord extends Fragment {
+public class CallRecordFragment extends Fragment {
 
     private Activity activity;
     private View view;

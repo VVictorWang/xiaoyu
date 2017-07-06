@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Setting;
+package com.victor.myclient.activity.setting;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.activity.Login.LoginActivity;
+import com.victor.myclient.activity.login.LoginActivity;
 
 import demo.animen.com.xiaoyutask.R;
 import okhttp3.FormBody;

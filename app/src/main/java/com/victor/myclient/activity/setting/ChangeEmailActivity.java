@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Setting;
+package com.victor.myclient.activity.setting;
 
 import android.os.Bundle;
 import android.os.Handler;

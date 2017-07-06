@@ -17,9 +17,9 @@ import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.datas.UserInfor;
-import com.victor.myclient.activity.Case.CaseListActivity;
-import com.victor.myclient.activity.Contact.ContactActivity;
-import com.victor.myclient.activity.Setting.Setting_Activity;
+import com.victor.myclient.activity.cases.CaseListActivity;
+import com.victor.myclient.activity.contact.ContactActivity;
+import com.victor.myclient.activity.setting.SettingActivity;
 import com.google.gson.Gson;
 import com.thinkcool.circletextimageview.CircleTextImageView;
 
@@ -137,8 +137,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.call_others).setOnClickListener(this);
         findViewById(R.id.jujia_main).setOnClickListener(this);
         findViewById(R.id.case_for_patient).setOnClickListener(this);
-
-
     }
 
     @Override
@@ -163,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Utils.startActivity(MainActivity.this, ContactActivity.class);
                 break;
             case R.id.setting_default:
-                Intent intent1 = new Intent(MainActivity.this, Setting_Activity.class);
+                Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
                 intent1.putExtra("email", userInfor.getEmail());
                 startActivity(intent1);
                 break;

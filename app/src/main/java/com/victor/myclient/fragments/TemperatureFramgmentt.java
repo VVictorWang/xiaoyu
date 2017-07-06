@@ -2,6 +2,7 @@ package com.victor.myclient.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
@@ -36,6 +38,7 @@ import com.victor.myclient.view.drawSmoothLine.Series;
 import org.litepal.crud.DataSupport;
 
 import demo.animen.com.xiaoyutask.R;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,25 +47,27 @@ import java.util.List;
  * Created by victor on 17-5-3.
  */
 
-public class Framgment_tempera extends Fragment implements BesselChart.ChartListener{
+public class TemperatureFramgmentt extends Fragment implements BesselChart.ChartListener {
 
-    BesselChart chart;
+    private static final String TAG = "TemperatureFramgmentt";
+
     private Activity activity;
-    private View layout;
-    private BarChart barChart;
     private RelativeLayout back;
+    private View layout;
     private TextView update;
-    private HomeInfor homeInfor;
     private TextView current_shi;
-    private ImageView choose_left, choose_right;
-    private List<Point> points=new ArrayList<>();
-    private boolean network_ava,has_data=false;
-    private static final String TAG = "Framgment_tempera";
-    private String data_string;
-    private long data_number;
     private TextView time_text;
-    private String current_data;
-    Handler handler = new Handler(){
+    private ImageView choose_left, choose_right;
+    private BesselChart chart;
+    private BarChart barChart;
+
+    private HomeInfor homeInfor;
+    private List<Point> points = new ArrayList<>();
+    private boolean network_ava, has_data = false;
+    private long data_number;
+    private int count = 1;
+
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x1234) {
@@ -70,7 +75,7 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
                 points.clear();
                 float a[] = {3, 6, 9, 12, 15, 18, 21, 24};
                 for (int i = 0; i < 8; i++) {
-                    points.add(new Point( a[i], homeInfor.getTemperatures().get((int)(a[i]-1)), true));
+                    points.add(new Point(a[i], homeInfor.getTemperatures().get((int) (a[i] - 1)), true));
                 }
                 seriess.add(new Series("温度", Color.WHITE, points));
                 chart.getData().setLabelTransform(new ChartData.LabelTransform() {
@@ -83,6 +88,7 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
                     public String horizontalTransform(int valueX) {
                         return String.format("%s", valueX);
                     }
+
                     @Override
                     public boolean labelDrawing(int valueX) {
                         return true;
@@ -98,6 +104,12 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
             }
         }
     };
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activity = getActivity();
+    }
 
     @Nullable
     @Override
@@ -115,16 +127,22 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         return layout;
     }
 
-
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activity = getActivity();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (count < 2) {
+            init();
+        }
     }
 
-    private void initView(){
-        network_ava = Utils.isNetWorkAvailabe(activity);
+    @Override
+    public void onStart() {
+        super.onStart();
+        count++;
+    }
+
+
+    private void initView() {
         chart = (BesselChart) layout.findViewById(R.id.shidu_line_chart);
         current_shi = (TextView) layout.findViewById(R.id.current_shidu_text);
         barChart = (BarChart) layout.findViewById(R.id.bar_shidu_chart);
@@ -135,13 +153,17 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         time_text = (TextView) layout.findViewById(R.id.time_temparature);
         chart.setSmoothness(0.4f);
         chart.setChartListener(this);
-        Date date = new Date(System.currentTimeMillis());
-        data_string = Utils.dataTostringtem(date);
-        data_number = Long.parseLong(data_string);
-        Log.e(TAG, data_string);
-        current_data = Utils.dataToStringWithChinese(date);
-        time_text.setText(current_data);
         chart.setSmoothness(0.33f);
+    }
+
+    private void init() {
+        network_ava = Utils.isNetWorkAvailabe(activity);
+        Date date = new Date(System.currentTimeMillis());
+        String current_data = Utils.dataToStringWithChinese(date);
+        time_text.setText(current_data);
+
+        String data_string = Utils.dataTostringtem(date);
+        data_number = Long.parseLong(data_string);
         new getHomeInforTask().execute(data_string);
     }
 
@@ -168,12 +190,9 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
                     Utils.showShortToast(activity, "已经是今天的数据了");
                 } else {
                     data_number++;
-                    data_number = Utils.parsedataNumber(data_number,true);
-                    Log.e(TAG, "data_number:  " + data_number);
-
-                        time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100));
-                        new getHomeInforTask().execute("" + data_number);
-
+                    data_number = Utils.parsedataNumber(data_number, true);
+                    time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100));
+                    new getHomeInforTask().execute("" + data_number);
                 }
 
             }
@@ -183,16 +202,16 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
             public void onClick(View v) {
                 data_number--;
                 data_number = Utils.parsedataNumber(data_number, false);
-                Log.e(TAG, "data_number:  " + data_number);
                 time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100));
                 new getHomeInforTask().execute("" + data_number);
             }
         });
     }
 
-    private void initData(){
+    private void initData() {
         IAxisValueFormatter iAxisValueFormatter = new IAxisValueFormatter() {
-            private String[] labels = new String[]{"03","06","09","12","15","18","21","24"};
+            private String[] labels = new String[]{"03", "06", "09", "12", "15", "18", "21", "24"};
+
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
                 float percent = value / axis.mAxisRange;
@@ -223,16 +242,18 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
         barChart.setData(barData);
         Description description1 = new Description();
         description1.setText("");
-        description1.setPosition(0,0);
+        description1.setPosition(0, 0);
         barChart.setDescription(description1);
         barChart.setDrawBarShadow(true);
         barChart.getLegend().setEnabled(false);
         barChart.invalidate();
         current_shi.setText((int) homeInfor.getHumidity() + "%");
     }
-    class getHomeInforTask extends AsyncTask<String, Void, Void> {
+
+    private class getHomeInforTask extends AsyncTask<String, Void, Void> {
         private Gson gson = new Gson();
         private ProgressDialog dialog = new ProgressDialog(activity);
+
         @Override
         protected Void doInBackground(String... params) {
             if (network_ava) {
@@ -256,6 +277,7 @@ public class Framgment_tempera extends Fragment implements BesselChart.ChartList
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             if (has_data) {

@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Contact;
+package com.victor.myclient.activity.contact;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,9 +9,9 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.adapters.FragmentAdapter;
-import com.victor.myclient.fragments.FragmentCall;
-import com.victor.myclient.fragments.FragmentCallRecord;
-import com.victor.myclient.fragments.FragmentContactList;
+import com.victor.myclient.fragments.CallFragment;
+import com.victor.myclient.fragments.CallRecordFragment;
+import com.victor.myclient.fragments.ContactListFragment;
 
 import demo.animen.com.xiaoyutask.R;
 
@@ -85,9 +85,9 @@ public class ContactActivity extends FragmentActivity {
     private void initTab() {
         viewPager = (ViewPager) findViewById(R.id.contact_view_pager);
         viewPageAdapter = new FragmentAdapter(getSupportFragmentManager());
-        viewPageAdapter.addFragment(new FragmentContactList());
-        viewPageAdapter.addFragment(new FragmentCall());
-        viewPageAdapter.addFragment(new FragmentCallRecord());
+        viewPageAdapter.addFragment(new ContactListFragment());
+        viewPageAdapter.addFragment(new CallFragment());
+        viewPageAdapter.addFragment(new CallRecordFragment());
         viewPager.setAdapter(viewPageAdapter);
         tabLayout = (TabLayout) findViewById(R.id.frag);
         tabLayout.setupWithViewPager(viewPager);

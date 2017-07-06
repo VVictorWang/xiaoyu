@@ -32,7 +32,7 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 17-5-20.
  */
 
-public class Fragment_room extends Fragment {
+public class RoomFragment extends Fragment {
     private Activity activity;
     private View view;
 
@@ -40,7 +40,6 @@ public class Fragment_room extends Fragment {
 
     private List<UserAcitivityInfo> userAcitivityInfos;
     private boolean net_work, has_data = false;
-    private String[] room_name = {"卧室1", "客厅", "厨房", "卧室2", "卫生间", "卧室3", "储物间", "饭厅", "其他"};
     private TextView bedroom1,bedroom2,bedroom3,washingroom,living_room,store_room,dining_room, other,kitchen_room;
     Handler handler = new Handler(){
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -129,7 +128,7 @@ public class Fragment_room extends Fragment {
 
     }
 
-    class GetActivity extends AsyncTask<Void, Void, Void> {
+    private class GetActivity extends AsyncTask<Void, Void, Void> {
         private Gson gson = new Gson();
         @Override
         protected void onPostExecute(Void aVoid) {
@@ -185,7 +184,6 @@ public class Fragment_room extends Fragment {
                 has_data = false;
             return null;
         }
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

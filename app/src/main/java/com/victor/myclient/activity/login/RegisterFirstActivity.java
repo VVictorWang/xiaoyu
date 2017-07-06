@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.Login;
+package com.victor.myclient.activity.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -13,7 +13,7 @@ import com.victor.myclient.utils.Utils;
 import demo.animen.com.xiaoyutask.R;
 
 
-public class RegisterActivityFirst extends AppCompatActivity {
+public class RegisterFirstActivity extends AppCompatActivity {
 
 
 
@@ -26,7 +26,7 @@ public class RegisterActivityFirst extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_verifcode);
-        ActivityManage.getInstance().pushActivity(RegisterActivityFirst.this);
+        ActivityManage.getInstance().pushActivity(RegisterFirstActivity.this);
 
         initView();
         initEvent();
@@ -42,7 +42,7 @@ public class RegisterActivityFirst extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Utils.finishActivity(RegisterActivityFirst.this);
+        Utils.finishActivity(RegisterFirstActivity.this);
         super.onBackPressed();
     }
 
@@ -84,7 +84,7 @@ public class RegisterActivityFirst extends AppCompatActivity {
                         enterpasswordagain.setError("两次输入密码不一致");
                     } else {
 
-                        Intent intent = new Intent(RegisterActivityFirst.this, RegisterActivitySecond.class);
+                        Intent intent = new Intent(RegisterFirstActivity.this, RegisterLastActivity.class);
                         Bundle bundle = new Bundle();
                         UserInformation information = new UserInformation();
                         information.setPassword(password);
