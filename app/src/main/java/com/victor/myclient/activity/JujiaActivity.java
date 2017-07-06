@@ -15,10 +15,13 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Datas.DoorInfor;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.Utils;
-import com.victor.myclient.adapters.JiuJiaViewPageAdapter;
+import com.victor.myclient.adapters.FragmentAdapter;
+import com.victor.myclient.datas.DoorInfor;
+import com.victor.myclient.fragments.Fragment_BaoJIng;
+import com.victor.myclient.fragments.Fragment_room;
+import com.victor.myclient.fragments.Framgment_tempera;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.Utils;
 
 import demo.animen.com.xiaoyutask.R;
 /**
@@ -29,7 +32,7 @@ public class JujiaActivity extends FragmentActivity {
 
     private android.support.v4.view.ViewPager jiujiaviewpager;
     private android.support.design.widget.TabLayout fragjiujia;
-    private JiuJiaViewPageAdapter viewPageAdapter;
+    private FragmentAdapter viewPageAdapter;
     private TextView door_status;
     private TabLayout.Tab one, two, three;
     View room_status_parent,person_status_parent,warning_infor_parent;
@@ -68,7 +71,10 @@ public class JujiaActivity extends FragmentActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void initTab() {
-        viewPageAdapter = new JiuJiaViewPageAdapter(getSupportFragmentManager());
+        viewPageAdapter = new FragmentAdapter(getSupportFragmentManager());
+        viewPageAdapter.addFragment(new Framgment_tempera());
+        viewPageAdapter.addFragment(new Fragment_room());
+        viewPageAdapter.addFragment(new Fragment_BaoJIng());
         jiujiaviewpager.setAdapter(viewPageAdapter);
         fragjiujia.setupWithViewPager(jiujiaviewpager);
         one = fragjiujia.getTabAt(0);

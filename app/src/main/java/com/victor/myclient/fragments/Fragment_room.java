@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.victor.myclient.Datas.UserAcitivityInfo;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.datas.UserAcitivityInfo;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.Utils;
 
 import org.litepal.crud.DataSupport;
 

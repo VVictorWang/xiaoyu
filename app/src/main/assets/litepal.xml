@@ -7,13 +7,13 @@
     </version>
 
     <list>
-        <mapping class="com.victor.myclient.Datas.DoctorInfor"/>
-        <mapping class="com.victor.myclient.Datas.ContactListData"/>
-        <mapping class="com.victor.myclient.Datas.CallRecord"/>
-        <mapping class="com.victor.myclient.Datas.CaseInfor"/>
-        <mapping class="com.victor.myclient.Datas.HomeInfor"/>
-        <mapping class="com.victor.myclient.Datas.UserAcitivityInfo"/>
-        <mapping class="com.victor.myclient.Datas.OneKeyWarning"/>
-        <mapping class="com.victor.myclient.Datas.DoctorXiaoYu"/>
+        <mapping class="com.victor.myclient.datas.DoctorInfor"/>
+        <mapping class="com.victor.myclient.datas.ContactListData"/>
+        <mapping class="com.victor.myclient.datas.CallRecord"/>
+        <mapping class="com.victor.myclient.datas.CaseInfor"/>
+        <mapping class="com.victor.myclient.datas.HomeInfor"/>
+        <mapping class="com.victor.myclient.datas.UserAcitivityInfo"/>
+        <mapping class="com.victor.myclient.datas.OneKeyWarning"/>
+        <mapping class="com.victor.myclient.datas.DoctorXiaoYu"/>
     </list>
 </litepal>

@@ -30,12 +30,12 @@ import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Datas.DoctorImage;
-import com.victor.myclient.Datas.PatientImageInfor;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.MyBitmapUtils;
-import com.victor.myclient.Utils.Utils;
-import com.victor.myclient.Datas.CallRecord;
+import com.victor.myclient.datas.DoctorImage;
+import com.victor.myclient.datas.PatientImageInfor;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyBitmapUtils;
+import com.victor.myclient.utils.Utils;
+import com.victor.myclient.datas.CallRecord;
 import com.victor.myclient.view.SimpleVideoView;
 import com.victor.myclient.view.VideoCellView;
 

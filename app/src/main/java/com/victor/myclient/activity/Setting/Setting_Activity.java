@@ -14,12 +14,12 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Datas.UserInfor;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.MyBitmapUtils;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.datas.UserInfor;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyBitmapUtils;
+import com.victor.myclient.utils.Utils;
 import com.victor.myclient.activity.Login.LoginActivity;
-import com.victor.myclient.Utils.GlideImageLoader;
+import com.victor.myclient.utils.GlideImageLoader;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;

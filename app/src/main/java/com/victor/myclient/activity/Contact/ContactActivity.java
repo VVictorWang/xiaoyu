@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.adapters.CallPageAdapter;
+import com.victor.myclient.adapters.FragmentAdapter;
+import com.victor.myclient.fragments.FragmentCall;
+import com.victor.myclient.fragments.FragmentCallRecord;
+import com.victor.myclient.fragments.FragmentContactList;
 
 import demo.animen.com.xiaoyutask.R;
 
@@ -20,7 +23,7 @@ import demo.animen.com.xiaoyutask.R;
 public class ContactActivity extends FragmentActivity {
 
     private ViewPager viewPager;
-    private CallPageAdapter viewPageAdapter;
+    private FragmentAdapter viewPageAdapter;
     private TabLayout tabLayout;
     private TabLayout.Tab one, two, three;
     @Override
@@ -81,7 +84,10 @@ public class ContactActivity extends FragmentActivity {
     }
     private void initTab() {
         viewPager = (ViewPager) findViewById(R.id.contact_view_pager);
-        viewPageAdapter = new CallPageAdapter(getSupportFragmentManager());
+        viewPageAdapter = new FragmentAdapter(getSupportFragmentManager());
+        viewPageAdapter.addFragment(new FragmentContactList());
+        viewPageAdapter.addFragment(new FragmentCall());
+        viewPageAdapter.addFragment(new FragmentCallRecord());
         viewPager.setAdapter(viewPageAdapter);
         tabLayout = (TabLayout) findViewById(R.id.frag);
         tabLayout.setupWithViewPager(viewPager);

@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.victor.myclient.activity.Login.LoginActivity;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.Utils;
 import com.victor.myclient.activity.MainActivity;
 
 import demo.animen.com.xiaoyutask.R;

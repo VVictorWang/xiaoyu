@@ -13,10 +13,10 @@ import android.widget.TextView;
 import com.ainemo.sdk.otf.ConnectNemoCallback;
 import com.ainemo.sdk.otf.NemoSDK;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.MyBitmapUtils;
-import com.victor.myclient.Utils.Utils;
-import com.victor.myclient.Datas.UserInfor;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyBitmapUtils;
+import com.victor.myclient.utils.Utils;
+import com.victor.myclient.datas.UserInfor;
 import com.victor.myclient.activity.Case.CaseListActivity;
 import com.victor.myclient.activity.Contact.ContactActivity;
 import com.victor.myclient.activity.Setting.Setting_Activity;
@@ -137,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.call_others).setOnClickListener(this);
         findViewById(R.id.jujia_main).setOnClickListener(this);
         findViewById(R.id.case_for_patient).setOnClickListener(this);
+
+
     }
 
     @Override
@@ -169,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
 
     private class getUserInfor extends AsyncTask<String, Void, String> {
         private Gson gson = new Gson();

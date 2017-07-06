@@ -17,10 +17,10 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.victor.myclient.Datas.OneKeyWarning;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.Utils;
-import com.victor.myclient.adapters.BaojingAdapter;
+import com.victor.myclient.datas.OneKeyWarning;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.Utils;
+import com.victor.myclient.adapters.BaojingInfoAdapter;
 
 import org.litepal.crud.DataSupport;
 
@@ -38,7 +38,7 @@ public class Fragment_BaoJIng extends Fragment {
     private View view;
 
     private RecyclerView recyclerView;
-    private BaojingAdapter adapter;
+    private BaojingInfoAdapter adapter;
     private List<OneKeyWarning> oneKeyWarnings;
     private RelativeLayout back;
     private TextView no_data;
@@ -98,7 +98,7 @@ public class Fragment_BaoJIng extends Fragment {
     }
 
     private void InitData() {
-        adapter = new BaojingAdapter(activity, oneKeyWarnings);
+        adapter = new BaojingInfoAdapter(activity, oneKeyWarnings);
         recyclerView.setAdapter(adapter);
     }
 

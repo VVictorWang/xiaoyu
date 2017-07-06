@@ -12,8 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.Utils;
 
 import demo.animen.com.xiaoyutask.R;
 import okhttp3.FormBody;

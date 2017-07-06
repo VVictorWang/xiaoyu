@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.victor.myclient.Datas.CallRecord;
+import com.victor.myclient.datas.CallRecord;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;

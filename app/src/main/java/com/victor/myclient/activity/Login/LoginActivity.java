@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.Utils;
 import com.victor.myclient.activity.MainActivity;
 
 import demo.animen.com.xiaoyutask.R;

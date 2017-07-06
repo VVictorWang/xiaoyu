@@ -12,11 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Datas.DoctorInfor;
-import com.victor.myclient.Datas.DoctorXiaoYu;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.MyBitmapUtils;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.datas.DoctorInfor;
+import com.victor.myclient.datas.DoctorXiaoYu;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyBitmapUtils;
+import com.victor.myclient.utils.Utils;
 import com.google.gson.Gson;
 import com.victor.myclient.activity.xiaoyu.VideoActivity;
 

@@ -13,11 +13,11 @@ import android.widget.RelativeLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Datas.CaseInfor;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.Utils;
-import com.victor.myclient.adapters.CaseLayout.CaseAdapter;
-import com.victor.myclient.adapters.CaseLayout.CustomLayoutManager;
+import com.victor.myclient.datas.CaseInfor;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.Utils;
+import com.victor.myclient.adapters.CaseAdapter;
+import com.victor.myclient.view.CustomLayoutManager;
 
 import org.litepal.crud.DataSupport;
 

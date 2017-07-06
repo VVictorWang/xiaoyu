@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.Utils;
 
 import demo.animen.com.xiaoyutask.R;
 

@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Datas.UserInformation;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.datas.UserInformation;
+import com.victor.myclient.utils.Utils;
 
 import demo.animen.com.xiaoyutask.R;
 

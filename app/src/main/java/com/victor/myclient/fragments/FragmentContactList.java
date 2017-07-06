@@ -21,14 +21,14 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.victor.myclient.Datas.ContactListData;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.datas.ContactListData;
+import com.victor.myclient.utils.Utils;
 import com.victor.myclient.activity.Contact.NewContactorActivity;
-import com.victor.myclient.Utils.sortlist.PinyinComparator;
-import com.victor.myclient.Utils.sortlist.CharacterParser;
-import com.victor.myclient.Utils.sortlist.SideBar;
-import com.victor.myclient.Utils.sortlist.SortModel;
-import com.victor.myclient.adapters.Contact_Adapter;
+import com.victor.myclient.utils.sortlist.PinyinComparator;
+import com.victor.myclient.utils.sortlist.CharacterParser;
+import com.victor.myclient.utils.sortlist.SideBar;
+import com.victor.myclient.utils.sortlist.SortModel;
+import com.victor.myclient.adapters.ContactListAdapter;
 import com.victor.myclient.view.ClearEditText;
 
 import org.litepal.crud.DataSupport;
@@ -49,7 +49,7 @@ public class FragmentContactList extends Fragment {
     private RecyclerView sortView;
     private SideBar sideBar;
     private TextView dialog;
-    private Contact_Adapter adapter;
+    private ContactListAdapter adapter;
     private RelativeLayout back;
     private ClearEditText mClearEditText;
 
@@ -191,7 +191,7 @@ public class FragmentContactList extends Fragment {
     }
 
     private void initData() {
-        adapter = new Contact_Adapter(activity, SourceDateList, sortView);
+        adapter = new ContactListAdapter(activity, SourceDateList, sortView);
         sortView.setAdapter(adapter);
         // 根据输入框输入值的改变来过滤搜索
         mClearEditText.addTextChangedListener(new TextWatcher() {

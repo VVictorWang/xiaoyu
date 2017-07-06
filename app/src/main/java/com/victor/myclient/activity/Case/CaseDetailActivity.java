@@ -10,10 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.Datas.CaseInfor;
-import com.victor.myclient.Utils.GlobalData;
-import com.victor.myclient.Utils.MyBitmapUtils;
-import com.victor.myclient.Utils.Utils;
+import com.victor.myclient.datas.CaseInfor;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyBitmapUtils;
+import com.victor.myclient.utils.Utils;
 
 import org.litepal.crud.DataSupport;
 
