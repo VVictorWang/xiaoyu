@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ActivityManage.getInstance().popAllActivity();
         ActivityManage.getInstance().pushActivity(LoginActivity.this);
         this.loginpassword = (EditText) findViewById(R.id.login_password);
         this.loginid = (EditText) findViewById(R.id.login_id);
@@ -111,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Utils.putValue(LoginActivity.this, GlobalData.NAME, username);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
+                            ActivityManage.getInstance().popAllActivity();
                             break;
                         case "0":
                             handler.sendEmptyMessage(0);

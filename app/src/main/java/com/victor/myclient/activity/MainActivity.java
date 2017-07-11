@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NemoSDK.getInstance().connectNemo("vic", "18774259685", new ConnectNemoCallback() {
             @Override
             public void onFailed(int i) {
-
                 Log.e(TAG,"fail");
                 runOnUiThread(new Runnable() {
                     @Override
@@ -101,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         new getUserInfor().execute(user_name);
     }
+
+
 
     private void initData() {
         user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
