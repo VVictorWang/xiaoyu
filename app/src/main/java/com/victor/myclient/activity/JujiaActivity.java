@@ -52,7 +52,7 @@ public class JujiaActivity extends FragmentActivity {
         net_work = Utils.isNetWorkAvailabe(JujiaActivity.this);
         initTab();
         new getDoorInfor().execute();
-        InitEvent();
+        initEvent();
     }
 
     private void initView() {
@@ -91,7 +91,7 @@ public class JujiaActivity extends FragmentActivity {
         jiujiaviewpager.setCurrentItem(0);
     }
 
-    private void InitEvent() {
+    private void initEvent() {
         fragjiujia.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
