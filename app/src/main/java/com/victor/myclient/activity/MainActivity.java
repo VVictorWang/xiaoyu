@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onFailed(int i) {
 
-                Log.e(TAG,"fail");
+                Log.e(TAG, "fail");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        bangding_xiaoyu_number.setText("绑定小鱼号: "+xiaoyuNumber);
+                        bangding_xiaoyu_number.setText("绑定小鱼号: " + xiaoyuNumber);
                     }
                 });
             }
@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private class getUserInfor extends AsyncTask<String, Void, String> {
         private Gson gson = new Gson();
+
         @Override
         protected String doInBackground(String... params) {
             if (net_work_available) {
@@ -217,18 +218,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             return "ok";
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (s != null) {
-                if (has_data) {
-                    nametext.setText(userInfor.getName());
-                    if (userInfor.getImage() != null) {
-                        bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + userInfor.getImage());
-                    }
+            if (has_data) {
+                nametext.setText(userInfor.getName());
+                if (userInfor.getImage() != null) {
+                    bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + userInfor.getImage());
                 }
             }
         }
+
 
         @Override
         protected void onPreExecute() {

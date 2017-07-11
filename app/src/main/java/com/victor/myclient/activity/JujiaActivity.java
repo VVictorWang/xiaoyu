@@ -24,6 +24,7 @@ import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
 import demo.animen.com.xiaoyutask.R;
+
 /**
  * Created by victor on 2017/4/24.
  */
@@ -32,14 +33,15 @@ public class JujiaActivity extends FragmentActivity {
 
     private android.support.v4.view.ViewPager jiujiaviewpager;
     private android.support.design.widget.TabLayout fragjiujia;
-    private FragmentAdapter viewPageAdapter;
+
     private TextView door_status;
     private TabLayout.Tab one, two, three;
-    View room_status_parent,person_status_parent,warning_infor_parent;
-    private RelativeLayout room_status,person_status, warning_infor;
+    View room_status_parent, person_status_parent, warning_infor_parent;
+    private RelativeLayout room_status, person_status, warning_infor;
     private Drawable jiujia_normal, jiujia_selected;
     private DoorInfor doorInfor;
-    private boolean  net_work;
+    private boolean net_work;
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class JujiaActivity extends FragmentActivity {
         net_work = Utils.isNetWorkAvailabe(JujiaActivity.this);
         initTab();
         new getDoorInfor().execute();
-       InitEvent();
+        InitEvent();
     }
 
     private void initView() {
@@ -59,10 +61,10 @@ public class JujiaActivity extends FragmentActivity {
         this.fragjiujia = (TabLayout) findViewById(R.id.frag_jiujia);
         this.jiujiaviewpager = (ViewPager) findViewById(R.id.jiujia_view_pager);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-        room_status_parent= layoutInflater.inflate(R.layout.room_status,null);
+        room_status_parent = layoutInflater.inflate(R.layout.room_status, null);
         person_status_parent = layoutInflater.inflate(R.layout.person_activity_status, null);
         warning_infor_parent = layoutInflater.inflate(R.layout.magic_status, null);
-        room_status =(RelativeLayout) room_status_parent.findViewById(R.id.room_status);
+        room_status = (RelativeLayout) room_status_parent.findViewById(R.id.room_status);
         person_status = (RelativeLayout) person_status_parent.findViewById(R.id.person_activity);
         warning_infor = (RelativeLayout) warning_infor_parent.findViewById(R.id.warning_view_pager);
         door_status = (TextView) room_status_parent.findViewById(R.id.room_status_text);
@@ -71,7 +73,7 @@ public class JujiaActivity extends FragmentActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void initTab() {
-        viewPageAdapter = new FragmentAdapter(getSupportFragmentManager());
+        FragmentAdapter viewPageAdapter = new FragmentAdapter(getSupportFragmentManager());
         viewPageAdapter.addFragment(new TemperatureFramgmentt());
         viewPageAdapter.addFragment(new RoomFragment());
         viewPageAdapter.addFragment(new BaoJingFragment());
@@ -105,6 +107,7 @@ public class JujiaActivity extends FragmentActivity {
                     tab.setCustomView(warning_infor_parent);
                 }
             }
+
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -129,9 +132,10 @@ public class JujiaActivity extends FragmentActivity {
 
     class getDoorInfor extends AsyncTask<Void, Void, Void> {
         private Gson gson = new Gson();
+
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (doorInfor.getStatus()==1) {
+            if (doorInfor.getStatus() == 1) {
                 door_status.setText("开启");
             } else {
                 door_status.setText("关闭");
@@ -148,7 +152,7 @@ public class JujiaActivity extends FragmentActivity {
                     doorInfor = gson.fromJson(door_infor, DoorInfor.class);
                     Utils.putIntValue(JujiaActivity.this, GlobalData.DOOR_STATUS, doorInfor.getStatus());
                 }
-            } else  {
+            } else {
                 doorInfor.setStatus(Utils.getIntValue(JujiaActivity.this, GlobalData.DOOR_STATUS));
             }
             return null;

@@ -85,7 +85,7 @@
             android:id="@+id/time_temparature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
+            android:layout_marginLeft="90dp"
             android:layout_toRightOf="@id/choose_data_jiujia_left"
             android:textColor="@color/whites"
             android:textSize="15dp" />

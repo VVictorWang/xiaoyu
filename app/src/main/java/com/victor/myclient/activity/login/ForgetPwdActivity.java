@@ -23,7 +23,6 @@ public class ForgetPwdActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             String message;
-
             switch (msg.what) {
                 case 1:
                     message = "参数错误";

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.log.L;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,8 +41,11 @@ import org.litepal.crud.DataSupport;
 import demo.animen.com.xiaoyutask.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static android.R.attr.data;
 
 /**
  * Created by victor on 17-5-3.
@@ -49,8 +53,7 @@ import java.util.List;
 
 public class TemperatureFramgmentt extends Fragment implements BesselChart.ChartListener {
 
-    private static final String TAG = "TemperatureFramgmentt";
-
+    public static final String TAG = "@victor TempatureFramg";
     private Activity activity;
     private RelativeLayout back;
     private View layout;
@@ -159,7 +162,7 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
     private void init() {
         network_ava = Utils.isNetWorkAvailabe(activity);
         Date date = new Date(System.currentTimeMillis());
-        String current_data = Utils.dataToStringWithChinese(date);
+        String current_data = Utils.DateToStringWithChinese(date);
         time_text.setText(current_data);
 
         String data_string = Utils.dataTostringtem(date);
@@ -178,32 +181,45 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
             @Override
             public void onClick(View v) {
                 data_number = Long.parseLong(Utils.dataTostringtem(new Date(System.currentTimeMillis())));
-                time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100));
+                time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100) + "日");
                 new getHomeInforTask().execute("" + data_number);
             }
         });
         choose_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long current = Long.parseLong(Utils.dataTostringtem(new Date(System.currentTimeMillis())));
-                if (data_number == current) {
-                    Utils.showShortToast(activity, "已经是今天的数据了");
-                } else {
-                    data_number++;
-                    data_number = Utils.parsedataNumber(data_number, true);
-                    time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100));
-                    new getHomeInforTask().execute("" + data_number);
-                }
-
+                String now = time_text.getText().toString();
+                Calendar calendar = Calendar.getInstance();
+                Date date = Utils.stringToDateWithChinese(now);
+                calendar.setTime(date);
+                calendar.add(Calendar.DATE, -1);
+                date = calendar.getTime();
+                time_text.setText(Utils.DateToStringWithChinese(date));
+                String data_string = Utils.dataTostringtem(date);
+                data_number = Long.parseLong(data_string);
+                new getHomeInforTask().execute("" + data_number);
             }
         });
         choose_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                data_number--;
-                data_number = Utils.parsedataNumber(data_number, false);
-                time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100));
-                new getHomeInforTask().execute("" + data_number);
+                String now = time_text.getText().toString();
+                Date date = new Date(System.currentTimeMillis());
+                String data_string = Utils.DateToStringWithChinese(date);
+                if (now.equals(data_string)) {
+                    Utils.showShortToast(activity, "已经是今天的数据了");
+                } else {
+                    Calendar calendar = Calendar.getInstance();
+                    Date date1 = Utils.stringToDateWithChinese(now);
+                    calendar.setTime(date1);
+                    calendar.add(Calendar.DATE, 1);
+                    date = calendar.getTime();
+                    data_string = Utils.dataTostringtem(date);
+                    data_number = Long.parseLong(data_string);
+                    time_text.setText(Utils.DateToStringWithChinese(date));
+                    new getHomeInforTask().execute("" + data_number);
+                }
+
             }
         });
     }

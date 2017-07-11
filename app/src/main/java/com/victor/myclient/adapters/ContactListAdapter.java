@@ -26,20 +26,21 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     private Context context;
     private RecyclerView recyclerView;
     private List<SortModel> list = new ArrayList<>();
-    public void updateListView(List<SortModel> list){
+
+    public void updateListView(List<SortModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }
 
-    public static class MyViewHoler extends RecyclerView.ViewHolder {
+    class MyViewHoler extends RecyclerView.ViewHolder {
         private TextView tvLetter;
         private TextView tvTitle;
         private CircleImageView icon;
-       private TextView number_text;
+        private TextView number_text;
 
-        public MyViewHoler(View itemView) {
+        MyViewHoler(View itemView) {
             super(itemView);
-            this.tvLetter =(TextView) itemView.findViewById(R.id.catalog);
+            this.tvLetter = (TextView) itemView.findViewById(R.id.catalog);
             this.tvTitle = (TextView) itemView.findViewById(R.id.title);
             this.icon = (CircleImageView) itemView.findViewById(R.id.icon);
             this.number_text = (TextView) itemView.findViewById(R.id.number_list);
@@ -50,7 +51,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     public int getItemCount() {
         return list.size();
     }
-
 
 
     public ContactListAdapter(Context context, List<SortModel> list, RecyclerView recyclerView) {
@@ -83,10 +83,10 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         int section = getSectionForPosition(position);
         final SortModel mContent = list.get(position);
         //如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
-        if(position == getPositionForSection(section)){
-           holder.tvLetter.setVisibility(View.VISIBLE);
+        if (position == getPositionForSection(section)) {
+            holder.tvLetter.setVisibility(View.VISIBLE);
             holder.tvLetter.setText(mContent.getSortLetters());
-        }else{
+        } else {
             holder.tvLetter.setVisibility(View.GONE);
         }
 

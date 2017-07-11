@@ -1,4 +1,5 @@
 package com.victor.myclient.view;
+
 import android.content.Context;
 
 import android.os.Handler;
@@ -6,6 +7,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.OpenGLTextureView;
 import com.ainemo.sdk.otf.VideoInfo;
@@ -83,21 +85,21 @@ public class SimpleVideoView extends ViewGroup {
             localVideoView.layout(l, t, r, b);
             localVideoView.bringToFront();
         } else {
-            mVideoViews.get(indexTag-1).layout(l, t, r, b);
-            mVideoViews.get(indexTag-1).bringToFront();
+            mVideoViews.get(indexTag - 1).layout(l, t, r, b);
+            mVideoViews.get(indexTag - 1).bringToFront();
             localVideoView.layout(l, (b * 3 / 4 - t / 4), (r + l) / 5, b);
             localVideoView.bringToFront();
         }
 
         for (int i = 0; i < size; i++) {
-            if (i > indexTag - 1||indexTag==0) {
+            if (i > indexTag - 1 || indexTag == 0) {
                 Log.i(TAG, "layout item at " + i);
                 mVideoViews.get(i).layout(l + 20 + (r - l) / 5 * (i), (b * 3 / 4 - t / 4),
                         l + 20 + (r - l) / 5 * (i + 1), b)
                 ;
                 mVideoViews.get(i).bringToFront();
-            }else if(i!=indexTag-1){
-                mVideoViews.get(i).layout(l + 20 + (r - l) / 5 * (i+1), (b * 3 / 4 - t / 4),
+            } else if (i != indexTag - 1) {
+                mVideoViews.get(i).layout(l + 20 + (r - l) / 5 * (i + 1), (b * 3 / 4 - t / 4),
                         l + 20 + (r - l) / 5 * (i + 2), b)
                 ;
                 mVideoViews.get(i).bringToFront();
@@ -108,7 +110,7 @@ public class SimpleVideoView extends ViewGroup {
         }
     }
 
-    public void setLayoutInfos (List < VideoInfo > videoInfos) {
+    public void setLayoutInfos(List<VideoInfo> videoInfos) {
 
         Log.i(TAG, "video info size is " + videoInfos.size());
 
@@ -149,35 +151,35 @@ public class SimpleVideoView extends ViewGroup {
         requestRender();
     }
 
-    public void destroy () {
+    public void destroy() {
         destroyDrawingCache();
         mVideoViews.clear();
         handler.removeCallbacksAndMessages(null);
     }
 
-    public void stopRender () {
+    public void stopRender() {
         handler.removeCallbacks(drawVideoFrameRunnable);
     }
 
-    private void requestRender () {
+    private void requestRender() {
         handler.postDelayed(drawVideoFrameRunnable, 1000 / 15);
     }
 
-    public void requestLocalFrame () {
+    public void requestLocalFrame() {
         handler.removeCallbacks(drawLocalVideoFrameRunnable);
         requestLocalVideoRender();
     }
 
-    public void stopLocalFrameRender () {
+    public void stopLocalFrameRender() {
         handler.removeCallbacks(drawLocalVideoFrameRunnable);
     }
 
-    private void requestLocalVideoRender () {
+    private void requestLocalVideoRender() {
         handler.postDelayed(drawLocalVideoFrameRunnable, 1000 / 15);
     }
 
     @Override
-    protected void onMeasure ( int widthMeasureSpec, int heightMeasureSpec){
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = getMeasuredWidth();
         int height = getMeasuredHeight();

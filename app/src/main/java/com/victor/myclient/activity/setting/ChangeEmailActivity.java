@@ -27,8 +27,6 @@ import okhttp3.Response;
 public class ChangeEmailActivity extends AppCompatActivity {
 
 
-    private ImageView backtomainimagebackgroundchangeemali;
-    private TextView backtomainimagebackgroundchangeemalitext;
     private RelativeLayout changeemailbackback;
     private EditText bindemail;
     private EditText bindname;
@@ -84,8 +82,6 @@ public class ChangeEmailActivity extends AppCompatActivity {
         this.bindname = (EditText) findViewById(R.id.bind_name);
         this.bindemail = (EditText) findViewById(R.id.bind_email);
         this.changeemailbackback = (RelativeLayout) findViewById(R.id.change_email_back_back);
-        this.backtomainimagebackgroundchangeemalitext = (TextView) findViewById(R.id.back_to_main_image_background_change_emali_text);
-        this.backtomainimagebackgroundchangeemali = (ImageView) findViewById(R.id.back_to_main_image_background_change_emali);
     }
 
     private void initEvent() {

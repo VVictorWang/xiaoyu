@@ -29,13 +29,13 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
 
     private List<CaseInfor> caseList = new ArrayList<>();
     private Context context;
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+      class ViewHolder extends RecyclerView.ViewHolder {
         private TextView doctorName;
         private TextView illnessName;
         private TextView dateText;
         private TextView patientName;
         private CircleImageView circleButton;
-        public ViewHolder(View view) {
+         ViewHolder(View view) {
             super(view);
             patientName = (TextView) view.findViewById(R.id.case_patient_name);
             doctorName = (TextView) view.findViewById(R.id.case_doctor_name);
