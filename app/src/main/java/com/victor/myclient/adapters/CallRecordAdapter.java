@@ -77,7 +77,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
       num += callRecord.getXiaoyuId();
     }
     holder.number.setText(num);
-    if (holder.date.getText() == null || holder.date.getText().equals("")) {
+//    if (holder.date.getText() == null || holder.date.getText().equals("")) {
       String dateString = "";
       if (null != callRecord.getDate()) {
         Calendar mCalender = Calendar.getInstance();
@@ -99,7 +99,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
         }
       }
       holder.date.setText(dateString);
-    }
+//    }
   }
 
   @Override

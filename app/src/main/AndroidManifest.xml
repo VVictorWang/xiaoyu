@@ -28,6 +28,14 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <!--个推服务-->
+    <!-- iBeancon功能所需权限 -->;
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <!-- 个推3.0电⼦围栏功能所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name="com.victor.myclient.MyApplication"
         android:allowBackup="true"
@@ -37,7 +45,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.victor.myclient.activity.MainActivity" />
+        <activity android:name="com.victor.myclient.activity.MainActivity"
+          android:launchMode="singleTask"
+            />
         <activity android:name="com.victor.myclient.activity.contact.ContactActivity" />
         <activity android:name="com.victor.myclient.activity.JujiaActivity" />
         <activity android:name="com.victor.myclient.activity.login.LoginActivity" />
@@ -67,6 +77,14 @@
            />
         <activity android:name="com.victor.myclient.activity.xiaoyu.IncommingAcivity" />
         <activity android:name="com.victor.myclient.activity.login.ForgetPwdActivity" />
+
+
+        <service android:name="com.victor.myclient.service.MyPushService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":pushservice"
+            />
+        <service android:name="com.victor.myclient.service.MyIntentService"/>
     </application>
 
 </manifest>

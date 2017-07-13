@@ -124,6 +124,7 @@ public class DoctorActivity extends AppCompatActivity {
                     DataSupport.deleteAll(DoctorInfor.class);
                     if (!doctorInfor.isSaved()) {
                         doctorInfor.saveAsync();
+                        doctorInfor.save();
                     }
                     if (!doctorXiaoYu.isSaved()) {
                         doctorXiaoYu.saveAsync();
