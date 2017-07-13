@@ -37,7 +37,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-
+//接电话的Activity
 public class IncommingAcivity extends AppCompatActivity {
 
     private android.widget.TextView connmtdialfromtext;

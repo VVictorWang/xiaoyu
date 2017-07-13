@@ -31,17 +31,17 @@ public class NewContactorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new__contactor);
-        InitView();
-        InitEvent();
+        initView();
+        initEvent();
     }
 
-    private void InitView() {
+    private void initView() {
         back = (RelativeLayout) findViewById(R.id.back_to_main_add_new_contact);
         finish = (Button) findViewById(R.id.new_contact_finish);
         name = (TextInputEditText) findViewById(R.id.new_contact_name);
         xiaoyu_number = (TextInputEditText) findViewById(R.id.new_contact_xiao_yu_number);
     }
-    private void InitEvent(){
+    private void initEvent(){
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

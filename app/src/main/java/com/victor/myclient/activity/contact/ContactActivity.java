@@ -33,7 +33,6 @@ public class ContactActivity extends FragmentActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_fragment_main);
         ActivityManage.getInstance().pushActivity(ContactActivity.this);

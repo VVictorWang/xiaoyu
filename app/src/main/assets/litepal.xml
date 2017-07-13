@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname value="xiaoyud" ></dbname>
+    <dbname value="xiaoyud" />
 
-    <version value="3" >
-
-    </version>
-
+    <version value="3" />
     <list>
         <mapping class="com.victor.myclient.datas.DoctorInfor"/>
         <mapping class="com.victor.myclient.datas.ContactListData"/>

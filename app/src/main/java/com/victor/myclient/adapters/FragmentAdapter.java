@@ -15,10 +15,10 @@ import java.util.List;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
     private List<Fragment> mFragments = new ArrayList<>();
+
     public FragmentAdapter(FragmentManager fm) {
         super(fm);
     }
-
 
 
     public FragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
@@ -29,7 +29,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public void addFragment(Fragment fragment) {
         mFragments.add(fragment);
     }
-
 
 
     @Override

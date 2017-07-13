@@ -41,8 +41,7 @@ public class BaojingInfoAdapter extends RecyclerView.Adapter<BaojingInfoAdapter.
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.baojing_adpter, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return  new ViewHolder(view);
     }
 
     @Override
