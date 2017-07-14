@@ -1,5 +1,6 @@
 package com.victor.myclient.activity.cases;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.victor.myclient.ActivityManage;
+import com.victor.myclient.base.BaseActivity;
 import com.victor.myclient.datas.CaseInfor;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
@@ -21,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 
-public class CaseDetailActivity extends AppCompatActivity {
+public class CaseDetailActivity extends BaseActivity {
 
     private RelativeLayout back;
     private LinearLayout doctor_part;
@@ -42,15 +44,22 @@ public class CaseDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.case_detail);
-        ActivityManage.getInstance().pushActivity(CaseDetailActivity.this);
         id = getIntent().getIntExtra("id", 1);
-        initView();
-        initEvent();
         initData();
     }
 
-    private void initView() {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.case_detail;
+    }
+
+    @Override
+    protected Activity getActivityToPush() {
+        return CaseDetailActivity.this;
+    }
+
+    @Override
+    protected void initView() {
         back = (RelativeLayout) findViewById(R.id.back_case_detail);
         doctor_part = (LinearLayout) findViewById(R.id.doctor_part_case_detail);
         person_part = (LinearLayout) findViewById(R.id.case_detail_person_part);
@@ -63,8 +72,8 @@ public class CaseDetailActivity extends AppCompatActivity {
         ill_result = (TextView) findViewById(R.id.case_detail_result);
         imageView = (CircleImageView) person_part.findViewById(R.id.person_detail_image);
     }
-
-    private void initEvent() {
+    @Override
+    protected void initEvent() {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

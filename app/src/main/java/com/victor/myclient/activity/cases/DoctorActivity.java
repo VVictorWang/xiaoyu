@@ -1,5 +1,6 @@
 package com.victor.myclient.activity.cases;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.victor.myclient.ActivityManage;
+import com.victor.myclient.base.BaseActivity;
 import com.victor.myclient.datas.DoctorInfor;
 import com.victor.myclient.datas.DoctorXiaoYu;
 import com.victor.myclient.utils.GlobalData;
@@ -28,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 
-public class DoctorActivity extends AppCompatActivity {
+public class DoctorActivity extends BaseActivity {
 
     private String doctor_id;
     private DoctorInfor doctorInfor;
@@ -44,11 +46,12 @@ public class DoctorActivity extends AppCompatActivity {
     private ProgressDialog dialog;
     private Button make_call;
 
-    private boolean net_work_available,has_data;
+    private boolean net_work_available, has_data;
     private String name;
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
     private DoctorXiaoYu doctorXiaoYu = new DoctorXiaoYu();
     private static final String TAG = "DoctorActivity";
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -58,15 +61,22 @@ public class DoctorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.doctor_info);
-        ActivityManage.getInstance().pushActivity(DoctorActivity.this);
         doctor_id = getIntent().getStringExtra("doctor_id");
-        initView();
-        initEvent();
         new GetDoctorInfor().execute();
     }
 
-    private void initView() {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.doctor_info;
+    }
+
+    @Override
+    protected Activity getActivityToPush() {
+        return DoctorActivity.this;
+    }
+
+    @Override
+    protected void initView() {
         dialog = new ProgressDialog(this);
         dialog.show();
         this.doctorinfointrodetail = (TextView) findViewById(R.id.doctor_info_intro_detail);
@@ -82,7 +92,8 @@ public class DoctorActivity extends AppCompatActivity {
         net_work_available = Utils.isNetWorkAvailabe(DoctorActivity.this);
     }
 
-    private void initEvent() {
+    @Override
+    protected void initEvent() {
         backdoctordetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,11 +160,12 @@ public class DoctorActivity extends AppCompatActivity {
                         has_data = true;
                     else
                         has_data = false;
-                }else
+                } else
                     has_data = false;
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -164,12 +176,13 @@ public class DoctorActivity extends AppCompatActivity {
                 doctorpartnamedoctor.setText("所在医院: " + doctorInfor.getHospital());
                 doctorparttimedoctor.setText("联系邮箱: " + doctorInfor.getMail());
                 doctorpartgoodat.setText("擅长方向: " + doctorInfor.getGood_at());
-                doctorinfointrodetail.setText("职称: "+doctorInfor.getJob_title()+"\n其他: "+doctorInfor.getCases());
+                doctorinfointrodetail.setText("职称: " + doctorInfor.getJob_title() + "\n其他: " + doctorInfor.getCases());
                 Log.e(TAG, "http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
-                bitmapUtils.disPlay(persondetailimagedoctor,"http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
+                bitmapUtils.disPlay(persondetailimagedoctor, "http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
             }
             dialog.dismiss();
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
