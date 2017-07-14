@@ -3,9 +3,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="6dp"
-    android:background="@color/transparent"
-    >
+    android:background="@color/transparent">
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -41,5 +42,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
+    <ProgressBar
+        android:layout_centerInParent="true"
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
 </RelativeLayout>

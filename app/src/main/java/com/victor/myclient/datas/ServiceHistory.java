@@ -8,11 +8,12 @@ import org.litepal.crud.DataSupport;
 
 public class ServiceHistory extends DataSupport {
 
+
     /**
-     * name : 员工甲的哥哥
+     * name : 员工甲的哥哥3
      * address : 华师
      * serviceDatetime : 2017-07-13 09:32:00
-     * serviceContent : 69583e4f7138624d584ec7964daa9e5640c7b9a9.jpg
+     * serviceContent : 831b6b2ebb93490ba132d58f14af419543595831.jpg
      * patientId : 5
      */
 

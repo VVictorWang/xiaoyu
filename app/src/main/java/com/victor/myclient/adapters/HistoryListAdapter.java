@@ -1,17 +1,22 @@
-package com.victor.myclient;
+package com.victor.myclient.adapters;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.victor.myclient.datas.ServiceHistory;
 import com.victor.myclient.utils.GlobalData;
-import com.victor.myclient.utils.Utils;
 
 import java.util.List;
 
@@ -44,7 +49,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
         private TextView nameAndAddress;
         private TextView time;
-
+        private ProgressBar progressBar;
         //            private RadioButton radioButton;
         private String filePath;
 
@@ -55,6 +60,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
             nameAndAddress = (TextView) itemView.findViewById(R.id.item_filename);
 //                radioButton = (RadioButton) itemView.findViewById(R.id.radioButton);
             time = (TextView) itemView.findViewById(R.id.size_time);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
         }
     }
 
@@ -74,9 +80,31 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
         holder.time.setText(serviceHistory.getServiceDatetime());
         holder.filePath = serviceHistory.getServiceContent();
-            Glide.with(myContext).
-                    load(GlobalData.GET_IMAGE+serviceHistory.getServiceContent()).
-                    into(holder.imageView);
+        Glide.with(myContext).
+
+                load(GlobalData.GET_IMAGE + serviceHistory.getServiceContent()).
+                placeholder(R.drawable.white).
+                error(R.drawable.white).
+                into(new GlideDrawableImageViewTarget(holder.imageView) {
+                    @Override
+                    public void onLoadStarted(Drawable placeholder) {
+
+                        super.onLoadStarted(placeholder);
+                        holder.progressBar.setVisibility(View.VISIBLE);
+                    }
+                    @Override
+                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+
+                        super.onLoadFailed(e, errorDrawable);
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                        super.onResourceReady(resource, animation);
+                        holder.progressBar.setVisibility(View.GONE);
+                    }
+                });
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

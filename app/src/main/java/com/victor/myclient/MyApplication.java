@@ -39,34 +39,6 @@ public class MyApplication extends Application {
         return context;
     }
 
-//    public static void sendMessage(Message msg) {
-//        handler.sendMessage(msg);
-//    }
-//
-//    public static class DemoHandler extends Handler {
-//
-//        @Override
-//        public void handleMessage(Message msg) {
-//            switch (msg.what) {
-//                case 0:
-//                    if (demoActivity != null) {
-//                        payloadData.append((String) msg.obj);
-//                        payloadData.append("\n");
-//                        if (GetuiSdkDemoActivity.tLogView != null) {
-//                            GetuiSdkDemoActivity.tLogView.append(msg.obj + "\n");
-//                        }
-//                    }
-//                    break;
-//
-//                case 1:
-//                    if (demoActivity != null) {
-//                        if (GetuiSdkDemoActivity.tLogView != null) {
-//                            GetuiSdkDemoActivity.tView.setText((String) msg.obj);
-//                        }
-//                    }
-//                    break;
-//            }
-//        }
-//    }
+
 
 }

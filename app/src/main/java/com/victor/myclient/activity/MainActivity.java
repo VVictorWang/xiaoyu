@@ -3,7 +3,7 @@ package com.victor.myclient.activity;
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.victor.myclient.activity.JujiaActivity;
+import com.victor.myclient.activity.homeservices.ServiceHistoryActivity;
 import com.victor.myclient.utils.GlobalData;
 
 import android.Manifest;
@@ -16,7 +16,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -27,7 +26,6 @@ import com.igexin.sdk.PushManager;
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.service.MyIntentService;
 import com.victor.myclient.service.MyPushService;
-import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.datas.UserInfor;
@@ -37,11 +35,11 @@ import com.victor.myclient.activity.setting.SettingActivity;
 import com.google.gson.Gson;
 import com.thinkcool.circletextimageview.CircleTextImageView;
 
-import java.security.Permission;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import demo.animen.com.xiaoyutask.R;
 
 
 /**
@@ -66,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private android.widget.TextView nametext;
     private android.widget.TextView bangding_xiaoyu_number;
     private CircleTextImageView callothers;
+    private CircleTextImageView services;
     private TextView time_call;
 
     private String xiaoyuNumber;
@@ -141,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.bangding_xiaoyu_number = (TextView) findViewById(R.id.bangding_xiaoyu_number);
         this.nametext = (TextView) findViewById(R.id.name_text);
         this.personimage = (CircleImageView) findViewById(R.id.person_image);
+        services=(CircleTextImageView) findViewById(R.id.services);
         time_call = (TextView) findViewById(R.id.time_call);
         setTime_call();
         userInfor = new UserInfor();
@@ -184,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.call_others).setOnClickListener(this);
         findViewById(R.id.jujia_main).setOnClickListener(this);
         findViewById(R.id.case_for_patient).setOnClickListener(this);
+        services.setOnClickListener(this);
     }
 
     @Override
@@ -211,6 +212,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
                 intent1.putExtra("email", userInfor.getEmail());
                 startActivity(intent1);
+                break;
+            case R.id.services:
+                Intent intent2=new Intent(MainActivity.this, ServiceHistoryActivity.class);
+                intent2.putExtra("id",userInfor.getPatientId());
+                startActivity(intent2);
                 break;
             default:
                 break;

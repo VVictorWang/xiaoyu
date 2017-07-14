@@ -17,7 +17,8 @@
       android:layout_marginTop="0dp"
       android:layout_marginLeft="135dp"
       android:paddingTop="10dp"
-      app:layout_constraintLeft_toLeftOf="parent" />
+      app:layout_constraintLeft_toLeftOf="parent"
+      android:id="@+id/textView" />
 
 
 
@@ -101,7 +102,28 @@
             android:layout_marginEnd="105dp" />
 
 
+    <com.thinkcool.circletextimageview.CircleTextImageView
+        android:id="@+id/services"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/infor_small"
+        app:citv_text_color="#ffffff"
 
+        app:citv_text_size="23sp"
+        app:citv_text_text="上访服务"
+        android:layout_marginEnd="10dp"
+        android:layout_alignRight="@+id/setting_default"
+        android:layout_alignEnd="@+id/setting_default"
+        android:layout_marginLeft="104dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="0.366" />
 
         <com.thinkcool.circletextimageview.CircleTextImageView
             android:id="@+id/call_others"
