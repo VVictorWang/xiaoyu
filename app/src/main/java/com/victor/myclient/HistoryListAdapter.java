@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.victor.myclient.datas.ServiceHistory;
+import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
 import java.util.List;
@@ -72,11 +74,9 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
         holder.time.setText(serviceHistory.getServiceDatetime());
         holder.filePath = serviceHistory.getServiceContent();
-//            Glide.with(myContext).
-//                    load(serviceHistory.getServiceContent()).
-//                    load(new File(serviceHistory.getFilePath())).
-//                    asBitmap().
-//                    into(holder.imageView);
+            Glide.with(myContext).
+                    load(GlobalData.GET_IMAGE+serviceHistory.getServiceContent()).
+                    into(holder.imageView);
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

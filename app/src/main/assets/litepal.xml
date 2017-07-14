@@ -2,7 +2,8 @@
 <litepal>
     <dbname value="xiaoyud" />
 
-    <version value="4"/>
+
+    <version value="5"/>
 
 
     <list>
