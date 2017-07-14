@@ -3,139 +3,84 @@
 
     <item
         is-multidex="true"
-        jar="E:\xiaoyu\app\libs\rxbus-1.0.0.jar"
+        jar="/home/victor/AndroidProject/xiaoyu/app/libs/nemo-java-utils-2.0.0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="93fe0ef9f75d35ae25bd7d7b1cb0edeb3432fcde">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\rxbus-1.0.0_be47c71cb571eb2b6b11c9dd4495fa43e999ec34\classes.dex" />
+        sha1="b6a1de849e2e32b9a80596dc9ca11bca82f5e6bb">
+        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/nemo-java-utils-2.0.0_457cf93a704e2c7adbbb09b60f8774463dd02056/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="E:\xiaoyu\app\libs\signature.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="376df33874367b8b5e22ea926b2902a87d7f33a5">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\signature_d82d1cfce0f067d08d595db0f8b456be0fac956f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\8cf0ed40b2114dea2bddb9e95bdd5f8ff74068dd\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_318b3ca27dff60e56fcdaf094fbe0b1a49115d1e\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\1024c69e7134c4c9f0c9464824f8f9cda7af9518\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_7194c109fea20c6e56e8610f24f17286e98be573\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\6770ed2118f74bd18bdae46ae207189763a26180\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e7c2bf694083e34f4bea5a100d2846118994118a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\xiaoyu\app\libs\rxjava-1.1.3.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="5a1aef6a9d56efb473b8be6b66689077e7317c45">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\rxjava-1.1.3_c07d40dde39f89607276c5417d9d05406d7401ac\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\5f4a85d51c817209d1311ba3fc34c7cc94e649f2\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a6f8af7ab2685887f586d793860b2f7ce6d3f7a2\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\xiaoyu\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_f804a7a01e7da961918135370b5c857069b2b8e5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\3edfefff28bbdd42cd383c80861397a521954e3b\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="1fc708e023161b0dd4d6fa6e7c3dee593c920b55">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ad8053130beede0ea71a02792f3a1c20786eb440\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\6eb90df597da107f85719562e37fbea8c4cb4189\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2d610b518842f0f7e2563e58729cba83c8b9be8f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\xiaoyu\app\libs\nemo-websocket.jar"
+        jar="/home/victor/AndroidProject/xiaoyu/app/libs/nemo-websocket.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="a4ed2b0f6b15861281016cedcc09b5523707df39">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\nemo-websocket_ea6232cbe3c8fd0bb629b2442b8ae48181a600e8\classes.dex" />
+        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/nemo-websocket_16658e1635542c8281ee543281468dee5da8fc92/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\aac715d2b8fc011cbf9973528f9e8ae813047d3c\output\jars\classes.jar"
+        jar="/home/victor/AndroidProject/xiaoyu/app/libs/nemosdk.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_162a16757cea9eeac1dcc6201c3880faa093c05a\classes.dex" />
+        sha1="b510d14c0330502a4374b043517b2eb402cc3a68">
+        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/nemosdk_322090d196798efbba28c62870492e01009ab820/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="E:\xiaoyu\app\libs\nemosdk.jar"
+        jar="/home/victor/AndroidProject/xiaoyu/app/libs/signature.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-<<<<<<< HEAD
-        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
-        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ee75dd577a793909bc0ebb0aeba72bf88100d58a/classes.dex" />
+        sha1="376df33874367b8b5e22ea926b2902a87d7f33a5">
+        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/signature_3386a67ce17750a4f92a4990b0fb77d0932b20a3/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/victor/.android/build-cache/920db844fb207b0e8bc8059e2725b2e96d6661c1/output/jars/classes.jar"
+        jar="/home/victor/AndroidProject/xiaoyu/app/libs/rxbus-1.0.0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="1e346707e4770db216049a532ab3eb5e317cf82a">
-        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_93db25bf942e99109e59ee88f27a594135083c54/classes.dex" />
+        sha1="93fe0ef9f75d35ae25bd7d7b1cb0edeb3432fcde">
+        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/rxbus-1.0.0_629b7948719a03b5bb87f4c706b1d7ec69908e3c/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/home/victor/.android/build-cache/b9349668a5919ac72da356450a548fb808ae8994/output/jars/classes.jar"
+        jar="/home/victor/AndroidProject/xiaoyu/app/libs/rxandroid.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d76fc11a42fb77a39580102dc6eb81ee9f2affb5/classes.dex" />
+        sha1="d4c4b83de2f6412072d2a29b1b7a5b03edaad5ff">
+        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/rxandroid_16e6736d11f7e7836950ea87a5e61a543aeabff6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/AndroidProject/xiaoyu/app/libs/rxjava-1.1.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5a1aef6a9d56efb473b8be6b66689077e7317c45">
+        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/rxjava-1.1.3_4c1f4455a64b6263ab6a4d607aba23ecdb12bd7b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/AndroidProject/xiaoyu/app/libs/nemo-json-gson-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="86bc9a5192765e1dd00e21a3bee40a371e008578">
+        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/2/nemo-json-gson-1.0.0_f6bc077f0d809bcb68de14c6f2d7e2821e2485c6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_8db1293658bd869e967bb0a632f746a0e85a7b72/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -143,147 +88,8 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="119a1f5eca0fa27907a58d5ace4dd6079480dc5f">
+        sha1="05a91f8413a4b5c1cba77ebae37fe0548c028fab">
         <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c776d3d25450a5432b1073999f1d02cc540d3af2/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/victor/.android/build-cache/77a6f92a621b0efb15a96fe3de7b99a5e5333570/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0550ce000895817e83e613b9c369cbcbaabd0672/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/victor/.android/build-cache/973e7831c0f8fc847eb9691d37282367ae486a62/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="1e7566849e699d836e88fb98a71bb0d5e1988279">
-        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ee82b72e707c60fe262878eb1e6294b0f396c5cb/classes.dex" />
-=======
-        sha1="b510d14c0330502a4374b043517b2eb402cc3a68">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\nemosdk_7a3bb01efb0add952cd5823702f86fb712ad8fc1\classes.dex" />
->>>>>>> 3fe328fa542b030733649f814ddbac485611b633
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\xiaoyu\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="05ecd0bc9a365c1a12a68b2d01c551718d3562c2">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_cd23659df67f23e46d9ae17e35c78fc995f7a7e9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\19183d4e82e7359de22ae7136015ad8a118ca272\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2037f9093d93fe76216559ee34965961801a6140\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\b6d76660126be8d29ed2827ff88cf9ac159fd372\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d2bf2ad024dfa60a60bb59b8bee5d4d8390d2fed\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\ceb572572526498f4a8cb878256528b5d6e14c7c\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="95519720620b553f63afc789beba9ad582807f7c">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c3f72d59f306bf640dd4bfd0c0eff8e54b959841\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\xiaoyu\app\libs\nemo-java-utils-2.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b6a1de849e2e32b9a80596dc9ca11bca82f5e6bb">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\nemo-java-utils-2.0.0_36bbc78a5f77e53f8e9b047323bc39d2e9c182ec\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\0eab1f63ba84514713623200b36e227500cec893\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d10cc8121b252a09da8ee537ed5386b7ca476923">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_08cdc64ab9dbbf447dc6c1a095fbcfe47f1cd09c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\xiaoyu\app\libs\nemo-json-gson-1.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="86bc9a5192765e1dd00e21a3bee40a371e008578">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\nemo-json-gson-1.0.0_a700a1a45b23ac2b8dc2f18ed95b667f3471b003\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\d078861f0085e77e546c07c5527a81abdf337fa5\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4bf77923b732baf57fb2aad55430f967f686b68b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\ea036ca8660b64410871b6dce5c239c75e3c7107\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ef5ccb151edf7d9b0bf319d2021cccb847f3214f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\02bf8d7c88b43084b59518940e13bfa7139b29c6\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9fe6f06a23cc97b19735689b1a55a59a2241d11f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\xiaoyu\app\libs\rxandroid.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d4c4b83de2f6412072d2a29b1b7a5b03edaad5ff">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\rxandroid_34548794b2affe2f76722f695d47b6ada2e3b521\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.3.1_0996a8c65317246fdce2bc64bbd1db057a5118aa\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\victor\.android\build-cache\0cc77a421ace84be0b946770c4edf662a2420b64\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
-        <dex dex="E:\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_afc3e57892287c4d8b860da0905f121e2cf4a437\classes.dex" />
     </item>
 
 </items>

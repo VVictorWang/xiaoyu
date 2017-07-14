@@ -37,36 +37,36 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.victor.myclient.ui.activity.MainActivity" />
-        <activity android:name="com.victor.myclient.ui.activity.contact.ContactActivity" />
-        <activity android:name="com.victor.myclient.ui.activity.JujiaActivity" />
-        <activity android:name="com.victor.myclient.ui.activity.login.LoginActivity" />
+        <activity android:name="com.victor.myclient.activity.MainActivity" />
+        <activity android:name="com.victor.myclient.activity.contact.ContactActivity" />
+        <activity android:name="com.victor.myclient.activity.JujiaActivity" />
+        <activity android:name="com.victor.myclient.activity.login.LoginActivity" />
 
         <service android:name="com.victor.myclient.service.IncomingCallService" />
 
-        <activity android:name="com.victor.myclient.ui.activity.setting.SettingActivity" />
-        <activity android:name="com.victor.myclient.ui.activity.cases.CaseListActivity"/>
-        <activity android:name="com.victor.myclient.ui.activity.cases.CaseDetailActivity"/>
-        <activity android:name="com.victor.myclient.ui.activity.login.RegisterFirstActivity" />
-        <activity android:name="com.victor.myclient.ui.activity.login.RegisterLastActivity" />
-        <activity android:name="com.victor.myclient.ui.activity.setting.ChangeXiaoYuActivity" />
-        <activity android:name="com.victor.myclient.ui.activity.setting.ChangeEmailActivity" />
+        <activity android:name="com.victor.myclient.activity.setting.SettingActivity" />
+        <activity android:name="com.victor.myclient.activity.cases.CaseListActivity"/>
+        <activity android:name="com.victor.myclient.activity.cases.CaseDetailActivity"/>
+        <activity android:name="com.victor.myclient.activity.login.RegisterFirstActivity" />
+        <activity android:name="com.victor.myclient.activity.login.RegisterLastActivity" />
+        <activity android:name="com.victor.myclient.activity.setting.ChangeXiaoYuActivity" />
+        <activity android:name="com.victor.myclient.activity.setting.ChangeEmailActivity" />
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen" />
-        <activity android:name="com.victor.myclient.ui.activity.FirstActivity">
+        <activity android:name="com.victor.myclient.activity.FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.victor.myclient.ui.activity.cases.DoctorActivity" />
-        <activity android:name="com.victor.myclient.ui.activity.contact.NewContactorActivity" />
-        <activity android:name="com.victor.myclient.ui.activity.xiaoyu.VideoActivity"
+        <activity android:name="com.victor.myclient.activity.cases.DoctorActivity" />
+        <activity android:name="com.victor.myclient.activity.contact.NewContactorActivity" />
+        <activity android:name="com.victor.myclient.activity.xiaoyu.VideoActivity"
            />
-        <activity android:name="com.victor.myclient.ui.activity.xiaoyu.IncommingAcivity" />
-        <activity android:name="com.victor.myclient.ui.activity.login.ForgetPwdActivity" />
+        <activity android:name="com.victor.myclient.activity.xiaoyu.IncommingAcivity" />
+        <activity android:name="com.victor.myclient.activity.login.ForgetPwdActivity" />
     </application>
 
 </manifest>
