@@ -42,6 +42,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import demo.animen.com.xiaoyutask.R;
 
 
 /**
