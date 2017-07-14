@@ -19,6 +19,8 @@ import com.ainemo.sdk.otf.ConnectNemoCallback;
 import com.ainemo.sdk.otf.NemoSDK;
 import com.igexin.sdk.PushManager;
 import com.victor.myclient.ActivityManage;
+import com.victor.myclient.ServiceHistoryActivity;
+import com.victor.myclient.datas.ServiceHistory;
 import com.victor.myclient.service.MyIntentService;
 import com.victor.myclient.service.MyPushService;
 import com.victor.myclient.utils.GlobalData;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private android.widget.TextView nametext;
     private android.widget.TextView bangding_xiaoyu_number;
     private CircleTextImageView callothers;
+    private CircleTextImageView services;
     private TextView time_call;
 
     private String xiaoyuNumber;
@@ -135,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.bangding_xiaoyu_number = (TextView) findViewById(R.id.bangding_xiaoyu_number);
         this.nametext = (TextView) findViewById(R.id.name_text);
         this.personimage = (CircleImageView) findViewById(R.id.person_image);
+        this.services=(CircleTextImageView) findViewById(R.id.services);
         time_call = (TextView) findViewById(R.id.time_call);
         setTime_call();
         userInfor = new UserInfor();
@@ -177,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.call_others).setOnClickListener(this);
         findViewById(R.id.jujia_main).setOnClickListener(this);
         findViewById(R.id.case_for_patient).setOnClickListener(this);
+        services.setOnClickListener(this);
     }
 
     @Override
@@ -204,6 +209,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
                 intent1.putExtra("email", userInfor.getEmail());
                 startActivity(intent1);
+                break;
+            case R.id.services:
+                Intent intent2=new Intent(MainActivity.this, ServiceHistoryActivity.class);
+                intent2.putExtra("id",userInfor.getPatientId());
+                startActivity(intent2);
                 break;
             default:
                 break;
