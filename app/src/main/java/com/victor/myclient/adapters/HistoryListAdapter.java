@@ -1,6 +1,6 @@
 package com.victor.myclient.adapters;
 
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -50,7 +50,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         private TextView nameAndAddress;
         private TextView time;
         private ProgressBar progressBar;
-        //            private RadioButton radioButton;
+
         private String filePath;
 
         public ViewHolder(View itemView) {
@@ -58,7 +58,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
             view = itemView;
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             nameAndAddress = (TextView) itemView.findViewById(R.id.item_filename);
-//                radioButton = (RadioButton) itemView.findViewById(R.id.radioButton);
+
             time = (TextView) itemView.findViewById(R.id.size_time);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
         }
@@ -67,7 +67,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.image_adapter, null);
+        View view = inflater.inflate(R.layout.item_image_adapter, null);
         ViewHolder holder = new ViewHolder(view);
         return holder;
 
@@ -81,7 +81,6 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         holder.time.setText(serviceHistory.getServiceDatetime());
         holder.filePath = serviceHistory.getServiceContent();
         Glide.with(myContext).
-
                 load(GlobalData.GET_IMAGE + serviceHistory.getServiceContent()).
                 placeholder(R.drawable.white).
                 error(R.drawable.white).
@@ -108,30 +107,9 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                    Intent intent=new Intent(myContext,ActivityVideoPlayer.class);
-//                    intent.putExtra("path",holder.filePath);
-//                    myContext.startActivity(intent);
+                myClickListener.onItemClick(holder.getPosition());
             }
         });
-//            holder.view.setOnLongClickListener(new OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View view) {
-//                    int position=holder.getAdapterPosition();
-//                    myClickListener.onLongCLick(position);
-//                    return true;
-//                }
-//            });
-//            holder.radioButton.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int position=holder.getAdapterPosition();
-//                    list.get(position).setChecked(!list.get(position).isChecked());
-//                    holder.radioButton.setChecked(list.get(position).isChecked());
-//                    myClickListener.onItemClick(position);
-//                }
-//            });
-//            holder.radioButton.setVisibility(serviceHistory.isRadioBtnShow()?View.VISIBLE:View.GONE);
-//            holder.radioButton.setChecked(serviceHistory.isChecked());
     }
 
     @Override
@@ -147,7 +125,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
     public interface MyClickListener {
         void onItemClick(int position);
-//            void onLongCLick(int position);
+
     }
 }
 
