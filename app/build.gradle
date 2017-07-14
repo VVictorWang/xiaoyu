@@ -67,5 +67,5 @@ dependencies {
 
 
     compile 'com.getui:sdk:2.10.2.0'
-
+    compile 'com.github.bumptech.glide:glide:3.5.2'
 }

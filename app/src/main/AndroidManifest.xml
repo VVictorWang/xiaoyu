@@ -43,41 +43,45 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
 
         <activity android:name="com.victor.myclient.activity.MainActivity"
-          android:launchMode="singleTask"
+          android:launchMode="singleTask" android:screenOrientation="portrait"
             />
-        <activity android:name="com.victor.myclient.activity.contact.ContactActivity" />
-        <activity android:name="com.victor.myclient.activity.JujiaActivity" />
-        <activity android:name="com.victor.myclient.activity.login.LoginActivity" />
+        <activity android:name="com.victor.myclient.activity.contact.ContactActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.victor.myclient.activity.JujiaActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.victor.myclient.activity.login.LoginActivity" android:screenOrientation="portrait"/>
 
-        <service android:name="com.victor.myclient.service.IncomingCallService" />
+        <service android:name="com.victor.myclient.service.IncomingCallService" android:screenOrientation="portrait"/>
 
-        <activity android:name="com.victor.myclient.activity.setting.SettingActivity" />
-        <activity android:name="com.victor.myclient.activity.cases.CaseListActivity"/>
-        <activity android:name="com.victor.myclient.activity.cases.CaseDetailActivity"/>
-        <activity android:name="com.victor.myclient.activity.login.RegisterFirstActivity" />
-        <activity android:name="com.victor.myclient.activity.login.RegisterLastActivity" />
-        <activity android:name="com.victor.myclient.activity.setting.ChangeXiaoYuActivity" />
-        <activity android:name="com.victor.myclient.activity.setting.ChangeEmailActivity" />
+        <activity android:name="com.victor.myclient.activity.setting.SettingActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.victor.myclient.activity.cases.CaseListActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.victor.myclient.activity.cases.CaseDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.victor.myclient.activity.login.RegisterFirstActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.victor.myclient.activity.login.RegisterLastActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.victor.myclient.activity.setting.ChangeXiaoYuActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.victor.myclient.activity.setting.ChangeEmailActivity" android:screenOrientation="portrait"/>
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
-            android:theme="@style/ImagePickerThemeFullScreen" />
-        <activity android:name="com.victor.myclient.activity.FirstActivity">
+            android:theme="@style/ImagePickerThemeFullScreen"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="com.victor.myclient.activity.FirstActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.victor.myclient.activity.cases.DoctorActivity" />
-        <activity android:name="com.victor.myclient.activity.contact.NewContactorActivity" />
+        <activity android:name="com.victor.myclient.activity.cases.DoctorActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.victor.myclient.activity.contact.NewContactorActivity" android:screenOrientation="portrait" />
         <activity android:name="com.victor.myclient.activity.xiaoyu.VideoActivity"
            />
         <activity android:name="com.victor.myclient.activity.xiaoyu.IncommingAcivity" />
-        <activity android:name="com.victor.myclient.activity.login.ForgetPwdActivity" />
+        <activity android:name="com.victor.myclient.activity.login.ForgetPwdActivity" android:screenOrientation="portrait"/>
 
+        <activity android:name="com.victor.myclient.ServiceHistoryActivity" android:screenOrientation="portrait"/>
 
         <service android:name="com.victor.myclient.service.MyPushService"
             android:exported="true"

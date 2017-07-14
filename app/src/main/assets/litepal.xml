@@ -2,7 +2,7 @@
 <litepal>
     <dbname value="xiaoyud" ></dbname>
 
-    <version value="3" >
+    <version value="4" >
 
     </version>
 
@@ -15,5 +15,6 @@
         <mapping class="com.victor.myclient.datas.UserAcitivityInfo"/>
         <mapping class="com.victor.myclient.datas.OneKeyWarning"/>
         <mapping class="com.victor.myclient.datas.DoctorXiaoYu"/>
+        <mapping class="com.victor.myclient.datas.ServiceHistory"/>
     </list>
 </litepal>
