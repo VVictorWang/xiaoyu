@@ -38,4 +38,6 @@ public interface GlobalData {
     String GET_DOCTOR_XIAO_YU = "http://139.196.40.97/OSAdmin-master/uploads/interface/getDoctorXiaoyuNum.php?doctorId=";
     String GET_PATIENT_IMAGE = "http://139.196.40.97/upload/patientimage/";
     String GET_DOCTOR_IMAGE = "http://139.196.40.97/upload/doctorimage/";
+    String GET_IMAGE="http://139.196.40.97/upload/serviceimage/";
+    String GET_SERVICE_HISTORY="http://139.196.40.97/OSAdmin-master/uploads/interface/getServiceHistory.php?patientId=";
 }

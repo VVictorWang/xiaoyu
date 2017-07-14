@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
+<<<<<<< HEAD
     <dbname value="xiaoyud" />
+=======
+    <dbname value="xiaoyud" ></dbname>
+
+    <version value="4" >
+
+    </version>
+>>>>>>> chen
 
     <version value="3" />
     <list>
@@ -12,5 +20,6 @@
         <mapping class="com.victor.myclient.datas.UserAcitivityInfo"/>
         <mapping class="com.victor.myclient.datas.OneKeyWarning"/>
         <mapping class="com.victor.myclient.datas.DoctorXiaoYu"/>
+        <mapping class="com.victor.myclient.datas.ServiceHistory"/>
     </list>
 </litepal>

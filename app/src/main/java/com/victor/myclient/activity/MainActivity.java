@@ -1,4 +1,6 @@
 package com.victor.myclient.activity;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.ainemo.sdk.otf.ConnectNemoCallback;
 import com.ainemo.sdk.otf.NemoSDK;
 import com.victor.myclient.ActivityManage;
+import com.victor.myclient.activity.JujiaActivity;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;

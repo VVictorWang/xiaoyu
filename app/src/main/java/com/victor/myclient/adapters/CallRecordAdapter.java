@@ -1,4 +1,7 @@
 package com.victor.myclient.adapters;
+import android.support.v7.widget.RecyclerView;
+
+import com.victor.myclient.datas.CallRecord;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
