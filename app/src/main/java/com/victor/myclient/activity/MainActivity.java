@@ -1,12 +1,20 @@
 package com.victor.myclient.activity;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
+import android.support.v7.app.AppCompatActivity;
+
+import com.victor.myclient.activity.JujiaActivity;
+import com.victor.myclient.utils.GlobalData;
+
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +22,10 @@ import android.widget.TextView;
 
 import com.ainemo.sdk.otf.ConnectNemoCallback;
 import com.ainemo.sdk.otf.NemoSDK;
+import com.igexin.sdk.PushManager;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.activity.JujiaActivity;
+import com.victor.myclient.service.MyIntentService;
+import com.victor.myclient.service.MyPushService;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
@@ -26,6 +36,7 @@ import com.victor.myclient.activity.setting.SettingActivity;
 import com.google.gson.Gson;
 import com.thinkcool.circletextimageview.CircleTextImageView;
 
+import java.security.Permission;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -61,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean net_work_available, has_data;
 
     private UserInfor userInfor;
+    private final static int REQUEST_PERMISSION = 1000;
 
     @Override
     protected void onResume() {
@@ -73,6 +85,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PackageManager packageManager = getPackageManager();
+        boolean sdCardWritePermission = packageManager.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, getPackageName()) == PackageManager.PERMISSION_GRANTED;
+        boolean phoneStatePermission = packageManager.checkPermission(Manifest.permission.READ_PHONE_STATE, getPackageName()) == PackageManager.PERMISSION_GRANTED;
+
+        if (Build.VERSION.SDK_INT >= 23 && !sdCardWritePermission || !phoneStatePermission) {
+            requestPermission();
+        } else {
+            PushManager.getInstance().initialize(this.getApplicationContext(), MyPushService.class);
+        }
+
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), MyIntentService.
+                class);
+
         ActivityManage.getInstance().pushActivity(MainActivity.this);
         initData();
         initView();
@@ -118,6 +143,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         time_call = (TextView) findViewById(R.id.time_call);
         setTime_call();
         userInfor = new UserInfor();
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE},
+                REQUEST_PERMISSION);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION) {
+            if (grantResults.length == 2 || grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                PushManager.getInstance().initialize(this.getApplicationContext(), MyPushService.class);
+            } else {
+                Utils.showShortToast(this, "建议您开启这些权限以便于获得更好的体验");
+                PushManager.getInstance().initialize(this.getApplicationContext(), MyPushService.class);
+            }
+        }
     }
 
     private void setTime_call() {
@@ -225,14 +268,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (has_data) {
-                nametext.setText(userInfor.getName());
-                if (userInfor.getImage() != null) {
-                    bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + userInfor.getImage());
+            if (s != null) {
+                if (has_data) {
+                    nametext.setText(userInfor.getName());
+                    if (userInfor.getImage() != null) {
+                        bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + userInfor.getImage());
+                    }
                 }
             }
         }
-
 
         @Override
         protected void onPreExecute() {

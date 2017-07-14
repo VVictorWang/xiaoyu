@@ -1,12 +1,11 @@
 package com.victor.myclient.adapters;
-import android.support.v7.widget.RecyclerView;
-
-import com.victor.myclient.datas.CallRecord;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +29,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
     private List<CallRecord> callRecordList;
     private Context context;
 
-     class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         private CircleImageView head;
         private TextView name;
@@ -40,7 +39,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
         private TextView date;
         private ImageView callType;
 
-         ViewHolder(View view) {
+        public ViewHolder(View view) {
             super(view);
             head = (CircleImageView) view.findViewById(R.id.record_icon);
             name = (TextView) view.findViewById(R.id.record_title);
@@ -79,29 +78,29 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
             num += callRecord.getXiaoyuId();
         }
         holder.number.setText(num);
-        if (holder.date.getText() == null || holder.date.getText().equals("")) {
-            String dateString = "";
-            if (null != callRecord.getDate()) {
-                Calendar mCalender = Calendar.getInstance();
-                SimpleDateFormat formater = new SimpleDateFormat("yyyy年MM月dd日");
-                Date curDate = new Date(System.currentTimeMillis());
-                Date yesterday = curDate;
-                mCalender.setTime(curDate);
-                int day = mCalender.get(Calendar.DATE);
-                mCalender.set(Calendar.DATE, day - 1);
-                String yesterdayString = formater.format(mCalender.getTime());
-                String curString = formater.format(curDate);
-                String callString = formater.format(callRecord.getDate());
-                if (curString.equals(callString)) {
-                    dateString = new String("今天");
-                } else if (yesterdayString.equals(callString)) {
-                    dateString = new String("昨天");
-                } else {
-                    dateString = callString;
-                }
+//    if (holder.date.getText() == null || holder.date.getText().equals("")) {
+        String dateString = "";
+        if (null != callRecord.getDate()) {
+            Calendar mCalender = Calendar.getInstance();
+            SimpleDateFormat formater = new SimpleDateFormat("yyyy年MM月dd日");
+            Date curDate = new Date(System.currentTimeMillis());
+            Date yesterday = curDate;
+            mCalender.setTime(curDate);
+            int day = mCalender.get(Calendar.DATE);
+            mCalender.set(Calendar.DATE, day - 1);
+            String yesterdayString = formater.format(mCalender.getTime());
+            String curString = formater.format(curDate);
+            String callString = formater.format(callRecord.getDate());
+            if (curString.equals(callString)) {
+                dateString = new String("今天");
+            } else if (yesterdayString.equals(callString)) {
+                dateString = new String("昨天");
+            } else {
+                dateString = callString;
             }
-            holder.date.setText(dateString);
         }
+        holder.date.setText(dateString);
+//    }
     }
 
     @Override
@@ -113,6 +112,18 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_call_record, parent, false);
-        return new ViewHolder(view);
+        ViewHolder holder = new ViewHolder(view);
+        view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+        view.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return false;
+            }
+        });
+        return holder;
     }
 }
