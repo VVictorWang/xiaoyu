@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.ainemo.sdk.otf.NemoReceivedCallListener;
 import com.ainemo.sdk.otf.NemoSDK;
-import com.victor.myclient.activity.xiaoyu.IncommingAcivity;
+import com.victor.myclient.ui.activity.xiaoyu.IncommingAcivity;
 
 /**
  * Created by 小武哥 on 2017/4/29.

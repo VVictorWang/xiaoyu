@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#24d0fd"
     android:orientation="vertical"
-    tools:context="com.victor.myclient.activity.MainActivity">
+    tools:context="com.victor.myclient.ui.activity.MainActivity">
   <TextView
     android:layout_width="wrap_content"
       android:layout_height="30dp"

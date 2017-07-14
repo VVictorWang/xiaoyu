@@ -65,6 +65,11 @@ public class Utils {
         activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
+    public static void startActivity(Activity activity, Intent intent) {
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
     public static boolean isNetWorkAvailabe(Context context) {
         if (context.checkCallingOrSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
             return false;
