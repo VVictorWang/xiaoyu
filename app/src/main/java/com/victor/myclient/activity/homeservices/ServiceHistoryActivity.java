@@ -2,17 +2,22 @@ package com.victor.myclient.activity.homeservices;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.adapters.HistoryListAdapter;
 import com.victor.myclient.datas.ServiceHistory;
 import com.victor.myclient.utils.GlobalData;
@@ -40,14 +45,16 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
     private HistoryListAdapter adapter;
     private Context context;
     private HistoryListAdapter.MyClickListener clickListener;
-    private ImageView imageView;
+//    private ImageView imageView;
 
     private static final String TAG = "ServiceHistoryActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_history);
+
         context = this;
         clickListener = this;
         patientId = Integer.parseInt(getIntent().getStringExtra("id"));
@@ -62,7 +69,7 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
         recyclerView = (RecyclerView) findViewById(R.id.list);
         GridLayoutManager manager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(manager);
-        imageView = (ImageView) findViewById(R.id.imageView);
+//        imageView = (ImageView) findViewById(R.id.imageView);
         list = new ArrayList<>();
         adapter = new HistoryListAdapter(list, this, this);
         recyclerView.setAdapter(adapter);
@@ -79,23 +86,22 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
     @Override
     public void onItemClick(int position) {
         android.util.Log.d(TAG, "onItemClick: position =" + position);
-        Glide.with(this).
-                load(GlobalData.GET_IMAGE + list.get(position).getServiceContent()).
-                fitCenter().
-                error(R.drawable.backspace_number).
-                into(imageView);
-        recyclerView.setVisibility(View.GONE);
-        imageView.setVisibility(View.VISIBLE);
+
+        Intent intent=new Intent(ServiceHistoryActivity.this,ImageDetailActivity.class);
+        intent.putExtra("url",GlobalData.GET_IMAGE + list.get(position).getServiceContent());
+        startActivity(intent);
     }
+
+
 
     @Override
     public void onBackPressed() {
-        if (imageView.getVisibility() == View.VISIBLE) {
-            recyclerView.setVisibility(View.VISIBLE);
-            imageView.setVisibility(View.GONE);
-        } else {
+//        if (imageView.getVisibility() == View.VISIBLE) {
+//            recyclerView.setVisibility(View.VISIBLE);
+//            imageView.setVisibility(View.GONE);
+//        } else {
             super.onBackPressed();
-        }
+//        }
     }
 
     class GetServiceTask extends AsyncTask<Void, Void, Void> {
@@ -108,10 +114,11 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
                         Utils.sendRequest(GlobalData.GET_SERVICE_HISTORY + patientId);
                 android.util.Log.d(TAG, "doInBackground: sendRequest=" + sendRequest);
                 if (!(sendRequest == null || sendRequest.contains("param_error") || sendRequest.contains("not_exist"))) {
-//                    list = gson.fromJson(sendRequest, new TypeToken<List<ServiceHistory>>() {}.getType());
-                    ServiceHistory serviceHistory = gson.fromJson(sendRequest, ServiceHistory.class);
-                    list = new ArrayList<>();
-                    list.add(serviceHistory);
+                    list = gson.fromJson(sendRequest, new TypeToken<List<ServiceHistory>>() {
+                    }.getType());
+//                    ServiceHistory serviceHistory = gson.fromJson(sendRequest, ServiceHistory.class);
+//                    list = new ArrayList<>();
+//                    list.add(serviceHistory);
 
                 } else {
                     list = null;

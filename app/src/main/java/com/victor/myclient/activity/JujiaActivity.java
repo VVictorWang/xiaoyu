@@ -85,6 +85,7 @@ public class JujiaActivity extends FragmentActivity {
         room_status.setBackground(jiujia_selected);
         person_status.setBackground(jiujia_normal);
         warning_infor.setBackground(jiujia_normal);
+
         one.setCustomView(room_status_parent);
         two.setCustomView(person_status_parent);
         three.setCustomView(warning_infor_parent);

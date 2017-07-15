@@ -78,6 +78,10 @@ public class Utils {
             if (connectivityManager == null) {
                 showShortToast(context, "不能得到系统网络服务");
             } else {
+//                NetworkInfo info=connectivityManager.getActiveNetworkInfo();
+//                if(info!=null&&info.getState()== NetworkInfo.State.CONNECTED){
+//                    return true;
+//                }
                 NetworkInfo[] infos = connectivityManager.getAllNetworkInfo();
                 if (infos != null) {
                     for (int i = 0; i < infos.length; i++) {

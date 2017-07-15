@@ -206,15 +206,15 @@ class BesselChartView extends View {
         paint1.setStrokeWidth(20);
 
         paint1.setAlpha(255);
-
-        for (Point point : calculator.maxPoints) {
+        Point point=calculator.maxPoints;
+        if(point!=null) {
             if (point != null && point.willDrawing && point.valueY > 0) {
                 LinearGradient linearGradient = new LinearGradient(point.x, point.y, point.x,
                         (float) calculator.yAxisHeight, style.getVerticalLineColor(),
                         0x00ffffff,
                         TileMode.MIRROR);
                 paint1.setShader(linearGradient);
-                canvas.drawRect(point.x-5, point.y, point.x+5, calculator.yAxisHeight, paint1);
+                canvas.drawRect(point.x - 5, point.y, point.x + 5, calculator.yAxisHeight, paint1);
             }
         }
     }
@@ -252,7 +252,7 @@ class BesselChartView extends View {
                         paint.setAlpha(255);
                     }
                 }
-            }else {Point pointMax =calculator.maxPoints.get(0);
+            }else {Point pointMax =calculator.maxPoints;
                 if (pointMax.willDrawing) {
                     paint.setAlpha(80);
                     canvas.drawCircle(pointMax.x, pointMax.y, 10, paint);
@@ -315,7 +315,7 @@ class BesselChartView extends View {
         paint.setStrokeWidth(3);
         paint.setColor(style.getRaiseTemColor());
         paint.setTextSize(style.getRaiseTemTextSize());
-        paint.setTextAlign(Align.CENTER);
+        paint.setTextAlign(Align.LEFT);
 //    float endCoordinateX = calculator.xAxisWidth;
 //    float coordinateY = getHeight() - calculator.xAxisHeight;
 //    canvas.drawLine(0, coordinateY, endCoordinateX, coordinateY, paint);
