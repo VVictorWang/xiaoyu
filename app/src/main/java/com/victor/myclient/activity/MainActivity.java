@@ -229,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected String doInBackground(String... params) {
             if (net_work_available) {
+
                 userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR + "FamilyName=" + user_name), UserInfor.class);
                 Utils.putValue(MainActivity.this, GlobalData.NAME, userInfor.getName());
                 Utils.putValue(MainActivity.this, GlobalData.USer_email, userInfor.getEmail());

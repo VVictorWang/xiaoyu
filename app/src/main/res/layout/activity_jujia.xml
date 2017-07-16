@@ -17,13 +17,12 @@
         style="@style/MyTabLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="130dp"
+        android:layout_gravity="center_horizontal"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp"
-
         app:tabContentStart="0dp"
         app:tabSelectedTextColor="#FF4081"
         app:tabTextColor="#000">
-
     </android.support.design.widget.TabLayout>
 
 </LinearLayout>

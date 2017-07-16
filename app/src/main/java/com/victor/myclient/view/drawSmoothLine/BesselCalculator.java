@@ -57,7 +57,8 @@ class BesselCalculator {
     /**
      * 最高点
      */
-    public List<Point> maxPoints = new ArrayList<>();
+    public Point maxPoints = new Point();
+
     public String maxTemperature;
     public String minTemperature;
     public String raiseTemperature;
@@ -342,7 +343,7 @@ class BesselCalculator {
             });
             int i = 0;
             while (i < temp.size() && temp.get(0).valueY == temp.get(i).valueY) {
-                maxPoints.add(temp.get(i));
+                maxPoints=temp.get(i);
                 i++;
             }
             maxTemperature = String.format("%.1f",temp.get(0).valueY)+ "℃";

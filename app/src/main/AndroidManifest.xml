@@ -47,7 +47,7 @@
         >
 
         <activity android:name="com.victor.myclient.activity.MainActivity"
-          android:launchMode="singleTask" android:screenOrientation="portrait"
+          android:launchMode="singleInstance" android:screenOrientation="portrait"
             />
         <activity android:name="com.victor.myclient.activity.contact.ContactActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.victor.myclient.activity.JujiaActivity" android:screenOrientation="portrait"/>
@@ -82,7 +82,8 @@
         <activity android:name="com.victor.myclient.activity.login.ForgetPwdActivity" android:screenOrientation="portrait"/>
 
         <activity android:name="com.victor.myclient.activity.homeservices.ServiceHistoryActivity" android:screenOrientation="portrait"/>
-        
+
+        <activity android:name="com.victor.myclient.activity.homeservices.ImageDetailActivity" android:screenOrientation="portrait"/>
         <service android:name="com.victor.myclient.service.MyPushService"
             android:exported="true"
             android:label="PushService"

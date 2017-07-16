@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -61,3 +62,57 @@
         android:layout_height="match_parent"
         android:visibility="gone"/>
 </RelativeLayout>
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#24d0fd">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/back"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:paddingLeft="6dp"
+            android:src="@drawable/backwards_iamge"
+            android:layout_marginLeft="2dp"
+
+            android:layout_marginTop="5dp" />
+        <TextView
+            android:id="@+id/back_to_main_image_background_setting_text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingTop="14dp"
+            android:text="主页"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/backButton"
+            android:layout_toEndOf="@+id/backButton" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="14dp"
+            android:text="上访服务"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="35dp" />
+
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>
+>>>>>>> chen

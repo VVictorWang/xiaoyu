@@ -36,8 +36,7 @@ public class FirstActivity extends AppCompatActivity {
             } else {
                 intent.setClass(FirstActivity.this, LoginActivity.class);
             }
-            startActivity(intent);
-            overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+            Utils.startActivity(FirstActivity.this, intent);
             Utils.finishActivity(FirstActivity.this);
         }
     };

@@ -84,7 +84,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         Glide.with(myContext).
                 load(GlobalData.GET_IMAGE + serviceHistory.getServiceContent()).
                 placeholder(R.drawable.white).
-                error(R.drawable.white).
+                error(R.drawable.image_load_error).
                 into(new GlideDrawableImageViewTarget(holder.imageView) {
                     @Override
                     public void onLoadStarted(Drawable placeholder) {
