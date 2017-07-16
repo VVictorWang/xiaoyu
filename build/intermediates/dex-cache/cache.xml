@@ -3,104 +3,11 @@
 
     <item
         is-multidex="true"
-        jar="/home/victor/.android/build-cache/298c4c3fd09dfada86513b0107266e81c2edd217/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-<<<<<<< HEAD
-=======
-        sha1="2582e799e334c6cf2dd9e8339149c78ef72e478a">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_fa69254d251f36c69a4c5219977d8fb437af7ee9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Silver\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.7.0_9e6652104180b2c66f837f97fac11246dcbc78c5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Silver\.android\build-cache\bae91cbcd91dee8ee2dc6737270f0b3548013a50\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="40e5cb8708fc25fe57cb403cc82e9ef98376b648">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_860a33c7e9355fbeebe31d778e5d27800a2ce2a9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Silver\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.12.0\3742beff8024d0a0073d284b7c5e4cbf73d99b25\okio-1.12.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="3742beff8024d0a0073d284b7c5e4cbf73d99b25">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.12.0_904f13d3fd2e8ba72076c2bb17ad2f96e50b5fc1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\rxandroid.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d4c4b83de2f6412072d2a29b1b7a5b03edaad5ff">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\rxandroid_36e9a06a9e0d64da8691dbef4a7385097af4b56c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Silver\.android\build-cache\9534e847f041ef9c7a076e6be33f92aca147c1ab\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="db185f06215220526d21bbf467cae061956cc185">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_58530318a2d5a28fab936027c6eb96f5d60bf61d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Silver\.android\build-cache\32cd002a7d1ccd08a5dd5948a035390f83b8e3d3\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="145da27a459a63ea0c4e318930365cf0a8b8e891">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9bd486913965880a206acb529331d0d52c940ace\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\nemo-json-gson-1.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="86bc9a5192765e1dd00e21a3bee40a371e008578">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\nemo-json-gson-1.0.0_81869ca9d983caee5ac7ada440a9191ee66d0758\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Silver\.android\build-cache\e1187a2d16edaa693d6ad0acd11f1972071367e6\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="1e7566849e699d836e88fb98a71bb0d5e1988279">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3243475e76be948d6a32f86b44e3637aaae8490b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Silver\.android\build-cache\83b2c71fc8f6ad5ba37f6c3118f3e8e502d2d39b\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
->>>>>>> chen
-        sha1="a624ff0e5856c86ed693acdfa917f6c1b04a6848">
-        <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_16e3d3632583446ec72f0805a1bdf7f67fee81aa/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="c942e4b6d4cf45365a9bbe95fef7dcaf3ef0272a">
+        sha1="73e2757be362a2f915ac71529fe1fc2347993e3b">
         <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c776d3d25450a5432b1073999f1d02cc540d3af2/classes.dex" />
     </item>
 

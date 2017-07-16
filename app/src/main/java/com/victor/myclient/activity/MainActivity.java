@@ -49,7 +49,6 @@ import demo.animen.com.xiaoyutask.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
-    private static final String TAG = "MainActivity";
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -73,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private UserInfor userInfor;
     private final static int REQUEST_PERMISSION = 1000;
+    public static final String TAG = "@victor MainActivity";
 
     @Override
     protected void onResume() {
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.bangding_xiaoyu_number = (TextView) findViewById(R.id.bangding_xiaoyu_number);
         this.nametext = (TextView) findViewById(R.id.name_text);
         this.personimage = (CircleImageView) findViewById(R.id.person_image);
-        services=(CircleTextImageView) findViewById(R.id.services);
+        services = (CircleTextImageView) findViewById(R.id.services);
         time_call = (TextView) findViewById(R.id.time_call);
         setTime_call();
         userInfor = new UserInfor();
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.case_for_patient:
                 Intent intent = new Intent(MainActivity.this, CaseListActivity.class);
                 intent.putExtra("id", userInfor.getPatientId());
-                startActivity(intent);
+                Utils.startActivity(MainActivity.this, intent);
                 break;
             case R.id.jujia_main:
                 Utils.startActivity(MainActivity.this, JujiaActivity.class);
@@ -211,12 +211,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.setting_default:
                 Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
                 intent1.putExtra("email", userInfor.getEmail());
-                startActivity(intent1);
+                Utils.startActivity(MainActivity.this, intent1);
                 break;
             case R.id.services:
-                Intent intent2=new Intent(MainActivity.this, ServiceHistoryActivity.class);
-                intent2.putExtra("id",userInfor.getPatientId());
-                startActivity(intent2);
+                Intent intent2 = new Intent(MainActivity.this, ServiceHistoryActivity.class);
+                intent2.putExtra("id", userInfor.getPatientId());
+                Utils.startActivity(MainActivity.this, intent2);
                 break;
             default:
                 break;
@@ -231,17 +231,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected String doInBackground(String... params) {
             if (net_work_available) {
                 userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR + "FamilyName=" + user_name), UserInfor.class);
-                String name = Utils.getValue(MainActivity.this, GlobalData.NAME);
-                if (name == null || name != userInfor.getName()) {
-                    Utils.putValue(MainActivity.this, GlobalData.NAME, userInfor.getName());
-                    Utils.putValue(MainActivity.this, GlobalData.USer_email, userInfor.getEmail());
-                    Utils.putValue(MainActivity.this, GlobalData.User_ID, userInfor.getId());
-                    Utils.putValue(MainActivity.this, GlobalData.Phone, userInfor.getPhone());
-                    Utils.putValue(MainActivity.this, GlobalData.PATIENT_ID, userInfor.getPatientId());
-                    Utils.putValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID, userInfor.getId());
-                    Utils.putValue(MainActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
-                }
+                Utils.putValue(MainActivity.this, GlobalData.NAME, userInfor.getName());
+                Utils.putValue(MainActivity.this, GlobalData.USer_email, userInfor.getEmail());
+                Utils.putValue(MainActivity.this, GlobalData.User_ID, userInfor.getId());
+                Utils.putValue(MainActivity.this, GlobalData.Phone, userInfor.getPhone());
+                Utils.putValue(MainActivity.this, GlobalData.PATIENT_ID, userInfor.getPatientId());
+                Utils.putValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID, userInfor.getId());
+                Utils.putValue(MainActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
+                Log.d(TAG, Utils.getValue(MainActivity.this, GlobalData.PATIENT_ID));
 //                String xiaoyu = Utils.sendRequest(GlobalData.GET_XIAO_YU_NUMBER + "type=phone&data=" + "13367379725");
+//                Log.d(TAG, xiaoyu);
 //                if (xiaoyu.contains("not")) {
 //                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
 //                    xiaoYuNumber.setXiaoyuNum("暂无");
@@ -256,14 +255,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 has_data = true;
             } else {
                 String name = Utils.getValue(MainActivity.this, GlobalData.NAME);
-                if (name != null) {
+                if (!(name.equals(""))) {
                     userInfor.setPatientId(Utils.getValue(MainActivity.this, GlobalData.PATIENT_ID));
                     userInfor.setEmail(Utils.getValue(MainActivity.this, GlobalData.USer_email));
                     userInfor.setPhone(Utils.getValue(MainActivity.this, GlobalData.Phone));
                     userInfor.setName(name);
-//                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
-//                    xiaoYuNumber.setXiaoyuNum(Utils.getValue(MainActivity.this, GlobalData.XIAO_YU));
-//                    xiaoYuNumbers.add(xiaoYuNumber);
                     has_data = true;
                 } else {
                     has_data = false;

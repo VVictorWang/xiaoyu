@@ -9,10 +9,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.adapters.HistoryListAdapter;
 import com.victor.myclient.datas.ServiceHistory;
 import com.victor.myclient.utils.GlobalData;
@@ -34,13 +36,14 @@ import demo.animen.com.xiaoyutask.R;
 public class ServiceHistoryActivity extends Activity implements HistoryListAdapter.MyClickListener {
     private int patientId;
     private boolean net_work;
-    private List<ServiceHistory> list;
+    private List<ServiceHistory> list = new ArrayList<>();
     private GetServiceTask getServiceTask;
     private RecyclerView recyclerView;
     private HistoryListAdapter adapter;
     private Context context;
     private HistoryListAdapter.MyClickListener clickListener;
     private ImageView imageView;
+    private RelativeLayout back;
 
     private static final String TAG = "ServiceHistoryActivity";
 
@@ -54,18 +57,29 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
         android.util.Log.d(TAG, "onCreate: id=" + patientId);
         net_work = Utils.isNetWorkAvailabe(this);
         initView();
+        initEvent();
         getServiceTask = new GetServiceTask();
         getServiceTask.execute();
     }
 
     private void initView() {
         recyclerView = (RecyclerView) findViewById(R.id.list);
+        back = (RelativeLayout) findViewById(R.id.back_to_main_history);
         GridLayoutManager manager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(manager);
         imageView = (ImageView) findViewById(R.id.imageView);
         list = new ArrayList<>();
         adapter = new HistoryListAdapter(list, this, this);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void initEvent() {
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.finishActivity(ServiceHistoryActivity.this);
+            }
+        });
     }
 
     @Override
@@ -108,20 +122,20 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
                         Utils.sendRequest(GlobalData.GET_SERVICE_HISTORY + patientId);
                 android.util.Log.d(TAG, "doInBackground: sendRequest=" + sendRequest);
                 if (!(sendRequest == null || sendRequest.contains("param_error") || sendRequest.contains("not_exist"))) {
-//                    list = gson.fromJson(sendRequest, new TypeToken<List<ServiceHistory>>() {}.getType());
-                    ServiceHistory serviceHistory = gson.fromJson(sendRequest, ServiceHistory.class);
-                    list = new ArrayList<>();
-                    list.add(serviceHistory);
+                    list = gson.fromJson(sendRequest, new TypeToken<List<ServiceHistory>>() {}.getType());
+//                    ServiceHistory serviceHistory = gson.fromJson(sendRequest, ServiceHistory.class);
+//                    list = new ArrayList<>();
+//                    list.add(serviceHistory);
 
                 } else {
-                    list = null;
+                    list.clear();
                 }
                 DataSupport.deleteAll(ServiceHistory.class);
                 DataSupport.saveAll(list);
             } else {
                 list = DataSupport.findAll(ServiceHistory.class);
             }
-            if (list != null) {
+            if (!(list.isEmpty())) {
                 Collections.sort(list, new Comparator<ServiceHistory>() {
                     @Override
                     public int compare(ServiceHistory o1, ServiceHistory o2) {

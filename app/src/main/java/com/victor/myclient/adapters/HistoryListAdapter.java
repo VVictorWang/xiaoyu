@@ -18,6 +18,7 @@ import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.victor.myclient.datas.ServiceHistory;
 import com.victor.myclient.utils.GlobalData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import demo.animen.com.xiaoyutask.R;
