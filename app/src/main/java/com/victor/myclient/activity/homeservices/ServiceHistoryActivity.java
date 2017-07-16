@@ -4,19 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.adapters.HistoryListAdapter;
@@ -44,7 +39,6 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
     private GetServiceTask getServiceTask;
     private RecyclerView recyclerView;
     private HistoryListAdapter adapter;
-    private ImageView back;
     private Context context;
     private HistoryListAdapter.MyClickListener clickListener;
     private ImageView imageView;
@@ -79,17 +73,10 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
         list = new ArrayList<>();
         adapter = new HistoryListAdapter(list, this, this);
         recyclerView.setAdapter(adapter);
-        back = (ImageView) findViewById(R.id.backButton);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     private void initEvent() {
-        back.setOnClickListener(new View.OnClickListener() {
+        back_to_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Utils.finishActivity(ServiceHistoryActivity.this);

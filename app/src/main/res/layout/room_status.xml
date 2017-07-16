@@ -6,8 +6,8 @@
 
     <RelativeLayout
         android:id="@+id/room_status"
-        android:layout_width="110dp"
-        android:layout_height="120dp"
+        android:layout_width="95dp"
+        android:layout_height="110dp"
         android:layout_marginLeft="8dp"
         android:background="@drawable/jiujia_viewpage_shape">
 
@@ -15,7 +15,7 @@
             android:id="@+id/room_status_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="23dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/room_status" />
 
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/room_status_image"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:text="房门状态"
             android:textColor="#ffffff" />

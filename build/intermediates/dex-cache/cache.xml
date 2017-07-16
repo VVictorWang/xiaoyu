@@ -3,21 +3,12 @@
 
     <item
         is-multidex="true"
-<<<<<<< HEAD
         jar="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="73e2757be362a2f915ac71529fe1fc2347993e3b">
+        sha1="d90163ce66f95c09603caa142dee616b60432ba4">
         <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c776d3d25450a5432b1073999f1d02cc540d3af2/classes.dex" />
-=======
-        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="8ffa088ceefeb25e5fbbb02e3111ee31da8641a6">
-        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_fa69254d251f36c69a4c5219977d8fb437af7ee9\classes.dex" />
->>>>>>> chen
     </item>
 
 </items>
