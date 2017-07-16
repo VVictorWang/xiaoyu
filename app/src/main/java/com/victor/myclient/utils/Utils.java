@@ -19,6 +19,7 @@ import com.victor.myclient.ActivityManage;
 import demo.animen.com.xiaoyutask.R;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -41,6 +42,7 @@ public class Utils {
         if (mToast != null) {
             mToast.makeText(context, msg, Toast.LENGTH_LONG);
         } else {
+            mToast.setText(msg);
             mToast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
         }
         mToast.show();
@@ -48,7 +50,15 @@ public class Utils {
 
     public static void showShortToast(Context context, String msg) {
 
-        mToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+//        mToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+//        mToast.show();
+
+        if (mToast != null) {
+            mToast.setText(msg);
+            mToast.makeText(context, msg, Toast.LENGTH_SHORT);
+        } else {
+            mToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        }
         mToast.show();
     }
 
@@ -78,10 +88,8 @@ public class Utils {
             if (connectivityManager == null) {
                 showShortToast(context, "不能得到系统网络服务");
             } else {
-//                NetworkInfo info=connectivityManager.getActiveNetworkInfo();
-//                if(info!=null&&info.getState()== NetworkInfo.State.CONNECTED){
-//                    return true;
-//                }
+
+
                 NetworkInfo[] infos = connectivityManager.getAllNetworkInfo();
                 if (infos != null) {
                     for (int i = 0; i < infos.length; i++) {
@@ -90,6 +98,15 @@ public class Utils {
                         }
                     }
                 }
+//                Runtime runtime = Runtime.getRuntime();
+//                try {
+//                    Process ipProcess = runtime.exec("ping -c 1 139.196.40.97");
+//                    int exitValue = ipProcess.waitFor();
+//                    return (exitValue == 0);
+//                } catch (IOException | InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+////                return false;
             }
         }
         showShortToast(context, "网络不可用");

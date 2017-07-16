@@ -43,6 +43,7 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
     private GetServiceTask getServiceTask;
     private RecyclerView recyclerView;
     private HistoryListAdapter adapter;
+    private ImageView back;
     private Context context;
     private HistoryListAdapter.MyClickListener clickListener;
 //    private ImageView imageView;
@@ -73,6 +74,13 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
         list = new ArrayList<>();
         adapter = new HistoryListAdapter(list, this, this);
         recyclerView.setAdapter(adapter);
+        back=(ImageView)findViewById(R.id.backButton);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -121,7 +129,7 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
 //                    list.add(serviceHistory);
 
                 } else {
-                    list = null;
+                    list.clear();
                 }
                 DataSupport.deleteAll(ServiceHistory.class);
                 DataSupport.saveAll(list);
@@ -133,9 +141,9 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
                     @Override
                     public int compare(ServiceHistory o1, ServiceHistory o2) {
                         if (o1.getServiceDatetime().compareTo(o2.getServiceDatetime()) < 0) {
-                            return -1;
-                        } else if (o1.getServiceDatetime().compareTo(o2.getServiceDatetime()) > 0) {
                             return 1;
+                        } else if (o1.getServiceDatetime().compareTo(o2.getServiceDatetime()) > 0) {
+                            return -1;
                         } else {
                             return 0;
                         }
