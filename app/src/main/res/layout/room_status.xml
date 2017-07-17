@@ -9,7 +9,7 @@
         android:layout_width="95dp"
         android:layout_height="110dp"
         android:layout_marginLeft="8dp"
-        android:background="@drawable/jiujia_viewpage_shape">
+        android:background="@drawable/btn_bg_door_background">
 
         <ImageView
             android:id="@+id/room_status_image"
@@ -17,7 +17,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="23dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/room_status" />
+            android:src="@drawable/icon_open_door" />
 
         <TextView
             android:id="@+id/room_status_image_text"

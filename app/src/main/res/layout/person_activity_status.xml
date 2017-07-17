@@ -9,7 +9,7 @@
         android:id="@+id/person_activity"
         android:layout_width="95dp"
         android:layout_height="110dp"
-        android:background="@drawable/jiujia_viewpage_shape">
+        android:background="@drawable/btn_bg_activity_background">
 
         <ImageView
             android:id="@+id/person_activity_small"
@@ -17,7 +17,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="12dp"
-            android:src="@drawable/people_activity"/>
+            android:src="@drawable/icon_activity"/>
 
         <TextView
             android:id="@+id/person_activity_small_text"
