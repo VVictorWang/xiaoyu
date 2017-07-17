@@ -98,6 +98,7 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
         Intent intent=new Intent(ServiceHistoryActivity.this,ImageDetailActivity.class);
         intent.putExtra("url",GlobalData.GET_IMAGE + list.get(position).getServiceContent());
         startActivity(intent);
+
     }
 
 
