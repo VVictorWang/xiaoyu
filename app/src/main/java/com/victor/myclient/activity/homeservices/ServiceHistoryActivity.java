@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -67,7 +68,7 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
     private void initView() {
         recyclerView = (RecyclerView) findViewById(R.id.list);
         back_to_main = (RelativeLayout) findViewById(R.id.back_to_main_history);
-        GridLayoutManager manager = new GridLayoutManager(this, 2);
+        LinearLayoutManager manager = new LinearLayoutManager(ServiceHistoryActivity.this);
         recyclerView.setLayoutManager(manager);
 //        imageView = (ImageView) findViewById(R.id.imageView);
         list = new ArrayList<>();
@@ -121,10 +122,12 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
                 String sendRequest =
                         Utils.sendRequest(GlobalData.GET_SERVICE_HISTORY + patientId);
                 android.util.Log.d(TAG, "doInBackground: sendRequest=" + sendRequest);
-                if (!(sendRequest == null || sendRequest.contains("param_error") || sendRequest.contains("not_exist"))) {
+                if (!(sendRequest == null || sendRequest.contains("param_error") || sendRequest
+                        .contains("not_exist"))) {
                     list = gson.fromJson(sendRequest, new TypeToken<List<ServiceHistory>>() {
                     }.getType());
-//                    ServiceHistory serviceHistory = gson.fromJson(sendRequest, ServiceHistory.class);
+//                    ServiceHistory serviceHistory = gson.fromJson(sendRequest, ServiceHistory
+// .class);
 //                    list = new ArrayList<>();
 //                    list.add(serviceHistory);
 

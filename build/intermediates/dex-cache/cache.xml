@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d90163ce66f95c09603caa142dee616b60432ba4">
+        sha1="15683c4ca4c3d3048f7eccdb2b46f825829df9fb">
         <dex dex="/home/victor/AndroidProject/xiaoyu/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c776d3d25450a5432b1073999f1d02cc540d3af2/classes.dex" />
     </item>
 

@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x123) {
-                callothers.setImageDrawable(getResources().getDrawable(R.drawable.infor_small_selected));
+                callothers.setImageDrawable(getResources().getDrawable(R.drawable
+                        .infor_small_selected));
             } else if (msg.what == 0x124) {
                 callothers.setImageDrawable(getResources().getDrawable(R.drawable.infor_small));
             }
@@ -85,8 +86,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PackageManager packageManager = getPackageManager();
-        boolean sdCardWritePermission = packageManager.checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, getPackageName()) == PackageManager.PERMISSION_GRANTED;
-        boolean phoneStatePermission = packageManager.checkPermission(Manifest.permission.READ_PHONE_STATE, getPackageName()) == PackageManager.PERMISSION_GRANTED;
+        boolean sdCardWritePermission = packageManager.checkPermission(Manifest.permission
+                .WRITE_EXTERNAL_STORAGE, getPackageName()) == PackageManager.PERMISSION_GRANTED;
+        boolean phoneStatePermission = packageManager.checkPermission(Manifest.permission
+                .READ_PHONE_STATE, getPackageName()) == PackageManager.PERMISSION_GRANTED;
 
         if (Build.VERSION.SDK_INT >= 23 && !sdCardWritePermission || !phoneStatePermission) {
             requestPermission();
@@ -94,14 +97,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             PushManager.getInstance().initialize(this.getApplicationContext(), MyPushService.class);
         }
 
-        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), MyIntentService.
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(),
+                MyIntentService.
                 class);
 
         ActivityManage.getInstance().pushActivity(MainActivity.this);
         initData();
         initView();
         initEvent();
-        NemoSDK.getInstance().connectNemo("vic", "18774259685", new ConnectNemoCallback() {
+        new getUserInfor().execute(user_name);
+    }
+
+    private void connectXiaoyu(String xiaoyuNumber, String user_name) {
+        String name = user_name;
+        String number = xiaoyuNumber;
+        if (user_name == null) {
+            name = "victor";
+            number = "18774259685";
+        }
+        NemoSDK.getInstance().connectNemo(name, number, new ConnectNemoCallback() {
             @Override
             public void onFailed(int i) {
 
@@ -117,16 +131,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSuccess(String s) {
                 Log.e(TAG, "success");
-                xiaoyuNumber = s;
+                final String reslut = s;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        bangding_xiaoyu_number.setText("绑定小鱼号: " + xiaoyuNumber);
+                        bangding_xiaoyu_number.setText("绑定小鱼号: " + reslut);
                     }
                 });
             }
         });
-        new getUserInfor().execute(user_name);
     }
 
     private void initData() {
@@ -146,19 +159,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE},
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
+                        .WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE},
                 REQUEST_PERMISSION);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_PERMISSION) {
-            if (grantResults.length == 2 || grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                PushManager.getInstance().initialize(this.getApplicationContext(), MyPushService.class);
+            if (grantResults.length == 2 || grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                PushManager.getInstance().initialize(this.getApplicationContext(), MyPushService
+                        .class);
             } else {
                 Utils.showShortToast(this, "建议您开启这些权限以便于获得更好的体验");
-                PushManager.getInstance().initialize(this.getApplicationContext(), MyPushService.class);
+                PushManager.getInstance().initialize(this.getApplicationContext(), MyPushService
+                        .class);
             }
         }
     }
@@ -174,7 +192,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void resumeData() {
         user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
-        bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(MainActivity.this, GlobalData.FAMILY_IMage));
+        bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue
+                (MainActivity.this, GlobalData.FAMILY_IMage));
         setTime_call();
     }
 
@@ -230,7 +249,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected String doInBackground(String... params) {
             if (net_work_available) {
 
-                userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR + "FamilyName=" + user_name), UserInfor.class);
+                userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR +
+                        "FamilyName=" + user_name), UserInfor.class);
                 Utils.putValue(MainActivity.this, GlobalData.NAME, userInfor.getName());
                 Utils.putValue(MainActivity.this, GlobalData.USer_email, userInfor.getEmail());
                 Utils.putValue(MainActivity.this, GlobalData.User_ID, userInfor.getId());
@@ -238,8 +258,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Utils.putValue(MainActivity.this, GlobalData.PATIENT_ID, userInfor.getPatientId());
                 Utils.putValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID, userInfor.getId());
                 Utils.putValue(MainActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
+                Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NAME, userInfor.getXiaoyuName
+                        ());
+                Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NUMBER, userInfor
+                        .getXiaoyuNum());
                 Log.d(TAG, Utils.getValue(MainActivity.this, GlobalData.PATIENT_ID));
-//                String xiaoyu = Utils.sendRequest(GlobalData.GET_XIAO_YU_NUMBER + "type=phone&data=" + "13367379725");
+//                String xiaoyu = Utils.sendRequest(GlobalData.GET_XIAO_YU_NUMBER +
+// "type=phone&data=" + "13367379725");
 //                Log.d(TAG, xiaoyu);
 //                if (xiaoyu.contains("not")) {
 //                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
@@ -251,15 +276,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    );
 //
 //                }
-//                Utils.putValue(MainActivity.this, GlobalData.XIAO_YU, xiaoYuNumbers.get(0).getXiaoyuNum());
+//                Utils.putValue(MainActivity.this, GlobalData.XIAO_YU, xiaoYuNumbers.get(0)
+// .getXiaoyuNum());
                 has_data = true;
             } else {
                 String name = Utils.getValue(MainActivity.this, GlobalData.NAME);
                 if (!(name.equals(""))) {
-                    userInfor.setPatientId(Utils.getValue(MainActivity.this, GlobalData.PATIENT_ID));
+                    userInfor.setPatientId(Utils.getValue(MainActivity.this, GlobalData
+                            .PATIENT_ID));
                     userInfor.setEmail(Utils.getValue(MainActivity.this, GlobalData.USer_email));
                     userInfor.setPhone(Utils.getValue(MainActivity.this, GlobalData.Phone));
                     userInfor.setName(name);
+                    userInfor.setXiaoyuName(Utils.getValue(MainActivity.this, GlobalData
+                            .XIAOYU_NAME));
+                    userInfor.setXiaoyuNum(Utils.getValue(MainActivity.this, GlobalData
+                            .XIAOYU_NUMBER));
                     has_data = true;
                 } else {
                     has_data = false;
@@ -274,8 +305,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (s != null) {
                 if (has_data) {
                     nametext.setText(userInfor.getName());
+                    connectXiaoyu(userInfor.getXiaoyuNum(), userInfor.getXiaoyuName());
                     if (userInfor.getImage() != null) {
-                        bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + userInfor.getImage());
+                        bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE +
+                                userInfor.getImage());
                     }
                 }
             }

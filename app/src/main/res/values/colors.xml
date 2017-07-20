@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="whites">#ffffff</color>
     <color name="gray">#AFAFAF</color>
+    <color name="mygray">#232020</color>
     <color name="yellow">#F99503</color>
     <color name="gray_color">#ffe8ecef</color>
     <color name="bg_sort_color">#EDEDED</color>

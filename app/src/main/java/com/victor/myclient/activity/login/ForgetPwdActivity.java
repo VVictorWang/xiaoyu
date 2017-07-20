@@ -6,9 +6,12 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
+import com.victor.myclient.datas.UserInfor;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
@@ -19,13 +22,16 @@ public class ForgetPwdActivity extends AppCompatActivity {
 
     private android.widget.RelativeLayout forgetpasswordback;
     private Button forget;
+    private boolean network;
+    private EditText name;
+    private UserInfor mUserInfor;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             String message;
             switch (msg.what) {
                 case 1:
-                    message = "参数错误";
+                    message = "用户名错误";
                     break;
                 case 2:
                     message = "用户不存在";
@@ -37,7 +43,7 @@ public class ForgetPwdActivity extends AppCompatActivity {
                     message = "邮件发送失败";
                     break;
                 default:
-                    message = "错误";
+                    message = "用户名错误";
                     break;
             }
             Utils.showShortToast(ForgetPwdActivity.this, message);
@@ -49,6 +55,7 @@ public class ForgetPwdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
         ActivityManage.getInstance().pushActivity(ForgetPwdActivity.this);
+        network = Utils.isNetWorkAvailabe(ForgetPwdActivity.this);
         InitViiew();
         InitEvent();
     }
@@ -62,6 +69,7 @@ public class ForgetPwdActivity extends AppCompatActivity {
     private void InitViiew() {
         this.forgetpasswordback = (RelativeLayout) findViewById(R.id.forget_password_back);
         forget = (Button) findViewById(R.id.forget_password_button);
+        name = (EditText) findViewById(R.id.input_number);
     }
 
     private void InitEvent() {
@@ -74,26 +82,37 @@ public class ForgetPwdActivity extends AppCompatActivity {
         forget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SendEmail();
+                String username = name.getText().toString();
+                if (username.equals("")) {
+                    name.setError("用户名不能为空");
+                } else
+                    SendEmail(username);
             }
         });
     }
 
-    private void SendEmail() {
+    private void SendEmail(final String user_name) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String reply = Utils.sendRequest(GlobalData.FORGET_PASSWOD + Utils.getValue(ForgetPwdActivity.this, GlobalData.User_ID));
-                    if (reply.contains("Error")) {
-                        handler.sendEmptyMessage(1);
-                    } else if (reply.contains("Found")) {
-                        handler.sendEmptyMessage(2);
-                    } else if (reply.contains("been sent")) {
-                        handler.sendEmptyMessage(3);
-                    } else if (reply.contains("could not")) {
-                        handler.sendEmptyMessage(4);
+                    if (network) {
+                        Gson gson = new Gson();
+                        mUserInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR +
+                                "FamilyName=" + user_name), UserInfor.class);
+                        String reply = Utils.sendRequest(GlobalData.FORGET_PASSWOD + mUserInfor
+                                .getId());
+                        if (reply.contains("Error")) {
+                            handler.sendEmptyMessage(1);
+                        } else if (reply.contains("Found")) {
+                            handler.sendEmptyMessage(2);
+                        } else if (reply.contains("been sent")) {
+                            handler.sendEmptyMessage(3);
+                        } else if (reply.contains("could not")) {
+                            handler.sendEmptyMessage(4);
+                        }
                     }
+
 
                 } catch (Exception e) {
                     e.printStackTrace();

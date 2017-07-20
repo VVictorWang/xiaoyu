@@ -20,26 +20,26 @@
                 android:id="@+id/fragment_room_back_image"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="4dp"
-                android:paddingLeft="6dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dp"
                 android:src="@drawable/backwards_iamge" />
 
             <TextView
                 android:id="@+id/fragment_room_back_image_text"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/fragment_room_back_image"
-                android:paddingTop="12dp"
                 android:text="主页"
+                android:layout_centerVertical="true"
                 android:textColor="@color/white"
                 android:textSize="18dp" />
         </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="160dp"
-            android:paddingTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:text="人员活动"
             android:textColor="@color/white"
             android:textSize="18dp" />

@@ -20,7 +20,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private android.widget.EditText loginid;
     private android.widget.EditText loginpassword;
@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Response response;
     private String URL = "http://139.196.40.97/OSAdmin-master/uploads/interface/regloginpost.php?";
 
-    Handler handler = new Handler(){
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             String message;
@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     message = "登录成功";
                     break;
                 case 0:
-                    message = "参数错误";
+                    message = "用户名或者密码不正确";
                     break;
                 case -1:
                     message = "用户名长度过大";
@@ -49,12 +49,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     message = "密码错误";
                     break;
                 default:
-                    message = "错误";
+                    message = "用户名或者密码不正确";
                     break;
             }
             Utils.showShortToast(LoginActivity.this, message);
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_button:
-                getResponse(loginid.getText().toString(), loginpassword.getText().toString());
+                String usrname = loginid.getText().toString();
+                String pwd = loginpassword.getText().toString();
+                if (usrname.equals("")) {
+                    loginid.setError("用户名不能为空");
+                } else if (pwd.equals("")) {
+                    loginpassword.setError("密码不能为空");
+                } else {
+                    getResponse(usrname, pwd);
+                }
                 break;
             case R.id.login_sign_up:
                 Utils.startActivity(LoginActivity.this, RegisterFirstActivity.class);
@@ -108,7 +117,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String reply = response.body().string();
                     switch (reply) {
                         case "1":
-                            Utils.putBooleanValue(LoginActivity.this, GlobalData.Login_status, true);
+                            Utils.putBooleanValue(LoginActivity.this, GlobalData.Login_status,
+                                    true);
                             Utils.putValue(LoginActivity.this, GlobalData.NAME, username);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
