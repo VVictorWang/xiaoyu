@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,15 +9,13 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
         android:id="@+id/back_to_main_contact_call"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="3dp"
         android:layout_marginLeft="-16dp"
-        app:layout_constraintLeft_toLeftOf="parent">
-
-
+        android:layout_marginTop="3dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <ImageView
@@ -25,7 +24,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="4dp"
             android:paddingLeft="6dp"
-            android:src="@drawable/backwards_iamge" />
+            android:src="@drawable/backwards_iamge"/>
 
         <TextView
             android:id="@+id/back_to_main_image_background_contact_call_text"
@@ -35,20 +34,21 @@
             android:paddingTop="12dp"
             android:text="主页"
             android:textColor="@color/white"
-            android:textSize="18dp" />
+            android:textSize="18dp"/>
     </RelativeLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="拨号"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="3dp"
         android:paddingTop="12dp"
+        android:text="拨号"
+
         android:textColor="@color/white"
         android:textSize="18dp"
-
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="3dp"
         app:layout_constraintLeft_toRightOf="@+id/back_to_main_contact_call"
-        android:layout_marginLeft="110dp" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/call_number"
@@ -68,19 +68,19 @@
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/backspace_number_image"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginBottom="477dp"
         android:src="@drawable/backspace_number"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.742"
         app:layout_constraintLeft_toRightOf="@+id/call_number"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="477dp" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_1"
@@ -101,7 +101,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.191" />
+        app:layout_constraintVertical_bias="0.191"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_2"
@@ -121,7 +121,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.191" />
+        app:layout_constraintVertical_bias="0.191"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_3"
@@ -142,7 +142,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.191" />
+        app:layout_constraintVertical_bias="0.191"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_4"
@@ -163,7 +163,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.386" />
+        app:layout_constraintVertical_bias="0.386"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_6"
@@ -182,7 +182,7 @@
         app:layout_constraintLeft_toRightOf="@+id/number_call_5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/number_call_3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_5"
@@ -200,7 +200,7 @@
         app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_7"
@@ -218,7 +218,7 @@
         app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/number_call_4" />
+        app:layout_constraintTop_toBottomOf="@+id/number_call_4"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_8"
@@ -236,7 +236,7 @@
         app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_9"
@@ -254,7 +254,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.878"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_10"
@@ -272,7 +272,7 @@
         app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_0"
@@ -290,7 +290,7 @@
         app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call_11"
@@ -311,7 +311,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/number_call_9"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <com.thinkcool.circletextimageview.CircleTextImageView
         android:id="@+id/number_call"
@@ -325,9 +325,9 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/call_image"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.008"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/number_call_0"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintHorizontal_bias="0.008" />
+        app:layout_constraintVertical_bias="0.0"/>
 </android.support.constraint.ConstraintLayout>

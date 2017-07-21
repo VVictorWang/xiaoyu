@@ -46,24 +46,61 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 2017/4/22.
  */
 
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 0x123) {
-                callothers.setImageDrawable(getResources().getDrawable(R.drawable
-                        .infor_small_selected));
-            } else if (msg.what == 0x124) {
-                callothers.setImageDrawable(getResources().getDrawable(R.drawable.infor_small));
+            switch (msg.what) {
+                case 0x123:
+                    callothers.setImageDrawable(getResources().getDrawable(R.drawable
+                            .infor_small_selected));
+                    break;
+                case 0x124:
+                    callothers.setImageDrawable(getResources().getDrawable(R.drawable
+                            .btn_bg_hujiao));
+                    break;
+                case 0x125:
+                    jujiamain.setImageDrawable(getResources().getDrawable(R.drawable
+                            .infor_small_selected));
+                    break;
+                case 0x126:
+                    jujiamain.setImageDrawable(getResources().getDrawable(R.drawable
+                            .btn_bg_hujiao));
+                    break;
+                case 0x127:
+                    caseforpatient.setImageDrawable(getResources().getDrawable(R.drawable
+                            .infor_small_selected));
+                    break;
+                case 0x128:
+                    caseforpatient.setImageDrawable(getResources().getDrawable(R.drawable
+                            .btn_bg_hujiao));
+                    break;
+                case 0x129:
+                    setting.setImageDrawable(getResources().getDrawable(R.drawable
+                            .infor_small_selected));
+                    break;
+                case 0x130:
+                    setting.setImageDrawable(getResources().getDrawable(R.drawable
+                            .btn_bg_hujiao));
+                    break;
+                case 0x131:
+                    services.setImageDrawable(getResources().getDrawable(R.drawable
+                            .infor_small_selected));
+                    break;
+                case 0x132:
+                    services.setImageDrawable(getResources().getDrawable(R.drawable
+                            .btn_bg_hujiao));
+                    break;
+
             }
+
         }
     };
     private de.hdodenhof.circleimageview.CircleImageView personimage;
     private android.widget.TextView nametext;
     private android.widget.TextView bangding_xiaoyu_number;
-    private CircleTextImageView callothers;
+    private CircleTextImageView callothers, jujiamain, caseforpatient, setting;
     private CircleTextImageView services;
     private TextView time_call;
 
@@ -99,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(),
                 MyIntentService.
-                class);
+                        class);
 
         ActivityManage.getInstance().pushActivity(MainActivity.this);
         initData();
@@ -119,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onFailed(int i) {
 
-                Log.e(TAG, "fail");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -130,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onSuccess(String s) {
-                Log.e(TAG, "success");
                 final String reslut = s;
                 runOnUiThread(new Runnable() {
                     @Override
@@ -153,6 +188,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.nametext = (TextView) findViewById(R.id.name_text);
         this.personimage = (CircleImageView) findViewById(R.id.person_image);
         services = (CircleTextImageView) findViewById(R.id.services);
+        jujiamain = (CircleTextImageView) findViewById(R.id.jujia_main);
+        caseforpatient = (CircleTextImageView) findViewById(R.id.case_for_patient);
+        setting = (CircleTextImageView) findViewById(R.id.setting_default);
         time_call = (TextView) findViewById(R.id.time_call);
         setTime_call();
         userInfor = new UserInfor();
@@ -198,10 +236,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initEvent() {
-        findViewById(R.id.setting_default).setOnClickListener(this);
-        findViewById(R.id.call_others).setOnClickListener(this);
-        findViewById(R.id.jujia_main).setOnClickListener(this);
-        findViewById(R.id.case_for_patient).setOnClickListener(this);
+        setting.setOnClickListener(this);
+        callothers.setOnClickListener(this);
+        jujiamain.setOnClickListener(this);
+        caseforpatient.setOnClickListener(this);
         services.setOnClickListener(this);
     }
 
@@ -209,11 +247,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.case_for_patient:
+                handler.sendEmptyMessage(0x127);
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.sendEmptyMessage(0x128);
+                    }
+                }, 50);
                 Intent intent = new Intent(MainActivity.this, CaseListActivity.class);
                 intent.putExtra("id", userInfor.getPatientId());
                 Utils.startActivity(MainActivity.this, intent);
                 break;
             case R.id.jujia_main:
+                handler.sendEmptyMessage(0x125);
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.sendEmptyMessage(0x126);
+                    }
+                }, 50);
                 Utils.startActivity(MainActivity.this, JujiaActivity.class);
                 break;
             case R.id.call_others:
@@ -227,11 +279,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Utils.startActivity(MainActivity.this, ContactActivity.class);
                 break;
             case R.id.setting_default:
+                handler.sendEmptyMessage(0x129);
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.sendEmptyMessage(0x130);
+                    }
+                }, 50);
                 Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
                 intent1.putExtra("email", userInfor.getEmail());
                 Utils.startActivity(MainActivity.this, intent1);
                 break;
             case R.id.services:
+                handler.sendEmptyMessage(0x131);
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.sendEmptyMessage(0x132);
+                    }
+                }, 50);
                 Intent intent2 = new Intent(MainActivity.this, ServiceHistoryActivity.class);
                 intent2.putExtra("id", userInfor.getPatientId());
                 Utils.startActivity(MainActivity.this, intent2);
@@ -262,22 +328,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         ());
                 Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NUMBER, userInfor
                         .getXiaoyuNum());
-                Log.d(TAG, Utils.getValue(MainActivity.this, GlobalData.PATIENT_ID));
-//                String xiaoyu = Utils.sendRequest(GlobalData.GET_XIAO_YU_NUMBER +
-// "type=phone&data=" + "13367379725");
-//                Log.d(TAG, xiaoyu);
-//                if (xiaoyu.contains("not")) {
-//                    XiaoYuNumber xiaoYuNumber = new XiaoYuNumber();
-//                    xiaoYuNumber.setXiaoyuNum("暂无");
-//                    xiaoYuNumbers.add(xiaoYuNumber);
-//                } else {
-//                    xiaoYuNumbers = gson2.fromJson(xiaoyu, new TypeToken<List<XiaoYuNumber>>() {
-//                            }.getType()
-//                    );
-//
-//                }
-//                Utils.putValue(MainActivity.this, GlobalData.XIAO_YU, xiaoYuNumbers.get(0)
-// .getXiaoyuNum());
                 has_data = true;
             } else {
                 String name = Utils.getValue(MainActivity.this, GlobalData.NAME);

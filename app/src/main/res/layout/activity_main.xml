@@ -131,7 +131,6 @@
             android:layout_height="120dp"
             android:src="@drawable/btn_bg_hujiao"
             app:citv_text_color="#ffffff"
-
             app:citv_text_size="23sp"
             app:citv_text_text="呼叫"
             android:layout_marginEnd="10dp"

@@ -21,7 +21,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-
 public class ChangeEmailActivity extends AppCompatActivity {
 
 
@@ -31,7 +30,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
     private EditText password;
     private Button finish;
 
-    Handler handler = new Handler(){
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             String message;
@@ -64,6 +63,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
             Utils.showShortToast(ChangeEmailActivity.this, message);
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,13 +121,14 @@ public class ChangeEmailActivity extends AppCompatActivity {
                 builder.add("password", password);
                 RequestBody body = builder.build();
                 try {
-                    Request request = new Request.Builder().url(GlobalData.CHANGE_EMAIL_PASSORT).post(body).build();
+                    Request request = new Request.Builder().url(GlobalData.CHANGE_EMAIL_PASSORT)
+                            .post(body).build();
                     Response response = client.newCall(request).execute();
                     String response_text = response.body().string();
                     switch (response_text) {
                         case "1":
                             handler.sendEmptyMessage(1);
-                            Utils.putValue(ChangeEmailActivity.this, GlobalData.USer_email,email);
+                            Utils.putValue(ChangeEmailActivity.this, GlobalData.USer_email, email);
                             break;
                         case "2":
                             handler.sendEmptyMessage(0);

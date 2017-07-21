@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,7 +20,7 @@
         android:src="@drawable/login_top"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/register_name"
@@ -39,7 +40,7 @@
         android:textSize="14dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/register_email"
@@ -60,7 +61,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/register_id_card"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/register_id_card"
@@ -79,7 +80,7 @@
         android:textSize="14dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/third_to_last_register"
@@ -98,7 +99,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -117,7 +118,7 @@
             android:paddingLeft="8dp"
             android:shadowColor="@color/colorPrimary"
             android:text="男"
-            android:textColor="@color/whites" />
+            android:textColor="@color/whites"/>
 
         <RadioButton
             android:id="@+id/select_woman"
@@ -127,7 +128,7 @@
             android:layout_marginLeft="25dp"
             android:paddingLeft="8dp"
             android:text="女"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
     </RadioGroup>
 
 

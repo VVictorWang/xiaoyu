@@ -1,4 +1,5 @@
 package com.victor.myclient.activity.login;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +27,6 @@ import okhttp3.Response;
 
 
 public class RegisterLastActivity extends AppCompatActivity {
-
 
 
     private UserInformation information;
@@ -84,6 +84,7 @@ public class RegisterLastActivity extends AppCompatActivity {
             Utils.showShortToast(RegisterLastActivity.this, message);
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +94,7 @@ public class RegisterLastActivity extends AppCompatActivity {
         initEvent();
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("new_user");
-        information = (UserInformation)bundle.getSerializable("user");
+        information = (UserInformation) bundle.getSerializable("user");
     }
 
     private void initView() {
@@ -105,7 +106,8 @@ public class RegisterLastActivity extends AppCompatActivity {
         this.registername = (TextInputEditText) findViewById(R.id.register_name);
         client = new OkHttpClient();
     }
-    private void initEvent(){
+
+    private void initEvent() {
         registername.setCursorVisible(false);
         registername.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,10 +128,9 @@ public class RegisterLastActivity extends AppCompatActivity {
                     Toast.makeText(RegisterLastActivity.this, "请选择你的性别", Toast.LENGTH_SHORT);
                 } else if (email.isEmpty()) {
                     registeremail.setError("邮箱不能为空");
-                }else if (!Utils.isEmail(email)) {
+                } else if (!Utils.isEmail(email)) {
                     registeremail.setError("邮箱格式不正确");
-                }
-                else {
+                } else {
                     if (id_card.isEmpty()) {
                         registeridcard.setError("身份证号不能为空");
                     } else {
@@ -143,6 +144,7 @@ public class RegisterLastActivity extends AppCompatActivity {
             }
         });
     }
+
     private void getResponseByOkhttp(final UserInformation information) {
         new Thread(new Runnable() {
             @Override
@@ -158,7 +160,8 @@ public class RegisterLastActivity extends AppCompatActivity {
                 builder.add("sex", information.getSex());
                 RequestBody requestBody = builder.build();
                 try {
-                    Request request = new Request.Builder().url(GlobalData.MAIN_ENGINE).post(requestBody).build();
+                    Request request = new Request.Builder().url(GlobalData.MAIN_ENGINE).post
+                            (requestBody).build();
                     Response response = client.newCall(request).execute();
                     String op = response.body().string();
                     Log.e("response, register:", op);
@@ -166,7 +169,8 @@ public class RegisterLastActivity extends AppCompatActivity {
                         case "1":
                             handler.sendEmptyMessage(1);
                             Utils.startActivity(RegisterLastActivity.this, MainActivity.class);
-                            Utils.putBooleanValue(RegisterLastActivity.this, GlobalData.Login_status, true);
+                            Utils.putBooleanValue(RegisterLastActivity.this, GlobalData
+                                    .Login_status, true);
                             ActivityManage.getInstance().popAllActivity();
                             break;
                         case "0":
