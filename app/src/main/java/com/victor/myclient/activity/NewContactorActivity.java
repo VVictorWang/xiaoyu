@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.contact;
+package com.victor.myclient.activity;
 
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +27,7 @@ public class NewContactorActivity extends AppCompatActivity {
     private TextInputEditText xiaoyu_number;
     private List<ContactListData> contactListDatas;
     private List<String> names;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,8 @@ public class NewContactorActivity extends AppCompatActivity {
         name = (TextInputEditText) findViewById(R.id.new_contact_name);
         xiaoyu_number = (TextInputEditText) findViewById(R.id.new_contact_xiao_yu_number);
     }
-    private void initEvent(){
+
+    private void initEvent() {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,8 +64,8 @@ public class NewContactorActivity extends AppCompatActivity {
                     name.setError("姓名不能为空");
                 } else if (isExist(name_infor)) {
                     name.setError("联系人已存在");
-                } else if (number.equals("")){
-                        xiaoyu_number.setError("小鱼号不能为空");
+                } else if (number.equals("")) {
+                    xiaoyu_number.setError("小鱼号不能为空");
                 } else if (!isInteger(number)) {
                     xiaoyu_number.setError("请输入正确的小鱼号");
                 } else {
@@ -73,7 +75,7 @@ public class NewContactorActivity extends AppCompatActivity {
                     contactListData.save();
                     Utils.finishActivity(NewContactorActivity.this);
                 }
-                }
+            }
 
         });
     }
@@ -86,6 +88,7 @@ public class NewContactorActivity extends AppCompatActivity {
         }
         return false;
     }
+
     public static boolean isInteger(String str) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
         return pattern.matcher(str).matches();

@@ -7,8 +7,17 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="8ffa088ceefeb25e5fbbb02e3111ee31da8641a6">
+        sha1="70e487872f71fd0940d198b02deebf10c50e5b93">
         <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_fa69254d251f36c69a4c5219977d8fb437af7ee9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Silver\.android\build-cache\84ba33674f2ba5c116689c1f3779429bc62305c8\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3b59733491ccad7aa57cf6882082b3b9da163635\classes.dex" />
     </item>
 
 </items>

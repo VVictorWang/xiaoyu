@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.victor.myclient.datas.CaseInfor;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.activity.cases.CaseDetailActivity;
+import com.victor.myclient.activity.CaseDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Date;

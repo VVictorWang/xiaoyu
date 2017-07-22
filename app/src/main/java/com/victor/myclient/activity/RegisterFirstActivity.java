@@ -1,4 +1,5 @@
-package com.victor.myclient.activity.login;
+package com.victor.myclient.activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -16,7 +17,6 @@ import demo.animen.com.xiaoyutask.R;
 public class RegisterFirstActivity extends AppCompatActivity {
 
 
-
     private TextInputEditText enterpassword;
     private TextInputEditText enterpasswordagain;
     private Button firsttosecondregister;
@@ -31,7 +31,8 @@ public class RegisterFirstActivity extends AppCompatActivity {
         initView();
         initEvent();
     }
-    private void  initView() {
+
+    private void initView() {
         this.enterphonenumber = (TextInputEditText) findViewById(R.id.enter_phone_number);
         this.firsttosecondregister = (Button) findViewById(R.id.first_to_second_register);
         this.enterpasswordagain = (TextInputEditText) findViewById(R.id.enter_password_again);
@@ -46,7 +47,7 @@ public class RegisterFirstActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void initEvent(){
+    private void initEvent() {
         enterphonenumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,18 +74,17 @@ public class RegisterFirstActivity extends AppCompatActivity {
                 String pawword_again = enterpasswordagain.getText().toString();
                 if (phone_number.isEmpty()) {
                     enterphonenumber.setError("手机号不能为空");
-                }
-                else if (!Utils.isMobileNO(phone_number)) {
+                } else if (!Utils.isMobileNO(phone_number)) {
                     enterphonenumber.setError("请输入正确格式的手机号");
-                }
-                else {
+                } else {
                     if (password.isEmpty()) {
                         enterpassword.setError("密码不能为空");
                     } else if (!password.equals(pawword_again)) {
                         enterpasswordagain.setError("两次输入密码不一致");
                     } else {
 
-                        Intent intent = new Intent(RegisterFirstActivity.this, RegisterLastActivity.class);
+                        Intent intent = new Intent(RegisterFirstActivity.this,
+                                RegisterLastActivity.class);
                         Bundle bundle = new Bundle();
                         UserInformation information = new UserInformation();
                         information.setPassword(password);

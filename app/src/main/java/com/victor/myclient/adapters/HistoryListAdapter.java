@@ -18,8 +18,10 @@ import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.victor.myclient.datas.ServiceHistory;
 import com.victor.myclient.utils.GlobalData;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 /**
@@ -45,7 +47,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         private View view;
-        private ImageView imageView;
+        private CircleImageView imageView;
 
         private TextView nameAndAddress;
         private TextView time;
@@ -56,7 +58,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            imageView = (CircleImageView) itemView.findViewById(R.id.imageView);
             nameAndAddress = (TextView) itemView.findViewById(R.id.item_filename);
 
             time = (TextView) itemView.findViewById(R.id.size_time);

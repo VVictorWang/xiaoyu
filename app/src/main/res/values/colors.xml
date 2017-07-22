@@ -5,21 +5,20 @@
     <color name="colorAccent">#FF4081</color>
     <color name="whites">#ffffff</color>
     <color name="gray">#AFAFAF</color>
+    <color name="mygray">#232020</color>
     <color name="yellow">#F99503</color>
     <color name="gray_color">#ffe8ecef</color>
     <color name="bg_sort_color">#EDEDED</color>
-<!--<<<<<<< HEAD-->
-<!--=======-->
     <color name="greenWhite">#3dd3fc</color>
     <color name="segment">#dadade</color>
     <color name="white">#fdfdfe</color>
     <color name="transparent">#00000000</color>
-
     <color name="test">#3dd3fc</color>
-<!--&gt;>>>>>> 92b4ee4e23a9a67dade993a740de94e78ed40872-->
     <color name="my_background">#24d0fd</color>
     <color name="line_top">#d8d8d8</color>
     <color name="jiujia_selected">#1fc6f2</color>
+    <color name="red">#ec2020</color>
+    <color name="mygrays">#e1dcdc</color>
 
 
 

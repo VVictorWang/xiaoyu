@@ -88,25 +88,14 @@ public class Utils {
             if (connectivityManager == null) {
                 showShortToast(context, "不能得到系统网络服务");
             } else {
-
-
                 NetworkInfo[] infos = connectivityManager.getAllNetworkInfo();
                 if (infos != null) {
                     for (int i = 0; i < infos.length; i++) {
-                        if (infos[i].getState() == NetworkInfo.State.CONNECTED) {
+                        if (infos[i].getState() == NetworkInfo.State.CONNECTED && infos[i].isAvailable()) {
                             return true;
                         }
                     }
                 }
-//                Runtime runtime = Runtime.getRuntime();
-//                try {
-//                    Process ipProcess = runtime.exec("ping -c 1 139.196.40.97");
-//                    int exitValue = ipProcess.waitFor();
-//                    return (exitValue == 0);
-//                } catch (IOException | InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-////                return false;
             }
         }
         showShortToast(context, "网络不可用");

@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.activity.login.LoginActivity;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
@@ -20,12 +19,13 @@ import demo.animen.com.xiaoyutask.R;
 * 判断是否已登陆来决定进入登陆界面还是主界面
 * */
 public class FirstActivity extends AppCompatActivity {
+    private int second = 2000;
     private boolean isLogin;  //是否是登录状态
     private int runcount; //运行次数
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            Intent intent = new Intent();
+            final Intent intent = new Intent();
             if (isLogin) {
                 intent.setClass(FirstActivity.this, MainActivity.class);
                 //运行15次后重新输入密码登录
@@ -36,29 +36,49 @@ public class FirstActivity extends AppCompatActivity {
             } else {
                 intent.setClass(FirstActivity.this, LoginActivity.class);
             }
-            startActivity(intent);
-            overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
-            Utils.finishActivity(FirstActivity.this);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    Utils.startActivity(FirstActivity.this, intent);
+                    Utils.finishActivity(FirstActivity.this);
+                }
+
+            }, second);
+
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         ActivityManage.getInstance().pushActivity(FirstActivity.this);
         initData();
-        if (isLogin) {
-            getLogin();
-        } else {
-            handler.sendEmptyMessage(0);
-        }
+
     }
 
-    private void initData(){
+    private void initData() {
         runcount = Utils.getIntValue(this, "RUN_COUNT");
         Utils.putIntValue(this, "RUN_COUNT", runcount++);
         isLogin = Utils.getBooleanValue(this, GlobalData.Login_status);
+        if (runcount == 1) {
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    Intent intent = new Intent(FirstActivity.this, WelcomeActivity.class);
+                    intent.putExtra("login", isLogin);
+                    Utils.startActivity(FirstActivity.this, intent);
+                }
+
+            }, second);
+
+        } else {
+            if (isLogin) {
+                getLogin();
+            } else {
+                handler.sendEmptyMessage(0);
+            }
+        }
     }
+
     private void getLogin() {
         handler.sendEmptyMessageDelayed(0, 600);
     }

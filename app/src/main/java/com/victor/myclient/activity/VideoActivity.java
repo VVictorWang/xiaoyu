@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.xiaoyu;
+package com.victor.myclient.activity;
 
 import android.Manifest;
 import android.content.DialogInterface;

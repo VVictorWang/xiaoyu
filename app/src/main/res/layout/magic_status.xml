@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="15dp"
+              android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="110dp"
-        android:layout_height="120dp"
         android:id="@+id/warning_view_pager"
-        android:background="@drawable/jiujia_viewpage_shape">
+        android:layout_width="130dp"
+        android:layout_height="110dp"
+        android:background="@drawable/baojing_background">
 
         <ImageView
             android:id="@+id/magic_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/warnnig_infor" />
+            android:src="@drawable/icon_baojing"/>
 
         <TextView
             android:id="@+id/magic_image_text_help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/magic_image"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="23dp"
             android:layout_marginTop="8dp"
             android:text="一键报警信息\n         查看"
-            android:textSize="14dp"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textSize="14dp"/>
 
 
     </RelativeLayout>

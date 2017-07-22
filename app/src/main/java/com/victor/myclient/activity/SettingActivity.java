@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.setting;
+package com.victor.myclient.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.datas.UserInfor;
-import com.victor.myclient.activity.login.LoginActivity;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
@@ -38,8 +37,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
-
 /**
  * Created by victor on 2017/4/24.
  */
@@ -57,6 +54,7 @@ public class SettingActivity extends AppCompatActivity {
     private CircleTextImageView changepassword;
     private TextView logoutoutbutton;
     private String email;
+    public static final String TAG = "@victor SettingActivity";
 
     private boolean networkavailable;
 
@@ -190,7 +188,7 @@ public class SettingActivity extends AppCompatActivity {
                 builder.addFormDataPart("patientFamilyImage", f.toString(), RequestBody.create(MEDIA_TYPE_JPG, f));
                 builder.addFormDataPart("id", id);
                 builder.setType(MultipartBody.FORM);
-                Log.e("id: ", id);
+                Log.d(TAG, "id:" + id);
                 RequestBody requestBody = builder.build();
                 final Request request = new Request.Builder().url(GlobalData.POST_IMAGE).post(requestBody).build();
                 try {
@@ -201,7 +199,7 @@ public class SettingActivity extends AppCompatActivity {
                         userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR + "FamilyName=" + Utils.getValue(SettingActivity.this, GlobalData.NAME)), UserInfor.class);
                         Utils.putValue(SettingActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
                     }
-                    Log.e("responce: ", op);
+                    Log.d(TAG, "responce: " + op);
                 } catch (Exception e) {
                     e.printStackTrace();
 

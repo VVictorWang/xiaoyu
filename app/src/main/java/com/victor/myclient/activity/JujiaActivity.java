@@ -1,21 +1,18 @@
 package com.victor.myclient.activity;
 
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.adapters.FragmentAdapter;
 import com.victor.myclient.datas.DoorInfor;
 import com.victor.myclient.fragments.BaoJingFragment;
 import com.victor.myclient.fragments.RoomFragment;
@@ -23,24 +20,25 @@ import com.victor.myclient.fragments.TemperatureFramgmentt;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import demo.animen.com.xiaoyutask.R;
 
 /**
  * Created by victor on 2017/4/24.
  */
 
-public class JujiaActivity extends FragmentActivity {
+public class JujiaActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private android.support.v4.view.ViewPager jiujiaviewpager;
-    private android.support.design.widget.TabLayout fragjiujia;
 
     private TextView door_status;
-    private TabLayout.Tab one, two, three;
-    View room_status_parent, person_status_parent, warning_infor_parent;
-    private RelativeLayout room_status, person_status, warning_infor;
-    private Drawable jiujia_normal, jiujia_selected;
     private DoorInfor doorInfor;
     private boolean net_work;
+    private View room, person, baojing;
+    private List<Fragment> mFragments = new ArrayList<>();
+    private int currentIndex;
+    private Fragment mCurrentFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -49,87 +47,59 @@ public class JujiaActivity extends FragmentActivity {
         setContentView(R.layout.activity_jujia);
         ActivityManage.getInstance().pushActivity(JujiaActivity.this);
         initView();
+        initFragment();
         net_work = Utils.isNetWorkAvailabe(JujiaActivity.this);
-        initTab();
         new getDoorInfor().execute();
-        initEvent();
     }
 
     private void initView() {
-        jiujia_normal = getResources().getDrawable(R.drawable.jiujia_viewpage_shape);
-        jiujia_selected = getResources().getDrawable(R.drawable.jiujia_view_pager_selected);
-        this.fragjiujia = (TabLayout) findViewById(R.id.frag_jiujia);
-        this.jiujiaviewpager = (ViewPager) findViewById(R.id.jiujia_view_pager);
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        room_status_parent = layoutInflater.inflate(R.layout.room_status, null);
-        person_status_parent = layoutInflater.inflate(R.layout.person_activity_status, null);
-        warning_infor_parent = layoutInflater.inflate(R.layout.magic_status, null);
-        room_status = (RelativeLayout) room_status_parent.findViewById(R.id.room_status);
-        person_status = (RelativeLayout) person_status_parent.findViewById(R.id.person_activity);
-        warning_infor = (RelativeLayout) warning_infor_parent.findViewById(R.id.warning_view_pager);
-        door_status = (TextView) room_status_parent.findViewById(R.id.room_status_text);
+        room = findViewById(R.id.room_status_btn);
+        room.setTag(0);
+        room.setOnClickListener(this);
+        person = findViewById(R.id.person_activity_btn);
+        person.setTag(1);
+        person.setOnClickListener(this);
+        baojing = findViewById(R.id.baojing_info_btn);
+        baojing.setTag(2);
+        baojing.setOnClickListener(this);
+
+        door_status = (TextView) room.findViewById(R.id.room_status_text);
         doorInfor = new DoorInfor();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void initTab() {
-        FragmentAdapter viewPageAdapter = new FragmentAdapter(getSupportFragmentManager());
-        viewPageAdapter.addFragment(new TemperatureFramgmentt());
-        viewPageAdapter.addFragment(new RoomFragment());
-        viewPageAdapter.addFragment(new BaoJingFragment());
-        jiujiaviewpager.setAdapter(viewPageAdapter);
-        fragjiujia.setupWithViewPager(jiujiaviewpager);
-        one = fragjiujia.getTabAt(0);
-        two = fragjiujia.getTabAt(1);
-        three = fragjiujia.getTabAt(2);
-        room_status.setBackground(jiujia_selected);
-        person_status.setBackground(jiujia_normal);
-        warning_infor.setBackground(jiujia_normal);
+    private void initFragment() {
+        mFragments.add(new TemperatureFramgmentt());
+        mFragments.add(new RoomFragment());
+        mFragments.add(new BaoJingFragment());
+        room.setSelected(true);
+        changeTab(0);
 
-        one.setCustomView(room_status_parent);
-        two.setCustomView(person_status_parent);
-        three.setCustomView(warning_infor_parent);
-        jiujiaviewpager.setCurrentItem(0);
     }
 
-    private void initEvent() {
-        fragjiujia.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (tab == fragjiujia.getTabAt(0)) {
-                    room_status.setBackground(jiujia_selected);
-                    tab.setCustomView(room_status_parent);
-                } else if (tab == fragjiujia.getTabAt(1)) {
-                    person_status.setBackground(jiujia_selected);
-                    tab.setCustomView(person_status_parent);
-                } else if (tab == fragjiujia.getTabAt(2)) {
-                    warning_infor.setBackground(jiujia_selected);
-                    tab.setCustomView(warning_infor_parent);
-                }
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                if (tab == fragjiujia.getTabAt(0)) {
-                    room_status.setBackground(jiujia_normal);
-                    tab.setCustomView(room_status_parent);
-                } else if (tab == fragjiujia.getTabAt(1)) {
-                    person_status.setBackground(jiujia_normal);
-                    tab.setCustomView(person_status_parent);
-                } else if (tab == fragjiujia.getTabAt(2)) {
-                    warning_infor.setBackground(jiujia_normal);
-                    tab.setCustomView(warning_infor_parent);
-                }
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+    private void changeTab(int index) {
+        currentIndex = index;
+        room.setSelected(index == 0);
+        person.setSelected(index == 1);
+        baojing.setSelected(index == 3);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (mCurrentFragment != null) {
+            transaction.hide(mCurrentFragment);
+        }
+        Fragment fragment = mFragments.get(currentIndex);
+        mCurrentFragment = fragment;
+        if (!fragment.isAdded()) {
+            transaction.add(R.id.frame, fragment);
+        } else {
+            transaction.show(fragment);
+        }
+        transaction.commit();
     }
+
+    @Override
+    public void onClick(View v) {
+        changeTab((int) v.getTag());
+    }
+
 
     class getDoorInfor extends AsyncTask<Void, Void, Void> {
         private Gson gson = new Gson();
@@ -141,7 +111,6 @@ public class JujiaActivity extends FragmentActivity {
             } else {
                 door_status.setText("关闭");
             }
-            one.setCustomView(room_status_parent);
             super.onPostExecute(aVoid);
         }
 

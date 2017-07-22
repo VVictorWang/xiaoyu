@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,20 +17,7 @@
         android:src="@drawable/login_top"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!--<de.hdodenhof.circleimageview.CircleImageView-->
-    <!--android:id="@+id/login_user_image"-->
-    <!--android:layout_width="58dp"-->
-    <!--android:layout_height="39dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:layout_marginTop="302dp"-->
-    <!--android:src="@drawable/login_username"-->
-    <!--app:layout_constraintHorizontal_bias="0.151"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent" />-->
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/login_id"
@@ -39,31 +27,31 @@
         android:layout_marginTop="304dp"
         android:background="@drawable/login_user"
         android:cursorVisible="false"
+        android:hint="请输入您的账号(姓名)"
         android:paddingLeft="55dp"
-        android:hint="请输入您的账号"
-        android:textColorHint="@color/whites"
-        android:textColor="@color/whites"
         android:singleLine="true"
+        android:textColor="@color/whites"
+        android:textColorHint="@color/whites"
         android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/login_password"
-        android:layout_width="240dp"
+        android:layout_width="250dp"
         android:layout_height="58dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="69dp"
         android:background="@drawable/login_passwd"
-        android:singleLine="true"
-        android:paddingLeft="55dp"
-        android:inputType="textPassword"
         android:hint="请输入您的密码"
+        android:inputType="textPassword"
+        android:paddingLeft="55dp"
+        android:singleLine="true"
+        android:textColor="@color/whites"
         android:textColorHint="@color/whites"
         android:textSize="15sp"
-        android:textColor="@color/whites"
-        app:layout_constraintTop_toTopOf="@id/login_id"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/login_id"
         />
 
     <!--<android.support.design.widget.FloatingActionButton-->
@@ -83,13 +71,13 @@
     <!--app:layout_constraintRight_toRightOf="parent">-->
     <!--</android.support.design.widget.FloatingActionButton>-->
     <Button
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="136dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="73dp"
-    android:id="@+id/login_button"
         android:background="@drawable/circle"
         android:elevation="10dp"
         android:text="登录"
@@ -100,7 +88,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/login_password"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"/>
 
     <Button
         android:id="@+id/login_forget_psw"
@@ -120,7 +108,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"/>
 
     <Button
         android:id="@+id/login_sign_up"
@@ -140,5 +128,5 @@
         app:layout_constraintLeft_toRightOf="@+id/login_forget_psw"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"/>
 </android.support.constraint.ConstraintLayout>
