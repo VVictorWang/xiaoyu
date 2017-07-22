@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.setting;
+package com.victor.myclient.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.datas.UserInfor;
-import com.victor.myclient.activity.login.LoginActivity;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
@@ -37,8 +36,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * Created by victor on 2017/4/24.

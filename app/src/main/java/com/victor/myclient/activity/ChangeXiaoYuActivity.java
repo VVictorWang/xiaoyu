@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.setting;
+package com.victor.myclient.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.activity.login.LoginActivity;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
@@ -78,12 +77,15 @@ public class ChangeXiaoYuActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        this.changepasswordusername = (TextInputEditText) findViewById(R.id.change_password_username);
+        this.changepasswordusername = (TextInputEditText) findViewById(R.id
+                .change_password_username);
         this.changepasswordfinish = (Button) findViewById(R.id.change_password_finish);
         this.changepasswordold = (TextInputEditText) findViewById(R.id.change_password_old);
-        this.changepasswordnewconfirm = (TextInputEditText) findViewById(R.id.change_password_new_confirm);
+        this.changepasswordnewconfirm = (TextInputEditText) findViewById(R.id
+                .change_password_new_confirm);
         this.changepasswordnew = (TextInputEditText) findViewById(R.id.change_password_new);
-        this.changexiaoyunumberback = (RelativeLayout) findViewById(R.id.change_xiao_yu_number_back);
+        this.changexiaoyunumberback = (RelativeLayout) findViewById(R.id
+                .change_xiao_yu_number_back);
         client = new OkHttpClient();
     }
 
@@ -120,7 +122,8 @@ public class ChangeXiaoYuActivity extends AppCompatActivity {
 
     }
 
-    private void ChangePassword(final String username, final String password_old, final String password_new, final String password_confirm) {
+    private void ChangePassword(final String username, final String password_old, final String
+            password_new, final String password_confirm) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -132,7 +135,8 @@ public class ChangeXiaoYuActivity extends AppCompatActivity {
                 builder.add("password_cnfm", password_confirm);
                 try {
                     RequestBody requestBody = builder.build();
-                    Request request = new Request.Builder().url(GlobalData.CHANGE_PASSWORD).post(requestBody).build();
+                    Request request = new Request.Builder().url(GlobalData.CHANGE_PASSWORD).post
+                            (requestBody).build();
                     Response response = client.newCall(request).execute();
                     String op = response.body().string();
                     switch (op) {

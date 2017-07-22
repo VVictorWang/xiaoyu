@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.thinkcool.circletextimageview.CircleTextImageView;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.activity.xiaoyu.VideoActivity;
+import com.victor.myclient.activity.VideoActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;

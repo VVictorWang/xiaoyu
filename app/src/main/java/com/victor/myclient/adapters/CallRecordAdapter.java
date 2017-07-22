@@ -82,7 +82,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
         String dateString = "";
         if (null != callRecord.getDate()) {
             Calendar mCalender = Calendar.getInstance();
-            SimpleDateFormat formater = new SimpleDateFormat("yyyy年MM月dd日");
+            SimpleDateFormat formater = new SimpleDateFormat("MM月dd日");
             Date curDate = new Date(System.currentTimeMillis());
             Date yesterday = curDate;
             mCalender.setTime(curDate);

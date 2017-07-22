@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,43 +12,44 @@
         <RelativeLayout
             android:id="@+id/back_doctor_detail"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
 
             <ImageView
                 android:id="@+id/back_to_main_image_background_doctor_infor"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
-                android:paddingLeft="6dp"
-                android:paddingTop="5dp"
-                android:src="@drawable/backwards_iamge" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dp"
+                android:src="@drawable/backwards_iamge"/>
+
 
             <TextView
                 android:id="@+id/back_to_main_image_background_doctor_infor_text"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/back_to_main_image_background_doctor_infor"
-                android:paddingTop="12dp"
                 android:text="返回"
                 android:textColor="@color/white"
-                android:textSize="16dp" />
+                android:textSize="16dp"/>
         </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="150dp"
-            android:paddingTop="12dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:text="医生信息"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="16dp"/>
     </RelativeLayout>
 
 
     <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/segment" />
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/segment"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,7 +72,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.17"
-                android:src="@drawable/login_top" />
+                android:src="@drawable/login_top"/>
         </LinearLayout>
 
         <LinearLayout
@@ -87,35 +88,36 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="王小二"
-                android:textSize="16dp" />
+                android:textSize="16dp"/>
 
             <TextView
                 android:id="@+id/person_detail_info_doctor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="男     48岁" />
+                android:text="男     48岁"/>
 
             <TextView
                 android:id="@+id/person_detail_job_doctor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="病情： 原发性高血压" />
+                android:text="病情： 原发性高血压"/>
 
         </LinearLayout>
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/segment"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:weightSum="2">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -131,7 +133,7 @@
                 android:text="主治医生"
 
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="15dp"/>
 
 
             <TextView
@@ -142,7 +144,7 @@
                 android:paddingTop="5dp"
                 android:text="联系邮箱"
                 android:textColor="@color/gray"
-                android:textSize="13dp" />
+                android:textSize="13dp"/>
 
             <TextView
                 android:id="@+id/doctor_part_good_at"
@@ -152,7 +154,7 @@
                 android:paddingTop="5dp"
                 android:text="擅长"
                 android:textColor="@color/gray"
-                android:textSize="13dp" />
+                android:textSize="13dp"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -172,41 +174,41 @@
                 android:background="@color/my_background"
                 android:text="发起呼救"
                 android:textColor="@color/white"
-                android:textSize="13dp" />
+                android:textSize="13dp"/>
         </LinearLayout>
     </LinearLayout>
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1">
+            android:layout_height="1dp"
+            android:background="@color/segment"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/segment" />
+        <TextView
+            android:id="@+id/doctor_info_intro"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="医生介绍"
+            android:textColor="@color/gray"
+            android:textSize="13dp"/>
 
-            <TextView
-                android:id="@+id/doctor_info_intro"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="医生介绍"
-                android:textColor="@color/gray"
-                android:textSize="13dp" />
+        <TextView
+            android:id="@+id/doctor_info_intro_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/doctor_info_intro"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="12dp"
+            android:textColor="@color/black"
 
-            <TextView
-                android:id="@+id/doctor_info_intro_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/doctor_info_intro"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="12dp"
-                android:textColor="@color/black"
-
-                android:textSize="17dp" />
-        </RelativeLayout>
-    </LinearLayout>
+            android:textSize="17dp"/>
+    </RelativeLayout>
+</LinearLayout>

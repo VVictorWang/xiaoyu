@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.cases;
+package com.victor.myclient.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.activity.xiaoyu.VideoActivity;
 import com.victor.myclient.datas.DoctorInfor;
 import com.victor.myclient.datas.DoctorXiaoYu;
 import com.victor.myclient.utils.GlobalData;

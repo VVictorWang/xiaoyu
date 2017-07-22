@@ -5,19 +5,16 @@ package com.victor.myclient.datas;
  */
 
 public class UserInfor {
+
     /**
-     * name : admin
-     * password : 098f6bcd4621d373cade4e832627b4f6
-     * patientId : 2
-     * email : test@qq.com
-     * phone : 12345678
-     * \
-     * <p>
-     * name：注册者姓名即患者家属姓名
-     * patientId: 患者家属对应的患者id
-     * mail： 患者家属邮箱
-     * phone： 患者家属电话
-     * image:
+     * id : 27
+     * name : ok
+     * patientId : 5
+     * email : 643705913@qq.com
+     * phone : 13536582658
+     * image : fb402015361887adc564b5be70fdd79fb1e9a8c3.png
+     * xiaoyuName : sliver
+     * xiaoyuNum : 15927698838
      */
 
     private String id;
@@ -26,21 +23,15 @@ public class UserInfor {
     private String email;
     private String phone;
     private String image;
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private String xiaoyuName;
+    private String xiaoyuNum;
 
     public String getId() {
         return id;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getImage() {
-        return image;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -50,7 +41,6 @@ public class UserInfor {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getPatientId() {
         return patientId;
@@ -74,5 +64,29 @@ public class UserInfor {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getXiaoyuName() {
+        return xiaoyuName;
+    }
+
+    public void setXiaoyuName(String xiaoyuName) {
+        this.xiaoyuName = xiaoyuName;
+    }
+
+    public String getXiaoyuNum() {
+        return xiaoyuNum;
+    }
+
+    public void setXiaoyuNum(String xiaoyuNum) {
+        this.xiaoyuNum = xiaoyuNum;
     }
 }

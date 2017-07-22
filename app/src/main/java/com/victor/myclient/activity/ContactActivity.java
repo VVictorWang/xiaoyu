@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.contact;
+package com.victor.myclient.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;

@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.homeservices;
+package com.victor.myclient.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,9 +41,8 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
     private HistoryListAdapter adapter;
     private Context context;
     private HistoryListAdapter.MyClickListener clickListener;
-    private ImageView imageView;
     private RelativeLayout back_to_main;
-//    private ImageView imageView;
+    private TextView empty;
 
     private static final String TAG = "ServiceHistoryActivity";
 
@@ -67,7 +66,8 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
     private void initView() {
         recyclerView = (RecyclerView) findViewById(R.id.list);
         back_to_main = (RelativeLayout) findViewById(R.id.back_to_main_history);
-        GridLayoutManager manager = new GridLayoutManager(this, 2);
+        empty = (TextView) findViewById(R.id.empty);
+        LinearLayoutManager manager = new LinearLayoutManager(ServiceHistoryActivity.this);
         recyclerView.setLayoutManager(manager);
 //        imageView = (ImageView) findViewById(R.id.imageView);
         list = new ArrayList<>();
@@ -104,30 +104,22 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
 
     @Override
     public void onBackPressed() {
-//        if (imageView.getVisibility() == View.VISIBLE) {
-//            recyclerView.setVisibility(View.VISIBLE);
-//            imageView.setVisibility(View.GONE);
-//        } else {
         super.onBackPressed();
-//        }
     }
 
-    class GetServiceTask extends AsyncTask<Void, Void, Void> {
+    class GetServiceTask extends AsyncTask<Void, String, String> {
         private Gson gson = new Gson();
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
             if (net_work) {
                 String sendRequest =
                         Utils.sendRequest(GlobalData.GET_SERVICE_HISTORY + patientId);
                 android.util.Log.d(TAG, "doInBackground: sendRequest=" + sendRequest);
-                if (!(sendRequest == null || sendRequest.contains("param_error") || sendRequest.contains("not_exist"))) {
+                if (!(sendRequest == null || sendRequest.contains("param_error") || sendRequest
+                        .contains("not_exist"))) {
                     list = gson.fromJson(sendRequest, new TypeToken<List<ServiceHistory>>() {
                     }.getType());
-//                    ServiceHistory serviceHistory = gson.fromJson(sendRequest, ServiceHistory.class);
-//                    list = new ArrayList<>();
-//                    list.add(serviceHistory);
-
                 } else {
                     list.clear();
                 }
@@ -149,15 +141,22 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
                         }
                     }
                 });
+                return "ok";
             }
-            return null;
+            return "empty";
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            adapter = new HistoryListAdapter(list, context, clickListener);
-            recyclerView.setAdapter(adapter);
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String s) {
+            if (s.equals("ok")) {
+                adapter = new HistoryListAdapter(list, context, clickListener);
+                recyclerView.setAdapter(adapter);
+            } else if (s.equals("empty")) {
+                empty.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.INVISIBLE);
+            }
+            super.onPostExecute(s);
         }
+
     }
 }
