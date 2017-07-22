@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.login;
+package com.victor.myclient.activity;
 
 import android.os.Bundle;
 import android.os.Handler;

@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.homeservices;
+package com.victor.myclient.activity;
 
 import android.app.Activity;
 import android.content.Intent;

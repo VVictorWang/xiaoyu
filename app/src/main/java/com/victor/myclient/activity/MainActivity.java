@@ -3,7 +3,6 @@ package com.victor.myclient.activity;
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.victor.myclient.activity.homeservices.ServiceHistoryActivity;
 import com.victor.myclient.utils.GlobalData;
 
 import android.Manifest;
@@ -16,7 +15,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,9 +27,6 @@ import com.victor.myclient.service.MyPushService;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.datas.UserInfor;
-import com.victor.myclient.activity.cases.CaseListActivity;
-import com.victor.myclient.activity.contact.ContactActivity;
-import com.victor.myclient.activity.setting.SettingActivity;
 import com.google.gson.Gson;
 import com.thinkcool.circletextimageview.CircleTextImageView;
 

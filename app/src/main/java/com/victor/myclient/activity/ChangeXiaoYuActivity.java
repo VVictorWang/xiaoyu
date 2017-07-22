@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.setting;
+package com.victor.myclient.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.activity.login.LoginActivity;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 

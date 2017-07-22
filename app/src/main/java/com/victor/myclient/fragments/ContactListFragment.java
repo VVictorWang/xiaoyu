@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.victor.myclient.datas.ContactListData;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.activity.contact.NewContactorActivity;
+import com.victor.myclient.activity.NewContactorActivity;
 import com.victor.myclient.utils.sortlist.PinyinComparator;
 import com.victor.myclient.utils.sortlist.CharacterParser;
 import com.victor.myclient.utils.sortlist.SideBar;

@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.contact;
+package com.victor.myclient.activity;
 
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;

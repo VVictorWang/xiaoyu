@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.victor.myclient.utils.sortlist.SortModel;
-import com.victor.myclient.activity.xiaoyu.VideoActivity;
+import com.victor.myclient.activity.VideoActivity;
 
 import java.util.ArrayList;
 import java.util.List;

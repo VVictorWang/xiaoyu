@@ -12,9 +12,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         manifestPlaceholders = [
-                GETUI_APP_ID : "CtHfX957Jr9ssdfXvnxVB2",
-                GETUI_APP_KEY : "nm5vhOe8RG9FlzEQ5yQpW5",
-                GETUI_APP_SECRET : "kejt1rWVhE8hZFTG1hSZT"
+                GETUI_APP_ID    : "CtHfX957Jr9ssdfXvnxVB2",
+                GETUI_APP_KEY   : "nm5vhOe8RG9FlzEQ5yQpW5",
+                GETUI_APP_SECRET: "kejt1rWVhE8hZFTG1hSZT"
         ]
         ndk {
             abiFilters "armeabi-v7a"
@@ -44,11 +44,12 @@ dependencies {
 //        all*.exclude module: 'gson'
     }
 //    compile project(':imagepicker')
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.lzy.widget:imagepicker:0.5.5'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     compile 'com.android.support:support-annotations:25.3.1'
     compile 'org.litepal.android:core:1.5.1'
@@ -64,9 +65,6 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'tech.linjiang:suitlines:1.0.0'
-    testCompile 'junit:junit:4.12'
-
-
     compile 'com.getui:sdk:2.10.2.0'
-    compile 'com.github.bumptech.glide:glide:3.5.2'
+    testCompile 'junit:junit:4.12'
 }

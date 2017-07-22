@@ -1,4 +1,4 @@
-package com.victor.myclient.activity.login;
+package com.victor.myclient.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,6 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.activity.MainActivity;
 import com.victor.myclient.datas.UserInformation;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
