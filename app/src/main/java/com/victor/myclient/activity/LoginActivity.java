@@ -116,10 +116,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String reply = response.body().string();
                     switch (reply) {
                         case "1":
+
                             Utils.putBooleanValue(LoginActivity.this, GlobalData.Login_status,
                                     true);
-                            Utils.putValue(LoginActivity.this, GlobalData.NAME, username);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            if (Utils.isMobileNO(username)) {
+                                Utils.putValue(LoginActivity.this, GlobalData.Phone, username);
+                                intent.putExtra("type", "phone");
+                            } else {
+                                Utils.putValue(LoginActivity.this, GlobalData.NAME, username);
+                                intent.putExtra("type", "username");
+                            }
                             startActivity(intent);
                             ActivityManage.getInstance().popAllActivity();
                             break;

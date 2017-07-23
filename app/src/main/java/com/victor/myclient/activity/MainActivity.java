@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView time_call;
 
     private String xiaoyuNumber;
-    private String user_name;
     private boolean net_work_available, has_data;
+    private String type = "username";
 
     private UserInfor userInfor;
     private final static int REQUEST_PERMISSION = 1000;
@@ -123,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (getIntent() != null && getIntent().getStringExtra("type") != null) {
+            type = getIntent().getStringExtra("type");
+        }
         PackageManager packageManager = getPackageManager();
         boolean sdCardWritePermission = packageManager.checkPermission(Manifest.permission
                 .WRITE_EXTERNAL_STORAGE, getPackageName()) == PackageManager.PERMISSION_GRANTED;
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initData();
         initView();
         initEvent();
-        new getUserInfor().execute(user_name);
+        new getUserInfor().execute();
     }
 
     private void connectXiaoyu(String xiaoyuNumber, String user_name) {
@@ -181,7 +184,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initData() {
-        user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
         net_work_available = Utils.isNetWorkAvailabe(MainActivity.this);
     }
 
@@ -232,7 +234,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void resumeData() {
-        user_name = Utils.getValue(MainActivity.this, GlobalData.NAME);
         bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue
                 (MainActivity.this, GlobalData.FAMILY_IMage));
         setTime_call();
@@ -316,22 +317,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected String doInBackground(String... params) {
-            if (net_work_available) {
-
-                userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR +
-                        "FamilyName=" + user_name), UserInfor.class);
-                Utils.putValue(MainActivity.this, GlobalData.NAME, userInfor.getName());
-                Utils.putValue(MainActivity.this, GlobalData.USer_email, userInfor.getEmail());
-                Utils.putValue(MainActivity.this, GlobalData.User_ID, userInfor.getId());
-                Utils.putValue(MainActivity.this, GlobalData.Phone, userInfor.getPhone());
-                Utils.putValue(MainActivity.this, GlobalData.PATIENT_ID, userInfor.getPatientId());
-                Utils.putValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID, userInfor.getId());
-                Utils.putValue(MainActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
-                Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NAME, userInfor.getXiaoyuName
-                        ());
-                Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NUMBER, userInfor
-                        .getXiaoyuNum());
-                has_data = true;
+            if (net_work_available ) {
+                if (type.equals("username")) {
+                    String info = Utils.sendRequest(GlobalData.GET_USR_INFOR +
+                            "FamilyName=" + Utils.getValue(MainActivity.this, GlobalData.NAME) +
+                            "&type=username");
+                    if (!info.contains("not_exist")) {
+                        userInfor = gson.fromJson(info, UserInfor.class);
+                        has_data = true;
+                    }else
+                        has_data = false;
+                } else if (type.equals("phone")) {
+                    String info = Utils.sendRequest(GlobalData.GET_USR_INFOR +
+                            "FamilyName=" + Utils.getValue(MainActivity.this, GlobalData.Phone) +
+                            "&type=phone");
+                    if (!info.contains("not_exist")) {
+                        userInfor = gson.fromJson(info, UserInfor.class);
+                        has_data = true;
+                    }else
+                        has_data = false;
+                }
+                if (has_data) {
+                    Utils.putValue(MainActivity.this, GlobalData.NAME, userInfor.getName());
+                    Utils.putValue(MainActivity.this, GlobalData.USer_email, userInfor.getEmail());
+                    Utils.putValue(MainActivity.this, GlobalData.User_ID, userInfor.getId());
+                    Utils.putValue(MainActivity.this, GlobalData.Phone, userInfor.getPhone());
+                    Utils.putValue(MainActivity.this, GlobalData.PATIENT_ID, userInfor.getPatientId());
+                    Utils.putValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID, userInfor.getId());
+                    Utils.putValue(MainActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
+                    Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NAME, userInfor.getXiaoyuName
+                            ());
+                    Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NUMBER, userInfor
+                            .getXiaoyuNum());
+                }
             } else {
                 String name = Utils.getValue(MainActivity.this, GlobalData.NAME);
                 if (!(name.equals(""))) {
@@ -365,7 +383,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE +
                                 userInfor.getImage());
                     }
-                }
+                }else
+                    Utils.showShortToast(MainActivity.this, "用户数据不存在");
             }
         }
 

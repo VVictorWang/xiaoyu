@@ -53,8 +53,7 @@ public class CaseListActivity extends AppCompatActivity {
         ActivityManage.getInstance().pushActivity(CaseListActivity.this);
         patientId = getIntent().getStringExtra("id");
         if (patientId == null || patientId.equals("")) {
-            Utils.showShortToast(CaseListActivity.this, "此用户没有绑定患者");
-            Utils.finishActivity(CaseListActivity.this);
+            Utils.showShortToast(CaseListActivity.this, "患者没有病例信息");
         } else {
             initView();
             initEvent();
