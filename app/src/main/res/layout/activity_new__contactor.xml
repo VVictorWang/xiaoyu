@@ -5,6 +5,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/my_background"
+                android:focusableInTouchMode="true"
                 tools:context="com.victor.myclient.activity.NewContactorActivity">
 
     <RelativeLayout

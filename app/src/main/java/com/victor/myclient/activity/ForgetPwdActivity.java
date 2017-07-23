@@ -98,19 +98,24 @@ public class ForgetPwdActivity extends AppCompatActivity {
                 try {
                     if (network) {
                         Gson gson = new Gson();
-                        mUserInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR +
-                                "FamilyName=" + user_name), UserInfor.class);
-                        String reply = Utils.sendRequest(GlobalData.FORGET_PASSWOD + mUserInfor
-                                .getId());
-                        if (reply.contains("Error")) {
+                        String info = Utils.sendRequest(GlobalData.GET_USR_INFOR +
+                                "FamilyName=" + user_name);
+                        if (!info.contains("not_exist")) {
+                            mUserInfor = gson.fromJson(info, UserInfor.class);
+                            String reply = Utils.sendRequest(GlobalData.FORGET_PASSWOD + mUserInfor
+                                    .getId());
+                            if (reply.contains("Error")) {
+                                handler.sendEmptyMessage(1);
+                            } else if (reply.contains("Found")) {
+                                handler.sendEmptyMessage(2);
+                            } else if (reply.contains("been sent")) {
+                                handler.sendEmptyMessage(3);
+                            } else if (reply.contains("could not")) {
+                                handler.sendEmptyMessage(4);
+                            }
+                        }else
                             handler.sendEmptyMessage(1);
-                        } else if (reply.contains("Found")) {
-                            handler.sendEmptyMessage(2);
-                        } else if (reply.contains("been sent")) {
-                            handler.sendEmptyMessage(3);
-                        } else if (reply.contains("could not")) {
-                            handler.sendEmptyMessage(4);
-                        }
+
                     }
 
 

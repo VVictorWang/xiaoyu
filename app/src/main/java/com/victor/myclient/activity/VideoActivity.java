@@ -42,6 +42,7 @@ import com.victor.myclient.view.VideoCellView;
 import java.util.Date;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -51,7 +52,7 @@ import rx.schedulers.Schedulers;
 
 public class VideoActivity extends AppCompatActivity {
     private SimpleVideoView mVideoView;
-    private ImageView mContent;
+    private CircleImageView mContent;
     private boolean foregroundCamera = true;
     private boolean micMute = false;
     private boolean audioMode = false;
@@ -167,7 +168,7 @@ public class VideoActivity extends AppCompatActivity {
 
     private void InitView() {
         mVideoView = (SimpleVideoView) findViewById(R.id.remote_video_view);
-        mContent = (ImageView) findViewById(R.id.shared_content);
+        mContent = (CircleImageView) findViewById(R.id.shared_content);
         this.audioonlybtn = (ImageButton) findViewById(R.id.audio_only_btn);
         this.mutebtn = (ImageButton) findViewById(R.id.mute_btn);
         this.switchcamera = (ImageButton) findViewById(R.id.switch_camera);
