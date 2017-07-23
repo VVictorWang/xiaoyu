@@ -18,7 +18,7 @@ import com.victor.myclient.utils.Utils;
 
 public class PostClientIdService extends Service {
     private String clientId;
-    private String patientId;
+    private String userId;
     Handler mHandler;
     HandlerThread mHandlerThread;
 
@@ -59,20 +59,24 @@ initBackThread();
                 new Runnable(){
                     @Override
                     public void run() {
-                        if (clientId != null & patientId != null) {
-//                            Log.d(TAG, "run: clientid shangchuanchenggong" + clientId + "patientid" + patientId);
-                            Log.d(TAG, "run: " + GlobalData.POST_CLIENTID + patientId + "&" + GlobalData.CLIENT_ID + clientId);
-                            Utils.sendRequest(GlobalData.POST_CLIENTID + patientId + "&" + GlobalData.CLIENT_ID + clientId);
+                        if (clientId != null & userId != null) {
+//                            Log.d(TAG, "run: " + GlobalData.POST_CLIENTID + userId + "&" + GlobalData.CLIENT_ID + clientId);
+                            String temp=Utils.sendRequest(GlobalData.POST_CLIENTID + userId + "&" + GlobalData.CLIENT_ID + clientId);
+                            stopSelf();
+//                            Log.d(TAG, "run: return="+temp);
                         } else {
                             clientId = Utils.getValue(getBaseContext(), GlobalData.CLIENT_ID
                             );
-                            patientId = Utils.getValue(getBaseContext(), GlobalData.PATIENT_ID);
-                            if (clientId != null & patientId != null) {
-
-                                Utils.sendRequest(GlobalData.POST_CLIENTID + patientId + "&" + GlobalData.CLIENT_ID + clientId);
+                            userId = Utils.getValue(getBaseContext(), GlobalData.User_ID);
+                            if (clientId != null & userId != null) {
+//                                Log.d(TAG, "run: " + GlobalData.POST_CLIENTID + userId + "&" + GlobalData.CLIENT_ID + clientId);
+                                Utils.sendRequest(GlobalData.POST_CLIENTID + userId + "&" + GlobalData.CLIENT_ID + clientId);
+                                stopSelf();
+                            }else{
+                                mHandler.sendEmptyMessageDelayed(0,5000);
                             }
                         }
-                        mHandler.sendEmptyMessageDelayed(0,10000);
+
                     }
                 }.run();
             }

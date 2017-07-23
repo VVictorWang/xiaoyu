@@ -44,5 +44,5 @@ public interface GlobalData {
     String GET_DOCTOR_IMAGE = "http://139.196.40.97/upload/doctorimage/";
     String GET_IMAGE="http://139.196.40.97/upload/serviceimage/";
     String GET_SERVICE_HISTORY="http://139.196.40.97/OSAdmin-master/uploads/interface/getServiceHistory.php?patientId=";
-    String POST_CLIENTID="http://139.196.40.97/OSAdmin-master/getui/onekey_tuisong.php?patientId=";
+    String POST_CLIENTID="http://139.196.40.97/OSAdmin-master/uploads/interface/add_clientId.php?id=";
 }
