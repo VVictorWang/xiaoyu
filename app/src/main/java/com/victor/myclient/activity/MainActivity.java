@@ -30,7 +30,7 @@ import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.datas.UserInfor;
 import com.google.gson.Gson;
-import com.thinkcool.circletextimageview.CircleTextImageView;
+import com.victor.myclient.view.CircleTextImageView;
 
 import java.util.Timer;
 import java.util.TimerTask;

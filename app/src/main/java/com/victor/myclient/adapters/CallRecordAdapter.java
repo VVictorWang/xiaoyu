@@ -1,6 +1,8 @@
 package com.victor.myclient.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +10,12 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.victor.myclient.activity.VideoActivity;
 import com.victor.myclient.datas.CallRecord;
+import com.victor.myclient.utils.Utils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
@@ -38,6 +43,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
         private String xiaoyuNum;
         private TextView date;
         private ImageView callType;
+        private RelativeLayout mRelativeLayout;
 
         public ViewHolder(View view) {
             super(view);
@@ -46,6 +52,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
             number = (TextView) view.findViewById(R.id.record_number_list);
             date = (TextView) view.findViewById(R.id.call_time);
             callType = (ImageView) view.findViewById(R.id.call_type);
+            mRelativeLayout = (RelativeLayout) view.findViewById(R.id.call_record);
         }
     }
 
@@ -54,7 +61,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
         this.context = context;
     }
 
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         CallRecord callRecord = callRecordList.get(position);
 
         holder.name.setText(callRecord.getName());
@@ -66,7 +73,6 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
             holder.callType.setImageResource(R.drawable.contact_hang_off);
         }
         holder.telephoneNum = callRecord.getTelephoneNum();
-        holder.xiaoyuNum = callRecord.getXiaoyuId();
         String num = "";
         if (null != callRecord.getTelephoneNum() && !"".equals(callRecord.getTelephoneNum())) {
             num = callRecord.getTelephoneNum();
@@ -78,6 +84,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
             num += callRecord.getXiaoyuId();
         }
         holder.number.setText(num);
+        holder.telephoneNum = num;
 //    if (holder.date.getText() == null || holder.date.getText().equals("")) {
         String dateString = "";
         if (null != callRecord.getDate()) {
@@ -100,7 +107,15 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
             }
         }
         holder.date.setText(dateString);
-//    }
+        holder.mRelativeLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, VideoActivity.class);
+                intent.putExtra("number", holder.telephoneNum);
+                intent.putExtra("type", "patient");
+                Utils.startActivity((Activity) context, intent);
+            }
+        });
     }
 
     @Override

@@ -17,9 +17,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.thinkcool.circletextimageview.CircleTextImageView;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.activity.VideoActivity;
+import com.victor.myclient.view.CircleTextImageView;
 
 import java.util.Timer;
 import java.util.TimerTask;

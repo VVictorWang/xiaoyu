@@ -13,6 +13,11 @@ The app is to help people with old and sick family members. Doctors put the info
 3. A Record of  your home information and the environment around you.
 
 
+## Third Open Source Dependency
 
-
-
+- Gson ------ To format the json data into Java classes.
+- [Litepal](https://github.com/LitePalFramework/LitePal) ----- To conveniently read or write to database.
+- [Glide](https://github.com/bumptech/glide) ----- To effectively display images.
+- [Okhttp](https://github.com/square/okhttp) ------ To conveniently get data from network or post data to network.
+- [ImagePicker](https://github.com/jeasonlzy/ImagePicker) ------ To pick and tailor pictures.
+- [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) ------ To show beautiful charts.

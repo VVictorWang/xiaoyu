@@ -23,7 +23,7 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView.Style;
-import com.thinkcool.circletextimageview.CircleTextImageView;
+import com.victor.myclient.view.CircleTextImageView;
 
 import java.io.File;
 import java.util.ArrayList;
