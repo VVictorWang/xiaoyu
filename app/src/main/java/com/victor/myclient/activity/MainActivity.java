@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             name = "victor";
             number = "18774259685";
         }
+        Log.d(TAG, "connectXiaoyu: user_name xiaoyunumber"+user_name+" "+xiaoyuNumber);
         NemoSDK.getInstance().connectNemo(name, number, new ConnectNemoCallback() {
             @Override
             public void onFailed(int i) {
@@ -168,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSuccess(String s) {
                 final String reslut = s;
+                Log.d(TAG, "onSuccess: s="+s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
