@@ -82,8 +82,8 @@
                         android:id="@+id/time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="服务时间"
                         android:layout_centerVertical="true"
+                        android:text="服务时间"
                         android:textColor="@color/mygray"
                         android:textSize="12sp"
                         />
@@ -107,7 +107,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:visibility="gone"
                 tools:visibility="visible"
                 />
