@@ -19,6 +19,8 @@ public interface GlobalData {
     String MAIN_ENGINE = "http://139.196.40.97/OSAdmin-master/uploads/interface/regloginpost.php?";
     String XIAOYU_NUMBER = "xiaoyu_number";
     String XIAOYU_NAME = "xiaoyu_name";
+    String CLIENT_ID="clientId";
+    String IP="139.196.40.97";
     String GET_USR_INFOR = "http://139.196.40.97/OSAdmin-master/uploads/interface/getPatientFamily.php?";
     String GET_PATIENT_CASE = "http://139.196.40.97/OSAdmin-master/uploads/interface/patientcases.php?patientId=";
     String GET_DOCTOR_INFOR = "http://139.196.40.97/OSAdmin-master/uploads/interface/doctorinfo.php?doctorId=";
@@ -42,4 +44,5 @@ public interface GlobalData {
     String GET_DOCTOR_IMAGE = "http://139.196.40.97/upload/doctorimage/";
     String GET_IMAGE="http://139.196.40.97/upload/serviceimage/";
     String GET_SERVICE_HISTORY="http://139.196.40.97/OSAdmin-master/uploads/interface/getServiceHistory.php?patientId=";
+    String POST_CLIENTID="http://139.196.40.97/OSAdmin-master/uploads/getui/onekey_tuisong.php?patientId=";
 }

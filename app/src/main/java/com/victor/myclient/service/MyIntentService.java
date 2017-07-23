@@ -11,6 +11,8 @@ import com.igexin.sdk.message.FeedbackCmdMessage;
 import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
 import com.igexin.sdk.message.SetTagCmdMessage;
+import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.Utils;
 
 /**
  * Created by Silver on 2017/7/11.
@@ -72,7 +74,7 @@ public class MyIntentService extends GTIntentService {
     @Override
     public void onReceiveClientId(Context context, String clientid) {
         Log.e(TAG, "onReceiveClientId -> " + "clientid = " + clientid);
-
+        Utils.putValue(context, GlobalData.CLIENT_ID,clientid);
         sendMessage(clientid, 1);
     }
 

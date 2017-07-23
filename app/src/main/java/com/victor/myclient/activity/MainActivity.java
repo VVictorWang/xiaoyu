@@ -3,6 +3,7 @@ package com.victor.myclient.activity;
 
 import android.support.v7.app.AppCompatActivity;
 
+import com.victor.myclient.service.PostClientIdService;
 import com.victor.myclient.utils.GlobalData;
 
 import android.Manifest;
@@ -15,6 +16,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -87,7 +89,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     services.setImageDrawable(getResources().getDrawable(R.drawable
                             .btn_bg_hujiao));
                     break;
-
+                case 0x133:
+                    Intent intent=new Intent(MainActivity.this, PostClientIdService.class);
+                    startService(intent);
+                    break;
+                    
             }
 
         }
@@ -349,6 +355,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onPostExecute(s);
             if (s != null) {
                 if (has_data) {
+                    Log.d(TAG, "onPostExecute: ");
+                    handler.sendEmptyMessage(0x133);
                     nametext.setText(userInfor.getName());
                     connectXiaoyu(userInfor.getXiaoyuNum(), userInfor.getXiaoyuName());
                     if (userInfor.getImage() != null) {

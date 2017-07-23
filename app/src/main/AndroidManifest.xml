@@ -122,6 +122,8 @@
             android:process=":pushservice"/>
         <service android:name="com.victor.myclient.service.MyIntentService"/>
 
+        <service android:name="com.victor.myclient.service.PostClientIdService"/>
+
         <activity android:name="com.victor.myclient.activity.WelcomeActivity">
         </activity>
     </application>
