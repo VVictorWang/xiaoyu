@@ -167,6 +167,8 @@ public class RegisterLastActivity extends AppCompatActivity {
                     switch (op) {
                         case "1":
                             handler.sendEmptyMessage(1);
+                            Utils.putValue(RegisterLastActivity.this, GlobalData.NAME,
+                                    information.getUsername());
                             Utils.startActivity(RegisterLastActivity.this, MainActivity.class);
                             Utils.putBooleanValue(RegisterLastActivity.this, GlobalData
                                     .Login_status, true);

@@ -133,7 +133,8 @@ public class IncommingAcivity extends AppCompatActivity {
         super.onStart();
     }
 
-    private void showIncomingCall(final int callIndex, final String callerNumber, final String callerName) {
+    private void showIncomingCall(final int callIndex, final String callerNumber, final String
+            callerName) {
         connmtanswerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,11 +180,13 @@ public class IncommingAcivity extends AppCompatActivity {
                 micMute = !micMute;
                 NemoSDK.getInstance().enableMic(micMute);
                 if (micMute) {
-                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.no_voice_bitmap);
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R
+                            .drawable.no_voice_bitmap);
                     Bitmap bitmap = drawable.getBitmap();
                     mutebtn.setImageBitmap(bitmap);
                 } else {
-                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.ic_toolbar_mic);
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R
+                            .drawable.ic_toolbar_mic);
                     Bitmap bitmap = drawable.getBitmap();
                     mutebtn.setImageBitmap(bitmap);
                 }
@@ -195,11 +198,13 @@ public class IncommingAcivity extends AppCompatActivity {
                 audioMode = !audioMode;
                 NemoSDK.getInstance().switchCallMode(audioMode);
                 if (audioMode) {
-                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.audio_multi);
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R
+                            .drawable.audio_multi);
                     Bitmap bitmap = drawable.getBitmap();
                     audioonlybtn.setImageBitmap(bitmap);
                 } else {
-                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.ic_toolbar_audio_only);
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R
+                            .drawable.ic_toolbar_audio_only);
                     Bitmap bitmap = drawable.getBitmap();
                     audioonlybtn.setImageBitmap(bitmap);
                 }
@@ -215,14 +220,19 @@ public class IncommingAcivity extends AppCompatActivity {
                 callRecord.setState(CallRecord.CALL_IN);
                 callRecord.setXiaoyuId(number);
                 callRecord.save();
-                int during_hour = hour + Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_HOUR);
+                int during_hour = hour + Utils.getIntValue(IncommingAcivity.this, GlobalData
+                        .DRURATION_HOUR);
 
-                int during_minute = minute + Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_MINITE);
+                int during_minute = minute + Utils.getIntValue(IncommingAcivity.this, GlobalData
+                        .DRURATION_MINITE);
 
-                int during_second = time + Utils.getIntValue(IncommingAcivity.this, GlobalData.DRURATION_SECOND);
+                int during_second = time + Utils.getIntValue(IncommingAcivity.this, GlobalData
+                        .DRURATION_SECOND);
                 Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_HOUR, during_hour);
-                Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_MINITE, during_minute);
-                Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_SECOND, during_second);
+                Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_MINITE,
+                        during_minute);
+                Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_SECOND,
+                        during_second);
                 Log.e(TAG, NemoSDK.getInstance().getStatisticsInfo());
                 Utils.finishActivity(IncommingAcivity.this);
             }
@@ -251,13 +261,17 @@ public class IncommingAcivity extends AppCompatActivity {
                             @Override
                             public void call(Integer integer) {
                                 if (NemoSDKErrorCode.WRONG_PASSWORD == integer) {
-                                    Toast.makeText(IncommingAcivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(IncommingAcivity.this, "密码错误", Toast
+                                            .LENGTH_SHORT).show();
                                 } else if (NemoSDKErrorCode.INVALID_PARAM == integer) {
-                                    Toast.makeText(IncommingAcivity.this, "错误的号码", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(IncommingAcivity.this, "错误的号码", Toast
+                                            .LENGTH_SHORT).show();
                                 } else if (NemoSDKErrorCode.NETWORK_UNAVAILABLE == integer) {
-                                    Toast.makeText(IncommingAcivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(IncommingAcivity.this, "网络不可用", Toast
+                                            .LENGTH_SHORT).show();
                                 } else if (NemoSDKErrorCode.HOST_ERROR == integer) {
-                                    Toast.makeText(IncommingAcivity.this, "主机错误", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(IncommingAcivity.this, "主机错误", Toast
+                                            .LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -291,13 +305,15 @@ public class IncommingAcivity extends AppCompatActivity {
                                         break;
                                     case DISCONNECTED:
                                         if (s.equals("CANCEL")) {
-                                            Toast.makeText(IncommingAcivity.this, "通话取消", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(IncommingAcivity.this, "通话取消", Toast
+                                                    .LENGTH_SHORT).show();
                                             releaseResource();
                                             Utils.finishActivity(IncommingAcivity.this);
                                         }
 
                                         if (s.equals("BUSY")) {
-                                            Toast.makeText(IncommingAcivity.this, "对方忙", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(IncommingAcivity.this, "对方忙", Toast
+                                                    .LENGTH_SHORT).show();
                                             releaseResource();
                                             Utils.finishActivity(IncommingAcivity.this);
                                         }
@@ -311,7 +327,8 @@ public class IncommingAcivity extends AppCompatActivity {
                                             releaseResource();
                                             Utils.finishActivity(IncommingAcivity.this);
                                         }
-                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                                        setRequestedOrientation(ActivityInfo
+                                                .SCREEN_ORIENTATION_PORTRAIT);
                                         break;
                                     default:
                                         break;
@@ -333,7 +350,8 @@ public class IncommingAcivity extends AppCompatActivity {
                                     videoView.stopRender();
                                 }
                                 videoCellViews = videoView.getmVideoViews();
-                                videoView.getLocalVideoView().setOnClickListener(new View.OnClickListener() {
+                                videoView.getLocalVideoView().setOnClickListener(new View
+                                        .OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         videoView.indexTag = 0;
@@ -360,7 +378,8 @@ public class IncommingAcivity extends AppCompatActivity {
                                 });
                                 for (int i = 0; i < videoCellViews.size(); i++) {
                                     videoCellViews.get(i).setTag(i + 1);
-                                    videoCellViews.get(i).setOnClickListener(new View.OnClickListener() {
+                                    videoCellViews.get(i).setOnClickListener(new View
+                                            .OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             videoView.indexTag = (Integer) v.getTag();

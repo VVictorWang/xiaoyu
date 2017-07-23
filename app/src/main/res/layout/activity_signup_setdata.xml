@@ -73,7 +73,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="376dp"
         android:background="@drawable/sign_xiao_yu_background"
-        android:hint="请输入您的身份证号"
+        android:hint="请输入患者的身份证号"
         android:paddingLeft="20dp"
         android:textColor="@color/whites"
         android:textColorHint="@color/white"

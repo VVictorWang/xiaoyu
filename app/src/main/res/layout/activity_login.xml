@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:background="@color/my_background">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -21,38 +22,42 @@
 
     <EditText
         android:id="@+id/login_id"
-        android:layout_width="240dp"
-        android:layout_height="58dp"
-        android:layout_marginLeft="52dp"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="304dp"
         android:background="@drawable/login_user"
-        android:cursorVisible="false"
-        android:hint="请输入您的账号(姓名)"
-        android:paddingLeft="55dp"
+        android:hint="请输入您的账号(姓名或手机号)"
+        android:paddingLeft="65dp"
+        android:paddingRight="10dp"
         android:singleLine="true"
         android:textColor="@color/whites"
         android:textColorHint="@color/whites"
         android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/login_password"
-        android:layout_width="250dp"
-        android:layout_height="58dp"
-        android:layout_marginLeft="50dp"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="69dp"
         android:background="@drawable/login_passwd"
         android:hint="请输入您的密码"
         android:inputType="textPassword"
-        android:paddingLeft="55dp"
+        android:paddingLeft="65dp"
+        android:paddingRight="10dp"
         android:singleLine="true"
         android:textColor="@color/whites"
         android:textColorHint="@color/whites"
         android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/login_id"
-        />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/login_id"/>
 
     <!--<android.support.design.widget.FloatingActionButton-->
     <!--android:id="@+id/login_sign_in"-->
