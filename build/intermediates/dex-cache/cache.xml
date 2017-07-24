@@ -3,12 +3,66 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_5b6b42dd5694d4dab5434fcf58f25db6f76b042d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="8dd32fd6e4957bf7b0505f8a0d51808e5c04204e">
+        sha1="99775c2b26dcb406c95db542a89367b3a902f37e">
         <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_fa69254d251f36c69a4c5219977d8fb437af7ee9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\rxbus-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="93fe0ef9f75d35ae25bd7d7b1cb0edeb3432fcde">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\rxbus-1.0.0_6b925c2ca2c2db6d805ad17f14041fd44b48ed0f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\rxjava-1.1.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="5a1aef6a9d56efb473b8be6b66689077e7317c45">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\rxjava-1.1.3_397d50965bf7aff3dd97e2ed32ba27f0a3ef24d1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\rxandroid.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4c4b83de2f6412072d2a29b1b7a5b03edaad5ff">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\rxandroid_36e9a06a9e0d64da8691dbef4a7385097af4b56c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\nemosdk.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b510d14c0330502a4374b043517b2eb402cc3a68">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\nemosdk_616a5a35ed45f1a3747dfaeb1e8e758ac749a76d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\nemo-json-gson-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="86bc9a5192765e1dd00e21a3bee40a371e008578">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\nemo-json-gson-1.0.0_81869ca9d983caee5ac7ada440a9191ee66d0758\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -18,6 +72,33 @@
         revision="25.0.2"
         sha1="914f5d3e3ace66080e59613708f06d129a222e25">
         <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3b59733491ccad7aa57cf6882082b3b9da163635\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\nemo-java-utils-2.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b6a1de849e2e32b9a80596dc9ca11bca82f5e6bb">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\nemo-java-utils-2.0.0_cfc6c36e046dff2c8e149eba57d0bf38503a8de2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\nemo-websocket.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a4ed2b0f6b15861281016cedcc09b5523707df39">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\nemo-websocket_b3eeb9d05ce0791fbeb772b1a18f522384fe23e1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\libs\signature.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="376df33874367b8b5e22ea926b2902a87d7f33a5">
+        <dex dex="C:\Users\Silver\Desktop\work\xiaoyu\xiaoyu\app\build\intermediates\transforms\dex\debug\folders\1000\2\signature_b395f71429edf4f307c3a448225424deb59cdfa4\classes.dex" />
     </item>
 
 </items>

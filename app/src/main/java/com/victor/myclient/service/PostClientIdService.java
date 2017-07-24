@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.victor.myclient.MyApplication;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
@@ -59,17 +60,18 @@ public class PostClientIdService extends Service {
                 new Runnable() {
                     @Override
                     public void run() {
-                        if (clientId != null & userId != null) {
+                        if (clientId != null && userId != null&&Utils.isNetWorkAvailabe(MyApplication.getContext())) {
                             String temp = Utils.sendRequest(GlobalData.POST_CLIENTID + userId +
-                                    "&" + GlobalData.CLIENT_ID + clientId);
+                                    "&" + GlobalData.CLIENT_ID +"="+ clientId);
+
                             stopSelf();
                         } else {
                             clientId = Utils.getValue(getBaseContext(), GlobalData.CLIENT_ID
                             );
                             userId = Utils.getValue(getBaseContext(), GlobalData.User_ID);
-                            if (clientId != null & userId != null) {
-                                Utils.sendRequest(GlobalData.POST_CLIENTID + userId + "&" +
-                                        GlobalData.CLIENT_ID + clientId);
+                            if (clientId != null && userId != null&&Utils.isNetWorkAvailabe(MyApplication.getContext())) {
+                                String temp = Utils.sendRequest(GlobalData.POST_CLIENTID + userId + "&" +
+                                        GlobalData.CLIENT_ID  +"="+ clientId);
                                 stopSelf();
                             } else {
                                 mHandler.sendEmptyMessageDelayed(0, 5000);
