@@ -6,14 +6,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.datas.UserInformation;
+import com.victor.myclient.data.UserInformation;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
@@ -163,7 +162,6 @@ public class RegisterLastActivity extends AppCompatActivity {
                             (requestBody).build();
                     Response response = client.newCall(request).execute();
                     String op = response.body().string();
-                    Log.e("response, register:", op);
                     switch (op) {
                         case "1":
                             handler.sendEmptyMessage(1);

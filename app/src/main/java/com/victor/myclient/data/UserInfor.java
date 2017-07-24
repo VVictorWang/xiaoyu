@@ -1,4 +1,4 @@
-package com.victor.myclient.datas;
+package com.victor.myclient.data;
 
 /**
  * Created by victor on 17-4-30.

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.adapters.HistoryListAdapter;
-import com.victor.myclient.datas.ServiceHistory;
+import com.victor.myclient.data.ServiceHistory;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 
@@ -55,7 +55,6 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
         context = this;
         clickListener = this;
         patientId = Integer.parseInt(getIntent().getStringExtra("id"));
-        android.util.Log.d(TAG, "onCreate: id=" + patientId);
         net_work = Utils.isNetWorkAvailabe(this);
         initView();
         initEvent();
@@ -69,7 +68,6 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
         empty = (TextView) findViewById(R.id.empty);
         LinearLayoutManager manager = new LinearLayoutManager(ServiceHistoryActivity.this);
         recyclerView.setLayoutManager(manager);
-//        imageView = (ImageView) findViewById(R.id.imageView);
         list = new ArrayList<>();
         adapter = new HistoryListAdapter(list, this, this);
         recyclerView.setAdapter(adapter);
@@ -94,7 +92,6 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
 
     @Override
     public void onItemClick(int position) {
-        android.util.Log.d(TAG, "onItemClick: position =" + position);
 
         Intent intent = new Intent(ServiceHistoryActivity.this, ImageDetailActivity.class);
         intent.putExtra("url", GlobalData.GET_IMAGE + list.get(position).getServiceContent());
@@ -116,7 +113,6 @@ public class ServiceHistoryActivity extends Activity implements HistoryListAdapt
             if (net_work) {
                 String sendRequest =
                         Utils.sendRequest(GlobalData.GET_SERVICE_HISTORY + patientId);
-                android.util.Log.d(TAG, "doInBackground: sendRequest=" + sendRequest);
                 if (!(sendRequest == null || sendRequest.contains("param_error") || sendRequest
                         .contains("not_exist"))) {
                     list = gson.fromJson(sendRequest, new TypeToken<List<ServiceHistory>>() {

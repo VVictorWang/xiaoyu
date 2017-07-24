@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.victor.myclient.activity.VideoActivity;
-import com.victor.myclient.datas.CallRecord;
+import com.victor.myclient.data.CallRecord;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.view.CircleImageView;
 

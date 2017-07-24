@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.victor.myclient.datas.ContactListData;
+import com.victor.myclient.data.ContactListData;
 import com.victor.myclient.utils.Utils;
 
 import org.litepal.crud.DataSupport;

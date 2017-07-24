@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.datas.CallRecord;
+import com.victor.myclient.data.CallRecord;
 import com.victor.myclient.adapters.CallRecordAdapter;
 
 import org.litepal.crud.DataSupport;

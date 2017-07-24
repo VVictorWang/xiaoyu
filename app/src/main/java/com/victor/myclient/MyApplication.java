@@ -19,9 +19,6 @@ import org.litepal.LitePal;
 public class MyApplication extends Application {
     private static Context context;
     private static final String TAG = "MyApplication";
-//   private static DemoHandler handler;
-//
-//    public static StringBuilder payloadData = new StringBuilder();
 
     @Override
     public void onCreate() {

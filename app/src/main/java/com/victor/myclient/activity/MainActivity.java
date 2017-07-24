@@ -16,7 +16,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,7 +27,7 @@ import com.victor.myclient.service.MyIntentService;
 import com.victor.myclient.service.MyPushService;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.datas.UserInfor;
+import com.victor.myclient.data.UserInfor;
 import com.google.gson.Gson;
 import com.victor.myclient.view.CircleImageView;
 import com.victor.myclient.view.CircleTextImageView;
@@ -156,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             name = "victor";
             number = "18774259685";
         }
-        Log.d(TAG, "connectXiaoyu: user_name xiaoyunumber" + user_name + " " + xiaoyuNumber);
         NemoSDK.getInstance().connectNemo(name, number, new ConnectNemoCallback() {
             @Override
             public void onFailed(int i) {
@@ -172,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSuccess(String s) {
                 final String reslut = s;
-                Log.d(TAG, "onSuccess: s=" + s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -350,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             ());
                     Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NAME, userInfor
                             .getXiaoyuName
-                            ());
+                                    ());
                     Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NUMBER, userInfor
                             .getXiaoyuNum());
                 }
@@ -379,7 +376,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onPostExecute(s);
             if (s != null) {
                 if (has_data) {
-                    Log.d(TAG, "onPostExecute: ");
                     handler.sendEmptyMessage(0x133);
                     nametext.setText(userInfor.getName());
                     connectXiaoyu(userInfor.getXiaoyuNum(), userInfor.getXiaoyuName());

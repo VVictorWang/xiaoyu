@@ -34,12 +34,10 @@ public class MyIntentService extends GTIntentService {
 
     @Override
     public void onReceiveServicePid(Context context, int pid) {
-        Log.d(TAG, "onReceiveServicePid -> " + pid);
     }
 
     @Override
     public void onReceiveMessageData(Context context, GTTransmitMessage msg) {
-        Log.d(TAG, "onReceiveMessageData: received");
         String appid = msg.getAppid();
         String taskid = msg.getTaskId();
         String messageid = msg.getMessageId();
@@ -70,25 +68,20 @@ public class MyIntentService extends GTIntentService {
             sendMessage(data, 0);
         }
 
-        Log.d(TAG,
-                "----------------------------------------------------------------------------------------------");
     }
 
     @Override
     public void onReceiveClientId(Context context, String clientid) {
-        Log.e(TAG, "onReceiveClientId -> " + "clientid = " + clientid);
         Utils.putValue(context, GlobalData.CLIENT_ID, clientid);
         sendMessage(clientid, 1);
     }
 
     @Override
     public void onReceiveOnlineState(Context context, boolean online) {
-        Log.d(TAG, "onReceiveOnlineState -> " + (online ? "online" : "offline"));
     }
 
     @Override
     public void onReceiveCommandResult(Context context, GTCmdMessage cmdMessage) {
-        Log.d(TAG, "onReceiveCommandResult -> " + cmdMessage);
 
         int action = cmdMessage.getAction();
 
@@ -149,7 +142,6 @@ public class MyIntentService extends GTIntentService {
                 break;
         }
 
-        Log.d(TAG, "settag result sn = " + sn + ", code = " + code + ", text = " + text);
     }
 
     private void feedbackResult(FeedbackCmdMessage feedbackCmdMsg) {
@@ -160,16 +152,11 @@ public class MyIntentService extends GTIntentService {
         long timestamp = feedbackCmdMsg.getTimeStamp();
         String cid = feedbackCmdMsg.getClientId();
 
-        Log.d(TAG, "onReceiveCommandResult -> " + "appid = " + appid + "\ntaskid = " + taskid +
-                "\nactionid = " + actionid + "\nresult = " + result
-                + "\ncid = " + cid + "\ntimestamp = " + timestamp);
     }
 
     private void sendMessage(String data, int what) {
         Message msg = Message.obtain();
         msg.what = what;
         msg.obj = data;
-        Log.d(TAG, "clientid Message=" + msg.what + "\t" + msg.obj);
-//        DemoApplication.sendMessage(msg);
     }
 }

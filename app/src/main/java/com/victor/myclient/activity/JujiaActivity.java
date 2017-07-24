@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.datas.DoorInfor;
+import com.victor.myclient.data.DoorInfor;
 import com.victor.myclient.fragments.BaoJingFragment;
 import com.victor.myclient.fragments.RoomFragment;
 import com.victor.myclient.fragments.TemperatureFramgmentt;

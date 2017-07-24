@@ -49,10 +49,6 @@ public class Utils {
     }
 
     public static void showShortToast(Context context, String msg) {
-
-//        mToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
-//        mToast.show();
-
         if (mToast != null) {
             mToast.setText(msg);
             mToast.makeText(context, msg, Toast.LENGTH_SHORT);
@@ -144,9 +140,6 @@ public class Utils {
 
     /**
      * 移除SharedPreference
-     *
-     * @param context
-     * @param key
      */
     public static final void RemoveValue(Context context, String key) {
         Editor editor = getSharedPreference(context).edit();
@@ -163,10 +156,6 @@ public class Utils {
 
     /**
      * 获取SharedPreference 值
-     *
-     * @param context
-     * @param key
-     * @return
      */
     public static final String getValue(Context context, String key) {
         return getSharedPreference(context).getString(key, "");
@@ -231,10 +220,6 @@ public class Utils {
 
     /**
      * 设置SharedPreference 值
-     *
-     * @param context
-     * @param key
-     * @param value
      */
     public static final boolean putValue(Context context, String key,
                                          String value) {
@@ -250,10 +235,6 @@ public class Utils {
 
     /**
      * 设置SharedPreference 值
-     *
-     * @param context
-     * @param key
-     * @param value
      */
     public static final boolean putIntValue(Context context, String key,
                                             int value) {
@@ -286,7 +267,6 @@ public class Utils {
             string = format.format(date);
         } catch (Exception e) {
             e.printStackTrace();
-//            Log.d(TAG, "dateToString: dateToString failed");
         }
         return string;
     }
@@ -298,7 +278,6 @@ public class Utils {
             string = format.format(date);
         } catch (Exception e) {
             e.printStackTrace();
-//            Log.d(TAG, "dateToString: dateToString failed");
         }
         return string;
     }
@@ -329,9 +308,6 @@ public class Utils {
 
     /**
      * 验证邮箱
-     *
-     * @param email
-     * @return
      */
     public static boolean isEmail(String email) {
         String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(" +
@@ -344,9 +320,6 @@ public class Utils {
 
     /**
      * 验证手机号
-     *
-     * @param mobiles
-     * @return
      */
     public static boolean isMobileNO(String mobiles) {
         Pattern p = Pattern
@@ -354,23 +327,5 @@ public class Utils {
         Matcher m = p.matcher(mobiles);
         return m.matches();
     }
-
-
-    /**
-     * 验证是否是数字
-     *
-     * @param str
-     * @return
-     */
-    public static boolean isNumber(String str) {
-        Pattern pattern = Pattern.compile("[0-9]*");
-        java.util.regex.Matcher match = pattern.matcher(str);
-        if (match.matches() == false) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
 
 }

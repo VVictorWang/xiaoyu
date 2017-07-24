@@ -28,7 +28,6 @@ public class PostClientIdService extends Service {
     public void onCreate() {
         super.onCreate();
         initBackThread();
-        Log.d(TAG, "onCreate: ");
     }
 
     @Override
@@ -61,19 +60,14 @@ public class PostClientIdService extends Service {
                     @Override
                     public void run() {
                         if (clientId != null & userId != null) {
-//                            Log.d(TAG, "run: " + GlobalData.POST_CLIENTID + userId + "&" +
-// GlobalData.CLIENT_ID + clientId);
                             String temp = Utils.sendRequest(GlobalData.POST_CLIENTID + userId +
                                     "&" + GlobalData.CLIENT_ID + clientId);
                             stopSelf();
-//                            Log.d(TAG, "run: return="+temp);
                         } else {
                             clientId = Utils.getValue(getBaseContext(), GlobalData.CLIENT_ID
                             );
                             userId = Utils.getValue(getBaseContext(), GlobalData.User_ID);
                             if (clientId != null & userId != null) {
-//                                Log.d(TAG, "run: " + GlobalData.POST_CLIENTID + userId + "&" +
-// GlobalData.CLIENT_ID + clientId);
                                 Utils.sendRequest(GlobalData.POST_CLIENTID + userId + "&" +
                                         GlobalData.CLIENT_ID + clientId);
                                 stopSelf();

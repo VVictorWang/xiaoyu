@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.datas.UserInfor;
+import com.victor.myclient.data.UserInfor;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
@@ -162,16 +161,12 @@ public class SettingActivity extends AppCompatActivity {
                     if (data != null) {
                         ArrayList<ImageItem> images = (ArrayList<ImageItem>) data
                                 .getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                        Log.i(TAG, "onActivityResult: 有数据");
-                        // Toast.makeText(this, "有数据", Toast.LENGTH_SHORT).show();
                         if (images.get(0).path != null) {
                             Utils.putValue(SettingActivity.this, GlobalData.Img_URl, images.get
                                     (0).path);
                             loginhead.setImageURI(Uri.fromFile(new File(images.get(0).path)));
                             uploadImage(images.get(0).path);
                         }
-                    } else {
-                        Log.i(TAG, "onActivityResult: 没有数据");
                     }
                 }
                 break;
@@ -193,7 +188,6 @@ public class SettingActivity extends AppCompatActivity {
                         (MEDIA_TYPE_JPG, f));
                 builder.addFormDataPart("id", id);
                 builder.setType(MultipartBody.FORM);
-                Log.d(TAG, "id:" + id);
                 RequestBody requestBody = builder.build();
                 final Request request = new Request.Builder().url(GlobalData.POST_IMAGE).post
                         (requestBody).build();
@@ -208,7 +202,6 @@ public class SettingActivity extends AppCompatActivity {
                         Utils.putValue(SettingActivity.this, GlobalData.FAMILY_IMage, userInfor
                                 .getImage());
                     }
-                    Log.d(TAG, "responce: " + op);
                 } catch (Exception e) {
                     e.printStackTrace();
 

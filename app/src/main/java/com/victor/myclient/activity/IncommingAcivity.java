@@ -8,10 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +22,7 @@ import com.victor.myclient.ActivityManage;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.datas.CallRecord;
+import com.victor.myclient.data.CallRecord;
 import com.victor.myclient.view.CircleImageView;
 import com.victor.myclient.view.SimpleVideoView;
 import com.victor.myclient.view.VideoCellView;
@@ -234,7 +232,6 @@ public class IncommingAcivity extends AppCompatActivity {
                         during_minute);
                 Utils.putIntValue(IncommingAcivity.this, GlobalData.DRURATION_SECOND,
                         during_second);
-                Log.e(TAG, NemoSDK.getInstance().getStatisticsInfo());
                 Utils.finishActivity(IncommingAcivity.this);
             }
         });

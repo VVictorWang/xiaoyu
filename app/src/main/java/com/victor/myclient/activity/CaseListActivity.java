@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.datas.CaseInfor;
+import com.victor.myclient.data.CaseInfor;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.adapters.CaseAdapter;

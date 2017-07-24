@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.datas.CaseInfor;
+import com.victor.myclient.data.CaseInfor;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;

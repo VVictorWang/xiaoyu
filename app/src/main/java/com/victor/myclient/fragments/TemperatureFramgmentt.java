@@ -2,16 +2,13 @@ package com.victor.myclient.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Color;
-import android.log.L;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +25,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.google.gson.Gson;
-import com.victor.myclient.datas.HomeInfor;
+import com.victor.myclient.data.HomeInfor;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.view.drawSmoothLine.BesselChart;
@@ -44,8 +41,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import static android.R.attr.data;
 
 /**
  * Created by victor on 17-5-3.
@@ -325,6 +320,5 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
 
     @Override
     public void onMove() {
-        Log.d("zqt", "onMove");
     }
 }

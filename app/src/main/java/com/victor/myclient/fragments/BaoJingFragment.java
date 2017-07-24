@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.victor.myclient.datas.OneKeyWarning;
+import com.victor.myclient.data.OneKeyWarning;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.adapters.BaojingInfoAdapter;

@@ -32,8 +32,6 @@ public interface GlobalData {
     String CHANGE_EMAIL_PASSORT = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
             "/userinfomgr.php";
     /*******************************************************************/
-    String GET_XIAO_YU_NUMBER = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
-            "/getXiaoyuNum.php?";
     String POST_IMAGE = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
             "/uploadPatientFamilyImage.php?";
     String CHANGE_PASSWORD = "http://139.196.40.97/OSAdmin-master/uploads/interface/userinfomgr" +
@@ -59,5 +57,6 @@ public interface GlobalData {
     String GET_IMAGE = "http://139.196.40.97/upload/serviceimage/";
     String GET_SERVICE_HISTORY = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
             "/getServiceHistory.php?patientId=";
-    String POST_CLIENTID = "http://139.196.40.97/OSAdmin-master/uploads/interface/add_clientId.php?id=";
+    String POST_CLIENTID = "http://139.196.40.97/OSAdmin-master/uploads/interface/add_clientId" +
+            ".php?id=";
 }

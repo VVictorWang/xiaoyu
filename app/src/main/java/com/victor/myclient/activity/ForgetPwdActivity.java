@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.datas.UserInfor;
+import com.victor.myclient.data.UserInfor;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 

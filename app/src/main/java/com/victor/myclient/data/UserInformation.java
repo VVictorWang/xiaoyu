@@ -1,4 +1,4 @@
-package com.victor.myclient.datas;
+package com.victor.myclient.data;
 
 import java.io.Serializable;
 

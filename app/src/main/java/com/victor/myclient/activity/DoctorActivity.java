@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.victor.myclient.ActivityManage;
-import com.victor.myclient.datas.DoctorInfor;
-import com.victor.myclient.datas.DoctorXiaoYu;
+import com.victor.myclient.data.DoctorInfor;
+import com.victor.myclient.data.DoctorXiaoYu;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;

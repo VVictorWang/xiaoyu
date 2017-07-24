@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.victor.myclient.datas.ContactListData;
+import com.victor.myclient.data.ContactListData;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.activity.NewContactorActivity;
 import com.victor.myclient.utils.sortlist.PinyinComparator;
@@ -256,9 +256,6 @@ public class ContactListFragment extends Fragment {
 
     /**
      * 为ListView填充数据
-     *
-     * @param date
-     * @return
      */
     private List<SortModel> filledData(String[] date, String[] numbers) {
         List<SortModel> mSortList = new ArrayList<SortModel>();
