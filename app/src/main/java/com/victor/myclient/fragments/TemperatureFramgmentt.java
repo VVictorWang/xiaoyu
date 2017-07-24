@@ -78,7 +78,8 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
                 points.clear();
                 float a[] = {3, 6, 9, 12, 15, 18, 21, 24};
                 for (int i = 0; i < 8; i++) {
-                    points.add(new Point(a[i], homeInfor.getTemperatures().get((int) (a[i] - 1)), true));
+                    points.add(new Point(a[i], homeInfor.getTemperatures().get((int) (a[i] - 1)),
+                            true));
                 }
                 seriess.add(new Series("温度", Color.WHITE, points));
                 chart.getData().setLabelTransform(new ChartData.LabelTransform() {
@@ -116,7 +117,8 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
+            savedInstanceState) {
         if (layout == null) {
             layout = activity.getLayoutInflater().inflate(R.layout.activity_jujia2, null);
         } else {
@@ -180,8 +182,10 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                data_number = Long.parseLong(Utils.dataTostringtem(new Date(System.currentTimeMillis())));
-                time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月" + (data_number % 100) + "日");
+                data_number = Long.parseLong(Utils.dataTostringtem(new Date(System
+                        .currentTimeMillis())));
+                time_text.setText((data_number / 10000) + "年" + ((data_number / 100) % 100) + "月"
+                        + (data_number % 100) + "日");
                 new getHomeInforTask().execute("" + data_number);
             }
         });
@@ -274,7 +278,8 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
         protected Void doInBackground(String... params) {
             if (network_ava) {
                 String date = params[0];
-                String infor = Utils.sendRequest(GlobalData.GET_HOME_INFOR + Utils.getValue(activity, GlobalData.PATIENT_ID) + "&date=" + date);
+                String infor = Utils.sendRequest(GlobalData.GET_HOME_INFOR + Utils.getValue
+                        (activity, GlobalData.PATIENT_ID) + "&date=" + date);
                 homeInfor = gson.fromJson(infor, HomeInfor.class);
                 DataSupport.deleteAll(HomeInfor.class);
                 homeInfor.saveAsync();

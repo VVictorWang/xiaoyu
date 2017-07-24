@@ -36,13 +36,13 @@ import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.datas.CallRecord;
+import com.victor.myclient.view.CircleImageView;
 import com.victor.myclient.view.SimpleVideoView;
 import com.victor.myclient.view.VideoCellView;
 
 import java.util.Date;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -99,9 +99,11 @@ public class VideoActivity extends AppCompatActivity {
                     }
                 }
             } else if (msg.what == 2) {
-                bitmapUtils.disPlay(user_image, GlobalData.GET_PATIENT_IMAGE + patientImageInfor.getImage());
+                bitmapUtils.disPlay(user_image, GlobalData.GET_PATIENT_IMAGE + patientImageInfor
+                        .getImage());
             } else if (msg.what == 3) {
-                bitmapUtils.disPlay(user_image, GlobalData.GET_DOCTOR_IMAGE + doctorImage.getDoctorimage());
+                bitmapUtils.disPlay(user_image, GlobalData.GET_DOCTOR_IMAGE + doctorImage
+                        .getDoctorimage());
             }
         }
     };
@@ -147,7 +149,8 @@ public class VideoActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Gson gson = new Gson();
-                    patientImageInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_CALLING_IMAGE + "&identity=patient"), PatientImageInfor.class);
+                    patientImageInfor = gson.fromJson(Utils.sendRequest(GlobalData
+                            .GET_CALLING_IMAGE + "&identity=patient"), PatientImageInfor.class);
                     handler.sendEmptyMessage(2);
                 }
             }).start();
@@ -156,7 +159,8 @@ public class VideoActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Gson gson = new Gson();
-                    doctorImage = gson.fromJson(Utils.sendRequest(GlobalData.GET_CALLING_IMAGE + "&identity=doctor"), DoctorImage.class);
+                    doctorImage = gson.fromJson(Utils.sendRequest(GlobalData.GET_CALLING_IMAGE +
+                            "&identity=doctor"), DoctorImage.class);
                     handler.sendEmptyMessage(3);
 
                 }
@@ -176,7 +180,7 @@ public class VideoActivity extends AppCompatActivity {
         this.connmtdialtotext = (TextView) findViewById(R.id.conn_mt_dial_to_text);
         user_pic_layout = (RelativeLayout) findViewById(R.id.profile_pic);
         time_call = (TextView) findViewById(R.id.call_time_text);
-        user_image = (ImageView) findViewById(R.id.user_capture);
+        user_image = (com.victor.myclient.view.CircleImageView) findViewById(R.id.bg_turn);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
         NemoSDK.getInstance().setNemoSDKListener(new NemoSDKListener() {
             @Override
@@ -197,27 +201,36 @@ public class VideoActivity extends AppCompatActivity {
                             public void call(Integer integer) {
                                 if (NemoSDKErrorCode.WRONG_PASSWORD == integer) {
                                     final EditText editText = new EditText(VideoActivity.this);
-                                    new AlertDialog.Builder(VideoActivity.this).setTitle("请输入密码").setView(editText).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            String password = editText.getText().toString();
-                                            dialog.dismiss();
-                                            NemoSDK.getInstance().makeCall(number, password);
-                                        }
-                                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    new AlertDialog.Builder(VideoActivity.this).setTitle("请输入密码")
+                                            .setView(editText).setPositiveButton("确定", new
+                                            DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int
+                                                        which) {
+                                                    String password = editText.getText().toString();
+                                                    dialog.dismiss();
+                                                    NemoSDK.getInstance().makeCall(number,
+                                                            password);
+                                                }
+                                            }).setNegativeButton("取消", new DialogInterface
+                                            .OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             dialog.dismiss();
                                             Utils.finishActivity(VideoActivity.this);
                                         }
                                     }).show();
-                                    Toast.makeText(VideoActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(VideoActivity.this, "密码错误", Toast
+                                            .LENGTH_SHORT).show();
                                 } else if (NemoSDKErrorCode.INVALID_PARAM == integer) {
-                                    Toast.makeText(VideoActivity.this, "错误的号码", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(VideoActivity.this, "错误的号码", Toast
+                                            .LENGTH_SHORT).show();
                                 } else if (NemoSDKErrorCode.NETWORK_UNAVAILABLE == integer) {
-                                    Toast.makeText(VideoActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(VideoActivity.this, "网络不可用", Toast
+                                            .LENGTH_SHORT).show();
                                 } else if (NemoSDKErrorCode.HOST_ERROR == integer) {
-                                    Toast.makeText(VideoActivity.this, "主机错误", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(VideoActivity.this, "主机错误", Toast
+                                            .LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -240,7 +253,8 @@ public class VideoActivity extends AppCompatActivity {
                                     case CONNECTING:
                                         hideSoftKeyboard();
                                         getImageUrl();
-                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
+                                        setRequestedOrientation(ActivityInfo
+                                                .SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
                                         break;
                                     case CONNECTED:
                                         new Thread(new TimeThread()).start();
@@ -253,12 +267,14 @@ public class VideoActivity extends AppCompatActivity {
                                         break;
                                     case DISCONNECTED:
                                         if (s.equals("CANCEL")) {
-//                                            Toast.makeText(VideoActivity.this, "通话取消", Toast.LENGTH_SHORT).show();
+//                                            Toast.makeText(VideoActivity.this, "通话取消", Toast
+// .LENGTH_SHORT).show();
 //                                            releaseResource();
 //                                            Utils.finishActivity(VideoActivity.this);
                                         }
                                         if (s.equals("BUSY")) {
-                                            Toast.makeText(VideoActivity.this, "对方忙", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(VideoActivity.this, "对方忙", Toast
+                                                    .LENGTH_SHORT).show();
                                             releaseResource();
                                             Utils.finishActivity(VideoActivity.this);
                                         }
@@ -272,7 +288,8 @@ public class VideoActivity extends AppCompatActivity {
                                             releaseResource();
                                             Utils.finishActivity(VideoActivity.this);
                                         }
-                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                                        setRequestedOrientation(ActivityInfo
+                                                .SCREEN_ORIENTATION_PORTRAIT);
                                         break;
                                     default:
                                         break;
@@ -294,7 +311,8 @@ public class VideoActivity extends AppCompatActivity {
                                     mVideoView.stopRender();
                                 }
                                 videoCellViews = mVideoView.getmVideoViews();
-                                mVideoView.getLocalVideoView().setOnClickListener(new View.OnClickListener() {
+                                mVideoView.getLocalVideoView().setOnClickListener(new View
+                                        .OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         mVideoView.indexTag = 0;
@@ -316,7 +334,8 @@ public class VideoActivity extends AppCompatActivity {
                                 });
                                 for (int i = 0; i < videoCellViews.size(); i++) {
                                     videoCellViews.get(i).setTag(i + 1);
-                                    videoCellViews.get(i).setOnClickListener(new View.OnClickListener() {
+                                    videoCellViews.get(i).setOnClickListener(new View
+                                            .OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             mVideoView.indexTag = (Integer) v.getTag();
@@ -346,11 +365,13 @@ public class VideoActivity extends AppCompatActivity {
                 micMute = !micMute;
                 NemoSDK.getInstance().enableMic(micMute);
                 if (micMute) {
-                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.no_voice_bitmap);
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R
+                            .drawable.no_voice_bitmap);
                     Bitmap bitmap = drawable.getBitmap();
                     mutebtn.setImageBitmap(bitmap);
                 } else {
-                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.ic_toolbar_mic);
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R
+                            .drawable.ic_toolbar_mic);
                     Bitmap bitmap = drawable.getBitmap();
                     mutebtn.setImageBitmap(bitmap);
                 }
@@ -363,11 +384,13 @@ public class VideoActivity extends AppCompatActivity {
                 audioMode = !audioMode;
                 NemoSDK.getInstance().switchCallMode(audioMode);
                 if (audioMode) {
-                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.audio_multi);
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R
+                            .drawable.audio_multi);
                     Bitmap bitmap = drawable.getBitmap();
                     audioonlybtn.setImageBitmap(bitmap);
                 } else {
-                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R.drawable.ic_toolbar_audio_only);
+                    BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(R
+                            .drawable.ic_toolbar_audio_only);
                     Bitmap bitmap = drawable.getBitmap();
                     audioonlybtn.setImageBitmap(bitmap);
                 }
@@ -385,9 +408,12 @@ public class VideoActivity extends AppCompatActivity {
                 callRecord.setXiaoyuId(number);
                 callRecord.setState(CallRecord.CALL_OUT);
                 callRecord.save();
-                int during_hour = hour + Utils.getIntValue(VideoActivity.this, GlobalData.DRURATION_HOUR);
-                int during_minute = minute + Utils.getIntValue(VideoActivity.this, GlobalData.DRURATION_MINITE);
-                int during_second = time + Utils.getIntValue(VideoActivity.this, GlobalData.DRURATION_SECOND);
+                int during_hour = hour + Utils.getIntValue(VideoActivity.this, GlobalData
+                        .DRURATION_HOUR);
+                int during_minute = minute + Utils.getIntValue(VideoActivity.this, GlobalData
+                        .DRURATION_MINITE);
+                int during_second = time + Utils.getIntValue(VideoActivity.this, GlobalData
+                        .DRURATION_SECOND);
                 Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION_HOUR, during_hour);
                 Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION_MINITE, during_minute);
                 Utils.putIntValue(VideoActivity.this, GlobalData.DRURATION_SECOND, during_second);
@@ -422,24 +448,31 @@ public class VideoActivity extends AppCompatActivity {
         if (!(ContextCompat
                 .checkSelfPermission(VideoActivity.this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) &&
-                !(ContextCompat.checkSelfPermission(VideoActivity.this, Manifest.permission.RECORD_AUDIO)
+                !(ContextCompat.checkSelfPermission(VideoActivity.this, Manifest.permission
+                        .RECORD_AUDIO)
                         == PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat
                     .requestPermissions(VideoActivity.this,
-                            new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO}, 0);
-        } else if (!(ContextCompat.checkSelfPermission(VideoActivity.this, Manifest.permission.RECORD_AUDIO)
+                            new String[]{Manifest.permission.CAMERA, Manifest.permission
+                                    .RECORD_AUDIO}, 0);
+        } else if (!(ContextCompat.checkSelfPermission(VideoActivity.this, Manifest.permission
+                .RECORD_AUDIO)
                 == PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat
-                    .requestPermissions(VideoActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
-        } else if (!(ContextCompat.checkSelfPermission(VideoActivity.this, Manifest.permission.CAMERA)
+                    .requestPermissions(VideoActivity.this, new String[]{Manifest.permission
+                            .RECORD_AUDIO}, 0);
+        } else if (!(ContextCompat.checkSelfPermission(VideoActivity.this, Manifest.permission
+                .CAMERA)
                 == PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(VideoActivity.this, new String[]{Manifest.permission.CAMERA}, 0);
+            ActivityCompat.requestPermissions(VideoActivity.this, new String[]{Manifest
+                    .permission.CAMERA}, 0);
         }
     }
 
     private void hideSoftKeyboard() {
         if (getCurrentFocus() != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService
+                    (INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }

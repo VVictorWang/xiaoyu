@@ -6,7 +6,7 @@ import org.litepal.crud.DataSupport;
  * Created by victor on 17-4-30.
  */
 
-public class DoctorInfor extends DataSupport{
+public class DoctorInfor extends DataSupport {
 
     /**
      * id:医生id

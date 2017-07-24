@@ -24,11 +24,12 @@ public class VerticalAxisView extends View {
     private List<ChartData.Label> labels;
     private BesselCalculator calculator;
 
-    public VerticalAxisView(Context context, List<ChartData.Label> labels, ChartStyle style, BesselCalculator calculator) {
+    public VerticalAxisView(Context context, List<ChartData.Label> labels, ChartStyle style,
+                            BesselCalculator calculator) {
         super(context);
-        this.calculator=calculator;
-        this.labels=labels;
-        this.style=style;
+        this.calculator = calculator;
+        this.labels = labels;
+        this.style = style;
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 

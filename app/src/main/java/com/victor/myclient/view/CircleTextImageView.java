@@ -30,7 +30,7 @@ import demo.animen.com.xiaoyutask.R;
  * blog: www.victorwang.science                                            #
  */
 
-public class CircleTextImageView extends android.support.v7.widget.AppCompatImageView{
+public class CircleTextImageView extends android.support.v7.widget.AppCompatImageView {
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
 
     private static final Bitmap.Config BITMAP_CONFIG = Bitmap.Config.ARGB_8888;
@@ -59,7 +59,7 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
     private String mTextString;
     private int mTextColor = DEFAULT_TEXT_COLOR;
     private int mTextSize = DEFAULT_TEXT_SIZE;
-    private int mTextPadding=DEFAULT_TEXT_PADDING;
+    private int mTextPadding = DEFAULT_TEXT_PADDING;
 
     private Bitmap mBitmap;
     private BitmapShader mBitmapShader;
@@ -88,16 +88,24 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
     public CircleTextImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleTextImageView, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleTextImageView,
+                defStyle, 0);
 
-        mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleTextImageView_citv_border_width, DEFAULT_BORDER_WIDTH);
-        mBorderColor = a.getColor(R.styleable.CircleTextImageView_citv_border_color, DEFAULT_BORDER_COLOR);
-        mBorderOverlay = a.getBoolean(R.styleable.CircleTextImageView_citv_border_overlay, DEFAULT_BORDER_OVERLAY);
-        mFillColor = a.getColor(R.styleable.CircleTextImageView_citv_fill_color, DEFAULT_FILL_COLOR);
+        mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleTextImageView_citv_border_width,
+                DEFAULT_BORDER_WIDTH);
+        mBorderColor = a.getColor(R.styleable.CircleTextImageView_citv_border_color,
+                DEFAULT_BORDER_COLOR);
+        mBorderOverlay = a.getBoolean(R.styleable.CircleTextImageView_citv_border_overlay,
+                DEFAULT_BORDER_OVERLAY);
+        mFillColor = a.getColor(R.styleable.CircleTextImageView_citv_fill_color,
+                DEFAULT_FILL_COLOR);
         mTextString = a.getString(R.styleable.CircleTextImageView_citv_text_text);
-        mTextColor = a.getColor(R.styleable.CircleTextImageView_citv_text_color, DEFAULT_TEXT_COLOR);
-        mTextSize = a.getDimensionPixelSize(R.styleable.CircleTextImageView_citv_text_size, DEFAULT_TEXT_SIZE);
-        mTextPadding=a.getDimensionPixelSize(R.styleable.CircleTextImageView_citv_text_padding, DEFAULT_TEXT_PADDING);
+        mTextColor = a.getColor(R.styleable.CircleTextImageView_citv_text_color,
+                DEFAULT_TEXT_COLOR);
+        mTextSize = a.getDimensionPixelSize(R.styleable.CircleTextImageView_citv_text_size,
+                DEFAULT_TEXT_SIZE);
+        mTextPadding = a.getDimensionPixelSize(R.styleable.CircleTextImageView_citv_text_padding,
+                DEFAULT_TEXT_PADDING);
         a.recycle();
 
         init();
@@ -121,7 +129,8 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
     @Override
     public void setScaleType(ScaleType scaleType) {
         if (scaleType != SCALE_TYPE) {
-            throw new IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType));
+            throw new IllegalArgumentException(String.format("ScaleType %s not supported.",
+                    scaleType));
         }
     }
 
@@ -134,14 +143,14 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (mBitmap == null&&TextUtils.isEmpty(mTextString)) {
+        if (mBitmap == null && TextUtils.isEmpty(mTextString)) {
             return;
         }
 
         if (mFillColor != Color.TRANSPARENT) {
             canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, mDrawableRadius, mFillPaint);
         }
-        if(mBitmap!=null) {
+        if (mBitmap != null) {
             canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, mDrawableRadius, mBitmapPaint);
         }
         if (mBorderWidth != 0) {
@@ -170,9 +179,9 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
     public void setText(@StringRes int TextResId) {
         setText(getResources().getString(TextResId));
     }
-    public void setText(String textString)
-    {
-        this.mTextString=textString;
+
+    public void setText(String textString) {
+        this.mTextString = textString;
         invalidate();
 
     }
@@ -194,9 +203,9 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
     public int getTextSize() {
         return mTextSize;
     }
-    public void setTextSize(int textSize)
-    {
-        this.mTextSize=textSize;
+
+    public void setTextSize(int textSize) {
+        this.mTextSize = textSize;
         mTextPaint.setTextSize(textSize);
         invalidate();
     }
@@ -324,9 +333,11 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
             Bitmap bitmap;
 
             if (drawable instanceof ColorDrawable) {
-                bitmap = Bitmap.createBitmap(COLORDRAWABLE_DIMENSION, COLORDRAWABLE_DIMENSION, BITMAP_CONFIG);
+                bitmap = Bitmap.createBitmap(COLORDRAWABLE_DIMENSION, COLORDRAWABLE_DIMENSION,
+                        BITMAP_CONFIG);
             } else {
-                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), BITMAP_CONFIG);
+                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable
+                        .getIntrinsicHeight(), BITMAP_CONFIG);
             }
 
             Canvas canvas = new Canvas(bitmap);
@@ -350,12 +361,10 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
         }
 
 
-
-        if (mBitmap == null&&TextUtils.isEmpty(mTextString)) {
+        if (mBitmap == null && TextUtils.isEmpty(mTextString)) {
             invalidate();
             return;
         }
-
 
 
         mTextPaint.setAntiAlias(true);
@@ -373,9 +382,9 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
         mFillPaint.setColor(mFillColor);
 
 
-
         mBorderRect.set(0, 0, getWidth(), getHeight());
-        mBorderRadius = Math.min((mBorderRect.height() - mBorderWidth) / 2.0f, (mBorderRect.width() - mBorderWidth) / 2.0f);
+        mBorderRadius = Math.min((mBorderRect.height() - mBorderWidth) / 2.0f, (mBorderRect.width
+                () - mBorderWidth) / 2.0f);
 
         mDrawableRect.set(mBorderRect);
         if (!mBorderOverlay) {
@@ -383,8 +392,7 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
         }
         mDrawableRadius = Math.min(mDrawableRect.height() / 2.0f, mDrawableRect.width() / 2.0f);
 
-        if(mBitmap!=null)
-        {
+        if (mBitmap != null) {
             mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
             mBitmapHeight = mBitmap.getHeight();
             mBitmapWidth = mBitmap.getWidth();
@@ -411,7 +419,8 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
         }
 
         mShaderMatrix.setScale(scale, scale);
-        mShaderMatrix.postTranslate((int) (dx + 0.5f) + mDrawableRect.left, (int) (dy + 0.5f) + mDrawableRect.top);
+        mShaderMatrix.postTranslate((int) (dx + 0.5f) + mDrawableRect.left, (int) (dy + 0.5f) +
+                mDrawableRect.top);
 
         mBitmapShader.setLocalMatrix(mShaderMatrix);
     }
@@ -419,20 +428,19 @@ public class CircleTextImageView extends android.support.v7.widget.AppCompatImag
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int widthMeasureSpecMode=MeasureSpec.getMode(widthMeasureSpec);
-        int widthMeasureSpecSize=MeasureSpec.getSize(widthMeasureSpec);
-        int heightMeasureSpecMode=MeasureSpec.getMode(heightMeasureSpec);
-        int heightMeasureSpecSize=MeasureSpec.getSize(heightMeasureSpec);
+        int widthMeasureSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthMeasureSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMeasureSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightMeasureSpecSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        if(!TextUtils.isEmpty(mTextString))
-        {
-            int textMeasuredSize= (int) (mTextPaint.measureText(mTextString));
-            textMeasuredSize+=2*mTextPadding;
-            if(widthMeasureSpecMode==MeasureSpec.AT_MOST&&heightMeasureSpecMode==MeasureSpec.AT_MOST)
-            {
-                if(textMeasuredSize>getMeasuredWidth()||textMeasuredSize>getMeasuredHeight())
-                {
-                    setMeasuredDimension(textMeasuredSize,textMeasuredSize);
+        if (!TextUtils.isEmpty(mTextString)) {
+            int textMeasuredSize = (int) (mTextPaint.measureText(mTextString));
+            textMeasuredSize += 2 * mTextPadding;
+            if (widthMeasureSpecMode == MeasureSpec.AT_MOST && heightMeasureSpecMode ==
+                    MeasureSpec.AT_MOST) {
+                if (textMeasuredSize > getMeasuredWidth() || textMeasuredSize > getMeasuredHeight
+                        ()) {
+                    setMeasuredDimension(textMeasuredSize, textMeasuredSize);
                 }
             }
         }

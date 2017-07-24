@@ -72,7 +72,8 @@ public class ContactListFragment extends Fragment {
     private static final String TAG = "ContactListFragment";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
+            savedInstanceState) {
         if (view == null) {
             view = activity.getLayoutInflater().inflate(R.layout.activity_main_contact, null);
         } else {
@@ -162,12 +163,14 @@ public class ContactListFragment extends Fragment {
         });
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
             @Override
-            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder
+                    viewHolder) {
                 return makeMovementFlags(0, ItemTouchHelper.RIGHT);
             }
 
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
                 return false;
             }
 

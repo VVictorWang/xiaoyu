@@ -58,7 +58,8 @@ public class CallRecordFragment extends Fragment {
     };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
+            savedInstanceState) {
         if (null == view) {
             view = activity.getLayoutInflater().inflate(R.layout.fragment_contact_record, null);
         } else {
@@ -108,7 +109,7 @@ public class CallRecordFragment extends Fragment {
         protected Integer doInBackground(Integer... params) {
             if (DataSupport.isExist(CallRecord.class)) {
                 list = DataSupport.findAll(CallRecord.class);
-            }else
+            } else
                 return 0;
             if (list != null) {
                 Collections.sort(list, new Comparator<CallRecord>() {

@@ -24,7 +24,8 @@ public class BaojingInfoAdapter extends RecyclerView.Adapter<BaojingInfoAdapter.
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView number;
         private TextView time;
-         ViewHolder(View itemView) {
+
+        ViewHolder(View itemView) {
             super(itemView);
             number = (TextView) itemView.findViewById(R.id.baojing_she_bei_number);
             time = (TextView) itemView.findViewById(R.id.baojing_time);
@@ -41,12 +42,12 @@ public class BaojingInfoAdapter extends RecyclerView.Adapter<BaojingInfoAdapter.
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.baojing_adpter, parent, false);
-        return  new ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-       OneKeyWarning oneKeyWarning = oneKeyWarnings.get(position);
+        OneKeyWarning oneKeyWarning = oneKeyWarnings.get(position);
         holder.time.setText("报警时间: " + oneKeyWarning.getAdd_date());
         holder.number.setText("设备编号: " + oneKeyWarning.getSid());
     }

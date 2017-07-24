@@ -6,7 +6,7 @@
   android:layout_gravity="center_horizontal"
   android:orientation="vertical"
   >
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.victor.myclient.view.CircleImageView
       android:id="@+id/circleImageView"
       android:elevation="1dp"
       android:layout_width="150dp"

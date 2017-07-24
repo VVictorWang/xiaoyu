@@ -43,8 +43,8 @@ public class BaoJingFragment extends Fragment {
     private RelativeLayout back;
     private TextView no_data;
 
-    private boolean net_work,has_data = false;
-    Handler handler = new Handler(){
+    private boolean net_work, has_data = false;
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x123) {
@@ -57,6 +57,7 @@ public class BaoJingFragment extends Fragment {
             }
         }
     };
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +67,8 @@ public class BaoJingFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
+            Bundle savedInstanceState) {
         if (view == null) {
             view = activity.getLayoutInflater().inflate(R.layout.fragment_baojing, null);
         } else {
@@ -104,10 +106,12 @@ public class BaoJingFragment extends Fragment {
 
     class FindBaojingListTask extends AsyncTask<Void, Void, Void> {
         private Gson gson = new Gson();
+
         @Override
         protected Void doInBackground(Void... params) {
             if (net_work) {
-                String infor = Utils.sendRequest(GlobalData.GET_ONEKEY_WARNING + Utils.getValue(activity, GlobalData.PATIENT_ID));
+                String infor = Utils.sendRequest(GlobalData.GET_ONEKEY_WARNING + Utils.getValue
+                        (activity, GlobalData.PATIENT_ID));
                 if (!infor.contains("not_exist")) {
                     oneKeyWarnings = gson.fromJson(infor, new TypeToken<List<OneKeyWarning>>() {
                     }.getType());
@@ -124,7 +128,7 @@ public class BaoJingFragment extends Fragment {
             } else if (DataSupport.isExist(OneKeyWarning.class)) {
                 oneKeyWarnings = DataSupport.findAll(OneKeyWarning.class);
                 has_data = true;
-            }else
+            } else
                 has_data = false;
             return null;
         }

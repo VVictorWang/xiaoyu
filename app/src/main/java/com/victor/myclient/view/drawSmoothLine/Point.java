@@ -32,7 +32,7 @@ public class Point {
     public Point() {
     }
 
-    public Point( float valueX, float valueY,boolean willDrawing) {
+    public Point(float valueX, float valueY, boolean willDrawing) {
         this.willDrawing = willDrawing;
         this.valueX = valueX;
         this.valueY = valueY;

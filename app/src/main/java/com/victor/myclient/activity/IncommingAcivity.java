@@ -25,6 +25,7 @@ import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.datas.CallRecord;
+import com.victor.myclient.view.CircleImageView;
 import com.victor.myclient.view.SimpleVideoView;
 import com.victor.myclient.view.VideoCellView;
 
@@ -49,7 +50,7 @@ public class IncommingAcivity extends AppCompatActivity {
     private ImageButton audioonlybtn;
     private ImageButton mutebtn;
     private ImageButton switchcamera;
-    private ImageView user_image;
+    private CircleImageView user_image;
     private android.widget.RelativeLayout profilepic;
     private TextView time_call;
     private String name, number;
@@ -121,7 +122,7 @@ public class IncommingAcivity extends AppCompatActivity {
         this.mutebtn = (ImageButton) findViewById(R.id.mute_btn);
         this.audioonlybtn = (ImageButton) findViewById(R.id.audio_only_btn);
         this.time_call = (TextView) findViewById(R.id.time_call_text);
-        user_image = (ImageView) findViewById(R.id.user_capture);
+        user_image = (CircleImageView) findViewById(R.id.bg_turn);
         finishcall = (ImageButton) findViewById(R.id.conn_mt_endcall_btn_calling);
         finishcall.setVisibility(View.GONE);
         videoView = (SimpleVideoView) findViewById(R.id.incoming_view);

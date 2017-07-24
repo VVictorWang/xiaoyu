@@ -10,20 +10,23 @@
     </declare-styleable>
     <declare-styleable name="ChartStyle">
         <attr name="verticalAxisPosition">
-            <enum name="left" value="0" />
-            <enum name="right" value="1" />
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
         </attr>
     </declare-styleable>
     <declare-styleable name="CircleTextImageView">
-        <attr name="citv_border_width" format="dimension" />
-        <attr name="citv_border_color" format="color" />
-        <attr name="citv_border_overlay" format="boolean" />
-        <attr name="citv_fill_color" format="color" />
+        <attr name="citv_border_width" format="dimension"/>
+        <attr name="citv_border_color" format="color"/>
+        <attr name="citv_border_overlay" format="boolean"/>
+        <attr name="citv_fill_color" format="color"/>
         <attr name="citv_text_text" format="string"/>
         <attr name="citv_text_color" format="color"/>
         <attr name="citv_text_size" format="dimension"/>
         <attr name="citv_text_padding" format="dimension"/>
     </declare-styleable>
-
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension"/>
+        <attr name="border_color" format="color"/>
+    </declare-styleable>
 
 </resources>

@@ -122,7 +122,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:background="@drawable/sign_xiao_yu_background"
-        android:elevation="5dp"
         android:paddingBottom="5dp"
         android:text="完成"
         android:textColor="@color/whites"

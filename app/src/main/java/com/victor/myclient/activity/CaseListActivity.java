@@ -46,6 +46,7 @@ public class CaseListActivity extends AppCompatActivity {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,7 @@ public class CaseListActivity extends AppCompatActivity {
             new CaseListTask().execute();
         }
     }
+
     private void initView() {
         back = (RelativeLayout) findViewById(R.id.case_list_back);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -70,7 +72,6 @@ public class CaseListActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
     }
-
 
 
     private void initEvent() {

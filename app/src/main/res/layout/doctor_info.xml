@@ -38,8 +38,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:text="医生信息"
             android:textColor="@color/white"
             android:textSize="16dp"/>
@@ -66,7 +66,7 @@
             android:gravity="center_horizontal"
             android:weightSum="1">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.victor.myclient.view.CircleImageView
                 android:id="@+id/person_detail_image_doctor"
                 android:layout_width="100dp"
                 android:layout_height="100dp"

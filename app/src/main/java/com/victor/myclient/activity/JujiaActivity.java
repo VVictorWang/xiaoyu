@@ -117,10 +117,12 @@ public class JujiaActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected Void doInBackground(Void... params) {
             if (net_work) {
-                String door_infor = Utils.sendRequest(GlobalData.GET_ROOM_STATUS + Utils.getValue(JujiaActivity.this, GlobalData.PATIENT_ID));
+                String door_infor = Utils.sendRequest(GlobalData.GET_ROOM_STATUS + Utils.getValue
+                        (JujiaActivity.this, GlobalData.PATIENT_ID));
                 if (!door_infor.contains("not_exist")) {
                     doorInfor = gson.fromJson(door_infor, DoorInfor.class);
-                    Utils.putIntValue(JujiaActivity.this, GlobalData.DOOR_STATUS, doorInfor.getStatus());
+                    Utils.putIntValue(JujiaActivity.this, GlobalData.DOOR_STATUS, doorInfor
+                            .getStatus());
                 }
             } else {
                 doorInfor.setStatus(Utils.getIntValue(JujiaActivity.this, GlobalData.DOOR_STATUS));

@@ -37,6 +37,7 @@ public class ActivityManage {
         }
         activityStack.add(activity);
     }
+
     public Activity getCurrentActivity() {
         Activity activity = null;
         if (!activityStack.isEmpty()) {

@@ -173,7 +173,8 @@ class BesselCalculator {
                     + style.getVerticalLabelTextPadding() * (i + 0.5f));
             label.drawingY = label.y + verticalTextRect.height() / 2 - 3;
         }
-        //yAxisWidth = (int) (verticalTextRect.width() * (1 + style.getVerticalLabelTextPaddingRate() * 2));
+        //yAxisWidth = (int) (verticalTextRect.width() * (1 + style
+        // .getVerticalLabelTextPaddingRate() * 2));
 
         yAxisWidth = 0;
         yAxisHeight = 2 * (verticalTextRect.height() * yLabelCount
@@ -195,7 +196,8 @@ class BesselCalculator {
             label.y = yAxisHeight / yLabelCount * (i + 1);
             label.drawingY = label.y + verticalTextRect.height() / 2 - 3;
         }
-        //yAxisWidth = (int) (verticalTextRect.width() * (1 + style.getVerticalLabelTextPaddingRate() * 2));
+        //yAxisWidth = (int) (verticalTextRect.width() * (1 + style
+        // .getVerticalLabelTextPaddingRate() * 2));
 
         yAxisWidth = 0;
 
@@ -254,7 +256,8 @@ class BesselCalculator {
         List<Title> titles = data.getTitles();
         int count = titles.size();
         float stepX =
-                (width - style.getHorizontalTitlePaddingLeft() - style.getHorizontalTitlePaddingRight())
+                (width - style.getHorizontalTitlePaddingLeft() - style
+                        .getHorizontalTitlePaddingRight())
                         / count;
         for (Title title : titles) {
             if (title instanceof Marker) {
@@ -264,10 +267,12 @@ class BesselCalculator {
             }
             title.circleTextPadding = 10;
             title.updateTextRect(paint, stepX);
-            title.textX = style.getHorizontalTitlePaddingLeft() + (titles.indexOf(title) + 0.5f) * stepX;
+            title.textX = style.getHorizontalTitlePaddingLeft() + (titles.indexOf(title) + 0.5f)
+                    * stepX;
             title.textY = xTitleHeight * 0.75f;
             title.circleX =
-                    title.textX - title.textRect.width() / 2 - title.circleTextPadding - title.radius;
+                    title.textX - title.textRect.width() / 2 - title.circleTextPadding - title
+                            .radius;
             title.circleY = title.textY - horizontalTitleRect.height() * 0.5f + 5;
         }
     }
@@ -292,14 +297,16 @@ class BesselCalculator {
                 Point point = points.get(i);
                 // 计算数据点的坐标
                 point.x = pointWidth * (i + 0.5f);
-                float ratio = (point.valueY - data.getMinValueY()) / (float) (data.getMaxValueY() - data
+                float ratio = (point.valueY - data.getMinValueY()) / (float) (data.getMaxValueY()
+                        - data
                         .getMinValueY());
                 point.y = maxCoordinateY - (maxCoordinateY - minCoordinateY) * ratio;
                 Marker marker = data.getMarker();
                 if (marker != null && marker.getPoint().valueX == point.valueX) {
                     Point markerPoint = marker.getPoint();
                     markerPoint.x = point.x;
-                    ratio = (markerPoint.valueY - data.getMinValueY()) / (float) (data.getMaxValueY() - data
+                    ratio = (markerPoint.valueY - data.getMinValueY()) / (float) (data
+                            .getMaxValueY() - data
                             .getMinValueY());
                     markerPoint.y = maxCoordinateY - (maxCoordinateY - minCoordinateY) * ratio;
                 }
@@ -343,13 +350,14 @@ class BesselCalculator {
             });
             int i = 0;
             while (i < temp.size() && temp.get(0).valueY == temp.get(i).valueY) {
-                maxPoints=temp.get(i);
+                maxPoints = temp.get(i);
                 i++;
             }
-            maxTemperature = String.format("%.1f",temp.get(0).valueY)+ "℃";
-            minTemperature =  String.format("%.1f",temp.get(temp.size() - 1).valueY) + "℃";
+            maxTemperature = String.format("%.1f", temp.get(0).valueY) + "℃";
+            minTemperature = String.format("%.1f", temp.get(temp.size() - 1).valueY) + "℃";
             raiseTemperature =
-                    String.format("%.1f",temp.get(0).valueY - temp.get(temp.size() - 1).valueY) + "℃";
+                    String.format("%.1f", temp.get(0).valueY - temp.get(temp.size() - 1).valueY)
+                            + "℃";
             for (Point point : series.getPoints()) {
                 int index = series.getPoints().indexOf(point);
                 if (gridPoints[index] == null || gridPoints[index].valueY < point.valueY) {

@@ -145,7 +145,8 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
 
 
     @Override
-    public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
+    public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State
+            state) {
         //每次滑动时先释放掉所有的View，因为后面调用recycleAndFillView()时会重新addView()。
 
 

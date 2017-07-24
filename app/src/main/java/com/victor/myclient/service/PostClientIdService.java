@@ -27,7 +27,7 @@ public class PostClientIdService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-initBackThread();
+        initBackThread();
         Log.d(TAG, "onCreate: ");
     }
 
@@ -40,7 +40,7 @@ initBackThread();
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mHandler.sendEmptyMessageDelayed(0,5000);
+        mHandler.sendEmptyMessageDelayed(0, 5000);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -49,19 +49,22 @@ initBackThread();
     public IBinder onBind(Intent intent) {
         return null;
     }
-    private void initBackThread(){
-        mHandlerThread=new HandlerThread("posting");
+
+    private void initBackThread() {
+        mHandlerThread = new HandlerThread("posting");
         mHandlerThread.start();
-        mHandler =new Handler(mHandlerThread.getLooper()){
+        mHandler = new Handler(mHandlerThread.getLooper()) {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                new Runnable(){
+                new Runnable() {
                     @Override
                     public void run() {
                         if (clientId != null & userId != null) {
-//                            Log.d(TAG, "run: " + GlobalData.POST_CLIENTID + userId + "&" + GlobalData.CLIENT_ID + clientId);
-                            String temp=Utils.sendRequest(GlobalData.POST_CLIENTID + userId + "&" + GlobalData.CLIENT_ID + clientId);
+//                            Log.d(TAG, "run: " + GlobalData.POST_CLIENTID + userId + "&" +
+// GlobalData.CLIENT_ID + clientId);
+                            String temp = Utils.sendRequest(GlobalData.POST_CLIENTID + userId +
+                                    "&" + GlobalData.CLIENT_ID + clientId);
                             stopSelf();
 //                            Log.d(TAG, "run: return="+temp);
                         } else {
@@ -69,11 +72,13 @@ initBackThread();
                             );
                             userId = Utils.getValue(getBaseContext(), GlobalData.User_ID);
                             if (clientId != null & userId != null) {
-//                                Log.d(TAG, "run: " + GlobalData.POST_CLIENTID + userId + "&" + GlobalData.CLIENT_ID + clientId);
-                                Utils.sendRequest(GlobalData.POST_CLIENTID + userId + "&" + GlobalData.CLIENT_ID + clientId);
+//                                Log.d(TAG, "run: " + GlobalData.POST_CLIENTID + userId + "&" +
+// GlobalData.CLIENT_ID + clientId);
+                                Utils.sendRequest(GlobalData.POST_CLIENTID + userId + "&" +
+                                        GlobalData.CLIENT_ID + clientId);
                                 stopSelf();
-                            }else{
-                                mHandler.sendEmptyMessageDelayed(0,5000);
+                            } else {
+                                mHandler.sendEmptyMessageDelayed(0, 5000);
                             }
                         }
 

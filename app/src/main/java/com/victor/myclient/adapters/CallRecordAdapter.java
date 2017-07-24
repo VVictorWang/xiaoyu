@@ -16,8 +16,8 @@ import android.widget.TextView;
 import com.victor.myclient.activity.VideoActivity;
 import com.victor.myclient.datas.CallRecord;
 import com.victor.myclient.utils.Utils;
+import com.victor.myclient.view.CircleImageView;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 import java.text.SimpleDateFormat;

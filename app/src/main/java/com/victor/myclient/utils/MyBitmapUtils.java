@@ -158,7 +158,8 @@ public class MyBitmapUtils {
      */
 
     private class LocalCacheUtils {
-        final String CACHE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WerbNews";
+        final String CACHE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() +
+                "/WerbNews";
 
         /**
          * 从本地读取图片

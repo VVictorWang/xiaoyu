@@ -19,16 +19,20 @@ public class ChartData {
     private int minValueY;
     private int maxPointsCount;
     private LabelTransform labelTransform;
-    /** 纵坐标显示文本的数量 */
+    /**
+     * 纵坐标显示文本的数量
+     */
     private int yLabelCount;
 
-    /** 使用哪一个series的横坐标来显示横坐标文本 */
+    /**
+     * 使用哪一个series的横坐标来显示横坐标文本
+     */
     private int xLabelUsageSeries;
 
     ChartData() {
         xLabels = new ArrayList<Label>();
         yLabels = new ArrayList<Label>();
-        titles=new ArrayList<Title>();
+        titles = new ArrayList<Title>();
         seriesList = new ArrayList<Series>();
         labelTransform = new LabelTransform() {
             @Override
@@ -50,18 +54,21 @@ public class ChartData {
         xLabelUsageSeries = 0;// 默认横轴使用第一个序列来显示文本
     }
 
-    /** 设置数据序列 */
+    /**
+     * 设置数据序列
+     */
     public void setSeriesList(List<Series> seriesList) {
         this.seriesList.clear();
         if (seriesList != null && seriesList.size() > 0) {
             this.seriesList.addAll(seriesList);
             if (this.seriesList.size() <= xLabelUsageSeries)
-                throw new IllegalArgumentException("xLabelUsageSeries should greater than seriesList.size()");
+                throw new IllegalArgumentException("xLabelUsageSeries should greater than " +
+                        "seriesList.size()");
             resetXLabels();
             resetYLabels();
             titles.clear();
 
-            for(Series series:seriesList){
+            for (Series series : seriesList) {
                 titles.add(series.getTitle());
                 if (series.getPoints().size() > maxPointsCount)
                     maxPointsCount = series.getPoints().size();
@@ -69,35 +76,42 @@ public class ChartData {
         }
     }
 
-    /** 重新生成X坐标轴文本 */
+    /**
+     * 重新生成X坐标轴文本
+     */
     private void resetXLabels() {
         xLabels.clear();
         for (Point point : seriesList.get(xLabelUsageSeries).getPoints()) {
-            if (labelTransform.labelDrawing((int)point.valueX))
-                xLabels.add(new Label((int)point.valueX, labelTransform
-                        .horizontalTransform((int)point.valueX)));
+            if (labelTransform.labelDrawing((int) point.valueX))
+                xLabels.add(new Label((int) point.valueX, labelTransform
+                        .horizontalTransform((int) point.valueX)));
         }
     }
-    /** 重新生成Y坐标轴文本 */
+
+    /**
+     * 重新生成Y坐标轴文本
+     */
     private void resetYLabels() {
         maxValueY = Integer.MIN_VALUE;
         minValueY = Integer.MAX_VALUE;
         for (Series series : seriesList) {
             for (Point point : series.getPoints()) {
-                if (point.valueY > maxValueY){
-                    maxValueY = (int)point.valueY+1;}
-                if (point.valueY < minValueY){
-                    minValueY = (int)point.valueY-1;}
+                if (point.valueY > maxValueY) {
+                    maxValueY = (int) point.valueY + 1;
+                }
+                if (point.valueY < minValueY) {
+                    minValueY = (int) point.valueY - 1;
+                }
             }
         }
-        float step = (maxValueY - minValueY) / (float)(yLabelCount - 1);
+        float step = (maxValueY - minValueY) / (float) (yLabelCount - 1);
         yLabels.clear();
-        minValueY =(int)( minValueY - step);
-        maxValueY =(int)( maxValueY + step);
+        minValueY = (int) (minValueY - step);
+        maxValueY = (int) (maxValueY + step);
         step = (maxValueY - minValueY) / (yLabelCount - 1);
-        int value =0;
-        for (int i = 0; i <=yLabelCount; i++) {
-            value=(int)(minValueY+step*i+1);
+        int value = 0;
+        for (int i = 0; i <= yLabelCount; i++) {
+            value = (int) (minValueY + step * i + 1);
             yLabels.add(0,
                     new Label(value, labelTransform.verticalTransform(value)));
         }
@@ -106,9 +120,11 @@ public class ChartData {
 //        Log.d("zqt", "step minValueY="+minValueY);
 //        Log.d("zqt", "step maxValueY="+maxValueY);
     }
+
     public void setLabelTransform(LabelTransform labelTransform) {
         this.labelTransform = labelTransform;
     }
+
     public List<Series> getSeriesList() {
         return seriesList;
     }
@@ -124,9 +140,11 @@ public class ChartData {
     public List<Label> getYLabels() {
         return yLabels;
     }
+
     public List<Title> getTitles() {
         return titles;
     }
+
     public int getMaxValueY() {
         return maxValueY;
     }
@@ -150,10 +168,12 @@ public class ChartData {
     public void setxLabelUsageSeries(int xLabelUsageSeries) {
         this.xLabelUsageSeries = xLabelUsageSeries;
     }
+
     public void setMarker(Marker marker) {
         titles.add(marker);
         this.marker = marker;
     }
+
     public Marker getMarker() {
         return marker;
     }
@@ -161,28 +181,47 @@ public class ChartData {
     public int getMaxPointsCount() {
         return maxPointsCount;
     }
+
     public interface LabelTransform {
-        /** 纵坐标显示的文本 */
+        /**
+         * 纵坐标显示的文本
+         */
         String verticalTransform(int valueY);
 
-        /** 横坐标显示的文本 */
+        /**
+         * 横坐标显示的文本
+         */
         String horizontalTransform(int valueX);
 
-        /** 是否显示指定位置的横坐标文本 */
+        /**
+         * 是否显示指定位置的横坐标文本
+         */
         boolean labelDrawing(int valueX);
 
     }
+
     class Label {
-        /**文本对应的坐标X*/
+        /**
+         * 文本对应的坐标X
+         */
         public float x;
-        /**文本对应的坐标Y*/
+        /**
+         * 文本对应的坐标Y
+         */
         public float y;
-        /** 文本对应的绘制坐标Y */
+        /**
+         * 文本对应的绘制坐标Y
+         */
         public float drawingY;
-        /**文本对应的实际数值*/
+        /**
+         * 文本对应的实际数值
+         */
         public int value;
-        /**文本*/
+        /**
+         * 文本
+         */
         public String text;
+
         public Label(int value, String text) {
             this.value = value;
             this.text = text;

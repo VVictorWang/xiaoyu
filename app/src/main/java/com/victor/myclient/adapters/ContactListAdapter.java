@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import com.victor.myclient.utils.sortlist.SortModel;
 import com.victor.myclient.activity.VideoActivity;
+import com.victor.myclient.view.CircleImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 /**

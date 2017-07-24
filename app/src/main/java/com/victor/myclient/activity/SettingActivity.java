@@ -23,12 +23,12 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView.Style;
+import com.victor.myclient.view.CircleImageView;
 import com.victor.myclient.view.CircleTextImageView;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -43,7 +43,7 @@ import okhttp3.Response;
 
 public class SettingActivity extends AppCompatActivity {
 
-    private de.hdodenhof.circleimageview.CircleImageView loginhead;
+    private CircleImageView loginhead;
 
 
     final static int IMAGE_PICKER = 1;
@@ -60,6 +60,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private UserInfor userInfor;
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
+
     @Override
     protected void onResume() {
         resumeView();
@@ -91,7 +92,8 @@ public class SettingActivity extends AppCompatActivity {
         this.loginhead = (CircleImageView) findViewById(R.id.login_head_setting);
         this.settingback = (RelativeLayout) findViewById(R.id.setting_back);
         changemail.setText("绑定邮箱: " + email);
-        bitmapUtils.disPlay(loginhead, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue(SettingActivity.this, GlobalData.FAMILY_IMage));
+        bitmapUtils.disPlay(loginhead, GlobalData.GET_PATIENT_FAMILY_IMAGE + Utils.getValue
+                (SettingActivity.this, GlobalData.FAMILY_IMage));
         networkavailable = Utils.isNetWorkAvailabe(SettingActivity.this);
     }
 
@@ -163,7 +165,8 @@ public class SettingActivity extends AppCompatActivity {
                         Log.i(TAG, "onActivityResult: 有数据");
                         // Toast.makeText(this, "有数据", Toast.LENGTH_SHORT).show();
                         if (images.get(0).path != null) {
-                            Utils.putValue(SettingActivity.this, GlobalData.Img_URl, images.get(0).path);
+                            Utils.putValue(SettingActivity.this, GlobalData.Img_URl, images.get
+                                    (0).path);
                             loginhead.setImageURI(Uri.fromFile(new File(images.get(0).path)));
                             uploadImage(images.get(0).path);
                         }
@@ -178,6 +181,7 @@ public class SettingActivity extends AppCompatActivity {
     private void uploadImage(final String imageurl) {
         new Thread(new Runnable() {
             OkHttpClient client = new OkHttpClient();
+
             @Override
             public void run() {
                 MediaType MEDIA_TYPE_JPG = MediaType.parse("image/png");
@@ -185,19 +189,24 @@ public class SettingActivity extends AppCompatActivity {
                 MultipartBody.Builder builder = new MultipartBody.Builder();
                 File f = new File(imageurl);
                 String id = Utils.getValue(SettingActivity.this, GlobalData.PATIENTFAMILY_ID);
-                builder.addFormDataPart("patientFamilyImage", f.toString(), RequestBody.create(MEDIA_TYPE_JPG, f));
+                builder.addFormDataPart("patientFamilyImage", f.toString(), RequestBody.create
+                        (MEDIA_TYPE_JPG, f));
                 builder.addFormDataPart("id", id);
                 builder.setType(MultipartBody.FORM);
                 Log.d(TAG, "id:" + id);
                 RequestBody requestBody = builder.build();
-                final Request request = new Request.Builder().url(GlobalData.POST_IMAGE).post(requestBody).build();
+                final Request request = new Request.Builder().url(GlobalData.POST_IMAGE).post
+                        (requestBody).build();
                 try {
                     Response response = client.newCall(request).execute();
                     String op = response.body().string();
                     if (op.contains("success") && networkavailable) {
                         Gson gson = new Gson();
-                        userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR + "FamilyName=" + Utils.getValue(SettingActivity.this, GlobalData.NAME)), UserInfor.class);
-                        Utils.putValue(SettingActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
+                        userInfor = gson.fromJson(Utils.sendRequest(GlobalData.GET_USR_INFOR +
+                                "FamilyName=" + Utils.getValue(SettingActivity.this, GlobalData
+                                .NAME)), UserInfor.class);
+                        Utils.putValue(SettingActivity.this, GlobalData.FAMILY_IMage, userInfor
+                                .getImage());
                     }
                     Log.d(TAG, "responce: " + op);
                 } catch (Exception e) {

@@ -26,11 +26,13 @@ public class ContactActivity extends FragmentActivity {
     private FragmentAdapter viewPageAdapter;
     private TabLayout tabLayout;
     private TabLayout.Tab one, two, three;
+
     @Override
     protected void onResume() {
         super.onResume();
         viewPager.setVisibility(View.VISIBLE);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,22 +45,27 @@ public class ContactActivity extends FragmentActivity {
 
     private void hideSoftKeyboard() {
         if (getCurrentFocus() != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService
+                    (INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
+
     private void initEvent() {
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab == tabLayout.getTabAt(0)) {
-                    one.setIcon(getResources().getDrawable(R.drawable.contact_bottom_first_selected));
+                    one.setIcon(getResources().getDrawable(R.drawable
+                            .contact_bottom_first_selected));
                     viewPager.setCurrentItem(0);
                 } else if (tab == tabLayout.getTabAt(1)) {
-                    two.setIcon(getResources().getDrawable(R.drawable.contact_bottom_second_selected));
+                    two.setIcon(getResources().getDrawable(R.drawable
+                            .contact_bottom_second_selected));
                     viewPager.setCurrentItem(1);
                 } else if (tab == tabLayout.getTabAt(2)) {
-                    three.setIcon(getResources().getDrawable(R.drawable.contact_bottom_third_selected));
+                    three.setIcon(getResources().getDrawable(R.drawable
+                            .contact_bottom_third_selected));
                     viewPager.setCurrentItem(2);
                 }
             }
@@ -81,6 +88,7 @@ public class ContactActivity extends FragmentActivity {
             }
         });
     }
+
     private void initTab() {
         viewPager = (ViewPager) findViewById(R.id.contact_view_pager);
         viewPageAdapter = new FragmentAdapter(getSupportFragmentManager());

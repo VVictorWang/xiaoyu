@@ -12,12 +12,12 @@ import android.widget.TextView;
 import com.victor.myclient.datas.CaseInfor;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.activity.CaseDetailActivity;
+import com.victor.myclient.view.CircleImageView;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 /**
@@ -29,13 +29,15 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
 
     private List<CaseInfor> caseList = new ArrayList<>();
     private Context context;
-      class ViewHolder extends RecyclerView.ViewHolder {
+
+    class ViewHolder extends RecyclerView.ViewHolder {
         private TextView doctorName;
         private TextView illnessName;
         private TextView dateText;
         private TextView patientName;
         private CircleImageView circleButton;
-         ViewHolder(View view) {
+
+        ViewHolder(View view) {
             super(view);
             patientName = (TextView) view.findViewById(R.id.case_patient_name);
             doctorName = (TextView) view.findViewById(R.id.case_doctor_name);
@@ -52,14 +54,15 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_case, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
+                .item_case, parent, false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final CaseInfor aCase = caseList.get(position);
         holder.patientName.setText(aCase.getName());
-        holder.doctorName.setText("主治医生: "+aCase.getDoctorName());
+        holder.doctorName.setText("主治医生: " + aCase.getDoctorName());
         holder.illnessName.setText(aCase.getIllproblem());
         Date date = Utils.stringToDate(aCase.getDate());
         holder.dateText.setText(Utils.dateToString(date));

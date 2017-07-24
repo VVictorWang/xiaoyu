@@ -1,13 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/bg_incoming">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/bg_incoming">
 
     <com.victor.myclient.view.SimpleVideoView
         android:id="@+id/incoming_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <ImageButton
         android:id="@+id/audio_only_btn"
@@ -18,7 +18,7 @@
         android:background="@drawable/toolbar_button_bg_style"
         android:scaleType="center"
         android:src="@drawable/ic_toolbar_audio_only"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <ImageButton
         android:id="@+id/mute_btn"
@@ -30,7 +30,7 @@
         android:longClickable="true"
         android:scaleType="center"
         android:src="@drawable/ic_toolbar_mic"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <ImageButton
         android:id="@+id/switch_camera"
@@ -42,7 +42,7 @@
         android:longClickable="true"
         android:scaleType="center"
         android:src="@drawable/ic_svc_toolbar_switch_camera"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,23 +59,14 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="55dp">
 
-            <ImageView
+            <com.victor.myclient.view.CircleImageView
                 android:id="@+id/bg_turn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/icon_imcoming_turn" />
+                android:src="@drawable/icon_imcoming_turn"/>
 
-            <ImageView
-                android:id="@+id/user_capture"
-                android:layout_width="108dip"
-                android:layout_height="108dip"
-                android:layout_centerInParent="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_contact_user_capture_no_border" />
-            <!--app:ainemo_border_color="@android:color/black"-->
-            <!--app:ainemo_border_width="0dip"-->
-            <!--app:is_oval="true"/> -->
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -90,7 +81,7 @@
                 android:layout_width="108dp"
                 android:layout_height="108dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_nemo_online" />
+                android:src="@drawable/ic_nemo_online"/>
         </RelativeLayout>
 
         <!-- Text -->
@@ -108,7 +99,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/incoming_call"
                 android:textColor="@android:color/white"
-                android:textSize="24sp" />
+                android:textSize="24sp"/>
 
             <TextView
                 android:id="@+id/time_call_text"
@@ -118,7 +109,7 @@
                 android:layout_marginTop="2dp"
                 android:text="@string/incoming_call"
                 android:textColor="@android:color/white"
-                android:textSize="13sp" />
+                android:textSize="13sp"/>
         </LinearLayout>
         <!-- middle place holder -->
     </LinearLayout>
@@ -137,22 +128,22 @@
             android:id="@+id/conn_mt_endcall_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
-            android:background="@drawable/toolbar_p2p_hangup_bg" />
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/toolbar_p2p_hangup_bg"/>
 
         <ImageButton
             android:id="@+id/conn_mt_endcall_btn_calling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:background="@drawable/toolbar_p2p_hangup_bg" />
+            android:background="@drawable/toolbar_p2p_hangup_bg"/>
 
         <ImageButton
             android:id="@+id/conn_mt_answer_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/incoming_button_answer_style" />
+            android:background="@drawable/incoming_button_answer_style"/>
     </LinearLayout>
 
 </RelativeLayout><!-- From: file:/Users/yinliang/Downloads/vulture/ui/MobileApp/ainemo_open_api/src/main/res/layout/callincoming_fragment.xml -->

@@ -9,14 +9,15 @@ import android.graphics.Rect;
  * @author tomkeyzhang（qitongzhang@anjuke.com）
  * @date :2014年4月23日
  */
-public class Marker extends Title{
+public class Marker extends Title {
     private Point point;
     private Bitmap bitmap;
     private Rect rect;
     private int width;
     private int height;
 
-    public Marker(int color, int valueX, int valueY, Bitmap bitmap, String text, int width, int height) {
+    public Marker(int color, int valueX, int valueY, Bitmap bitmap, String text, int width, int
+            height) {
         super(text, color);
         this.point = new Point(valueX, valueY, true);
         this.bitmap = bitmap;
@@ -45,7 +46,7 @@ public class Marker extends Title{
         return rect;
     }
 
-    public Rect updateRect(float x,float y,int width,int height) {
+    public Rect updateRect(float x, float y, int width, int height) {
         rect.left = (int) (x - width / 2);
         rect.right = (int) (x + width / 2);
         rect.top = (int) (y - height / 2);

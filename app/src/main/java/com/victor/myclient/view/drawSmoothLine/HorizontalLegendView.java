@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.List;
 
 /**
@@ -19,7 +20,8 @@ public class HorizontalLegendView extends View {
     private List<Title> titles;
     private BesselCalculator calculator;
 
-    public HorizontalLegendView(Context context, List<Title> titles, ChartStyle style, BesselCalculator calculator) {
+    public HorizontalLegendView(Context context, List<Title> titles, ChartStyle style,
+                                BesselCalculator calculator) {
         super(context);
         this.titles = titles;
         this.style = style;
@@ -29,6 +31,7 @@ public class HorizontalLegendView extends View {
 
     /**
      * 绘制横轴的标题
+     *
      * @param canvas
      */
     @Override
@@ -46,7 +49,8 @@ public class HorizontalLegendView extends View {
 //            if (title instanceof Marker) {
 //                Marker marker = (Marker) title;
 //                canvas.drawBitmap(marker.getBitmap(), null,
-//                        marker.updateRect(title.circleX, title.circleY, title.radius * 2, title.radius * 2), paint);
+//                        marker.updateRect(title.circleX, title.circleY, title.radius * 2, title
+// .radius * 2), paint);
 //            } else {
 //                canvas.drawCircle(title.circleX, title.circleY, title.radius, paint);
 //            }

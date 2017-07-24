@@ -13,10 +13,10 @@ public class UserInformation implements Serializable {
     private String sex;
     private String email;
     private String id_card;
+
     public void setId_card(String id_card) {
         this.id_card = id_card;
     }
-
 
 
     public String getId_card() {

@@ -83,7 +83,8 @@ class BesselChartView extends View {
             float lastScrollX = 0f;
 
             @Override
-            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float
+                    distanceY) {
                 if (Math.abs(distanceX / distanceY) > 1) {
                     getParent().requestDisallowInterceptTouchEvent(true);
                     BesselChartView.this.calculator.move(distanceX);
@@ -100,8 +101,10 @@ class BesselChartView extends View {
             }
 
             @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                scroller.fling((int) BesselChartView.this.calculator.getTranslateX(), 0, (int) velocityX, 0,
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float
+                    velocityY) {
+                scroller.fling((int) BesselChartView.this.calculator.getTranslateX(), 0, (int)
+                                velocityX, 0,
                         -getWidth(), 0, 0, 0);
                 ViewCompat.postInvalidateOnAnimation(BesselChartView.this);
                 return true;
@@ -171,7 +174,7 @@ class BesselChartView extends View {
     /**
      *
      */
-    private void drawBackGround(Canvas canvas){
+    private void drawBackGround(Canvas canvas) {
 
         paint.setColor(style.getBackgroundUpPartColor());
 //    Path path=new Path();
@@ -180,10 +183,12 @@ class BesselChartView extends View {
 //    path.lineTo((float) (calculator.height/2.0),calculator.width);
 //    path.lineTo(0,calculator.width);
 //    path.close();
-        canvas.drawRect(0,0,calculator.width, ((float) calculator.height/2),paint);
+        canvas.drawRect(0, 0, calculator.width, ((float) calculator.height / 2), paint);
         paint.setColor(style.getBackgroundDownPartColor());
-        canvas.drawRect(0, ((float) calculator.height/2),calculator.width,calculator.height,paint);
+        canvas.drawRect(0, ((float) calculator.height / 2), calculator.width, calculator.height,
+                paint);
     }
+
     /**
      * 绘制网格线
      */
@@ -201,13 +206,13 @@ class BesselChartView extends View {
 
 
         // 再绘制竖直线（标记最大值的竖直线）
-        Paint paint1=new Paint();
+        Paint paint1 = new Paint();
         paint1.setDither(false);
         paint1.setStrokeWidth(20);
 
         paint1.setAlpha(255);
-        Point point=calculator.maxPoints;
-        if(point!=null) {
+        Point point = calculator.maxPoints;
+        if (point != null) {
             if (point != null && point.willDrawing && point.valueY > 0) {
                 LinearGradient linearGradient = new LinearGradient(point.x, point.y, point.x,
                         (float) calculator.yAxisHeight, style.getVerticalLineColor(),
@@ -235,7 +240,8 @@ class BesselChartView extends View {
                     curvePath.moveTo(list.get(i).x, list.get(i).y);
                 } else {
                     curvePath
-                            .cubicTo(list.get(i - 2).x, list.get(i - 2).y, list.get(i - 1).x, list.get(i - 1).y,
+                            .cubicTo(list.get(i - 2).x, list.get(i - 2).y, list.get(i - 1).x,
+                                    list.get(i - 1).y,
                                     list.get(i).x, list.get(i).y);
                 }
             }
@@ -243,7 +249,7 @@ class BesselChartView extends View {
             canvas.drawPath(curvePath, paint);// 绘制光滑曲线
             paint.setStyle(Paint.Style.FILL);
             if (drawAllPoint) {
-                for (Point point :  series.getPoints()  ) {
+                for (Point point : series.getPoints()) {
                     if (point.willDrawing) {
                         paint.setAlpha(80);
                         canvas.drawCircle(point.x, point.y, 10, paint);
@@ -252,7 +258,8 @@ class BesselChartView extends View {
                         paint.setAlpha(255);
                     }
                 }
-            }else {Point pointMax =calculator.maxPoints;
+            } else {
+                Point pointMax = calculator.maxPoints;
                 if (pointMax.willDrawing) {
                     paint.setAlpha(80);
                     canvas.drawCircle(pointMax.x, pointMax.y, 10, paint);
@@ -294,11 +301,13 @@ class BesselChartView extends View {
                     paint);
         }
     }
+
     /**
-     *绘制最大最小温度
+     * 绘制最大最小温度
+     *
      * @param canvas
      */
-    private void drawTemText(Canvas canvas){
+    private void drawTemText(Canvas canvas) {
         //最大值
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(5);
@@ -308,7 +317,7 @@ class BesselChartView extends View {
 //    float endCoordinateX = calculator.xAxisWidth;
 //    float coordinateY = getHeight() - calculator.xAxisHeight;
 //    canvas.drawLine(0, coordinateY, endCoordinateX, coordinateY, paint);
-        canvas.drawText(calculator.maxTemperature,data.getXLabels().get(1).x,100,paint);
+        canvas.drawText(calculator.maxTemperature, data.getXLabels().get(1).x, 100, paint);
 
         //上升值
         paint.setStyle(Paint.Style.FILL);
@@ -319,14 +328,16 @@ class BesselChartView extends View {
 //    float endCoordinateX = calculator.xAxisWidth;
 //    float coordinateY = getHeight() - calculator.xAxisHeight;
 //    canvas.drawLine(0, coordinateY, endCoordinateX, coordinateY, paint);
-        canvas.drawText(calculator.raiseTemperature,(data.getXLabels().get(1).x+data.getXLabels().get(0).x)/2,200,paint);
+        canvas.drawText(calculator.raiseTemperature, (data.getXLabels().get(1).x + data
+                .getXLabels().get(0).x) / 2, 200, paint);
 
-        Path path=new Path();
-        path.moveTo((data.getXLabels().get(1).x+data.getXLabels().get(0).x)/2-80,(float) (200-20*Math.sqrt(3)));
-        path.lineTo((data.getXLabels().get(1).x+data.getXLabels().get(0).x)/2-100,200);
-        path.lineTo((data.getXLabels().get(1).x+data.getXLabels().get(0).x)/2-60,200);
+        Path path = new Path();
+        path.moveTo((data.getXLabels().get(1).x + data.getXLabels().get(0).x) / 2 - 80, (float)
+                (200 - 20 * Math.sqrt(3)));
+        path.lineTo((data.getXLabels().get(1).x + data.getXLabels().get(0).x) / 2 - 100, 200);
+        path.lineTo((data.getXLabels().get(1).x + data.getXLabels().get(0).x) / 2 - 60, 200);
         path.close();
-        canvas.drawPath(path,paint);
+        canvas.drawPath(path, paint);
         //最小值
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(3);
@@ -336,14 +347,17 @@ class BesselChartView extends View {
 //    float endCoordinateX = calculator.xAxisWidth;
 //    float coordinateY = getHeight() - calculator.xAxisHeight;
 //    canvas.drawLine(0, coordinateY, endCoordinateX, coordinateY, paint);
-        canvas.drawText(calculator.minTemperature,data.getXLabels().get(0).x,calculator.height/2+style.getMinTemTextSize()/2,paint);
+        canvas.drawText(calculator.minTemperature, data.getXLabels().get(0).x, calculator.height
+                / 2 + style.getMinTemTextSize() / 2, paint);
     }
+
     public void updateSize() {
         LayoutParams lp = getLayoutParams();
         lp.height = calculator.height;
         lp.width = calculator.xAxisWidth;
         setLayoutParams(lp);
     }
+
     public void setDrawBesselPoint(boolean drawBesselPoint) {
         this.drawBesselPoint = drawBesselPoint;
     }

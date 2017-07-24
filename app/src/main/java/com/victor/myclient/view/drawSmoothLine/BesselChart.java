@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
+
 import demo.animen.com.xiaoyutask.R;
 
 
@@ -14,30 +15,49 @@ import demo.animen.com.xiaoyutask.R;
  * @date :2014年5月4日
  */
 public class BesselChart extends LinearLayout {
-    /** 贝塞尔曲线图 */
+    /**
+     * 贝塞尔曲线图
+     */
     private BesselChartView besselChartView;
-    /** 纵轴 */
+    /**
+     * 纵轴
+     */
     private VerticalAxisView verticalAxis;
-    /** 横向说明 */
+    /**
+     * 横向说明
+     */
     private HorizontalLegendView horizontalLegend;
-    /** 动画对象 */
+    /**
+     * 动画对象
+     */
     private AnimateRunnable animateRunnable;
-    /** 带纵轴的贝塞尔曲线图 */
+    /**
+     * 带纵轴的贝塞尔曲线图
+     */
     private LinearLayout besselChartLayout;
-    /** 横轴的位置 */
+    /**
+     * 横轴的位置
+     */
     private int position = VerticalAxisView.POSITION_RIGHT;
-    /** 曲线图绘制的计算信息 */
+    /**
+     * 曲线图绘制的计算信息
+     */
     private BesselCalculator calculator;
-    /** 曲线图的样式 */
+    /**
+     * 曲线图的样式
+     */
     private ChartStyle style;
-    /** 曲线图的数据 */
+    /**
+     * 曲线图的数据
+     */
     private ChartData data;
 
     public BesselChart(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ChartStyle);
 
-        position = a.getInt(R.styleable.ChartStyle_verticalAxisPosition, VerticalAxisView.POSITION_RIGHT);
+        position = a.getInt(R.styleable.ChartStyle_verticalAxisPosition, VerticalAxisView
+                .POSITION_RIGHT);
         a.recycle();
         init();
     }
@@ -56,17 +76,23 @@ public class BesselChart extends LinearLayout {
         besselChartLayout = new LinearLayout(getContext());
         besselChartView = new BesselChartView(getContext(), data, style, calculator);
         verticalAxis = new VerticalAxisView(getContext(), data.getYLabels(), style, calculator);
-        horizontalLegend = new HorizontalLegendView(getContext(), data.getTitles(), style, calculator);
+        horizontalLegend = new HorizontalLegendView(getContext(), data.getTitles(), style,
+                calculator);
         besselChartLayout.setOrientation(LinearLayout.HORIZONTAL);
         verticalAxis.setPosition(position);
-        besselChartLayout.addView(verticalAxis, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        besselChartLayout.addView(verticalAxis, new LayoutParams(LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT));
         if (position == VerticalAxisView.POSITION_LEFT) {
-            besselChartLayout.addView(besselChartView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1));
+            besselChartLayout.addView(besselChartView, new LayoutParams(LayoutParams
+                    .MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1));
         } else {
-            besselChartLayout.addView(besselChartView, 0, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1));
+            besselChartLayout.addView(besselChartView, 0, new LayoutParams(LayoutParams
+                    .MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1));
         }
-        addView(besselChartLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        addView(horizontalLegend, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        addView(besselChartLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams
+                .WRAP_CONTENT));
+        addView(horizontalLegend, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams
+                .WRAP_CONTENT));
     }
 
     public void setPosition(int position) {
@@ -93,7 +119,9 @@ public class BesselChart extends LinearLayout {
         return style;
     }
 
-    /** 刷新数据 */
+    /**
+     * 刷新数据
+     */
     public void refresh() {
         refresh(false);
     }
@@ -110,6 +138,7 @@ public class BesselChart extends LinearLayout {
     public void setDrawBesselPoint(boolean drawBesselPoint) {
         besselChartView.setDrawBesselPoint(drawBesselPoint);
     }
+
     /***
      * 带动画刷新数据
      *
@@ -119,7 +148,7 @@ public class BesselChart extends LinearLayout {
         post(new Runnable() {
             @Override
             public void run() {
-                calculator.compute(getWidth(),getHeight());// 重新计算图形信息
+                calculator.compute(getWidth(), getHeight());// 重新计算图形信息
                 besselChartView.updateSize();// 更新图形的
                 verticalAxis.updateSize();// 更新纵轴的宽高
                 horizontalLegend.updateHeight();// 更新标题的高度
@@ -166,12 +195,15 @@ public class BesselChart extends LinearLayout {
                 run = !calculator.ensureTranslation();
                 besselChartView.postInvalidate();
             }
-        };
+        }
+
+        ;
     }
 
     public void setChartListener(ChartListener chartListener) {
         besselChartView.setChartListener(chartListener);
     }
+
     public interface ChartListener {
         void onMove();
     }

@@ -18,17 +18,15 @@ import android.widget.TextView;
 import demo.animen.com.xiaoyutask.R;
 
 /**
- * @Description:右侧的sideBar,显示的是二十六个字母以及*，和#号，
- * 点击字母，自动导航到相应拼音的汉字上
- * @author http://blog.csdn.net/finddreams
+ * 右侧的sideBar,显示的是二十六个字母以及*，和#号， 点击字母，自动导航到相应拼音的汉字上
  */
 public class SideBar extends View {
     // 触摸事件
     private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
     // 26个字母
-    public static String[] b = { "☆","A", "B", "C", "D", "E", "F", "G", "H", "I",
+    public static String[] b = {"☆", "A", "B", "C", "D", "E", "F", "G", "H", "I",
             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
-            "W", "X", "Y", "Z","#"};
+            "W", "X", "Y", "Z", "#"};
     private int choose = -1;// 选中
     private Paint paint = new Paint();
 
@@ -37,6 +35,7 @@ public class SideBar extends View {
     public void setTextView(TextView mTextDialog) {
         this.mTextDialog = mTextDialog;
     }
+
     public SideBar(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
@@ -135,7 +134,6 @@ public class SideBar extends View {
      * 接口
      *
      * @author coder
-     *
      */
     public interface OnTouchingLetterChangedListener {
         public void onTouchingLetterChanged(String s);

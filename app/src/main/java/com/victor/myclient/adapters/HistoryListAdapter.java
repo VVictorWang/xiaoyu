@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,11 +16,10 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.victor.myclient.datas.ServiceHistory;
 import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.view.CircleImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 /**
@@ -36,7 +34,8 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
     private MyClickListener myClickListener;
 
-    public HistoryListAdapter(List<ServiceHistory> list, Context myContext, MyClickListener clickListener) {
+    public HistoryListAdapter(List<ServiceHistory> list, Context myContext, MyClickListener
+            clickListener) {
         this.list = list;
         this.myContext = myContext;
 
@@ -92,6 +91,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
                         super.onLoadStarted(placeholder);
                         holder.progressBar.setVisibility(View.VISIBLE);
                     }
+
                     @Override
                     public void onLoadFailed(Exception e, Drawable errorDrawable) {
 
@@ -100,7 +100,8 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
                     }
 
                     @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super
+                            GlideDrawable> animation) {
                         super.onResourceReady(resource, animation);
                         holder.progressBar.setVisibility(View.GONE);
                     }

@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.victor.myclient.view.CircleImageView
                 android:id="@+id/imageView"
                 android:layout_width="70dp"
                 android:layout_height="70dp"

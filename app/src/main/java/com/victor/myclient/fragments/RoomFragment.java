@@ -40,8 +40,9 @@ public class RoomFragment extends Fragment {
 
     private List<UserAcitivityInfo> userAcitivityInfos;
     private boolean net_work, has_data = false;
-    private TextView bedroom1,bedroom2,bedroom3,washingroom,living_room,store_room,dining_room, other,kitchen_room;
-    Handler handler = new Handler(){
+    private TextView bedroom1, bedroom2, bedroom3, washingroom, living_room, store_room,
+            dining_room, other, kitchen_room;
+    Handler handler = new Handler() {
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @Override
         public void handleMessage(Message msg) {
@@ -83,16 +84,19 @@ public class RoomFragment extends Fragment {
             }
         }
     };
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
         net_work = Utils.isNetWorkAvailabe(activity);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
+            Bundle savedInstanceState) {
         if (view == null) {
             view = activity.getLayoutInflater().inflate(R.layout.fragment_room_status, null);
         } else {
@@ -107,7 +111,7 @@ public class RoomFragment extends Fragment {
     }
 
     private void InitView() {
-      userAcitivityInfos = new ArrayList<>();
+        userAcitivityInfos = new ArrayList<>();
         back = (RelativeLayout) view.findViewById(R.id.fragment_room_back);
         bedroom1 = (TextView) view.findViewById(R.id.bed_room1_text);
         bedroom2 = (TextView) view.findViewById(R.id.bed_room2_text);
@@ -130,11 +134,12 @@ public class RoomFragment extends Fragment {
 
     private class GetActivity extends AsyncTask<Void, Void, Void> {
         private Gson gson = new Gson();
+
         @Override
         protected void onPostExecute(Void aVoid) {
             if (has_data) {
                 handler.sendEmptyMessage(0x123);
-            }else
+            } else
                 handler.sendEmptyMessage(0x124);
             super.onPostExecute(aVoid);
         }
@@ -142,9 +147,11 @@ public class RoomFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             if (net_work) {
-                String info = Utils.sendRequest(GlobalData.GET_ACTIVITIES + Utils.getValue(activity, GlobalData.PATIENT_ID));
+                String info = Utils.sendRequest(GlobalData.GET_ACTIVITIES + Utils.getValue
+                        (activity, GlobalData.PATIENT_ID));
                 if (!info.contains("not_exist")) {
-                    userAcitivityInfos = gson.fromJson(info, new TypeToken<List<UserAcitivityInfo>>() {
+                    userAcitivityInfos = gson.fromJson(info, new
+                            TypeToken<List<UserAcitivityInfo>>() {
                     }.getType());
                     DataSupport.deleteAll(UserAcitivityInfo.class);
                     for (UserAcitivityInfo userAcitivityInfo : userAcitivityInfos) {
@@ -152,7 +159,8 @@ public class RoomFragment extends Fragment {
                     }
                     has_data = true;
                 } else if (DataSupport.isExist(UserAcitivityInfo.class)) {
-                    List<UserAcitivityInfo> userAcitivityInfos1 = DataSupport.findAll(UserAcitivityInfo.class);
+                    List<UserAcitivityInfo> userAcitivityInfos1 = DataSupport.findAll
+                            (UserAcitivityInfo.class);
                     for (UserAcitivityInfo userAcitivityInfo : userAcitivityInfos1) {
                         boolean addabe = true;
                         for (UserAcitivityInfo userAcitivityInfo1 : userAcitivityInfos) {
@@ -165,8 +173,10 @@ public class RoomFragment extends Fragment {
                             userAcitivityInfos.add(userAcitivityInfo);
                         }
                     }
-            }} else if (DataSupport.isExist(UserAcitivityInfo.class)) {
-                List<UserAcitivityInfo> userAcitivityInfos1 = DataSupport.findAll(UserAcitivityInfo.class);
+                }
+            } else if (DataSupport.isExist(UserAcitivityInfo.class)) {
+                List<UserAcitivityInfo> userAcitivityInfos1 = DataSupport.findAll
+                        (UserAcitivityInfo.class);
                 for (UserAcitivityInfo userAcitivityInfo : userAcitivityInfos1) {
                     boolean addable = true;
                     for (UserAcitivityInfo userAcitivityInfo1 : userAcitivityInfos) {
@@ -180,10 +190,11 @@ public class RoomFragment extends Fragment {
                     }
                 }
                 has_data = true;
-            }else
+            } else
                 has_data = false;
             return null;
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

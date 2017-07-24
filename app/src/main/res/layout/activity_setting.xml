@@ -51,7 +51,7 @@
 
     </RelativeLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.victor.myclient.view.CircleImageView
         android:id="@+id/login_head_setting"
         android:layout_width="150dp"
         android:layout_height="150dp"

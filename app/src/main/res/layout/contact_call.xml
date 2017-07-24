@@ -67,7 +67,7 @@
         tools:text="1234566"
         />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.victor.myclient.view.CircleImageView
         android:id="@+id/backspace_number_image"
         android:layout_width="25dp"
         android:layout_height="25dp"

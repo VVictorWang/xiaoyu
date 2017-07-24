@@ -81,17 +81,20 @@ public class Utils {
     }
 
     public static boolean isNetWorkAvailabe(Context context) {
-        if (context.checkCallingOrSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+        if (context.checkCallingOrSelfPermission(Manifest.permission.INTERNET) != PackageManager
+                .PERMISSION_GRANTED) {
             return false;
         } else {
-            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager connectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivityManager == null) {
                 showShortToast(context, "不能得到系统网络服务");
             } else {
                 NetworkInfo[] infos = connectivityManager.getAllNetworkInfo();
                 if (infos != null) {
                     for (int i = 0; i < infos.length; i++) {
-                        if (infos[i].getState() == NetworkInfo.State.CONNECTED && infos[i].isAvailable()) {
+                        if (infos[i].getState() == NetworkInfo.State.CONNECTED && infos[i]
+                                .isAvailable()) {
                             return true;
                         }
                     }
@@ -301,7 +304,6 @@ public class Utils {
     }
 
 
-
     public static String DateToStringWithChinese(Date date) {
         DateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         String result = null;
@@ -332,7 +334,8 @@ public class Utils {
      * @return
      */
     public static boolean isEmail(String email) {
-        String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+        String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(" +
+                "([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
         Pattern p = Pattern.compile(str);
         Matcher m = p.matcher(email);
 

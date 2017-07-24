@@ -48,10 +48,12 @@ public class MyIntentService extends GTIntentService {
         String cid = msg.getClientId();
 
         // 第三方回执调用接口，actionid范围为90000-90999，可根据业务场景执行
-        boolean result = PushManager.getInstance().sendFeedbackMessage(context, taskid, messageid, 90001);
+        boolean result = PushManager.getInstance().sendFeedbackMessage(context, taskid,
+                messageid, 90001);
         Log.d(TAG, "call sendFeedbackMessage = " + (result ? "success" : "failed"));
 
-        Log.d(TAG, "onReceiveMessageData -> " + "appid = " + appid + "\ntaskid = " + taskid + "\nmessageid = " + messageid + "\npkg = " + pkg
+        Log.d(TAG, "onReceiveMessageData -> " + "appid = " + appid + "\ntaskid = " + taskid +
+                "\nmessageid = " + messageid + "\npkg = " + pkg
                 + "\ncid = " + cid);
 
         if (payload == null) {
@@ -68,13 +70,14 @@ public class MyIntentService extends GTIntentService {
             sendMessage(data, 0);
         }
 
-        Log.d(TAG, "----------------------------------------------------------------------------------------------");
+        Log.d(TAG,
+                "----------------------------------------------------------------------------------------------");
     }
 
     @Override
     public void onReceiveClientId(Context context, String clientid) {
         Log.e(TAG, "onReceiveClientId -> " + "clientid = " + clientid);
-        Utils.putValue(context, GlobalData.CLIENT_ID,clientid);
+        Utils.putValue(context, GlobalData.CLIENT_ID, clientid);
         sendMessage(clientid, 1);
     }
 
@@ -157,7 +160,8 @@ public class MyIntentService extends GTIntentService {
         long timestamp = feedbackCmdMsg.getTimeStamp();
         String cid = feedbackCmdMsg.getClientId();
 
-        Log.d(TAG, "onReceiveCommandResult -> " + "appid = " + appid + "\ntaskid = " + taskid + "\nactionid = " + actionid + "\nresult = " + result
+        Log.d(TAG, "onReceiveCommandResult -> " + "appid = " + appid + "\ntaskid = " + taskid +
+                "\nactionid = " + actionid + "\nresult = " + result
                 + "\ncid = " + cid + "\ntimestamp = " + timestamp);
     }
 
@@ -165,7 +169,7 @@ public class MyIntentService extends GTIntentService {
         Message msg = Message.obtain();
         msg.what = what;
         msg.obj = data;
-        Log.d(TAG, "clientid Message="+msg.what+"\t"+msg.obj);
+        Log.d(TAG, "clientid Message=" + msg.what + "\t" + msg.obj);
 //        DemoApplication.sendMessage(msg);
     }
 }

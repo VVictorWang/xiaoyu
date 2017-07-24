@@ -113,7 +113,7 @@ public class ForgetPwdActivity extends AppCompatActivity {
                             } else if (reply.contains("could not")) {
                                 handler.sendEmptyMessage(4);
                             }
-                        }else
+                        } else
                             handler.sendEmptyMessage(1);
 
                     }

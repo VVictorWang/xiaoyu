@@ -6,7 +6,7 @@ import org.litepal.crud.DataSupport;
  * Created by victor on 2017/5/29.
  */
 
-public class DoorInfor extends DataSupport{
+public class DoorInfor extends DataSupport {
     private String sid;
     private int status;
     private String add_date;

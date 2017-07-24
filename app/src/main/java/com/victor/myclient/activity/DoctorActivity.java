@@ -18,12 +18,12 @@ import com.victor.myclient.datas.DoctorXiaoYu;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
+import com.victor.myclient.view.CircleImageView;
 
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 
@@ -32,7 +32,7 @@ public class DoctorActivity extends AppCompatActivity {
     private String doctor_id;
     private DoctorInfor doctorInfor;
     private RelativeLayout backdoctordetail;
-    private de.hdodenhof.circleimageview.CircleImageView persondetailimagedoctor;
+    private CircleImageView persondetailimagedoctor;
     private TextView persondetailnamedoctor;
     private TextView persondetailinfodoctor;
     private TextView persondetailjobdoctor;
@@ -76,7 +76,8 @@ public class DoctorActivity extends AppCompatActivity {
         this.persondetailjobdoctor = (TextView) findViewById(R.id.person_detail_job_doctor);
         this.persondetailinfodoctor = (TextView) findViewById(R.id.person_detail_info_doctor);
         this.persondetailnamedoctor = (TextView) findViewById(R.id.person_detail_name_doctor);
-        this.persondetailimagedoctor = (CircleImageView) findViewById(R.id.person_detail_image_doctor);
+        this.persondetailimagedoctor = (CircleImageView) findViewById(R.id
+                .person_detail_image_doctor);
         this.backdoctordetail = (RelativeLayout) findViewById(R.id.back_doctor_detail);
         make_call = (Button) findViewById(R.id.doctor_part_button_doctor);
         net_work_available = Utils.isNetWorkAvailabe(DoctorActivity.this);
@@ -119,7 +120,8 @@ public class DoctorActivity extends AppCompatActivity {
                     if (xiaoyu.contains("not_exist")) {
                         doctorXiaoYu.setXiaoyuNum("000");
                     } else {
-                        doctorXiaoYu = gson.fromJson(Utils.sendRequest(GlobalData.GET_DOCTOR_XIAO_YU + doctor_id), DoctorXiaoYu.class);
+                        doctorXiaoYu = gson.fromJson(Utils.sendRequest(GlobalData
+                                .GET_DOCTOR_XIAO_YU + doctor_id), DoctorXiaoYu.class);
                     }
                     DataSupport.deleteAll(DoctorInfor.class);
                     if (!doctorInfor.isSaved()) {
@@ -165,9 +167,11 @@ public class DoctorActivity extends AppCompatActivity {
                 doctorpartnamedoctor.setText("所在医院: " + doctorInfor.getHospital());
                 doctorparttimedoctor.setText("联系邮箱: " + doctorInfor.getMail());
                 doctorpartgoodat.setText("擅长方向: " + doctorInfor.getGood_at());
-                doctorinfointrodetail.setText("职称: " + doctorInfor.getJob_title() + "\n其他: " + doctorInfor.getCases());
+                doctorinfointrodetail.setText("职称: " + doctorInfor.getJob_title() + "\n其他: " +
+                        doctorInfor.getCases());
                 Log.e(TAG, "http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
-                bitmapUtils.disPlay(persondetailimagedoctor, "http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
+                bitmapUtils.disPlay(persondetailimagedoctor,
+                        "http://139.196.40.97/upload/doctorimage/" + doctorInfor.getImage());
             }
             dialog.dismiss();
         }

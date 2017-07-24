@@ -23,6 +23,7 @@ import demo.animen.com.xiaoyutask.R;
 
 public class ImageDetailActivity extends Activity {
     private ImageView imageView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +32,8 @@ public class ImageDetailActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_image_detail);
 
-        Intent intent=getIntent();
-        imageView=(ImageView)findViewById(R.id.imageView);
+        Intent intent = getIntent();
+        imageView = (ImageView) findViewById(R.id.imageView);
         Glide.with(this).
                 load(intent.getStringExtra("url")).
                 fitCenter().

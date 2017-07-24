@@ -14,10 +14,10 @@ import com.victor.myclient.datas.CaseInfor;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
+import com.victor.myclient.view.CircleImageView;
 
 import org.litepal.crud.DataSupport;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 
@@ -87,7 +87,8 @@ public class CaseDetailActivity extends AppCompatActivity {
         doctor_name.setText("主治医生  " + caseInfor.getDoctorName());
         date.setText(caseInfor.getDate());
         name.setText(caseInfor.getName());
-        ill_problem.setText("病情: " + caseInfor.getIllproblem() + "\n体温: " + caseInfor.getTemperature() + "°C\n血压: " + caseInfor.getBlood_pressure() + "mmHg");
+        ill_problem.setText("病情: " + caseInfor.getIllproblem() + "\n体温: " + caseInfor
+                .getTemperature() + "°C\n血压: " + caseInfor.getBlood_pressure() + "mmHg");
         ill_result.setText(caseInfor.getIllresult());
         sex_age.setText(caseInfor.getSex() + "    " + caseInfor.getAge() + "岁");
         doctor_id = caseInfor.getDoctorId();

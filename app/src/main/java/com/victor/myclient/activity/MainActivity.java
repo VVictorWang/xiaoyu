@@ -30,12 +30,12 @@ import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.datas.UserInfor;
 import com.google.gson.Gson;
+import com.victor.myclient.view.CircleImageView;
 import com.victor.myclient.view.CircleTextImageView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 
@@ -90,15 +90,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             .btn_bg_hujiao));
                     break;
                 case 0x133:
-                    Intent intent=new Intent(MainActivity.this, PostClientIdService.class);
+                    Intent intent = new Intent(MainActivity.this, PostClientIdService.class);
                     startService(intent);
                     break;
-                    
+
             }
 
         }
     };
-    private de.hdodenhof.circleimageview.CircleImageView personimage;
+    private CircleImageView personimage;
     private android.widget.TextView nametext;
     private android.widget.TextView bangding_xiaoyu_number;
     private CircleTextImageView callothers, jujiamain, caseforpatient, setting;
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             name = "victor";
             number = "18774259685";
         }
-        Log.d(TAG, "connectXiaoyu: user_name xiaoyunumber"+user_name+" "+xiaoyuNumber);
+        Log.d(TAG, "connectXiaoyu: user_name xiaoyunumber" + user_name + " " + xiaoyuNumber);
         NemoSDK.getInstance().connectNemo(name, number, new ConnectNemoCallback() {
             @Override
             public void onFailed(int i) {
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSuccess(String s) {
                 final String reslut = s;
-                Log.d(TAG, "onSuccess: s="+s);
+                Log.d(TAG, "onSuccess: s=" + s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected String doInBackground(String... params) {
-            if (net_work_available ) {
+            if (net_work_available) {
                 if (type.equals("username")) {
                     String info = Utils.sendRequest(GlobalData.GET_USR_INFOR +
                             "FamilyName=" + Utils.getValue(MainActivity.this, GlobalData.NAME) +
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (!info.contains("not_exist")) {
                         userInfor = gson.fromJson(info, UserInfor.class);
                         has_data = true;
-                    }else
+                    } else
                         has_data = false;
                 } else if (type.equals("phone")) {
                     String info = Utils.sendRequest(GlobalData.GET_USR_INFOR +
@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (!info.contains("not_exist")) {
                         userInfor = gson.fromJson(info, UserInfor.class);
                         has_data = true;
-                    }else
+                    } else
                         has_data = false;
                 }
                 if (has_data) {
@@ -342,10 +342,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Utils.putValue(MainActivity.this, GlobalData.USer_email, userInfor.getEmail());
                     Utils.putValue(MainActivity.this, GlobalData.User_ID, userInfor.getId());
                     Utils.putValue(MainActivity.this, GlobalData.Phone, userInfor.getPhone());
-                    Utils.putValue(MainActivity.this, GlobalData.PATIENT_ID, userInfor.getPatientId());
-                    Utils.putValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID, userInfor.getId());
-                    Utils.putValue(MainActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage());
-                    Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NAME, userInfor.getXiaoyuName
+                    Utils.putValue(MainActivity.this, GlobalData.PATIENT_ID, userInfor
+                            .getPatientId());
+                    Utils.putValue(MainActivity.this, GlobalData.PATIENTFAMILY_ID, userInfor
+                            .getId());
+                    Utils.putValue(MainActivity.this, GlobalData.FAMILY_IMage, userInfor.getImage
+                            ());
+                    Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NAME, userInfor
+                            .getXiaoyuName
                             ());
                     Utils.putValue(MainActivity.this, GlobalData.XIAOYU_NUMBER, userInfor
                             .getXiaoyuNum());
@@ -383,7 +387,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bitmapUtils.disPlay(personimage, GlobalData.GET_PATIENT_FAMILY_IMAGE +
                                 userInfor.getImage());
                     }
-                }else
+                } else
                     Utils.showShortToast(MainActivity.this, "用户数据不存在");
             }
         }

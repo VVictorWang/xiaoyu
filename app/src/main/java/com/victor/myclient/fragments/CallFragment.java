@@ -19,12 +19,12 @@ import android.widget.TextView;
 
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.activity.VideoActivity;
+import com.victor.myclient.view.CircleImageView;
 import com.victor.myclient.view.CircleTextImageView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import demo.animen.com.xiaoyutask.R;
 
 /**
@@ -38,31 +38,37 @@ public class CallFragment extends Fragment {
     private TextView textView;
     private CircleImageView backspace_number;
     private RelativeLayout back;
-    Handler hander = new Handler(){
+    Handler hander = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what >= 0 && msg.what <= 9) {
                 textView.append("" + msg.what);
-                circleTextImageViews[msg.what].setImageDrawable(getResources().getDrawable(R.drawable.call_number_image_selecte));
+                circleTextImageViews[msg.what].setImageDrawable(getResources().getDrawable(R
+                        .drawable.call_number_image_selecte));
                 backspace_number.setVisibility(View.VISIBLE);
             } else if (msg.what == 10) {
                 textView.append("*");
-                circleTextImageViews[msg.what].setImageDrawable(getResources().getDrawable(R.drawable.call_number_image_selecte));
+                circleTextImageViews[msg.what].setImageDrawable(getResources().getDrawable(R
+                        .drawable.call_number_image_selecte));
                 backspace_number.setVisibility(View.VISIBLE);
             } else if (msg.what == 11) {
                 textView.append("#");
-                circleTextImageViews[msg.what].setImageDrawable(getResources().getDrawable(R.drawable.call_number_image_selecte));
+                circleTextImageViews[msg.what].setImageDrawable(getResources().getDrawable(R
+                        .drawable.call_number_image_selecte));
                 backspace_number.setVisibility(View.VISIBLE);
             } else if (msg.what > 11) {
-                circleTextImageViews[msg.what-12].setImageDrawable(getResources().getDrawable(R.drawable.call_number_image));
+                circleTextImageViews[msg.what - 12].setImageDrawable(getResources().getDrawable(R
+                        .drawable.call_number_image));
                 //权限检查
 
 
             }
         }
     };
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
+            savedInstanceState) {
         if (layout == null) {
             activity = this.getActivity();
             layout = activity.getLayoutInflater().inflate(R.layout.contact_call, null);
@@ -75,6 +81,7 @@ public class CallFragment extends Fragment {
         init();
         return layout;
     }
+
     private void init() {
         circleTextImageViews[0] = (CircleTextImageView) layout.findViewById(R.id.number_call_0);
         circleTextImageViews[1] = (CircleTextImageView) layout.findViewById(R.id.number_call_1);
@@ -94,7 +101,8 @@ public class CallFragment extends Fragment {
         backspace_number = (CircleImageView) layout.findViewById(R.id.backspace_number_image);
         initEvent();
     }
-    private void initEvent(){
+
+    private void initEvent() {
         backspace_number.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,15 +125,15 @@ public class CallFragment extends Fragment {
 
                 @Override
                 public void onClick(View v) {
-                    if (j>=0 && j<=11) {
+                    if (j >= 0 && j <= 11) {
 
                         hander.sendEmptyMessage(j);
                         new Timer().schedule(new TimerTask() {
                             @Override
                             public void run() {
-                                hander.sendEmptyMessage(j +12);
+                                hander.sendEmptyMessage(j + 12);
                             }
-                        },150);
+                        }, 150);
                     }
                 }
             });
@@ -159,20 +167,24 @@ public class CallFragment extends Fragment {
 
     private void checkPermission() {
         if (!(ContextCompat
-            .checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
-            == PackageManager.PERMISSION_GRANTED) &&
-            !(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)
+                .checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) &&
+                !(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)
+                        == PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat
+                    .requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.CAMERA, Manifest.permission
+                                    .RECORD_AUDIO}, 0);
+        } else if (!(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission
+                .RECORD_AUDIO)
                 == PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat
-                .requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO}, 0);
-        } else if (!(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)
-            == PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat
-                .requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO}, 0);
+                    .requestPermissions(getActivity(), new String[]{Manifest.permission
+                            .RECORD_AUDIO}, 0);
         } else if (!(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
-            == PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 0);
+                == PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission
+                    .CAMERA}, 0);
         }
     }
 }
