@@ -171,6 +171,14 @@ public class BesselChart extends LinearLayout {
         animateRunnable.run = false;// 取消动画
     }
 
+    public void setChartListener(ChartListener chartListener) {
+        besselChartView.setChartListener(chartListener);
+    }
+
+    public interface ChartListener {
+        void onMove();
+    }
+
     /**
      * 自动滚动动画
      */
@@ -198,13 +206,5 @@ public class BesselChart extends LinearLayout {
         }
 
         ;
-    }
-
-    public void setChartListener(ChartListener chartListener) {
-        besselChartView.setChartListener(chartListener);
-    }
-
-    public interface ChartListener {
-        void onMove();
     }
 }

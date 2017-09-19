@@ -7,9 +7,9 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
 
 /**
@@ -17,12 +17,11 @@ import com.victor.myclient.utils.Utils;
  */
 
 public class PostClientIdService extends Service {
-    private String clientId;
-    private String userId;
+    private static final String TAG = "PostClientIdService";
     Handler mHandler;
     HandlerThread mHandlerThread;
-
-    private static final String TAG = "PostClientIdService";
+    private String clientId;
+    private String userId;
 
     @Override
     public void onCreate() {
@@ -64,9 +63,9 @@ public class PostClientIdService extends Service {
                                     "&" + GlobalData.CLIENT_ID + clientId);
                             stopSelf();
                         } else {
-                            clientId = Utils.getValue(getBaseContext(), GlobalData.CLIENT_ID
+                            clientId = PrefUtils.getValue(getBaseContext(), GlobalData.CLIENT_ID
                             );
-                            userId = Utils.getValue(getBaseContext(), GlobalData.User_ID);
+                            userId = PrefUtils.getValue(getBaseContext(), GlobalData.User_ID);
                             if (clientId != null & userId != null) {
                                 Utils.sendRequest(GlobalData.POST_CLIENTID + userId + "&" +
                                         GlobalData.CLIENT_ID + clientId);

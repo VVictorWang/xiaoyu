@@ -2,17 +2,10 @@ package com.victor.myclient.service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.igexin.sdk.GTServiceManager;
-import com.igexin.sdk.PushManager;
-import com.victor.myclient.utils.GlobalData;
-import com.victor.myclient.utils.Utils;
-
-import okhttp3.internal.Util;
 
 /**
  * Created by Silver on 2017/7/11.

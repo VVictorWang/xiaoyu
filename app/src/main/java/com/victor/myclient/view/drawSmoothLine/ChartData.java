@@ -55,28 +55,6 @@ public class ChartData {
     }
 
     /**
-     * 设置数据序列
-     */
-    public void setSeriesList(List<Series> seriesList) {
-        this.seriesList.clear();
-        if (seriesList != null && seriesList.size() > 0) {
-            this.seriesList.addAll(seriesList);
-            if (this.seriesList.size() <= xLabelUsageSeries)
-                throw new IllegalArgumentException("xLabelUsageSeries should greater than " +
-                        "seriesList.size()");
-            resetXLabels();
-            resetYLabels();
-            titles.clear();
-
-            for (Series series : seriesList) {
-                titles.add(series.getTitle());
-                if (series.getPoints().size() > maxPointsCount)
-                    maxPointsCount = series.getPoints().size();
-            }
-        }
-    }
-
-    /**
      * 重新生成X坐标轴文本
      */
     private void resetXLabels() {
@@ -121,16 +99,38 @@ public class ChartData {
 //        Log.d("zqt", "step maxValueY="+maxValueY);
     }
 
-    public void setLabelTransform(LabelTransform labelTransform) {
-        this.labelTransform = labelTransform;
-    }
-
     public List<Series> getSeriesList() {
         return seriesList;
     }
 
+    /**
+     * 设置数据序列
+     */
+    public void setSeriesList(List<Series> seriesList) {
+        this.seriesList.clear();
+        if (seriesList != null && seriesList.size() > 0) {
+            this.seriesList.addAll(seriesList);
+            if (this.seriesList.size() <= xLabelUsageSeries)
+                throw new IllegalArgumentException("xLabelUsageSeries should greater than " +
+                        "seriesList.size()");
+            resetXLabels();
+            resetYLabels();
+            titles.clear();
+
+            for (Series series : seriesList) {
+                titles.add(series.getTitle());
+                if (series.getPoints().size() > maxPointsCount)
+                    maxPointsCount = series.getPoints().size();
+            }
+        }
+    }
+
     public LabelTransform getLabelTransform() {
         return labelTransform;
+    }
+
+    public void setLabelTransform(LabelTransform labelTransform) {
+        this.labelTransform = labelTransform;
     }
 
     public List<Label> getXLabels() {
@@ -169,13 +169,13 @@ public class ChartData {
         this.xLabelUsageSeries = xLabelUsageSeries;
     }
 
+    public Marker getMarker() {
+        return marker;
+    }
+
     public void setMarker(Marker marker) {
         titles.add(marker);
         this.marker = marker;
-    }
-
-    public Marker getMarker() {
-        return marker;
     }
 
     public int getMaxPointsCount() {

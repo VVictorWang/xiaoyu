@@ -77,6 +77,34 @@ public class MyBitmapUtils {
         }
 
         /**
+         * 网络下载图片
+         */
+        private Bitmap downLoadBitmap(String url) {
+            HttpURLConnection conn = null;
+            try {
+                conn = (HttpURLConnection) new URL(url).openConnection();
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setRequestMethod("GET");
+
+                int responseCode = conn.getResponseCode();
+                if (responseCode == 200) {
+                    //图片压缩
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 2;//宽高压缩为原来的1/2
+                    options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+                    return BitmapFactory.decodeStream(conn.getInputStream(), null, options);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                conn.disconnect();
+            }
+
+            return null;
+        }
+
+        /**
          * AsyncTask就是对handler和线程池的封装
          * 第一个泛型:参数类型
          * 第二个泛型:更新进度的泛型
@@ -122,34 +150,6 @@ public class MyBitmapUtils {
 
                 }
             }
-        }
-
-        /**
-         * 网络下载图片
-         */
-        private Bitmap downLoadBitmap(String url) {
-            HttpURLConnection conn = null;
-            try {
-                conn = (HttpURLConnection) new URL(url).openConnection();
-                conn.setConnectTimeout(5000);
-                conn.setReadTimeout(5000);
-                conn.setRequestMethod("GET");
-
-                int responseCode = conn.getResponseCode();
-                if (responseCode == 200) {
-                    //图片压缩
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 2;//宽高压缩为原来的1/2
-                    options.inPreferredConfig = Bitmap.Config.ARGB_4444;
-                    return BitmapFactory.decodeStream(conn.getInputStream(), null, options);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                conn.disconnect();
-            }
-
-            return null;
         }
     }
 

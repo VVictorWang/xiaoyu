@@ -12,7 +12,7 @@ import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
 import com.igexin.sdk.message.SetTagCmdMessage;
 import com.victor.myclient.utils.GlobalData;
-import com.victor.myclient.utils.Utils;
+import com.victor.myclient.utils.PrefUtils;
 
 /**
  * Created by Silver on 2017/7/11.
@@ -72,7 +72,7 @@ public class MyIntentService extends GTIntentService {
 
     @Override
     public void onReceiveClientId(Context context, String clientid) {
-        Utils.putValue(context, GlobalData.CLIENT_ID, clientid);
+        PrefUtils.putValue(context, GlobalData.CLIENT_ID, clientid);
         sendMessage(clientid, 1);
     }
 

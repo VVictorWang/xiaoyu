@@ -21,14 +21,6 @@ public class CallRecord extends DataSupport {
     private String during_time;
     private String imageUrl;
 
-    public String getHangUpTime() {
-        return during_time;
-    }
-
-    public void setHangUpTime(String during_time) {
-        this.during_time = during_time;
-    }
-
     public CallRecord() {
     }
 
@@ -41,6 +33,14 @@ public class CallRecord extends DataSupport {
         this.date = date;
         this.during_time = during_time;
         this.imageUrl = imageUrl;
+    }
+
+    public String getHangUpTime() {
+        return during_time;
+    }
+
+    public void setHangUpTime(String during_time) {
+        this.during_time = during_time;
     }
 
     public String getName() {

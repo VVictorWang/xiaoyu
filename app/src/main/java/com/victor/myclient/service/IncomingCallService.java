@@ -1,15 +1,12 @@
 package com.victor.myclient.service;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.ainemo.sdk.otf.NemoReceivedCallListener;
 import com.ainemo.sdk.otf.NemoSDK;
-import com.victor.myclient.activity.IncommingAcivity;
+import com.victor.myclient.ui.activity.IncommingAcivity;
 
 /**
  * Created by 小武哥 on 2017/4/29.

@@ -1,7 +1,6 @@
 package com.victor.myclient.view;
 
 import android.content.Context;
-
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -19,21 +18,10 @@ import java.util.List;
 public class SimpleVideoView extends ViewGroup {
 
 
-    private static final String TAG = "SimpleVideoView";
-
-
-    public int indexTag = 0;
     public static final int LOCAL_VIEW_ID = 99;
+    private static final String TAG = "SimpleVideoView";
+    public int indexTag = 0;
     private OpenGLTextureView localVideoView;
-
-    public List<VideoCellView> getmVideoViews() {
-        return mVideoViews;
-    }
-
-    public void setmVideoViews(List<VideoCellView> mVideoViews) {
-        this.mVideoViews = mVideoViews;
-    }
-
     private List<VideoCellView> mVideoViews = new ArrayList<>();
     private Handler handler = new Handler();
     private Runnable drawVideoFrameRunnable = new Runnable() {
@@ -45,7 +33,6 @@ public class SimpleVideoView extends ViewGroup {
             requestRender();
         }
     };
-
     private Runnable drawLocalVideoFrameRunnable = new Runnable() {
         @Override
         public void run() {
@@ -53,7 +40,6 @@ public class SimpleVideoView extends ViewGroup {
             requestLocalVideoRender();
         }
     };
-
     public SimpleVideoView(Context context) {
         super(context);
         init();
@@ -62,6 +48,14 @@ public class SimpleVideoView extends ViewGroup {
     public SimpleVideoView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
+    }
+
+    public List<VideoCellView> getmVideoViews() {
+        return mVideoViews;
+    }
+
+    public void setmVideoViews(List<VideoCellView> mVideoViews) {
+        this.mVideoViews = mVideoViews;
     }
 
     public OpenGLTextureView getLocalVideoView() {

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
  */
 
 public class CustomLayoutManager extends RecyclerView.LayoutManager {
+    public int totalHeight = 0;
     /**
      * 用于保存item的位置信息
      */
@@ -20,9 +21,6 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager {
      * 用于保存item是否处于可见状态的信息
      */
     private SparseBooleanArray itemStates = new SparseBooleanArray();
-
-
-    public int totalHeight = 0;
     private int verticalScrollOffset;
     private int rightPartOffset = 0;
 

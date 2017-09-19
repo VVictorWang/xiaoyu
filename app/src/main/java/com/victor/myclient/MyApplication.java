@@ -3,8 +3,6 @@ package com.victor.myclient;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 
 import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.Settings;
@@ -17,11 +15,16 @@ import org.litepal.LitePal;
  */
 
 public class MyApplication extends Application {
-    private static Context context;
     private static final String TAG = "MyApplication";
+    private static Context context;
+
+    public static Context getContext() {
+        return context;
+    }
 
     @Override
     public void onCreate() {
+
         super.onCreate();
         context = getApplicationContext();
         LitePal.initialize(context);
@@ -31,10 +34,6 @@ public class MyApplication extends Application {
         nemoSDK.init(this, settings);
         Intent intent = new Intent(this, IncomingCallService.class);
         startService(intent);
-    }
-
-    public static Context getContext() {
-        return context;
     }
 
 

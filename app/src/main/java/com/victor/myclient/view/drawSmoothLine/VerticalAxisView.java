@@ -1,4 +1,3 @@
-
 package com.victor.myclient.view.drawSmoothLine;
 
 import android.content.Context;

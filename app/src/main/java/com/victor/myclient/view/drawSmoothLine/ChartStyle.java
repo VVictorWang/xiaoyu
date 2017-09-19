@@ -130,12 +130,12 @@ public class ChartStyle {
         return verticalLabelTextPadding;
     }
 
-    public int getVerticalLabelTextColor() {
-        return verticalLabelTextColor;
-    }
-
     public void setVerticalLabelTextPadding(int verticalLabelTextPadding) {
         this.verticalLabelTextPadding = verticalLabelTextPadding;
+    }
+
+    public int getVerticalLabelTextColor() {
+        return verticalLabelTextColor;
     }
 
     public void setVerticalLabelTextColor(int verticalLabelTextColor) {
@@ -162,16 +162,16 @@ public class ChartStyle {
         return gridColor;
     }
 
+    public void setGridColor(int gridColor) {
+        this.gridColor = gridColor;
+    }
+
     public int getVerticalLineColor() {
         return verticalLineColor;
     }
 
     public void setVerticalLineColor(int verticalLineColor) {
         this.verticalLineColor = verticalLineColor;
-    }
-
-    public void setGridColor(int gridColor) {
-        this.gridColor = gridColor;
     }
 
     public float getHorizontalTitleTextSize() {
@@ -210,12 +210,12 @@ public class ChartStyle {
         return horizontalTitlePaddingLeft;
     }
 
-    public int getHorizontalTitlePaddingRight() {
-        return horizontalTitlePaddingRight;
-    }
-
     public void setHorizontalTitlePaddingLeft(int horizontalTitlePaddingLeft) {
         this.horizontalTitlePaddingLeft = horizontalTitlePaddingLeft;
+    }
+
+    public int getHorizontalTitlePaddingRight() {
+        return horizontalTitlePaddingRight;
     }
 
     public void setHorizontalTitlePaddingRight(int horizontalTitlePaddingRight) {

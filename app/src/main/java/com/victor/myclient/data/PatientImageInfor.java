@@ -7,12 +7,12 @@ package com.victor.myclient.data;
 public class PatientImageInfor {
     private String patientimage;
 
-    public void setImage(String image) {
-        this.patientimage = image;
-    }
-
     public String getImage() {
 
         return patientimage;
+    }
+
+    public void setImage(String image) {
+        this.patientimage = image;
     }
 }

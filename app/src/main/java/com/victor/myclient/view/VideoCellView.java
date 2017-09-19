@@ -17,11 +17,11 @@ public class VideoCellView extends OpenGLTextureView {
         super(context, attrs);
     }
 
-    public void setParticipantId(int participantId) {
-        this.participantId = participantId;
-    }
-
     public int getParticipantId() {
         return participantId;
+    }
+
+    public void setParticipantId(int participantId) {
+        this.participantId = participantId;
     }
 }

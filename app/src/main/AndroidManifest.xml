@@ -46,17 +46,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.victor.myclient.activity.MainActivity"
+            android:name="com.victor.myclient.ui.activity.MainActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.ContactActivity"
+            android:name="com.victor.myclient.ui.activity.ContactActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.JujiaActivity"
+            android:name="com.victor.myclient.ui.activity.JujiaActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.LoginActivity"
+            android:name="com.victor.myclient.ui.activity.LoginActivity"
             android:screenOrientation="portrait"/>
 
         <service
@@ -64,32 +64,32 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.victor.myclient.activity.SettingActivity"
+            android:name="com.victor.myclient.ui.activity.SettingActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.CaseListActivity"
+            android:name="com.victor.myclient.ui.activity.CaseListActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.CaseDetailActivity"
+            android:name="com.victor.myclient.ui.activity.CaseDetailActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.RegisterFirstActivity"
+            android:name="com.victor.myclient.ui.activity.RegisterFirstActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.RegisterLastActivity"
+            android:name="com.victor.myclient.ui.activity.RegisterLastActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.ChangeXiaoYuActivity"
+            android:name="com.victor.myclient.ui.activity.ChangeXiaoYuActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.ChangeEmailActivity"
+            android:name="com.victor.myclient.ui.activity.ChangeEmailActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ImagePickerThemeFullScreen"/>
         <activity
-            android:name="com.victor.myclient.activity.FirstActivity"
+            android:name="com.victor.myclient.ui.activity.FirstActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -98,21 +98,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.victor.myclient.activity.DoctorActivity"
+            android:name="com.victor.myclient.ui.activity.DoctorActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.NewContactorActivity"
+            android:name="com.victor.myclient.ui.activity.NewContactorActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.victor.myclient.activity.VideoActivity"/>
-        <activity android:name="com.victor.myclient.activity.IncommingAcivity"/>
+        <activity android:name="com.victor.myclient.ui.activity.VideoActivity"/>
+        <activity android:name="com.victor.myclient.ui.activity.IncommingAcivity"/>
         <activity
-            android:name="com.victor.myclient.activity.ForgetPwdActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.victor.myclient.activity.ServiceHistoryActivity"
+            android:name="com.victor.myclient.ui.activity.ForgetPwdActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.activity.ImageDetailActivity"
+            android:name="com.victor.myclient.ui.activity.ServiceHistoryActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.victor.myclient.ui.activity.ImageDetailActivity"
             android:screenOrientation="portrait"/>
 
         <service
@@ -124,7 +124,7 @@
 
         <service android:name="com.victor.myclient.service.PostClientIdService"/>
 
-        <activity android:name="com.victor.myclient.activity.WelcomeActivity">
+        <activity android:name="com.victor.myclient.ui.activity.WelcomeActivity">
         </activity>
     </application>
 

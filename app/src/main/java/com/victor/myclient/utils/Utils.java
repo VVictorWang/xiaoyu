@@ -2,24 +2,13 @@ package com.victor.myclient.utils;
 
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.victor.myclient.ActivityManage;
-
-import demo.animen.com.xiaoyutask.R;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -58,23 +47,6 @@ public class Utils {
         mToast.show();
     }
 
-    public static void finishActivity(Activity activity) {
-        ActivityManage activityManage = ActivityManage.getInstance();
-        activityManage.popActivity(activity);
-        activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
-    }
-
-    public static void startActivity(Activity activity, Class<?> cls) {
-        Intent intent = new Intent();
-        intent.setClass(activity, cls);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-    }
-
-    public static void startActivity(Activity activity, Intent intent) {
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-    }
 
     public static boolean isNetWorkAvailabe(Context context) {
         if (context.checkCallingOrSelfPermission(Manifest.permission.INTERNET) != PackageManager
@@ -102,96 +74,6 @@ public class Utils {
     }
 
 
-    public static class Counter implements Runnable {
-        private int time = 0;
-        private Activity activity;
-        private String message;
-
-        public Counter(Activity activity, String message) {
-            this.activity = activity;
-            this.message = message;
-        }
-
-        public Counter(int time, Activity activity, String message) {
-            this.time = time;
-            this.activity = activity;
-            this.message = message;
-        }
-
-        public Counter(int start) {
-            this.time = start;
-        }
-
-        @Override
-        public void run() {
-            try {
-                Thread.sleep(1000);
-                time++;
-                if (time > 10) {
-                    showShortToast(activity, message);
-                    activity.finish();
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 移除SharedPreference
-     */
-    public static final void RemoveValue(Context context, String key) {
-        Editor editor = getSharedPreference(context).edit();
-        editor.remove(key);
-        boolean result = editor.commit();
-        if (!result) {
-            Log.e("移除Shared", "save " + key + " failed");
-        }
-    }
-
-    private static final SharedPreferences getSharedPreference(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context);
-    }
-
-    /**
-     * 获取SharedPreference 值
-     */
-    public static final String getValue(Context context, String key) {
-        return getSharedPreference(context).getString(key, "");
-    }
-
-    public static final Boolean getBooleanValue(Context context, String key) {
-        return getSharedPreference(context).getBoolean(key, false);
-    }
-
-    public static final void putBooleanValue(Context context, String key,
-                                             boolean bl) {
-        Editor edit = getSharedPreference(context).edit();
-        edit.putBoolean(key, bl);
-        edit.commit();
-    }
-
-    public static final int getIntValue(Context context, String key) {
-        return getSharedPreference(context).getInt(key, 0);
-    }
-
-    public static final long getLongValue(Context context, String key,
-                                          long default_data) {
-        return getSharedPreference(context).getLong(key, default_data);
-    }
-
-    public static final boolean putLongValue(Context context, String key,
-                                             Long value) {
-        Editor editor = getSharedPreference(context).edit();
-        editor.putLong(key, value);
-        return editor.commit();
-    }
-
-    public static final Boolean hasValue(Context context, String key) {
-        return getSharedPreference(context).contains(key);
-    }
-
     public static String sendRequest(String myurl) {
         HttpURLConnection connection = null;
         StringBuilder builder = new StringBuilder();
@@ -218,34 +100,6 @@ public class Utils {
         return builder.toString();
     }
 
-    /**
-     * 设置SharedPreference 值
-     */
-    public static final boolean putValue(Context context, String key,
-                                         String value) {
-        value = value == null ? "" : value;
-        Editor editor = getSharedPreference(context).edit();
-        editor.putString(key, value);
-        boolean result = editor.commit();
-        if (!result) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * 设置SharedPreference 值
-     */
-    public static final boolean putIntValue(Context context, String key,
-                                            int value) {
-        Editor editor = getSharedPreference(context).edit();
-        editor.putInt(key, value);
-        boolean result = editor.commit();
-        if (!result) {
-            return false;
-        }
-        return true;
-    }
 
     //将字符串转成日期格式
     public static Date stringToDate(String str) {

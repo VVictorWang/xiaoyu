@@ -11,12 +11,12 @@ public class SortModel {
     private String sortLetters;  //显示数据拼音的首字母
     private String number;
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public String getNumber() {
         return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getName() {

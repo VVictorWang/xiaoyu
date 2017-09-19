@@ -10,19 +10,19 @@ public class DoctorXiaoYu extends DataSupport {
     private String xiaoyuNum;
     private int id;
 
-    public void setXiaoyuNum(String xiaoyuNum) {
-        this.xiaoyuNum = xiaoyuNum;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getXiaoyuNum() {
         return xiaoyuNum;
     }
 
+    public void setXiaoyuNum(String xiaoyuNum) {
+        this.xiaoyuNum = xiaoyuNum;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
