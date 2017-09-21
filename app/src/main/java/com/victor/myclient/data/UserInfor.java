@@ -17,14 +17,14 @@ public class UserInfor {
      * xiaoyuNum : 15927698838
      */
 
-    private String id;
-    private String name;
-    private String patientId;
-    private String email;
-    private String phone;
-    private String image;
-    private String xiaoyuName;
-    private String xiaoyuNum;
+    public String id;
+    public String name;
+    public String patientId;
+    public String email;
+    public String phone;
+    public String image;
+    public String xiaoyuName;
+    public String xiaoyuNum;
 
     public String getId() {
         return id;

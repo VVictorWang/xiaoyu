@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -19,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import demo.animen.com.xiaoyutask.R;
 
 /**
  * Created by victor on 17-4-29.
@@ -47,6 +52,21 @@ public class Utils {
         mToast.show();
     }
 
+    public static String createAcacheKey(Object... param) {
+        String key = "";
+        for (Object o : param) {
+            key += "-" + o;
+        }
+        return key.replaceFirst("-", "");
+    }
+
+    public static void showImage(Context context, String imageUrl, ImageView imageView) {
+        Glide.with(context).
+                load(imageUrl).
+                fitCenter().
+                error(R.drawable.image_load_error).
+                into(imageView);
+    }
 
     public static boolean isNetWorkAvailabe(Context context) {
         if (context.checkCallingOrSelfPermission(Manifest.permission.INTERNET) != PackageManager

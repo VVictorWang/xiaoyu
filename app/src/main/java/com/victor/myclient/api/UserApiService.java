@@ -45,7 +45,7 @@ public interface UserApiService {
     Observable<DoctorInfor> getDoctorInfo(@Query("doctorId") int doctorId);
 
 
-    @POST("upload/uploadPatientFamilyImage.php")
+    @POST("uploads/interface/uploadPatientFamilyImage.php")
     Observable<MessageResponse> uploadImage(@Body RequestBody requestBody);
 
     @POST("uploads/interface/userinfomgr.php")

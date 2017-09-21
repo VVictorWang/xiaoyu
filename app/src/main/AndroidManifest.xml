@@ -85,7 +85,7 @@
             android:name="com.victor.myclient.ui.activity.RegisterLastActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.ui.activity.ChangeXiaoYuActivity"
+            android:name="com.victor.myclient.ui.activity.ChangePwdActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.victor.myclient.ui.activity.ChangeEmailActivity"

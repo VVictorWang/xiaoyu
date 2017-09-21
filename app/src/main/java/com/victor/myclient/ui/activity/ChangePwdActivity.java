@@ -22,7 +22,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class ChangeXiaoYuActivity extends BaseActivity {
+public class ChangePwdActivity extends BaseActivity {
 
 
     private RelativeLayout changexiaoyunumberback;
@@ -63,7 +63,7 @@ public class ChangeXiaoYuActivity extends BaseActivity {
                 default:
                     message = "错误";
             }
-            Utils.showShortToast(ChangeXiaoYuActivity.this, message);
+            Utils.showShortToast(ChangePwdActivity.this, message);
         }
     };
 
@@ -80,7 +80,7 @@ public class ChangeXiaoYuActivity extends BaseActivity {
 
     @Override
     protected Activity getActivity() {
-        return ChangeXiaoYuActivity.this;
+        return ChangePwdActivity.this;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class ChangeXiaoYuActivity extends BaseActivity {
         changexiaoyunumberback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(ChangeXiaoYuActivity.this);
+                ActivityManage.finishActivity(ChangePwdActivity.this);
             }
         });
 
@@ -150,7 +150,7 @@ public class ChangeXiaoYuActivity extends BaseActivity {
                     switch (op) {
                         case "1":
                             handler.sendEmptyMessage(1);
-                            ActivityManage.startActivity(ChangeXiaoYuActivity.this, LoginActivity
+                            ActivityManage.startActivity(ChangePwdActivity.this, LoginActivity
                                     .class);
                             break;
                         case "2":
