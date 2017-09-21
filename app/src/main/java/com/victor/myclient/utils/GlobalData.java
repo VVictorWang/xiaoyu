@@ -8,7 +8,6 @@ public interface GlobalData {
     String Login_status = "login_status";
     String Phone = "phone";
     String PATIENTFAMILY_ID = "patient_family_image";
-    String Img_URl = "tou_xiang";
     String NAME = "NAME";
     String User_ID = "User_ID";
     String USer_email = "email";
@@ -22,7 +21,6 @@ public interface GlobalData {
     String XIAOYU_NUMBER = "xiaoyu_number";
     String XIAOYU_NAME = "xiaoyu_name";
     String CLIENT_ID = "clientId";
-    String IP = "139.196.40.97";
     String GET_USR_INFOR = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
             "/getPatientFamily.php?";
     String GET_PATIENT_CASE = "http://139.196.40.97/OSAdmin-master/uploads/interface/patientcases" +
@@ -33,9 +31,7 @@ public interface GlobalData {
             ".php?patientId=";
     String CHANGE_EMAIL_PASSORT = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
             "/userinfomgr.php";
-    /*******************************************************************/
-    String POST_IMAGE = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
-            "/uploadPatientFamilyImage.php?";
+
     String CHANGE_PASSWORD = "http://139.196.40.97/OSAdmin-master/uploads/interface/userinfomgr" +
             ".php?";
     String GET_PATIENT_FAMILY_IMAGE = "http://139.196.40.97/upload/patientfamilyimage/";

@@ -40,6 +40,7 @@ public class SimpleVideoView extends ViewGroup {
             requestLocalVideoRender();
         }
     };
+
     public SimpleVideoView(Context context) {
         super(context);
         init();

@@ -36,7 +36,7 @@ public class RoomFragment extends BaseFragment {
     private RelativeLayout back;
 
     private List<UserAcitivityInfo> userAcitivityInfos;
-    private boolean  has_data = false;
+    private boolean has_data = false;
     private TextView bedroom1, bedroom2, bedroom3, washingroom, living_room, store_room,
             dining_room, other, kitchen_room;
     Handler handler = new Handler() {
@@ -81,7 +81,6 @@ public class RoomFragment extends BaseFragment {
             }
         }
     };
-
 
 
     @Override

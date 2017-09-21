@@ -39,8 +39,6 @@ public class BaoJingFragment extends BaseFragment {
     private List<OneKeyWarning> oneKeyWarnings;
     private RelativeLayout back;
     private TextView no_data;
-    private boolean has_data = false;
-
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -54,7 +52,7 @@ public class BaoJingFragment extends BaseFragment {
             }
         }
     };
-
+    private boolean has_data = false;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

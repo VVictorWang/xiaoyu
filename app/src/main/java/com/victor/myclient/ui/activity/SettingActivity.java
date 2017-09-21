@@ -19,7 +19,6 @@ import com.lzy.imagepicker.view.CropImageView.Style;
 import com.victor.myclient.ActivityManage;
 import com.victor.myclient.api.UserApi;
 import com.victor.myclient.data.MessageResponse;
-import com.victor.myclient.data.UserInfor;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlideImageLoader;
 import com.victor.myclient.utils.GlobalData;
@@ -45,6 +44,7 @@ public class SettingActivity extends BaseActivity {
 
     public static final String TAG = "@victor SettingActivity";
     final static int IMAGE_PICKER = 1;
+    private static OnAvatarChanged sOnAvatarChanged;
     private CircleImageView loginhead;
     private RelativeLayout settingback;
     private Button settingchangeimage;
@@ -54,7 +54,9 @@ public class SettingActivity extends BaseActivity {
     private TextView logoutoutbutton;
     private String email;
 
-    private static OnAvatarChanged sOnAvatarChanged;
+    public static void setOnAvatarChanged(OnAvatarChanged onAvatarChanged) {
+        sOnAvatarChanged = onAvatarChanged;
+    }
 
     @Override
     protected void onResume() {
@@ -191,10 +193,6 @@ public class SettingActivity extends BaseActivity {
                         }
                     }
                 });
-    }
-
-    public static void setOnAvatarChanged(OnAvatarChanged onAvatarChanged) {
-        sOnAvatarChanged = onAvatarChanged;
     }
 
     public interface OnAvatarChanged {

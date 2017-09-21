@@ -131,7 +131,7 @@ public class JujiaActivity extends BaseActivity implements View.OnClickListener 
             if (net_work) {
                 String door_infor = Utils.sendRequest(GlobalData.GET_ROOM_STATUS + PrefUtils
                         .getValue
-                        (JujiaActivity.this, GlobalData.PATIENT_ID));
+                                (JujiaActivity.this, GlobalData.PATIENT_ID));
                 if (!door_infor.contains("not_exist")) {
                     doorInfor = gson.fromJson(door_infor, DoorInfor.class);
                     PrefUtils.putIntValue(JujiaActivity.this, GlobalData.DOOR_STATUS, doorInfor

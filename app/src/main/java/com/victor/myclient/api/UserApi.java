@@ -2,6 +2,7 @@ package com.victor.myclient.api;
 
 import com.victor.myclient.data.CaseInfor;
 import com.victor.myclient.data.DoctorInfor;
+import com.victor.myclient.data.DoctorXiaoYu;
 import com.victor.myclient.data.DoorInfor;
 import com.victor.myclient.data.HomeInfor;
 import com.victor.myclient.data.MessageResponse;
@@ -59,7 +60,7 @@ public class UserApi {
         return mUserApiService.getUserInfo(name, type);
     }
 
-    public Observable<CaseInfor> getCaseInfo(int patientId) {
+    public Observable<List<CaseInfor>> getCaseInfo(int patientId) {
         return mUserApiService.getCaseInfo(patientId);
     }
 
@@ -90,6 +91,10 @@ public class UserApi {
 
     public Observable<DoctorInfor> getDoctorInfo(int doctorId) {
         return mUserApiService.getDoctorInfo(doctorId);
+    }
+
+    public Observable<DoctorXiaoYu> getDoctorXiaoyu(int doxtorId) {
+        return mUserApiService.getDoctorXiaoyu(doxtorId);
     }
 
     public Observable<MessageResponse> uploadImage(String imageurl, String patientId) {

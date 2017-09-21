@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,9 +51,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private android.widget.TextView xiaoYuText;
     private CircleTextImageView callothers, jujiamain, caseforpatient, setting;
     private CircleTextImageView services;
-
-    private MainContract.Presenter mPresenter;
-
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -101,6 +99,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         }
     };
+    private MainContract.Presenter mPresenter;
     private TextView time_call;
     private String type = "username";
     private UserInfor userInfor;
@@ -212,6 +211,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 Intent intent = new Intent(MainActivity.this, CaseListActivity.class);
                 if (!CheckUtils.isNull(userInfor)) {
                     intent.putExtra("id", userInfor.getPatientId());
+                    Log.d(TAG, userInfor.getPatientId());
                 }
                 ActivityManage.startActivity(getActivity(), intent);
                 break;

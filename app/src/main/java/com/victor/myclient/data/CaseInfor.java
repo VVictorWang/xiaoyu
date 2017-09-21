@@ -38,43 +38,43 @@ public class CaseInfor extends DataSupport {
      * doctorName : 孙立人
      * 12 : 孙立人
      */
-    private int id;
+    public int id;
+    public String name;
+    public String sex;
+    public String age;
+    public String image;
+    public String date;
+    public String patientId;
+    public String doctorId;
+    public String illproblem;
+    public String illresult;
+    public String temperature;
+    public String blood_pressure;
+    public String doctorName;
     @SerializedName("0")
     private String _$0;
-    private String name;
     @SerializedName("1")
     private String _$1;
-    private String sex;
     @SerializedName("2")
     private String _$2;
-    private String age;
     @SerializedName("3")
     private String _$3;
-    private String image;
     @SerializedName("4")
     private String _$4;
-    private String date;
     @SerializedName("5")
     private String _$5;
-    private String patientId;
     @SerializedName("6")
     private String _$6;
-    private String doctorId;
     @SerializedName("7")
     private String _$7;
-    private String illproblem;
     @SerializedName("8")
     private String _$8;
-    private String illresult;
     @SerializedName("9")
     private String _$9;
-    private String temperature;
     @SerializedName("10")
     private String _$10;
-    private String blood_pressure;
     @SerializedName("11")
     private String _$11;
-    private String doctorName;
     @SerializedName("12")
     private String _$12;
 

@@ -30,8 +30,8 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
     private List<CaseInfor> caseList = new ArrayList<>();
     private Context context;
 
-    public CaseAdapter(Context context, List<CaseInfor> caseList) {
-        this.caseList = caseList;
+    public CaseAdapter(Context context) {
+        caseList = new ArrayList<>();
         this.context = context;
     }
 
@@ -39,6 +39,12 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
                 .item_case, parent, false));
+    }
+
+    public void addItems(List<CaseInfor> caseInfors) {
+        caseList.clear();
+        caseList.addAll(caseInfors);
+        notifyDataSetChanged();
     }
 
     @Override

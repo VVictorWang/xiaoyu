@@ -1,12 +1,10 @@
 package com.victor.myclient.data;
 
-import org.litepal.crud.DataSupport;
-
 /**
  * Created by victor on 17-4-30.
  */
 
-public class DoctorInfor extends DataSupport {
+public class DoctorInfor {
 
     /**
      * id:医生id
@@ -42,122 +40,18 @@ public class DoctorInfor extends DataSupport {
      * creationDate : 2017-04-21 16:26:10
      */
 
+    public int id;
+    public String phone;
+    public String name;
+    public String mail;
+    public String sex;
+    public String age;
+    public String image;
+    public String hospital;
+    public String hospitalName;
+    public String job_title;
+    public String good_at;
+    public String cases;
+    public String creationDate;
 
-    private int id;
-    private String phone;
-    private String name;
-    private String mail;
-    private String sex;
-    private String age;
-    private String image;
-    private String hospital;
-    private String hospitalName;
-    private String job_title;
-    private String good_at;
-    private String cases;
-    private String creationDate;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getHospital() {
-        return hospital;
-    }
-
-    public void setHospital(String hospital) {
-        this.hospital = hospital;
-    }
-
-    public String getHospitalName() {
-        return hospitalName;
-    }
-
-    public void setHospitalName(String hospitalName) {
-        this.hospitalName = hospitalName;
-    }
-
-    public String getJob_title() {
-        return job_title;
-    }
-
-    public void setJob_title(String job_title) {
-        this.job_title = job_title;
-    }
-
-    public String getGood_at() {
-        return good_at;
-    }
-
-    public void setGood_at(String good_at) {
-        this.good_at = good_at;
-    }
-
-    public String getCases() {
-        return cases;
-    }
-
-    public void setCases(String cases) {
-        this.cases = cases;
-    }
-
-    public String getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
-    }
 }

@@ -13,7 +13,6 @@ import com.victor.myclient.ActivityManage;
 import com.victor.myclient.data.CaseInfor;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
-import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.view.CircleImageView;
 
@@ -25,8 +24,6 @@ import demo.animen.com.xiaoyutask.R;
 public class CaseDetailActivity extends BaseActivity {
 
     private RelativeLayout back;
-    private LinearLayout doctor_part;
-    private LinearLayout person_part;
     private Button see_doctor_tail;
     private TextView doctor_name;
     private TextView date;
@@ -35,16 +32,16 @@ public class CaseDetailActivity extends BaseActivity {
     private CircleImageView imageView;
 
     private String doctor_id;
+    private int id = 1;
 
-    private int id;
-
-    private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (getIntent() != null) {
+            id = getIntent().getIntExtra("id", 1);
+        }
         super.onCreate(savedInstanceState);
         initEvent();
-        id = getIntent().getIntExtra("id", 1);
         initData();
     }
 
@@ -62,8 +59,8 @@ public class CaseDetailActivity extends BaseActivity {
     @Override
     protected void initView() {
         back = (RelativeLayout) findViewById(R.id.back_case_detail);
-        doctor_part = (LinearLayout) findViewById(R.id.doctor_part_case_detail);
-        person_part = (LinearLayout) findViewById(R.id.case_detail_person_part);
+        LinearLayout doctor_part = (LinearLayout) findViewById(R.id.doctor_part_case_detail);
+        LinearLayout person_part = (LinearLayout) findViewById(R.id.case_detail_person_part);
         see_doctor_tail = (Button) doctor_part.findViewById(R.id.doctor_part_button);
         doctor_name = (TextView) doctor_part.findViewById(R.id.doctor_part_name);
         date = (TextView) doctor_part.findViewById(R.id.doctor_part_time);
@@ -85,7 +82,7 @@ public class CaseDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CaseDetailActivity.this, DoctorActivity.class);
-                intent.putExtra("doctor_id", doctor_id);
+                intent.putExtra("doctor_id", Integer.valueOf(doctor_id));
                 ActivityManage.startActivity(CaseDetailActivity.this, intent);
             }
         });
@@ -101,11 +98,8 @@ public class CaseDetailActivity extends BaseActivity {
         ill_result.setText(caseInfor.getIllresult());
         sex_age.setText(caseInfor.getSex() + "    " + caseInfor.getAge() + "岁");
         doctor_id = caseInfor.getDoctorId();
-        bitmapUtils.disPlay(imageView, GlobalData.GET_PATIENT_IMAGE + caseInfor.getImage());
-    }
-
-    public void showNoData() {
-        Utils.showShortToast(CaseDetailActivity.this, "没有数据");
+        Utils.showImage(getActivity(), GlobalData.GET_PATIENT_IMAGE + caseInfor.getImage(),
+                imageView);
     }
 
     private void initData() {
@@ -113,7 +107,7 @@ public class CaseDetailActivity extends BaseActivity {
             CaseInfor caseInfor = DataSupport.find(CaseInfor.class, (long) id);
             showData(caseInfor);
         } else {
-            showNoData();
+            Utils.showShortToast(CaseDetailActivity.this, "没有数据");
         }
     }
 }

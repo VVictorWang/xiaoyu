@@ -2,6 +2,7 @@ package com.victor.myclient.api;
 
 import com.victor.myclient.data.CaseInfor;
 import com.victor.myclient.data.DoctorInfor;
+import com.victor.myclient.data.DoctorXiaoYu;
 import com.victor.myclient.data.DoorInfor;
 import com.victor.myclient.data.HomeInfor;
 import com.victor.myclient.data.MessageResponse;
@@ -32,7 +33,7 @@ public interface UserApiService {
 
 
     @GET("uploads/interface/patientcases.php")
-    Observable<CaseInfor> getCaseInfo(@Query("patientId") int patientId);
+    Observable<List<CaseInfor>> getCaseInfo(@Query("patientId") int patientId);
 
 
     @POST("uploads/interface/regloginpost.php")
@@ -43,6 +44,9 @@ public interface UserApiService {
 
     @GET("uploads/interface/doctorinfo.php")
     Observable<DoctorInfor> getDoctorInfo(@Query("doctorId") int doctorId);
+
+    @GET("uploads/interface/getDoctorXiaoyuNum.php")
+    Observable<DoctorXiaoYu> getDoctorXiaoyu(@Query("doctorId") int doctorId);
 
 
     @POST("uploads/interface/uploadPatientFamilyImage.php")
@@ -55,7 +59,8 @@ public interface UserApiService {
     Observable<Integer> changePwd(@Body RequestBody body);
 
     @GET("uploads/interface/homeinfo.php")
-    Observable<HomeInfor> getHomeInfo(@Query("patientId") int patientId, @Query("date") String date);
+    Observable<HomeInfor> getHomeInfo(@Query("patientId") int patientId, @Query("date") String
+            date);
 
     @GET("uploads/interface/doorinfo.php")
     Observable<DoorInfor> getDoorInfo(@Query("patientId") int patientId);
@@ -68,8 +73,6 @@ public interface UserApiService {
 
     @GET("uploads/interface/getActivities.php")
     Observable<List<UserAcitivityInfo>> getUserActivities(@Query("patientId") int patientId);
-
-
 
 
 }

@@ -107,5 +107,4 @@ public class ContactActivity extends FragmentActivity {
         three.setIcon(getResources().getDrawable(R.drawable.contact_bottom_third_nor));
     }
 
-
 }

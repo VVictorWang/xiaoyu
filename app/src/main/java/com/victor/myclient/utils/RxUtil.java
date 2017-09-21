@@ -2,6 +2,7 @@ package com.victor.myclient.utils;
 
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.MyApplication;
 
 import java.lang.reflect.Field;
@@ -49,6 +50,28 @@ public class RxUtil {
             }
         }).subscribeOn(Schedulers.io());
     }
+
+    public static <T> Observable rxCreateList(final String key, final List<T> ts) {
+        return Observable.create(new Observable.OnSubscribe<String>() {
+
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                String json = ACache.get(MyApplication.getInstance()).getAsString(key);
+                if (!CheckUtils.isEmpty(json)) {
+                    subscriber.onNext(json);
+                }
+                subscriber.onCompleted();
+            }
+        }).map(new Func1<String, List<T>>() {
+            @Override
+            public List<T> call(String s) {
+                return new Gson().fromJson(s, new
+                        TypeToken<List<T>>() {
+                        }.getType());
+            }
+        }).subscribeOn(Schedulers.io());
+    }
+
 
     public static <T> Observable.Transformer<T, T> rxCacheListHelper(final String key) {
         return new Observable.Transformer<T, T>() {

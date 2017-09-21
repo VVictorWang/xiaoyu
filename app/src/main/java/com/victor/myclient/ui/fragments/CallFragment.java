@@ -30,7 +30,6 @@ public class CallFragment extends BaseFragment {
     private CircleTextImageView[] circleTextImageViews = new CircleTextImageView[13];
     private TextView textView;
     private CircleImageView backspace_number;
-    private RelativeLayout back;
     Handler hander = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -58,7 +57,7 @@ public class CallFragment extends BaseFragment {
             }
         }
     };
-
+    private RelativeLayout back;
 
     @Override
     protected int getLayoutId() {
