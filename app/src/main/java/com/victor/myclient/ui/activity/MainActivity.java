@@ -24,6 +24,8 @@ import com.victor.myclient.service.MyIntentService;
 import com.victor.myclient.service.MyPushService;
 import com.victor.myclient.service.PostClientIdService;
 import com.victor.myclient.ui.base.BaseActivity;
+import com.victor.myclient.ui.contract.MainContract;
+import com.victor.myclient.ui.presenter.MainPresenter;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.PrefUtils;
@@ -43,7 +45,7 @@ import static com.victor.myclient.utils.PrefUtils.getValue;
  * Created by victor on 2017/4/22.
  */
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, MainContract.View {
     public static final String TAG = "@victor MainActivity";
     private final static int REQUEST_PERMISSION = 1000;
     private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
@@ -52,6 +54,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private android.widget.TextView bangding_xiaoyu_number;
     private CircleTextImageView callothers, jujiamain, caseforpatient, setting;
     private CircleTextImageView services;
+
+    private MainContract.Presenter mPresenter;
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -139,7 +144,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 MyIntentService.
                         class);
 
-        initView();
+        mPresenter = new MainPresenter(this);
         initEvent();
         new getUserInfor().execute();
     }
@@ -315,6 +320,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void setPresenter(MainContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
 
     private class getUserInfor extends AsyncTask<String, Void, String> {
         private Gson gson = new Gson();
@@ -324,7 +339,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             if (net_work_available) {
                 if (type.equals("username")) {
                     String info = Utils.sendRequest(GlobalData.GET_USR_INFOR +
-                            "FamilyName=" + getValue(MainActivity.this, GlobalData.NAME) +
+                            "FamilyName=" + PrefUtils.getValue(MainActivity.this, GlobalData.NAME) +
                             "&type=username");
                     if (!info.contains("not_exist")) {
                         userInfor = gson.fromJson(info, UserInfor.class);
@@ -333,7 +348,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         has_data = false;
                 } else if (type.equals("phone")) {
                     String info = Utils.sendRequest(GlobalData.GET_USR_INFOR +
-                            "FamilyName=" + getValue(MainActivity.this, GlobalData.Phone) +
+                            "FamilyName=" + PrefUtils.getValue(MainActivity.this, GlobalData.Phone) +
                             "&type=phone");
                     if (!info.contains("not_exist")) {
                         userInfor = gson.fromJson(info, UserInfor.class);

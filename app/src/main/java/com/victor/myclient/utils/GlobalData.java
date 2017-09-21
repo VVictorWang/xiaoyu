@@ -16,6 +16,8 @@ public interface GlobalData {
     String DOOR_STATUS = "door_status";
     String DoctorName = "doctor_name";
     String FAMILY_IMage = "family_image";
+
+    String BASE_URL = "http://139.196.40.97/OSAdmin-master/";
     String MAIN_ENGINE = "http://139.196.40.97/OSAdmin-master/uploads/interface/regloginpost.php?";
     String XIAOYU_NUMBER = "xiaoyu_number";
     String XIAOYU_NAME = "xiaoyu_name";

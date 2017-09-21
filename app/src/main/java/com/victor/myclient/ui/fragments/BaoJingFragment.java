@@ -1,24 +1,22 @@
 package com.victor.myclient.ui.fragments;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.data.OneKeyWarning;
 import com.victor.myclient.ui.adapters.BaojingInfoAdapter;
+import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
@@ -34,15 +32,15 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 17-5-4.
  */
 
-public class BaoJingFragment extends Fragment {
-    private Activity activity;
-    private View view;
+public class BaoJingFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
     private BaojingInfoAdapter adapter;
     private List<OneKeyWarning> oneKeyWarnings;
     private RelativeLayout back;
     private TextView no_data;
+    private boolean has_data = false;
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -56,44 +54,31 @@ public class BaoJingFragment extends Fragment {
             }
         }
     };
-    private boolean net_work, has_data = false;
+
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activity = getActivity();
-        net_work = Utils.isNetWorkAvailabe(activity);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
-            Bundle savedInstanceState) {
-        if (view == null) {
-            view = activity.getLayoutInflater().inflate(R.layout.fragment_baojing, null);
-        } else {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (parent != null) {
-                parent.removeView(view);
-            }
-        }
-        initView();
-
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         new FindBaojingListTask().execute();
-        return view;
     }
 
-    private void initView() {
-        recyclerView = (RecyclerView) view.findViewById(R.id.baojing_information_list);
-        no_data = (TextView) view.findViewById(R.id.fragment_baojing_no_data);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_baojing;
+    }
+
+    @Override
+    protected void initView() {
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.baojing_information_list);
+        no_data = (TextView) rootView.findViewById(R.id.fragment_baojing_no_data);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
         oneKeyWarnings = new ArrayList<>();
-        back = (RelativeLayout) view.findViewById(R.id.fragment_baojing_back);
+        back = (RelativeLayout) rootView.findViewById(R.id.fragment_baojing_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.finishActivity(activity);
+                ActivityManage.finishActivity(activity);
             }
         });
         oneKeyWarnings = new ArrayList<>();
@@ -109,7 +94,7 @@ public class BaoJingFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            if (net_work) {
+            if (network) {
                 String infor = Utils.sendRequest(GlobalData.GET_ONEKEY_WARNING + PrefUtils.getValue
                         (activity, GlobalData.PATIENT_ID));
                 if (!infor.contains("not_exist")) {

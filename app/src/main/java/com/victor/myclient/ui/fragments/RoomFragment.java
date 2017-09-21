@@ -1,6 +1,5 @@
 package com.victor.myclient.ui.fragments;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,16 +7,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.data.UserAcitivityInfo;
+import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
@@ -33,14 +31,12 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 17-5-20.
  */
 
-public class RoomFragment extends Fragment {
-    private Activity activity;
-    private View view;
+public class RoomFragment extends BaseFragment {
 
     private RelativeLayout back;
 
     private List<UserAcitivityInfo> userAcitivityInfos;
-    private boolean net_work, has_data = false;
+    private boolean  has_data = false;
     private TextView bedroom1, bedroom2, bedroom3, washingroom, living_room, store_room,
             dining_room, other, kitchen_room;
     Handler handler = new Handler() {
@@ -86,52 +82,41 @@ public class RoomFragment extends Fragment {
         }
     };
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activity = getActivity();
-        net_work = Utils.isNetWorkAvailabe(activity);
-    }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
-            Bundle savedInstanceState) {
-        if (view == null) {
-            view = activity.getLayoutInflater().inflate(R.layout.fragment_room_status, null);
-        } else {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (parent != null) {
-                parent.removeView(view);
-            }
-        }
-        InitView();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         new GetActivity().execute();
-        return view;
     }
 
-    private void InitView() {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_room_status;
+    }
+
+    @Override
+    protected void initView() {
         userAcitivityInfos = new ArrayList<>();
-        back = (RelativeLayout) view.findViewById(R.id.fragment_room_back);
-        bedroom1 = (TextView) view.findViewById(R.id.bed_room1_text);
-        bedroom2 = (TextView) view.findViewById(R.id.bed_room2_text);
-        bedroom3 = (TextView) view.findViewById(R.id.bed_room3_text);
-        washingroom = (TextView) view.findViewById(R.id.washing_room_text);
-        living_room = (TextView) view.findViewById(R.id.living_room_text);
-        store_room = (TextView) view.findViewById(R.id.store_room_text);
-        dining_room = (TextView) view.findViewById(R.id.dinig_room_text);
-        other = (TextView) view.findViewById(R.id.other_room_text);
-        kitchen_room = (TextView) view.findViewById(R.id.kitchen_room_text);
+        back = (RelativeLayout) rootView.findViewById(R.id.fragment_room_back);
+        bedroom1 = (TextView) rootView.findViewById(R.id.bed_room1_text);
+        bedroom2 = (TextView) rootView.findViewById(R.id.bed_room2_text);
+        bedroom3 = (TextView) rootView.findViewById(R.id.bed_room3_text);
+        washingroom = (TextView) rootView.findViewById(R.id.washing_room_text);
+        living_room = (TextView) rootView.findViewById(R.id.living_room_text);
+        store_room = (TextView) rootView.findViewById(R.id.store_room_text);
+        dining_room = (TextView) rootView.findViewById(R.id.dinig_room_text);
+        other = (TextView) rootView.findViewById(R.id.other_room_text);
+        kitchen_room = (TextView) rootView.findViewById(R.id.kitchen_room_text);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.finishActivity(activity);
+                ActivityManage.finishActivity(activity);
             }
         });
 
-
     }
+
 
     private class GetActivity extends AsyncTask<Void, Void, Void> {
         private Gson gson = new Gson();
@@ -147,7 +132,7 @@ public class RoomFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            if (net_work) {
+            if (network) {
                 String info = Utils.sendRequest(GlobalData.GET_ACTIVITIES + PrefUtils.getValue
                         (activity, GlobalData.PATIENT_ID));
                 if (!info.contains("not_exist")) {

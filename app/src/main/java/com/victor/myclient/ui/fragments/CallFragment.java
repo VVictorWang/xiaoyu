@@ -1,23 +1,18 @@
 package com.victor.myclient.ui.fragments;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.victor.myclient.ui.activity.VideoActivity;
+import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.view.CircleImageView;
 import com.victor.myclient.view.CircleTextImageView;
@@ -31,12 +26,11 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 2017/4/24.
  */
 
-public class CallFragment extends Fragment {
-    private Activity activity;
-    private View layout;
+public class CallFragment extends BaseFragment {
     private CircleTextImageView[] circleTextImageViews = new CircleTextImageView[13];
     private TextView textView;
     private CircleImageView backspace_number;
+    private RelativeLayout back;
     Handler hander = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -64,43 +58,34 @@ public class CallFragment extends Fragment {
             }
         }
     };
-    private RelativeLayout back;
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
-            savedInstanceState) {
-        if (layout == null) {
-            activity = this.getActivity();
-            layout = activity.getLayoutInflater().inflate(R.layout.contact_call, null);
-        } else {
-            ViewGroup parent = (ViewGroup) layout.getParent();
-            if (parent != null) {
-                parent.removeView(layout);
-            }
-        }
-        init();
-        return layout;
+    protected int getLayoutId() {
+        return R.layout.contact_call;
     }
 
-    private void init() {
-        circleTextImageViews[0] = (CircleTextImageView) layout.findViewById(R.id.number_call_0);
-        circleTextImageViews[1] = (CircleTextImageView) layout.findViewById(R.id.number_call_1);
-        circleTextImageViews[2] = (CircleTextImageView) layout.findViewById(R.id.number_call_2);
-        circleTextImageViews[3] = (CircleTextImageView) layout.findViewById(R.id.number_call_3);
-        circleTextImageViews[4] = (CircleTextImageView) layout.findViewById(R.id.number_call_4);
-        circleTextImageViews[5] = (CircleTextImageView) layout.findViewById(R.id.number_call_5);
-        circleTextImageViews[6] = (CircleTextImageView) layout.findViewById(R.id.number_call_6);
-        circleTextImageViews[7] = (CircleTextImageView) layout.findViewById(R.id.number_call_7);
-        circleTextImageViews[8] = (CircleTextImageView) layout.findViewById(R.id.number_call_8);
-        circleTextImageViews[9] = (CircleTextImageView) layout.findViewById(R.id.number_call_9);
-        circleTextImageViews[10] = (CircleTextImageView) layout.findViewById(R.id.number_call_10);
-        circleTextImageViews[11] = (CircleTextImageView) layout.findViewById(R.id.number_call_11);
-        circleTextImageViews[12] = (CircleTextImageView) layout.findViewById(R.id.number_call);
-        back = (RelativeLayout) layout.findViewById(R.id.back_to_main_contact_call);
-        textView = (TextView) layout.findViewById(R.id.call_number);
-        backspace_number = (CircleImageView) layout.findViewById(R.id.backspace_number_image);
+    @Override
+    protected void initView() {
+        circleTextImageViews[0] = (CircleTextImageView) rootView.findViewById(R.id.number_call_0);
+        circleTextImageViews[1] = (CircleTextImageView) rootView.findViewById(R.id.number_call_1);
+        circleTextImageViews[2] = (CircleTextImageView) rootView.findViewById(R.id.number_call_2);
+        circleTextImageViews[3] = (CircleTextImageView) rootView.findViewById(R.id.number_call_3);
+        circleTextImageViews[4] = (CircleTextImageView) rootView.findViewById(R.id.number_call_4);
+        circleTextImageViews[5] = (CircleTextImageView) rootView.findViewById(R.id.number_call_5);
+        circleTextImageViews[6] = (CircleTextImageView) rootView.findViewById(R.id.number_call_6);
+        circleTextImageViews[7] = (CircleTextImageView) rootView.findViewById(R.id.number_call_7);
+        circleTextImageViews[8] = (CircleTextImageView) rootView.findViewById(R.id.number_call_8);
+        circleTextImageViews[9] = (CircleTextImageView) rootView.findViewById(R.id.number_call_9);
+        circleTextImageViews[10] = (CircleTextImageView) rootView.findViewById(R.id.number_call_10);
+        circleTextImageViews[11] = (CircleTextImageView) rootView.findViewById(R.id.number_call_11);
+        circleTextImageViews[12] = (CircleTextImageView) rootView.findViewById(R.id.number_call);
+        back = (RelativeLayout) rootView.findViewById(R.id.back_to_main_contact_call);
+        textView = (TextView) rootView.findViewById(R.id.call_number);
+        backspace_number = (CircleImageView) rootView.findViewById(R.id.backspace_number_image);
         initEvent();
     }
+
 
     private void initEvent() {
         backspace_number.setOnClickListener(new View.OnClickListener() {

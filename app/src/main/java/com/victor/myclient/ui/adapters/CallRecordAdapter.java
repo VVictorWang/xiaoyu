@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.data.CallRecord;
 import com.victor.myclient.ui.activity.VideoActivity;
 import com.victor.myclient.utils.Utils;
@@ -24,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 
 import demo.animen.com.xiaoyutask.R;
+
+import static com.victor.myclient.ActivityManage.startActivity;
 
 /**
  * Created by 小武哥 on 2017/4/29.
@@ -91,7 +94,7 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
                 Intent intent = new Intent(context, VideoActivity.class);
                 intent.putExtra("number", holder.telephoneNum);
                 intent.putExtra("type", "patient");
-                Utils.startActivity((Activity) context, intent);
+                ActivityManage.startActivity((Activity) context, intent);
             }
         });
     }

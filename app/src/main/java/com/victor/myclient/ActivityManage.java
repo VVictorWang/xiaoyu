@@ -2,6 +2,8 @@ package com.victor.myclient;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import java.util.Stack;
 
@@ -26,12 +28,14 @@ public class ActivityManage {
         return instance;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
     public static void finishActivity(Activity activity) {
         ActivityManage activityManage = ActivityManage.getInstance();
         activityManage.popActivity(activity);
         activity.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
     public static void startActivity(Activity activity, Class<?> cls) {
         Intent intent = new Intent();
         intent.setClass(activity, cls);
@@ -39,6 +43,7 @@ public class ActivityManage {
         activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
     public static void startActivity(Activity activity, Intent intent) {
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);

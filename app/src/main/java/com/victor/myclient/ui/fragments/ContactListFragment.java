@@ -1,13 +1,11 @@
 package com.victor.myclient.ui.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -15,16 +13,15 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.data.ContactListData;
 import com.victor.myclient.ui.activity.NewContactorActivity;
 import com.victor.myclient.ui.adapters.ContactListAdapter;
-import com.victor.myclient.utils.Utils;
+import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.sortlist.CharacterParser;
 import com.victor.myclient.utils.sortlist.PinyinComparator;
 import com.victor.myclient.utils.sortlist.SideBar;
@@ -43,10 +40,8 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 2017/4/24.
  */
 
-public class ContactListFragment extends Fragment {
+public class ContactListFragment extends BaseFragment {
     private static final String TAG = "ContactListFragment";
-    private Activity activity;
-    private View view;
     private RecyclerView sortView;
     private SideBar sideBar;
     private TextView dialog;
@@ -69,20 +64,10 @@ public class ContactListFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private TextView add_new;
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
-            savedInstanceState) {
-        if (view == null) {
-            view = activity.getLayoutInflater().inflate(R.layout.activity_main_contact, null);
-        } else {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (parent != null) {
-                parent.removeView(view);
-            }
-        }
-        initView();
-        initEvent();
-        return view;
+    protected int getLayoutId() {
+        return R.layout.activity_main_contact;
     }
 
     @Override
@@ -101,18 +86,19 @@ public class ContactListFragment extends Fragment {
 
     }
 
-    private void initView() {
-        sideBar = (SideBar) view.findViewById(R.id.sidrbar);
-        dialog = (TextView) view.findViewById(R.id.dialog);
+    @Override
+    protected void initView() {
+        sideBar = (SideBar) rootView.findViewById(R.id.sidrbar);
+        dialog = (TextView) rootView.findViewById(R.id.dialog);
 
         sideBar.setTextView(dialog);
-        add_new = (TextView) view.findViewById(R.id.add_new_contact);
-        back = (RelativeLayout) view.findViewById(R.id.back_to_main_contact_list);
-        sortView = (RecyclerView) view.findViewById(R.id.sortlist);
+        add_new = (TextView) rootView.findViewById(R.id.add_new_contact);
+        back = (RelativeLayout) rootView.findViewById(R.id.back_to_main_contact_list);
+        sortView = (RecyclerView) rootView.findViewById(R.id.sortlist);
         layoutManager = new LinearLayoutManager(activity);
         sortView.setLayoutManager(layoutManager);
 
-        mClearEditText = (ClearEditText) view
+        mClearEditText = (ClearEditText) rootView
                 .findViewById(R.id.filter_edit);
         // 实例化汉字转拼音类
         sideBar.setTextView(dialog);
@@ -144,6 +130,7 @@ public class ContactListFragment extends Fragment {
 
             }
         });
+        initEvent();
     }
 
     private void initEvent() {
@@ -156,7 +143,7 @@ public class ContactListFragment extends Fragment {
         add_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.startActivity(activity, NewContactorActivity.class);
+                ActivityManage.startActivity(activity, NewContactorActivity.class);
             }
         });
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {

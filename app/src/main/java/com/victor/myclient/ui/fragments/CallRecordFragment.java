@@ -1,23 +1,20 @@
 package com.victor.myclient.ui.fragments;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.data.CallRecord;
 import com.victor.myclient.ui.adapters.CallRecordAdapter;
-import com.victor.myclient.utils.Utils;
+import com.victor.myclient.ui.base.BaseFragment;
 
 import org.litepal.crud.DataSupport;
 
@@ -33,10 +30,8 @@ import demo.animen.com.xiaoyutask.R;
  * Created by 小武哥 on 2017/4/29.
  */
 
-public class CallRecordFragment extends Fragment {
+public class CallRecordFragment extends BaseFragment {
 
-    private Activity activity;
-    private View view;
     private RecyclerView recyclerView;
     private CallRecordAdapter adapter;
     private List<CallRecord> list = new ArrayList<>();
@@ -57,19 +52,10 @@ public class CallRecordFragment extends Fragment {
         }
     };
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
-            savedInstanceState) {
-        if (null == view) {
-            view = activity.getLayoutInflater().inflate(R.layout.fragment_contact_record, null);
-        } else {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (null != parent) {
-                parent.removeView(view);
-            }
-        }
-        initView();
-        return view;
+    protected int getLayoutId() {
+        return R.layout.fragment_contact_record;
     }
 
     @Override
@@ -88,18 +74,19 @@ public class CallRecordFragment extends Fragment {
 
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
 
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.record_list);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.record_list);
         layoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(layoutManager);
 
-        back = (RelativeLayout) view.findViewById(R.id.back_to_main_contact_list);
+        back = (RelativeLayout) rootView.findViewById(R.id.back_to_main_contact_list);
         back.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.finishActivity(activity);
+                ActivityManage.finishActivity(activity);
             }
         });
     }

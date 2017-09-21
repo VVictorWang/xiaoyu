@@ -17,6 +17,11 @@ import org.litepal.LitePal;
 public class MyApplication extends Application {
     private static final String TAG = "MyApplication";
     private static Context context;
+    private static MyApplication sInstance;
+
+    public static MyApplication getInstance() {
+        return sInstance;
+    }
 
     public static Context getContext() {
         return context;

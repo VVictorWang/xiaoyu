@@ -1,6 +1,5 @@
 package com.victor.myclient.ui.fragments;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -8,10 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,7 +21,9 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.google.gson.Gson;
+import com.victor.myclient.ActivityManage;
 import com.victor.myclient.data.HomeInfor;
+import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
@@ -47,12 +45,10 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 17-5-3.
  */
 
-public class TemperatureFramgmentt extends Fragment implements BesselChart.ChartListener {
+public class TemperatureFramgmentt extends BaseFragment implements BesselChart.ChartListener {
 
     public static final String TAG = "@victor TempatureFramg";
-    private Activity activity;
     private RelativeLayout back;
-    private View layout;
     private TextView update;
     private TextView current_shi;
     private TextView time_text;
@@ -105,26 +101,8 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
     private int count = 1;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activity = getActivity();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle
-            savedInstanceState) {
-        if (layout == null) {
-            layout = activity.getLayoutInflater().inflate(R.layout.activity_jujia2, null);
-        } else {
-            ViewGroup parent = (ViewGroup) layout.getParent();
-            if (parent != null) {
-                parent.removeView(layout);
-            }
-        }
-        initView();
-        initEvent();
-        return layout;
+    protected int getLayoutId() {
+        return R.layout.activity_jujia2;
     }
 
     @Override
@@ -142,18 +120,20 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
     }
 
 
-    private void initView() {
-        chart = (BesselChart) layout.findViewById(R.id.shidu_line_chart);
-        current_shi = (TextView) layout.findViewById(R.id.current_shidu_text);
-        barChart = (BarChart) layout.findViewById(R.id.bar_shidu_chart);
-        back = (RelativeLayout) layout.findViewById(R.id.back_to_main_jujia);
-        update = (TextView) layout.findViewById(R.id.update_jujia);
-        choose_left = (ImageView) layout.findViewById(R.id.choose_data_jiujia_left);
-        choose_right = (ImageView) layout.findViewById(R.id.choose_data_jiujia_right);
-        time_text = (TextView) layout.findViewById(R.id.time_temparature);
+    @Override
+    protected void initView() {
+        chart = (BesselChart) rootView.findViewById(R.id.shidu_line_chart);
+        current_shi = (TextView) rootView.findViewById(R.id.current_shidu_text);
+        barChart = (BarChart) rootView.findViewById(R.id.bar_shidu_chart);
+        back = (RelativeLayout) rootView.findViewById(R.id.back_to_main_jujia);
+        update = (TextView) rootView.findViewById(R.id.update_jujia);
+        choose_left = (ImageView) rootView.findViewById(R.id.choose_data_jiujia_left);
+        choose_right = (ImageView) rootView.findViewById(R.id.choose_data_jiujia_right);
+        time_text = (TextView) rootView.findViewById(R.id.time_temparature);
         chart.setSmoothness(0.4f);
         chart.setChartListener(this);
         chart.setSmoothness(0.33f);
+        initEvent();
     }
 
     private void init() {
@@ -161,7 +141,6 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
         Date date = new Date(System.currentTimeMillis());
         String current_data = Utils.DateToStringWithChinese(date);
         time_text.setText(current_data);
-
         String data_string = Utils.dataTostringtem(date);
         data_number = Long.parseLong(data_string);
         new getHomeInforTask().execute(data_string);
@@ -171,7 +150,7 @@ public class TemperatureFramgmentt extends Fragment implements BesselChart.Chart
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.finishActivity(activity);
+                ActivityManage.finishActivity(activity);
             }
         });
         update.setOnClickListener(new View.OnClickListener() {
