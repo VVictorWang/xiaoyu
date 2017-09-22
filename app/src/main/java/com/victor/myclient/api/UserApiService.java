@@ -66,7 +66,7 @@ public interface UserApiService {
     Observable<DoorInfor> getDoorInfo(@Query("patientId") int patientId);
 
     @GET("uploads/interface/send_password_mail.php")
-    Observable<String> sendEmail(@Query("id") int id);
+    Observable<MessageResponse> sendEmail(@Query("id") int id);
 
     @GET("uploads/interface/getOnekeyWaring.php")
     Observable<List<OneKeyWarning>> getOneKeyWarnning(@Query("patientId") int patientId);

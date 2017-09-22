@@ -30,17 +30,8 @@ import demo.animen.com.xiaoyutask.R;
  */
 
 public class Utils {
-    private static Toast mToast = null;
 
-    public static void showLongToast(Context context, String msg) {
-        if (mToast != null) {
-            mToast.makeText(context, msg, Toast.LENGTH_LONG);
-        } else {
-            mToast.setText(msg);
-            mToast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
-        }
-        mToast.show();
-    }
+    private static Toast mToast = null;
 
     public static void showShortToast(Context context, String msg) {
         if (mToast != null) {

@@ -180,10 +180,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     private void setTime_call() {
-        int hour = PrefUtils.getIntValue(MainActivity.this, GlobalData.DRURATION_HOUR);
-        int minute = PrefUtils.getIntValue(MainActivity.this, GlobalData.DRURATION_MINITE);
-        int second = PrefUtils.getIntValue(MainActivity.this, GlobalData.DRURATION_SECOND);
-        minute = minute + hour * 60 + second / 60;
+        int minute = PrefUtils.getIntValue(MainActivity.this, GlobalData.ECLIPSE_TIME) / 60;
         time_call.setText("小鱼通话时长: " + minute + "分钟");
 
     }

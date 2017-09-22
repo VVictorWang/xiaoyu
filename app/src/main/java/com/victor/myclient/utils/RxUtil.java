@@ -23,15 +23,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class RxUtil {
-    public static <T> Observable.Transformer<T, T> rxSchedulerHelper() {
-        return new Observable.Transformer<T, T>() {
-            @Override
-            public Observable<T> call(Observable<T> tObservable) {
-                return tObservable.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-    }
+
 
     public static <T> Observable rxCreateDiskObservable(final String key, final Class<T> tClass) {
         return Observable.create(new Observable.OnSubscribe<String>() {
@@ -51,26 +43,6 @@ public class RxUtil {
         }).subscribeOn(Schedulers.io());
     }
 
-    public static <T> Observable rxCreateList(final String key, final List<T> ts) {
-        return Observable.create(new Observable.OnSubscribe<String>() {
-
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                String json = ACache.get(MyApplication.getInstance()).getAsString(key);
-                if (!CheckUtils.isEmpty(json)) {
-                    subscriber.onNext(json);
-                }
-                subscriber.onCompleted();
-            }
-        }).map(new Func1<String, List<T>>() {
-            @Override
-            public List<T> call(String s) {
-                return new Gson().fromJson(s, new
-                        TypeToken<List<T>>() {
-                        }.getType());
-            }
-        }).subscribeOn(Schedulers.io());
-    }
 
 
     public static <T> Observable.Transformer<T, T> rxCacheListHelper(final String key) {

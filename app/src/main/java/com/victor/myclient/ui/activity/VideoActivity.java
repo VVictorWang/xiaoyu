@@ -11,12 +11,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,7 +37,6 @@ import com.victor.myclient.data.DoctorImage;
 import com.victor.myclient.data.PatientImageInfor;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
-import com.victor.myclient.utils.MyBitmapUtils;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.view.CircleImageView;
@@ -63,62 +64,36 @@ public class VideoActivity extends BaseActivity {
     private android.widget.ImageButton switchcamera;
     private android.widget.ImageButton mutebtn;
     private android.widget.ImageButton audioonlybtn;
-    private RelativeLayout user_pic_layout;
+    private Chronometer mChronometer;
+    private RelativeLayout user_pic_layout, videoLayout;
     private TextView time_call;
     private String number, name, type;
     private boolean visible = true;
 
-    private List<VideoCellView> videoCellViews;
-    private MyBitmapUtils bitmapUtils = new MyBitmapUtils();
     private ImageView user_image;
-    private int time = 0, minute = 0, hour = 0;
     private PatientImageInfor patientImageInfor = new PatientImageInfor();
     private DoctorImage doctorImage = new DoctorImage();
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 1) {
-                time++;
-                if (time < 10) {
-                    if (minute >= 10) {
-                        time_call.setText("通话时长: " + minute + ":0" + time);
-                    } else {
-                        time_call.setText("通话时长: 0" + minute + ":0" + time);
-                    }
-                } else if (time < 60) {
-                    if (minute >= 10) {
-                        time_call.setText("通话时长: " + minute + ":" + time);
-                    } else {
-                        time_call.setText("通话时长: 0" + minute + ":" + time);
-                    }
-                } else if (time >= 60) {
-                    minute++;
-                    time -= 60;
-                    if (minute >= 10) {
-                        time_call.setText("通话时长: " + minute + ":0" + time);
-                    } else {
-                        time_call.setText("通话时长: 0" + minute + ":0" + time);
-                    }
-                }
-            } else if (msg.what == 2) {
-                bitmapUtils.disPlay(user_image, GlobalData.GET_PATIENT_IMAGE + patientImageInfor
-                        .getImage());
+            if (msg.what == 2) {
+                Utils.showImage(getActivity(), GlobalData.GET_PATIENT_IMAGE + patientImageInfor
+                        .getImage(), user_image);
             } else if (msg.what == 3) {
-                bitmapUtils.disPlay(user_image, GlobalData.GET_DOCTOR_IMAGE + doctorImage
-                        .getDoctorimage());
+                Utils.showImage(getActivity(), GlobalData.GET_DOCTOR_IMAGE + doctorImage
+                        .getDoctorimage(), user_image);
             }
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         number = getIntent().getStringExtra("number");
         type = getIntent().getStringExtra("type");
         name = "无用户信息";
-        InitView();
+        super.onCreate(savedInstanceState);
         InitEvent();
-        InitData();
+        initData();
     }
 
     @Override
@@ -133,58 +108,6 @@ public class VideoActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
-    }
-
-    @Override
-    protected void onStart() {
-        mVideoView.requestLocalFrame();
-        super.onStart();
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        NemoSDK.getInstance().setNemoSDKListener(null);
-        super.onDestroy();
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        ActivityManage.getInstance().popActivity(VideoActivity.this);
-    }
-
-    private void getImageUrl() {
-        if (type.equals("patient")) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Gson gson = new Gson();
-                    patientImageInfor = gson.fromJson(Utils.sendRequest(GlobalData
-                            .GET_CALLING_IMAGE + "&identity=patient"), PatientImageInfor.class);
-                    handler.sendEmptyMessage(2);
-                }
-            }).start();
-        } else if (type.equals("doctor")) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Gson gson = new Gson();
-                    doctorImage = gson.fromJson(Utils.sendRequest(GlobalData.GET_CALLING_IMAGE +
-                            "&identity=doctor"), DoctorImage.class);
-                    handler.sendEmptyMessage(3);
-
-                }
-            }).start();
-        }
-
-
-    }
-
-    private void InitView() {
         mVideoView = (SimpleVideoView) findViewById(R.id.remote_video_view);
         mContent = (CircleImageView) findViewById(R.id.shared_content);
         this.audioonlybtn = (ImageButton) findViewById(R.id.audio_only_btn);
@@ -195,6 +118,8 @@ public class VideoActivity extends BaseActivity {
         user_pic_layout = (RelativeLayout) findViewById(R.id.profile_pic);
         time_call = (TextView) findViewById(R.id.call_time_text);
         user_image = (com.victor.myclient.view.CircleImageView) findViewById(R.id.bg_turn);
+        mChronometer = (Chronometer) findViewById(R.id.time_eclipse);
+        videoLayout = (RelativeLayout) findViewById(R.id.video_layout);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
         NemoSDK.getInstance().setNemoSDKListener(new NemoSDKListener() {
             @Override
@@ -271,12 +196,15 @@ public class VideoActivity extends BaseActivity {
                                                 .SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
                                         break;
                                     case CONNECTED:
-                                        new Thread(new TimeThread()).start();
+                                        time_call.setVisibility(View.INVISIBLE);
+                                        mChronometer.setVisibility(View.VISIBLE);
+                                        mChronometer.setBase(SystemClock.elapsedRealtime());
+                                        mChronometer.start();
                                         connmtdialtotext.setText("通话进行中...");
-                                        connmtcancelcallbtn.setVisibility(View.GONE);
-                                        time_call.setVisibility(View.GONE);
-                                        connmtdialtotext.setVisibility(View.GONE);
-                                        user_pic_layout.setVisibility(View.GONE);
+                                        connmtcancelcallbtn.setVisibility(View.INVISIBLE);
+                                        time_call.setVisibility(View.INVISIBLE);
+                                        connmtdialtotext.setVisibility(View.INVISIBLE);
+                                        user_pic_layout.setVisibility(View.INVISIBLE);
                                         visible = !visible;
                                         break;
                                     case DISCONNECTED:
@@ -324,28 +252,7 @@ public class VideoActivity extends BaseActivity {
                                 } else {
                                     mVideoView.stopRender();
                                 }
-                                videoCellViews = mVideoView.getmVideoViews();
-                                mVideoView.getLocalVideoView().setOnClickListener(new View
-                                        .OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        mVideoView.indexTag = 0;
-                                        mVideoView.requestLayout();
-                                        if (visible) {
-                                            connmtcancelcallbtn.setVisibility(View.GONE);
-                                            time_call.setVisibility(View.GONE);
-                                            connmtdialtotext.setVisibility(View.GONE);
-                                            user_pic_layout.setVisibility(View.GONE);
-                                            visible = !visible;
-                                        } else {
-                                            connmtdialtotext.setVisibility(View.VISIBLE);
-                                            connmtcancelcallbtn.setVisibility(View.VISIBLE);
-                                            time_call.setVisibility(View.VISIBLE);
-                                            user_pic_layout.setVisibility(View.VISIBLE);
-                                            visible = !visible;
-                                        }
-                                    }
-                                });
+                                List<VideoCellView> videoCellViews = mVideoView.getmVideoViews();
                                 for (int i = 0; i < videoCellViews.size(); i++) {
                                     videoCellViews.get(i).setTag(i + 1);
                                     videoCellViews.get(i).setOnClickListener(new View
@@ -363,6 +270,55 @@ public class VideoActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        mVideoView.requestLocalFrame();
+        super.onStart();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        NemoSDK.getInstance().setNemoSDKListener(null);
+        super.onDestroy();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        ActivityManage.getInstance().popActivity(VideoActivity.this);
+    }
+
+    private void getImageUrl() {
+        if (type.equals("patient")) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    patientImageInfor = gson.fromJson(Utils.sendRequest(GlobalData
+                            .GET_CALLING_IMAGE + "&identity=patient"), PatientImageInfor.class);
+                    handler.sendEmptyMessage(2);
+                }
+            }).start();
+        } else if (type.equals("doctor")) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Gson gson = new Gson();
+                    doctorImage = gson.fromJson(Utils.sendRequest(GlobalData.GET_CALLING_IMAGE +
+                            "&identity=doctor"), DoctorImage.class);
+                    handler.sendEmptyMessage(3);
+
+                }
+            }).start();
+        }
+
+
+    }
+
 
     private void InitEvent() {
         switchcamera.setOnClickListener(new View.OnClickListener() {
@@ -422,17 +378,10 @@ public class VideoActivity extends BaseActivity {
                 callRecord.setXiaoyuId(number);
                 callRecord.setState(CallRecord.CALL_OUT);
                 callRecord.save();
-                int during_hour = hour + PrefUtils.getIntValue(VideoActivity.this, GlobalData
-                        .DRURATION_HOUR);
-                int during_minute = minute + PrefUtils.getIntValue(VideoActivity.this, GlobalData
-                        .DRURATION_MINITE);
-                int during_second = time + PrefUtils.getIntValue(VideoActivity.this, GlobalData
-                        .DRURATION_SECOND);
-                PrefUtils.putIntValue(VideoActivity.this, GlobalData.DRURATION_HOUR, during_hour);
-                PrefUtils.putIntValue(VideoActivity.this, GlobalData.DRURATION_MINITE,
-                        during_minute);
-                PrefUtils.putIntValue(VideoActivity.this, GlobalData.DRURATION_SECOND,
-                        during_second);
+                int eclpise = (int) ((SystemClock.elapsedRealtime() - mChronometer.getBase()) /
+                        1000) + PrefUtils.getIntValue(getActivity(), GlobalData
+                        .ECLIPSE_TIME);
+                PrefUtils.putIntValue(getActivity(), GlobalData.ECLIPSE_TIME, eclpise);
                 ActivityManage.finishActivity(VideoActivity.this);
                 NemoSDK.getInstance().setNemoSDKListener(null);
             }
@@ -444,13 +393,38 @@ public class VideoActivity extends BaseActivity {
 
             }
         });
+        videoLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (visible) {
+                    connmtdialtotext.setVisibility(View.INVISIBLE);
+                    if (time_call.getVisibility() == View.VISIBLE) {
+                        time_call.setVisibility(View.INVISIBLE);
+                    } else if (mChronometer.getVisibility() == View.VISIBLE) {
+                        mChronometer.setVisibility(View.INVISIBLE);
+                    }
+                    user_pic_layout.setVisibility(View.INVISIBLE);
+                    audioonlybtn.setVisibility(View.INVISIBLE);
+                    mutebtn.setVisibility(View.INVISIBLE);
+                    switchcamera.setVisibility(View.INVISIBLE);
+                    connmtcancelcallbtn.setVisibility(View.INVISIBLE);
+                } else {
+                    connmtdialtotext.setVisibility(View.VISIBLE);
+                    time_call.setVisibility(View.VISIBLE);
+                    mChronometer.setVisibility(View.INVISIBLE);
+                    user_pic_layout.setVisibility(View.VISIBLE);
+                    audioonlybtn.setVisibility(View.VISIBLE);
+                    mutebtn.setVisibility(View.VISIBLE);
+                    switchcamera.setVisibility(View.VISIBLE);
+                    connmtdialtotext.setVisibility(View.VISIBLE);
+                }
+                visible = !visible;
+            }
+        });
     }
 
 
-    private void InitData() {
-        time = 0;
-        minute = 0;
-        hour = 0;
+    private void initData() {
         checkPermission();
         NemoSDK.getInstance().makeCall(number);
 
@@ -490,20 +464,6 @@ public class VideoActivity extends BaseActivity {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService
                     (INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        }
-    }
-
-    class TimeThread implements Runnable {
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    Thread.sleep(1000);
-                    handler.sendEmptyMessage(1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 

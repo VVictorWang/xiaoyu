@@ -139,7 +139,7 @@ public class UserApi {
         return mUserApiService.getDoorInfo(patientId);
     }
 
-    private Observable<String> sendEmail(int id) {
+    public Observable<MessageResponse> sendEmail(int id) {
         return mUserApiService.sendEmail(id);
     }
 

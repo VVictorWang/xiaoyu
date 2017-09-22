@@ -25,8 +25,7 @@ public class DataUtil {
         PrefUtils.putValue(context, GlobalData.PATIENTFAMILY_ID, userInfor
                 .getId());
         PrefUtils.putValue(context, GlobalData.FAMILY_IMage, userInfor
-                .getImage
-                        ());
+                .getImage());
         PrefUtils.putValue(context, GlobalData.XIAOYU_NAME, userInfor
                 .getXiaoyuName
                         ());
