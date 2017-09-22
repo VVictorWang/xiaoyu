@@ -2,7 +2,7 @@ package com.victor.myclient.ui.presenter;
 
 import com.victor.myclient.MyApplication;
 import com.victor.myclient.api.UserApi;
-import com.victor.myclient.data.UserInfor;
+import com.victor.myclient.bean.UserInfor;
 import com.victor.myclient.ui.activity.SettingActivity;
 import com.victor.myclient.ui.contract.MainContract;
 import com.victor.myclient.utils.DataUtil;

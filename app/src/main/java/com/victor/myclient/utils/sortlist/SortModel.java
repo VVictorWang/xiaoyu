@@ -7,7 +7,7 @@ package com.victor.myclient.utils.sortlist;
 public class SortModel {
 
 
-    private String name;   //显示的数�?
+    private String name;   //显示的数字
     private String sortLetters;  //显示数据拼音的首字母
     private String number;
 

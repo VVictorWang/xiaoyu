@@ -92,7 +92,7 @@
 
     </RelativeLayout>
 
-    <com.victor.myclient.view.drawSmoothLine.BesselChart
+    <com.victor.myclient.widget.drawSmoothLine.BesselChart
         android:id="@+id/shidu_line_chart"
         android:layout_width="match_parent"
         android:layout_height="220dp"

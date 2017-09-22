@@ -7,8 +7,8 @@ import android.support.design.widget.TextInputEditText;
 import android.view.View;
 import android.widget.Button;
 
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.UserInformation;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.UserInformation;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.Utils;
 
@@ -51,7 +51,7 @@ public class RegisterFirstActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        ActivityManage.finishActivity(RegisterFirstActivity.this);
+        MyActivityManager.finishActivity(RegisterFirstActivity.this);
         super.onBackPressed();
     }
 

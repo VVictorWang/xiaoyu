@@ -31,17 +31,17 @@ import com.ainemo.sdk.otf.NemoSDKErrorCode;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
 import com.google.gson.Gson;
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.CallRecord;
-import com.victor.myclient.data.DoctorImage;
-import com.victor.myclient.data.PatientImageInfor;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.CallRecord;
+import com.victor.myclient.bean.DoctorImage;
+import com.victor.myclient.bean.PatientImageInfor;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.CircleImageView;
-import com.victor.myclient.view.SimpleVideoView;
-import com.victor.myclient.view.VideoCellView;
+import com.victor.myclient.widget.CircleImageView;
+import com.victor.myclient.widget.SimpleVideoView;
+import com.victor.myclient.widget.VideoCellView;
 
 import java.util.Date;
 import java.util.List;
@@ -117,7 +117,7 @@ public class VideoActivity extends BaseActivity {
         this.connmtdialtotext = (TextView) findViewById(R.id.conn_mt_dial_to_text);
         user_pic_layout = (RelativeLayout) findViewById(R.id.profile_pic);
         time_call = (TextView) findViewById(R.id.call_time_text);
-        user_image = (com.victor.myclient.view.CircleImageView) findViewById(R.id.bg_turn);
+        user_image = (com.victor.myclient.widget.CircleImageView) findViewById(R.id.bg_turn);
         mChronometer = (Chronometer) findViewById(R.id.time_eclipse);
         videoLayout = (RelativeLayout) findViewById(R.id.video_layout);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
@@ -156,7 +156,7 @@ public class VideoActivity extends BaseActivity {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             dialog.dismiss();
-                                            ActivityManage.finishActivity(VideoActivity.this);
+                                            MyActivityManager.finishActivity(VideoActivity.this);
                                         }
                                     }).show();
                                     Toast.makeText(VideoActivity.this, "密码错误", Toast
@@ -218,17 +218,17 @@ public class VideoActivity extends BaseActivity {
                                             Toast.makeText(VideoActivity.this, "对方忙", Toast
                                                     .LENGTH_SHORT).show();
                                             releaseResource();
-                                            ActivityManage.finishActivity(VideoActivity.this);
+                                            MyActivityManager.finishActivity(VideoActivity.this);
                                         }
                                         if (s.equals("CONF_FULL")) {
                                             Utils.showShortToast(VideoActivity.this, "会议室已满");
                                             releaseResource();
-                                            ActivityManage.finishActivity(VideoActivity.this);
+                                            MyActivityManager.finishActivity(VideoActivity.this);
                                         }
                                         if (s.equals("NET_WORK_ERROR")) {
                                             Utils.showShortToast(VideoActivity.this, "网络错误");
                                             releaseResource();
-                                            ActivityManage.finishActivity(VideoActivity.this);
+                                            MyActivityManager.finishActivity(VideoActivity.this);
                                         }
                                         setRequestedOrientation(ActivityInfo
                                                 .SCREEN_ORIENTATION_PORTRAIT);
@@ -289,7 +289,7 @@ public class VideoActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        ActivityManage.getInstance().popActivity(VideoActivity.this);
+        MyActivityManager.getInstance().popActivity(VideoActivity.this);
     }
 
     private void getImageUrl() {
@@ -382,7 +382,7 @@ public class VideoActivity extends BaseActivity {
                         1000) + PrefUtils.getIntValue(getActivity(), GlobalData
                         .ECLIPSE_TIME);
                 PrefUtils.putIntValue(getActivity(), GlobalData.ECLIPSE_TIME, eclpise);
-                ActivityManage.finishActivity(VideoActivity.this);
+                MyActivityManager.finishActivity(VideoActivity.this);
                 NemoSDK.getInstance().setNemoSDKListener(null);
             }
         });

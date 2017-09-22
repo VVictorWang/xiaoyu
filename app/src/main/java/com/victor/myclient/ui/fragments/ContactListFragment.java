@@ -17,16 +17,16 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.ContactListData;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.ContactListData;
 import com.victor.myclient.ui.activity.NewContactorActivity;
 import com.victor.myclient.ui.adapters.ContactListAdapter;
 import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.sortlist.CharacterParser;
 import com.victor.myclient.utils.sortlist.PinyinComparator;
-import com.victor.myclient.utils.sortlist.SideBar;
+import com.victor.myclient.widget.PingYinSideBar;
 import com.victor.myclient.utils.sortlist.SortModel;
-import com.victor.myclient.view.ClearEditText;
+import com.victor.myclient.widget.ClearEditText;
 
 import org.litepal.crud.DataSupport;
 
@@ -43,7 +43,7 @@ import demo.animen.com.xiaoyutask.R;
 public class ContactListFragment extends BaseFragment {
     private static final String TAG = "ContactListFragment";
     private RecyclerView sortView;
-    private SideBar sideBar;
+    private PingYinSideBar sideBar;
     private TextView dialog;
     private ContactListAdapter adapter;
     private RelativeLayout back;
@@ -88,7 +88,7 @@ public class ContactListFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        sideBar = (SideBar) rootView.findViewById(R.id.sidrbar);
+        sideBar = (PingYinSideBar) rootView.findViewById(R.id.sidrbar);
         dialog = (TextView) rootView.findViewById(R.id.dialog);
 
         sideBar.setTextView(dialog);
@@ -103,7 +103,7 @@ public class ContactListFragment extends BaseFragment {
         // 实例化汉字转拼音类
         sideBar.setTextView(dialog);
         // 设置右侧触摸监听
-        sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
+        sideBar.setOnTouchingLetterChangedListener(new PingYinSideBar.OnTouchingLetterChangedListener() {
 
             @SuppressLint("NewApi")
             @Override
@@ -143,7 +143,7 @@ public class ContactListFragment extends BaseFragment {
         add_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.startActivity(activity, NewContactorActivity.class);
+                MyActivityManager.startActivity(activity, NewContactorActivity.class);
             }
         });
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {

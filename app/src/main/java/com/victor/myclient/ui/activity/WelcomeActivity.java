@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.victor.myclient.ActivityManage;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.ui.adapters.GuideViewPagerAdapter;
 import com.victor.myclient.utils.PrefUtils;
 
@@ -40,7 +40,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        views = new ArrayList<View>();
+        views = new ArrayList<>();
 
 //         初始化引导页视图列表
         for (int i = 0; i < pics.length; i++) {
@@ -148,7 +148,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     private void enterMainActivity() {
         Intent intent = new Intent(WelcomeActivity.this,
                 LoginActivity.class);
-        ActivityManage.startActivity(WelcomeActivity.this, intent);
+        MyActivityManager.startActivity(WelcomeActivity.this, intent);
         finish();
     }
 

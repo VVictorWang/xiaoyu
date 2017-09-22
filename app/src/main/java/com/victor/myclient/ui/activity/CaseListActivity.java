@@ -7,13 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.victor.myclient.ActivityManage;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.api.UserApi;
-import com.victor.myclient.data.CaseInfor;
+import com.victor.myclient.bean.CaseInfor;
 import com.victor.myclient.ui.adapters.CaseAdapter;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.CustomLayoutManager;
+import com.victor.myclient.widget.CustomLayoutManager;
 
 import java.util.List;
 
@@ -78,7 +78,7 @@ public class CaseListActivity extends BaseActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(CaseListActivity.this);
+                MyActivityManager.finishActivity(CaseListActivity.this);
             }
         });
     }

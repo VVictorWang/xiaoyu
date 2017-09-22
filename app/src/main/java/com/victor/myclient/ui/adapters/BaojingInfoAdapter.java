@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.victor.myclient.data.OneKeyWarning;
+import com.victor.myclient.bean.OneKeyWarning;
 
 import java.util.List;
 

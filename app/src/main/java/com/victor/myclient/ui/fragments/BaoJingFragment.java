@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.OneKeyWarning;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.OneKeyWarning;
 import com.victor.myclient.ui.adapters.BaojingInfoAdapter;
 import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.GlobalData;
@@ -76,7 +76,7 @@ public class BaoJingFragment extends BaseFragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(activity);
+                MyActivityManager.finishActivity(activity);
             }
         });
         oneKeyWarnings = new ArrayList<>();

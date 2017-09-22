@@ -12,7 +12,7 @@
     android:layout_width="match_parent"
     android:id="@+id/call_record"
     >
-    <com.victor.myclient.view.CircleImageView
+    <com.victor.myclient.widget.CircleImageView
       android:id="@+id/record_icon"
       android:layout_centerVertical="true"
       android:src="@drawable/contact_image"

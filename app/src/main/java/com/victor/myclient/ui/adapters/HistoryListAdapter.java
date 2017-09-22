@@ -14,9 +14,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-import com.victor.myclient.data.ServiceHistory;
+import com.victor.myclient.bean.ServiceHistory;
 import com.victor.myclient.utils.GlobalData;
-import com.victor.myclient.view.CircleImageView;
+import com.victor.myclient.widget.CircleImageView;
 
 import java.util.List;
 

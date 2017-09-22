@@ -2,7 +2,6 @@ package com.victor.myclient.service;
 
 import android.content.Context;
 import android.os.Message;
-import android.util.Log;
 
 import com.igexin.sdk.GTIntentService;
 import com.igexin.sdk.PushConsts;
@@ -12,6 +11,7 @@ import com.igexin.sdk.message.GTCmdMessage;
 import com.igexin.sdk.message.GTTransmitMessage;
 import com.igexin.sdk.message.SetTagCmdMessage;
 import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.LogUtils;
 import com.victor.myclient.utils.PrefUtils;
 
 /**
@@ -20,7 +20,7 @@ import com.victor.myclient.utils.PrefUtils;
 
 public class MyIntentService extends GTIntentService {
 
-    private static final String TAG = "MyIntentService";
+    public static final String TAG = "@victor MyIntentService";
 
     /**
      * 为了观察透传数据变化.
@@ -48,17 +48,17 @@ public class MyIntentService extends GTIntentService {
         // 第三方回执调用接口，actionid范围为90000-90999，可根据业务场景执行
         boolean result = PushManager.getInstance().sendFeedbackMessage(context, taskid,
                 messageid, 90001);
-        Log.d(TAG, "call sendFeedbackMessage = " + (result ? "success" : "failed"));
+        LogUtils.d(TAG, "call sendFeedbackMessage = " + (result ? "success" : "failed"));
 
-        Log.d(TAG, "onReceiveMessageData -> " + "appid = " + appid + "\ntaskid = " + taskid +
+        LogUtils.d(TAG, "onReceiveMessageData -> " + "appid = " + appid + "\ntaskid = " + taskid +
                 "\nmessageid = " + messageid + "\npkg = " + pkg
                 + "\ncid = " + cid);
 
         if (payload == null) {
-            Log.e(TAG, "receiver payload = null");
+            LogUtils.e(TAG, "receiver payload = null");
         } else {
             String data = new String(payload);
-            Log.d(TAG, "receiver payload = " + data);
+            LogUtils.d(TAG, "receiver payload = " + data);
 
             // 测试消息为了观察数据变化
             if (data.equals("收到一条透传测试消息")) {

@@ -15,9 +15,8 @@ import org.litepal.LitePal;
  */
 
 public class MyApplication extends Application {
-    private static final String TAG = "MyApplication";
     private static Context context;
-    private static MyApplication sInstance;
+    private static MyApplication sInstance ;
 
     public static MyApplication getInstance() {
         return sInstance;
@@ -29,9 +28,9 @@ public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
-
         super.onCreate();
         context = getApplicationContext();
+        sInstance = this;
         LitePal.initialize(context);
         Settings settings = new Settings("995ffeda2b164757fdd923d5211d5fd45f761303");
         //请使用自己的企业i，否则无法运行demo

@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.CallRecord;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.CallRecord;
 import com.victor.myclient.ui.adapters.CallRecordAdapter;
 import com.victor.myclient.ui.base.BaseFragment;
 
@@ -86,7 +86,7 @@ public class CallRecordFragment extends BaseFragment {
         back.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityManage.finishActivity(activity);
+                MyActivityManager.finishActivity(activity);
             }
         });
     }

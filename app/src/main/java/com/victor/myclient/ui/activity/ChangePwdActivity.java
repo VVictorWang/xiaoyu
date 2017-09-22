@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.victor.myclient.ActivityManage;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.api.UserApi;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.Utils;
@@ -63,7 +63,7 @@ public class ChangePwdActivity extends BaseActivity {
         changexiaoyunumberback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(ChangePwdActivity.this);
+                MyActivityManager.finishActivity(ChangePwdActivity.this);
             }
         });
 
@@ -115,7 +115,7 @@ public class ChangePwdActivity extends BaseActivity {
                         switch (integer) {
                             case 1:
                                 message = "修改成功";
-                                ActivityManage.startActivity(ChangePwdActivity.this, LoginActivity
+                                MyActivityManager.startActivity(ChangePwdActivity.this, LoginActivity
                                         .class);
                                 break;
                             case -1:

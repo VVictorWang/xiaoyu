@@ -21,16 +21,16 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.google.gson.Gson;
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.HomeInfor;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.HomeInfor;
 import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.drawSmoothLine.BesselChart;
-import com.victor.myclient.view.drawSmoothLine.ChartData;
-import com.victor.myclient.view.drawSmoothLine.Point;
-import com.victor.myclient.view.drawSmoothLine.Series;
+import com.victor.myclient.widget.drawSmoothLine.BesselChart;
+import com.victor.myclient.widget.drawSmoothLine.ChartData;
+import com.victor.myclient.widget.drawSmoothLine.Point;
+import com.victor.myclient.widget.drawSmoothLine.Series;
 
 import org.litepal.crud.DataSupport;
 
@@ -150,7 +150,7 @@ public class TemperatureFramgmentt extends BaseFragment implements BesselChart.C
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(activity);
+                MyActivityManager.finishActivity(activity);
             }
         });
         update.setOnClickListener(new View.OnClickListener() {

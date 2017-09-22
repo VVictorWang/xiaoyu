@@ -1,8 +1,8 @@
 package com.victor.myclient.ui.presenter;
 
 import com.victor.myclient.api.UserApi;
-import com.victor.myclient.data.DoctorInfor;
-import com.victor.myclient.data.DoctorXiaoYu;
+import com.victor.myclient.bean.DoctorInfor;
+import com.victor.myclient.bean.DoctorXiaoYu;
 import com.victor.myclient.ui.base.RxPresenter;
 import com.victor.myclient.ui.contract.DoctorContract;
 import com.victor.myclient.utils.RxUtil;

@@ -18,14 +18,14 @@ import com.ainemo.sdk.otf.NemoSDK;
 import com.ainemo.sdk.otf.NemoSDKErrorCode;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.CallRecord;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.CallRecord;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.CircleImageView;
-import com.victor.myclient.view.SimpleVideoView;
-import com.victor.myclient.view.VideoCellView;
+import com.victor.myclient.widget.CircleImageView;
+import com.victor.myclient.widget.SimpleVideoView;
+import com.victor.myclient.widget.VideoCellView;
 
 import java.util.Date;
 import java.util.List;
@@ -62,7 +62,7 @@ public class IncommingAcivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.callincoming_fragment);
-        ActivityManage.getInstance().pushActivity(IncommingAcivity.this);
+        MyActivityManager.getInstance().pushActivity(IncommingAcivity.this);
         initView();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
         Intent intent = getIntent();
@@ -121,7 +121,7 @@ public class IncommingAcivity extends AppCompatActivity {
                 callRecord.setName(callerNumber);
                 callRecord.setDate(new Date(System.currentTimeMillis()));
                 callRecord.save();
-                ActivityManage.finishActivity(IncommingAcivity.this);
+                MyActivityManager.finishActivity(IncommingAcivity.this);
             }
         });
         connmtdialfromtext.setText(callerName + " (" + callerNumber + ")");
@@ -186,7 +186,7 @@ public class IncommingAcivity extends AppCompatActivity {
                         1000) + PrefUtils.getIntValue(IncommingAcivity.this, GlobalData
                         .ECLIPSE_TIME);
                 PrefUtils.putIntValue(IncommingAcivity.this, GlobalData.ECLIPSE_TIME, eclpise);
-                ActivityManage.finishActivity(IncommingAcivity.this);
+                MyActivityManager.finishActivity(IncommingAcivity.this);
             }
         });
 
@@ -291,24 +291,24 @@ public class IncommingAcivity extends AppCompatActivity {
                                             Toast.makeText(IncommingAcivity.this, "通话取消", Toast
                                                     .LENGTH_SHORT).show();
                                             releaseResource();
-                                            ActivityManage.finishActivity(IncommingAcivity.this);
+                                            MyActivityManager.finishActivity(IncommingAcivity.this);
                                         }
 
                                         if (s.equals("BUSY")) {
                                             Toast.makeText(IncommingAcivity.this, "对方忙", Toast
                                                     .LENGTH_SHORT).show();
                                             releaseResource();
-                                            ActivityManage.finishActivity(IncommingAcivity.this);
+                                            MyActivityManager.finishActivity(IncommingAcivity.this);
                                         }
                                         if (s.equals("CONF_FULL")) {
                                             Utils.showShortToast(IncommingAcivity.this, "会议室已满");
                                             releaseResource();
-                                            ActivityManage.finishActivity(IncommingAcivity.this);
+                                            MyActivityManager.finishActivity(IncommingAcivity.this);
                                         }
                                         if (s.equals("NET_WORK_ERROR")) {
                                             Utils.showShortToast(IncommingAcivity.this, "网络错误");
                                             releaseResource();
-                                            ActivityManage.finishActivity(IncommingAcivity.this);
+                                            MyActivityManager.finishActivity(IncommingAcivity.this);
                                         }
                                         setRequestedOrientation(ActivityInfo
                                                 .SCREEN_ORIENTATION_PORTRAIT);

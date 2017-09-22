@@ -1,14 +1,14 @@
 package com.victor.myclient.api;
 
-import com.victor.myclient.data.CaseInfor;
-import com.victor.myclient.data.DoctorInfor;
-import com.victor.myclient.data.DoctorXiaoYu;
-import com.victor.myclient.data.DoorInfor;
-import com.victor.myclient.data.HomeInfor;
-import com.victor.myclient.data.MessageResponse;
-import com.victor.myclient.data.OneKeyWarning;
-import com.victor.myclient.data.UserAcitivityInfo;
-import com.victor.myclient.data.UserInfor;
+import com.victor.myclient.bean.CaseInfor;
+import com.victor.myclient.bean.DoctorInfor;
+import com.victor.myclient.bean.DoctorXiaoYu;
+import com.victor.myclient.bean.DoorInfor;
+import com.victor.myclient.bean.HomeInfor;
+import com.victor.myclient.bean.MessageResponse;
+import com.victor.myclient.bean.OneKeyWarning;
+import com.victor.myclient.bean.UserAcitivityInfo;
+import com.victor.myclient.bean.UserInfor;
 import com.victor.myclient.utils.GlobalData;
 
 import java.io.File;

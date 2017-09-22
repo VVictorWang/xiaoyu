@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.victor.myclient.ActivityManage;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.api.UserApi;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.CheckUtils;
@@ -28,7 +28,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActivityManage.getInstance().popAllActivity();
+        MyActivityManager.getInstance().popAllActivity();
         super.onCreate(savedInstanceState);
         loginid.setOnClickListener(this);
         findViewById(R.id.login_button).setOnClickListener(this);
@@ -67,10 +67,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.login_sign_up:
-                ActivityManage.startActivity(LoginActivity.this, RegisterFirstActivity.class);
+                MyActivityManager.startActivity(LoginActivity.this, RegisterFirstActivity.class);
                 break;
             case R.id.login_forget_psw:
-                ActivityManage.startActivity(LoginActivity.this, ForgetPwdActivity.class);
+                MyActivityManager.startActivity(LoginActivity.this, ForgetPwdActivity.class);
                 break;
             case R.id.login_id:
                 loginid.setCursorVisible(true);
@@ -115,7 +115,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     intent.putExtra("type", "username");
                                 }
                                 startActivity(intent);
-                                ActivityManage.getInstance().popAllActivity();
+                                MyActivityManager.getInstance().popAllActivity();
                                 break;
                             case 0:
                                 message = "用户名或者密码不正确";

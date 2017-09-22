@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.UserAcitivityInfo;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.UserAcitivityInfo;
 import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
@@ -110,7 +110,7 @@ public class RoomFragment extends BaseFragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(activity);
+                MyActivityManager.finishActivity(activity);
             }
         });
 

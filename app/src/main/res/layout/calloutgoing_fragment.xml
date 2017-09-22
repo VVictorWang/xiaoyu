@@ -4,12 +4,12 @@
                 android:id="@+id/video_layout"
                 android:background="@drawable/bg_outgoing_shadow">
 
-    <com.victor.myclient.view.SimpleVideoView
+    <com.victor.myclient.widget.SimpleVideoView
         android:id="@+id/remote_video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.victor.myclient.view.CircleImageView
+    <com.victor.myclient.widget.CircleImageView
         android:id="@+id/shared_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 android:visibility="visible"
                 >
 
-                <com.victor.myclient.view.CircleImageView
+                <com.victor.myclient.widget.CircleImageView
                     android:id="@+id/bg_turn"
                     android:layout_width="130dp"
                     android:layout_height="130dp"

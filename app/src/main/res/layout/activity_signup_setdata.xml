@@ -9,7 +9,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <com.victor.myclient.view.CircleImageView
+    <com.victor.myclient.widget.CircleImageView
         android:id="@+id/login_head_register"
         android:layout_width="150dp"
         android:layout_height="150dp"

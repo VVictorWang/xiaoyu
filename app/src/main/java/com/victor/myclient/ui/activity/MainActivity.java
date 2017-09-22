@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,8 +17,8 @@ import com.ainemo.sdk.otf.ConnectNemoCallback;
 import com.ainemo.sdk.otf.NemoSDK;
 import com.bumptech.glide.Glide;
 import com.igexin.sdk.PushManager;
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.UserInfor;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.UserInfor;
 import com.victor.myclient.service.MyIntentService;
 import com.victor.myclient.service.MyPushService;
 import com.victor.myclient.service.PostClientIdService;
@@ -30,8 +29,8 @@ import com.victor.myclient.utils.CheckUtils;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.CircleImageView;
-import com.victor.myclient.view.CircleTextImageView;
+import com.victor.myclient.widget.CircleImageView;
+import com.victor.myclient.widget.CircleTextImageView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -208,9 +207,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 Intent intent = new Intent(MainActivity.this, CaseListActivity.class);
                 if (!CheckUtils.isNull(userInfor)) {
                     intent.putExtra("id", userInfor.getPatientId());
-                    Log.d(TAG, userInfor.getPatientId());
                 }
-                ActivityManage.startActivity(getActivity(), intent);
+                MyActivityManager.startActivity(getActivity(), intent);
                 break;
             case R.id.jujia_main:
                 handler.sendEmptyMessage(0x125);
@@ -220,7 +218,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         handler.sendEmptyMessage(0x126);
                     }
                 }, 50);
-                ActivityManage.startActivity(getActivity(), JujiaActivity.class);
+                MyActivityManager.startActivity(getActivity(), JujiaActivity.class);
                 break;
             case R.id.call_others:
                 handler.sendEmptyMessage(0x123);
@@ -230,7 +228,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         handler.sendEmptyMessage(0x124);
                     }
                 }, 50);
-                ActivityManage.startActivity(getActivity(), ContactActivity.class);
+                MyActivityManager.startActivity(getActivity(), ContactActivity.class);
                 break;
             case R.id.setting_default:
                 handler.sendEmptyMessage(0x129);
@@ -244,7 +242,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 if (!CheckUtils.isNull(userInfor)) {
                     intent1.putExtra("email", userInfor.getEmail());
                 }
-                ActivityManage.startActivity(getActivity(), intent1);
+                MyActivityManager.startActivity(getActivity(), intent1);
                 break;
             case R.id.services:
                 handler.sendEmptyMessage(0x131);
@@ -258,7 +256,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 if (!CheckUtils.isNull(userInfor)) {
                     intent2.putExtra("id", userInfor.getPatientId());
                 }
-                ActivityManage.startActivity(getActivity(), intent2);
+                MyActivityManager.startActivity(getActivity(), intent2);
                 break;
             default:
                 break;

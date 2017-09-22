@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.DoorInfor;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.DoorInfor;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.ui.fragments.BaoJingFragment;
 import com.victor.myclient.ui.fragments.RoomFragment;
@@ -46,7 +46,7 @@ public class JujiaActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jujia);
-        ActivityManage.getInstance().pushActivity(JujiaActivity.this);
+        MyActivityManager.getInstance().pushActivity(JujiaActivity.this);
         initView();
         initFragment();
         net_work = Utils.isNetWorkAvailabe(JujiaActivity.this);

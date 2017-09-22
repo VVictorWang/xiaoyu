@@ -16,16 +16,16 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView.Style;
-import com.victor.myclient.ActivityManage;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.api.UserApi;
-import com.victor.myclient.data.MessageResponse;
+import com.victor.myclient.bean.MessageResponse;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlideImageLoader;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.CircleImageView;
-import com.victor.myclient.view.CircleTextImageView;
+import com.victor.myclient.widget.CircleImageView;
+import com.victor.myclient.widget.CircleTextImageView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -104,13 +104,13 @@ public class SettingActivity extends BaseActivity {
         changemailbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.startActivity(getActivity(), ChangeEmailActivity.class);
+                MyActivityManager.startActivity(getActivity(), ChangeEmailActivity.class);
             }
         });
         changepassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.startActivity(getActivity(), ChangePwdActivity.class);
+                MyActivityManager.startActivity(getActivity(), ChangePwdActivity.class);
             }
         });
 
@@ -118,14 +118,14 @@ public class SettingActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 PrefUtils.putBooleanValue(SettingActivity.this, GlobalData.Login_status, false);
-                ActivityManage.startActivity(getActivity(), LoginActivity.class);
+                MyActivityManager.startActivity(getActivity(), LoginActivity.class);
 
             }
         });
         settingback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(getActivity());
+                MyActivityManager.finishActivity(getActivity());
             }
         });
 

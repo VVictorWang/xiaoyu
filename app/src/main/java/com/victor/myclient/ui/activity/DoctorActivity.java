@@ -9,15 +9,15 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.DoctorInfor;
-import com.victor.myclient.data.DoctorXiaoYu;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.DoctorInfor;
+import com.victor.myclient.bean.DoctorXiaoYu;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.ui.contract.DoctorContract;
 import com.victor.myclient.ui.presenter.DoctorPresenter;
 import com.victor.myclient.utils.CheckUtils;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.CircleImageView;
+import com.victor.myclient.widget.CircleImageView;
 
 import demo.animen.com.xiaoyutask.R;
 
@@ -91,7 +91,7 @@ public class DoctorActivity extends BaseActivity implements DoctorContract.View 
         backdoctordetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(DoctorActivity.this);
+                MyActivityManager.finishActivity(DoctorActivity.this);
             }
         });
         make_call.setOnClickListener(new View.OnClickListener() {

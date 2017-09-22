@@ -10,7 +10,7 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class RxPresenter {
-    protected CompositeSubscription mCompositeSubscription;
+    private CompositeSubscription mCompositeSubscription;
 
     protected void unSubscribe() {
         if (mCompositeSubscription != null) {

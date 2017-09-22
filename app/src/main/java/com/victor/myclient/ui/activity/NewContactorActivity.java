@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.ContactListData;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.ContactListData;
 import com.victor.myclient.ui.base.BaseActivity;
 
 import org.litepal.crud.DataSupport;
@@ -62,7 +62,7 @@ public class NewContactorActivity extends BaseActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(NewContactorActivity.this);
+                MyActivityManager.finishActivity(NewContactorActivity.this);
             }
         });
         finish.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +88,7 @@ public class NewContactorActivity extends BaseActivity {
                     contactListData.setNumber(number);
                     contactListData.setName(name_infor);
                     contactListData.save();
-                    ActivityManage.finishActivity(NewContactorActivity.this);
+                    MyActivityManager.finishActivity(NewContactorActivity.this);
                 }
             }
 

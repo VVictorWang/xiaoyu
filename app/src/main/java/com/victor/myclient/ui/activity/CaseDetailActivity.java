@@ -9,12 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.CaseInfor;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.CaseInfor;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.CircleImageView;
+import com.victor.myclient.widget.CircleImageView;
 
 import org.litepal.crud.DataSupport;
 
@@ -75,7 +75,7 @@ public class CaseDetailActivity extends BaseActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(CaseDetailActivity.this);
+                MyActivityManager.finishActivity(CaseDetailActivity.this);
             }
         });
         see_doctor_tail.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +83,7 @@ public class CaseDetailActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CaseDetailActivity.this, DoctorActivity.class);
                 intent.putExtra("doctor_id", Integer.valueOf(doctor_id));
-                ActivityManage.startActivity(CaseDetailActivity.this, intent);
+                MyActivityManager.startActivity(CaseDetailActivity.this, intent);
             }
         });
     }

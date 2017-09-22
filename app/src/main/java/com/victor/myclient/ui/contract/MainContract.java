@@ -1,6 +1,6 @@
 package com.victor.myclient.ui.contract;
 
-import com.victor.myclient.data.UserInfor;
+import com.victor.myclient.bean.UserInfor;
 import com.victor.myclient.ui.base.BasePresenter;
 import com.victor.myclient.ui.base.BaseView;
 

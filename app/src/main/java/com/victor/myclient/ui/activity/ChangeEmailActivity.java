@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import com.victor.myclient.ActivityManage;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.api.UserApi;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.CheckUtils;
@@ -60,7 +60,7 @@ public class ChangeEmailActivity extends BaseActivity {
         changeemailbackback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(getActivity());
+                MyActivityManager.finishActivity(getActivity());
             }
         });
         finish.setOnClickListener(new View.OnClickListener() {

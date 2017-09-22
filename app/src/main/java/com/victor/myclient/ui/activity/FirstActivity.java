@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.victor.myclient.ActivityManage;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.PrefUtils;
@@ -39,8 +39,8 @@ public class FirstActivity extends BaseActivity {
             }
             new Handler().postDelayed(new Runnable() {
                 public void run() {
-                    ActivityManage.startActivity(FirstActivity.this, intent);
-                    ActivityManage.finishActivity(FirstActivity.this);
+                    MyActivityManager.startActivity(FirstActivity.this, intent);
+                    MyActivityManager.finishActivity(FirstActivity.this);
                 }
 
             }, second);
@@ -79,7 +79,7 @@ public class FirstActivity extends BaseActivity {
                 public void run() {
                     Intent intent = new Intent(FirstActivity.this, WelcomeActivity.class);
                     intent.putExtra("login", isLogin);
-                    ActivityManage.startActivity(FirstActivity.this, intent);
+                    MyActivityManager.startActivity(FirstActivity.this, intent);
                 }
 
             }, second);

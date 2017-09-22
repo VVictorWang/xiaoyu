@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.victor.myclient.ActivityManage;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.ui.adapters.FragmentAdapter;
 import com.victor.myclient.ui.fragments.CallFragment;
 import com.victor.myclient.ui.fragments.CallRecordFragment;
@@ -37,7 +37,7 @@ public class ContactActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_fragment_main);
-        ActivityManage.getInstance().pushActivity(ContactActivity.this);
+        MyActivityManager.getInstance().pushActivity(ContactActivity.this);
         initTab();
         initEvent();
     }

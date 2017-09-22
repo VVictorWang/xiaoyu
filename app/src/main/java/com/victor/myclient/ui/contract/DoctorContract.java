@@ -1,7 +1,7 @@
 package com.victor.myclient.ui.contract;
 
-import com.victor.myclient.data.DoctorInfor;
-import com.victor.myclient.data.DoctorXiaoYu;
+import com.victor.myclient.bean.DoctorInfor;
+import com.victor.myclient.bean.DoctorXiaoYu;
 import com.victor.myclient.ui.base.BasePresenter;
 import com.victor.myclient.ui.base.BaseView;
 

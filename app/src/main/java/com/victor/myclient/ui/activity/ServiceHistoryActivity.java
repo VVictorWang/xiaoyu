@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.victor.myclient.ActivityManage;
-import com.victor.myclient.data.ServiceHistory;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.bean.ServiceHistory;
 import com.victor.myclient.ui.adapters.HistoryListAdapter;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
@@ -86,7 +86,7 @@ public class ServiceHistoryActivity extends BaseActivity implements HistoryListA
         back_to_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(ServiceHistoryActivity.this);
+                MyActivityManager.finishActivity(ServiceHistoryActivity.this);
             }
         });
     }

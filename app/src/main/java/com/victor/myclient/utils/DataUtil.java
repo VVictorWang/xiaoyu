@@ -3,7 +3,7 @@ package com.victor.myclient.utils;
 import android.content.Context;
 
 import com.victor.myclient.MyApplication;
-import com.victor.myclient.data.UserInfor;
+import com.victor.myclient.bean.UserInfor;
 
 /**
  * Created by victor on 9/21/17.

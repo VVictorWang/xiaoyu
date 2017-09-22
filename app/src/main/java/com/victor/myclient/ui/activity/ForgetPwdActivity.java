@@ -2,13 +2,12 @@ package com.victor.myclient.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import com.victor.myclient.ActivityManage;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.MyApplication;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
@@ -49,7 +48,7 @@ public class ForgetPwdActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        ActivityManage.finishActivity(ForgetPwdActivity.this);
+        MyActivityManager.finishActivity(ForgetPwdActivity.this);
         super.onBackPressed();
     }
 
@@ -57,7 +56,7 @@ public class ForgetPwdActivity extends BaseActivity {
         forgetpasswordback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityManage.finishActivity(ForgetPwdActivity.this);
+                MyActivityManager.finishActivity(ForgetPwdActivity.this);
             }
         });
         forget.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +79,6 @@ public class ForgetPwdActivity extends BaseActivity {
                         ("http://139.196.40.97/OSAdmin-master/uploads/interface" +
                                 "/send_password_mail.php?id=" + PrefUtils
                                 .getValue(MyApplication.getContext(), GlobalData.PATIENTFAMILY_ID));
-                Log.d("ok", json);
                 if (json.contains("been sent")) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -89,7 +87,7 @@ public class ForgetPwdActivity extends BaseActivity {
                         }
                     });
 
-                    ActivityManage.finishActivity(getActivity());
+                    MyActivityManager.finishActivity(getActivity());
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override

@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.victor.myclient.ui.activity.VideoActivity;
 import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.CircleImageView;
-import com.victor.myclient.view.CircleTextImageView;
+import com.victor.myclient.widget.CircleImageView;
+import com.victor.myclient.widget.CircleTextImageView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -150,8 +150,7 @@ public class CallFragment extends BaseFragment {
 
 
     private void checkPermission() {
-        if (!(ContextCompat
-                .checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+        if (!(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) &&
                 !(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)
                         == PackageManager.PERMISSION_GRANTED)) {

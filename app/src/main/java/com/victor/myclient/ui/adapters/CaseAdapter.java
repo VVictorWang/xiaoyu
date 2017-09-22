@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.victor.myclient.data.CaseInfor;
+import com.victor.myclient.bean.CaseInfor;
 import com.victor.myclient.ui.activity.CaseDetailActivity;
 import com.victor.myclient.utils.Utils;
-import com.victor.myclient.view.CircleImageView;
+import com.victor.myclient.widget.CircleImageView;
 
 import java.util.ArrayList;
 import java.util.Date;

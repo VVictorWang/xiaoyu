@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
 
-            <com.victor.myclient.view.CircleImageView
+            <com.victor.myclient.widget.CircleImageView
                 android:id="@+id/imageView"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
