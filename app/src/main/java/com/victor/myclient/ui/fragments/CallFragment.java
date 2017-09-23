@@ -51,8 +51,6 @@ public class CallFragment extends BaseFragment {
             } else if (msg.what > 11) {
                 circleTextImageViews[msg.what - 12].setImageDrawable(getResources().getDrawable(R
                         .drawable.call_number_image));
-                //权限检查
-
 
             }
         }

@@ -31,12 +31,12 @@ import com.ainemo.sdk.otf.NemoSDKErrorCode;
 import com.ainemo.sdk.otf.NemoSDKListener;
 import com.ainemo.sdk.otf.VideoInfo;
 import com.google.gson.Gson;
-import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.bean.CallRecord;
 import com.victor.myclient.bean.DoctorImage;
 import com.victor.myclient.bean.PatientImageInfor;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.widget.CircleImageView;
@@ -92,7 +92,7 @@ public class VideoActivity extends BaseActivity {
         type = getIntent().getStringExtra("type");
         name = "无用户信息";
         super.onCreate(savedInstanceState);
-        InitEvent();
+        initEvent();
         initData();
     }
 
@@ -320,7 +320,7 @@ public class VideoActivity extends BaseActivity {
     }
 
 
-    private void InitEvent() {
+    private void initEvent() {
         switchcamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.api.UserApi;
 import com.victor.myclient.bean.OneKeyWarning;
-import com.victor.myclient.ui.adapters.BaojingInfoAdapter;
+import com.victor.myclient.ui.adapters.WarnningInfoAdapter;
 import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.MyActivityManager;
@@ -35,7 +35,7 @@ public class WarnningFragment extends BaseFragment {
 
     private static String PATIENTID = "patientId";
     private RecyclerView recyclerView;
-    private BaojingInfoAdapter adapter;
+    private WarnningInfoAdapter adapter;
     private RelativeLayout back;
     private TextView no_data;
     private String patientId = null;
@@ -80,7 +80,7 @@ public class WarnningFragment extends BaseFragment {
                 MyActivityManager.finishActivity(activity);
             }
         });
-        adapter = new BaojingInfoAdapter(activity);
+        adapter = new WarnningInfoAdapter(activity);
         recyclerView.setAdapter(adapter);
     }
 

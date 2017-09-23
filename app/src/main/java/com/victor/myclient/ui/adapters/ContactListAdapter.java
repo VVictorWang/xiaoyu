@@ -25,12 +25,18 @@ import demo.animen.com.xiaoyutask.R;
 public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.MyViewHoler> {
     private Context context;
     private RecyclerView recyclerView;
-    private List<SortModel> list = new ArrayList<>();
+    private List<SortModel> list ;
 
-    public ContactListAdapter(Context context, List<SortModel> list, RecyclerView recyclerView) {
+    public ContactListAdapter(Context context, RecyclerView recyclerView) {
         this.context = context;
-        this.list = list;
+        this.list = new ArrayList<>();
         this.recyclerView = recyclerView;
+    }
+
+    public void addItems(List<SortModel> sortModels) {
+        list.clear();
+        list.addAll(sortModels);
+        notifyDataSetChanged();
     }
 
     public void updateListView(List<SortModel> list) {

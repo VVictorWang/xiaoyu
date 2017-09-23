@@ -19,6 +19,7 @@ import com.victor.myclient.ui.activity.VideoActivity;
 import com.victor.myclient.widget.CircleImageView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,9 +35,15 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
     private List<CallRecord> callRecordList;
     private Context context;
 
-    public CallRecordAdapter(Context context, List<CallRecord> callRecordList) {
-        this.callRecordList = callRecordList;
+    public CallRecordAdapter(Context context) {
+        this.callRecordList = new ArrayList<>();
         this.context = context;
+    }
+
+    public void addItems(List<CallRecord> callRecords) {
+        callRecordList.clear();
+        callRecordList.addAll(callRecords);
+        notifyDataSetChanged();
     }
 
     public void onBindViewHolder(final ViewHolder holder, int position) {

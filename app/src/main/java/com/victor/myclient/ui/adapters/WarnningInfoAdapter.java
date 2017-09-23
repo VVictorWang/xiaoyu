@@ -18,11 +18,11 @@ import demo.animen.com.xiaoyutask.R;
  * Created by victor on 17-5-4.
  */
 
-public class BaojingInfoAdapter extends RecyclerView.Adapter<BaojingInfoAdapter.ViewHolder> {
+public class WarnningInfoAdapter extends RecyclerView.Adapter<WarnningInfoAdapter.ViewHolder> {
     private Context context;
     private List<OneKeyWarning> oneKeyWarnings;
 
-    public BaojingInfoAdapter(Context context) {
+    public WarnningInfoAdapter(Context context) {
         this.context = context;
         oneKeyWarnings = new ArrayList<>();
     }

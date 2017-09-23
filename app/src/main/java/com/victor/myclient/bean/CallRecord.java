@@ -24,16 +24,7 @@ public class CallRecord extends DataSupport {
     public CallRecord() {
     }
 
-    public CallRecord(String name, String telephoneNum, String xiaoyuId, int state, Date date,
-                      String during_time, String imageUrl) {
-        this.name = name;
-        this.telephoneNum = telephoneNum;
-        this.xiaoyuId = xiaoyuId;
-        this.state = state;
-        this.date = date;
-        this.during_time = during_time;
-        this.imageUrl = imageUrl;
-    }
+
 
     public String getHangUpTime() {
         return during_time;

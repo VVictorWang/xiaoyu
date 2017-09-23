@@ -1,10 +1,7 @@
 package com.victor.myclient.ui.fragments;
 
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,16 +14,17 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.bean.ContactListData;
 import com.victor.myclient.ui.activity.NewContactorActivity;
 import com.victor.myclient.ui.adapters.ContactListAdapter;
 import com.victor.myclient.ui.base.BaseFragment;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.utils.Utils;
 import com.victor.myclient.utils.sortlist.CharacterParser;
 import com.victor.myclient.utils.sortlist.PinyinComparator;
-import com.victor.myclient.widget.PingYinSideBar;
 import com.victor.myclient.utils.sortlist.SortModel;
 import com.victor.myclient.widget.ClearEditText;
+import com.victor.myclient.widget.PingYinSideBar;
 
 import org.litepal.crud.DataSupport;
 
@@ -35,32 +33,25 @@ import java.util.Collections;
 import java.util.List;
 
 import demo.animen.com.xiaoyutask.R;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by victor on 2017/4/24.
  */
 
 public class ContactListFragment extends BaseFragment {
-    private static final String TAG = "ContactListFragment";
     private RecyclerView sortView;
     private PingYinSideBar sideBar;
-    private TextView dialog;
+    private TextView textDialog;
     private ContactListAdapter adapter;
     private RelativeLayout back;
     private ClearEditText mClearEditText;
     private CharacterParser characterParser;
     private List<SortModel> SourceDateList;
     private PinyinComparator pinyinComparator;
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0x123) {
-                initData();
-            } else if (msg.what == 0x124) {
-//                Utils.showShortToast(activity, "没有数据");
-            }
-        }
-    };
     private RecyclerView.LayoutManager layoutManager;
     private TextView add_new;
 
@@ -73,7 +64,7 @@ public class ContactListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        new ConstactAsyncTask().execute(0);
+        getInfo();
     }
 
     @Override
@@ -82,36 +73,35 @@ public class ContactListFragment extends BaseFragment {
         activity = getActivity();
         characterParser = CharacterParser.getInstance();
         pinyinComparator = new PinyinComparator();
-        new ConstactAsyncTask().execute(0);
-
+        getInfo();
     }
 
     @Override
     protected void initView() {
         sideBar = (PingYinSideBar) rootView.findViewById(R.id.sidrbar);
-        dialog = (TextView) rootView.findViewById(R.id.dialog);
+        textDialog = (TextView) rootView.findViewById(R.id.dialog);
 
-        sideBar.setTextView(dialog);
+        sideBar.setTextView(textDialog);
         add_new = (TextView) rootView.findViewById(R.id.add_new_contact);
         back = (RelativeLayout) rootView.findViewById(R.id.back_to_main_contact_list);
         sortView = (RecyclerView) rootView.findViewById(R.id.sortlist);
         layoutManager = new LinearLayoutManager(activity);
         sortView.setLayoutManager(layoutManager);
+        adapter = new ContactListAdapter(activity, sortView);
+        sortView.setAdapter(adapter);
 
         mClearEditText = (ClearEditText) rootView
                 .findViewById(R.id.filter_edit);
         // 实例化汉字转拼音类
-        sideBar.setTextView(dialog);
+        sideBar.setTextView(textDialog);
         // 设置右侧触摸监听
-        sideBar.setOnTouchingLetterChangedListener(new PingYinSideBar.OnTouchingLetterChangedListener() {
+        sideBar.setOnTouchingLetterChangedListener(new PingYinSideBar
+                .OnTouchingLetterChangedListener() {
 
             @SuppressLint("NewApi")
             @Override
             public void onTouchingLetterChanged(String s) {
                 // 该字母首次出现的位置
-
-//                if (adapter.getItemCount()) {
-//                }
                 if (adapter != null) {
                     int position = adapter.getPositionForSection(s.charAt(0));
                     if (position != -1) {
@@ -128,6 +118,25 @@ public class ContactListFragment extends BaseFragment {
             public void onFocusChange(View arg0, boolean arg1) {
                 mClearEditText.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 
+            }
+        });
+        // 根据输入框输入值的改变来过滤搜索
+        mClearEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                // 当输入框里面的值为空，更新为原来的列表，否则为过滤数据列表
+                filterData(s.toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
         initEvent();
@@ -178,32 +187,8 @@ public class ContactListFragment extends BaseFragment {
         helper.attachToRecyclerView(sortView);
     }
 
-    private void initData() {
-        adapter = new ContactListAdapter(activity, SourceDateList, sortView);
-        sortView.setAdapter(adapter);
-        // 根据输入框输入值的改变来过滤搜索
-        mClearEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                // 当输入框里面的值为空，更新为原来的列表，否则为过滤数据列表
-                filterData(s.toString());
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-    }
-
     /**
-     * 为ListView填充数据
+     * 为RecyclerView填充数据
      */
     private List<SortModel> filledData(String[] date, String[] numbers) {
         List<SortModel> mSortList = new ArrayList<SortModel>();
@@ -230,8 +215,6 @@ public class ContactListFragment extends BaseFragment {
 
     /**
      * 根据输入框中的值来过滤数据并更新recyclerview
-     *
-     * @param filterStr
      */
     private void filterData(String filterStr) {
         List<SortModel> filterDateList = new ArrayList<SortModel>();
@@ -254,39 +237,41 @@ public class ContactListFragment extends BaseFragment {
         adapter.updateListView(filterDateList);
     }
 
-    private class ConstactAsyncTask extends AsyncTask<Integer, Integer, Integer> {
+    private void getInfo() {
+        Observable.from(DataSupport.findAll(ContactListData.class)).observeOn(AndroidSchedulers
+                .mainThread())
+                .subscribeOn(Schedulers.io())
+                .toList()
+                .subscribe(new Observer<List<ContactListData>>() {
+                    @Override
+                    public void onCompleted() {
 
-        @Override
-        protected Integer doInBackground(Integer... arg0) {
-            if (DataSupport.isExist(ContactListData.class)) {
-                List<ContactListData> contactListDatas = DataSupport.findAll(ContactListData.class);
-                List<String> names = new ArrayList<>();
-                List<String> numbers = new ArrayList<>();
-                for (ContactListData contactListData : contactListDatas) {
-                    names.add(contactListData.getName());
-                    numbers.add(contactListData.getNumber());
-                }
-                String[] names_list = new String[]{};
-                String[] numbers_list = new String[]{};
-                numbers_list = numbers.toArray(numbers_list);
-                names_list = names.toArray(names_list);
-                SourceDateList = filledData(names_list, numbers_list);
-                // 根据a-z进行排序源数据
-                Collections.sort(SourceDateList, pinyinComparator);
-                handler.sendEmptyMessage(0x123);
-            } else
-                handler.sendEmptyMessage(0x124);
-            return 1;
-        }
+                    }
 
-        @Override
-        protected void onPostExecute(Integer result) {
-            super.onPostExecute(result);
-        }
+                    @Override
+                    public void onError(Throwable e) {
+                        Utils.showShortToast(activity, "发生错误");
+                    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+                    @Override
+                    public void onNext(List<ContactListData> contactListDatas) {
+                        List<String> names = new ArrayList<>();
+                        List<String> numbers = new ArrayList<>();
+                        for (ContactListData contactListData : contactListDatas) {
+                            names.add(contactListData.getName());
+                            numbers.add(contactListData.getNumber());
+                        }
+                        String[] names_list = new String[]{};
+                        String[] numbers_list = new String[]{};
+                        numbers_list = numbers.toArray(numbers_list);
+                        names_list = names.toArray(names_list);
+                        SourceDateList = filledData(names_list, numbers_list);
+                        // 根据a-z进行排序源数据
+                        Collections.sort(SourceDateList, pinyinComparator);
+                        adapter.addItems(SourceDateList);
+                    }
+                });
     }
+
+
 }

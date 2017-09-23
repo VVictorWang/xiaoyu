@@ -12,7 +12,6 @@ public class GlobalData {
     public static String User_ID = "User_ID";
     public static String USer_email = "email";
     public static String PATIENT_ID = "patient_id";
-    public static String DOOR_STATUS = "door_status";
     public static String FAMILY_IMage = "family_image";
     public static String ECLIPSE_TIME = "eclipse_time";
     public static String BASE_URL = "http://139.196.40.97/OSAdmin-master/";
@@ -21,14 +20,8 @@ public class GlobalData {
     public static String CLIENT_ID = "clientId";
 
 
-
-
-
     public static String GET_PATIENT_FAMILY_IMAGE =
             "http://139.196.40.97/upload/patientfamilyimage/";
-    public static String GET_ACTIVITIES = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
-            "/getActivities" +
-            ".php?patientId=";
 
 
     public static String GET_CALLING_IMAGE =
