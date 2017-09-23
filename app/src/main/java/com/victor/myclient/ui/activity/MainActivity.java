@@ -17,7 +17,6 @@ import com.ainemo.sdk.otf.ConnectNemoCallback;
 import com.ainemo.sdk.otf.NemoSDK;
 import com.bumptech.glide.Glide;
 import com.igexin.sdk.PushManager;
-import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.bean.UserInfor;
 import com.victor.myclient.service.MyIntentService;
 import com.victor.myclient.service.MyPushService;
@@ -27,6 +26,7 @@ import com.victor.myclient.ui.contract.MainContract;
 import com.victor.myclient.ui.presenter.MainPresenter;
 import com.victor.myclient.utils.CheckUtils;
 import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.widget.CircleImageView;
@@ -218,7 +218,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         handler.sendEmptyMessage(0x126);
                     }
                 }, 50);
-                MyActivityManager.startActivity(getActivity(), JujiaActivity.class);
+                Intent intent1 = new Intent(getActivity(), JujiaActivity.class);
+                if (!CheckUtils.isNull(userInfor)) {
+                    intent1.putExtra("id", userInfor.getPatientId());
+                }
+                MyActivityManager.startActivity(getActivity(), intent1);
                 break;
             case R.id.call_others:
                 handler.sendEmptyMessage(0x123);
@@ -238,11 +242,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         handler.sendEmptyMessage(0x130);
                     }
                 }, 50);
-                Intent intent1 = new Intent(getActivity(), SettingActivity.class);
+                Intent intent3 = new Intent(getActivity(), SettingActivity.class);
                 if (!CheckUtils.isNull(userInfor)) {
-                    intent1.putExtra("email", userInfor.getEmail());
+                    intent3.putExtra("email", userInfor.getEmail());
                 }
-                MyActivityManager.startActivity(getActivity(), intent1);
+                MyActivityManager.startActivity(getActivity(), intent3);
                 break;
             case R.id.services:
                 handler.sendEmptyMessage(0x131);

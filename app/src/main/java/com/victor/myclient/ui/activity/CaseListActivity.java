@@ -7,11 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.victor.myclient.utils.MyActivityManager;
+import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.api.UserApi;
 import com.victor.myclient.bean.CaseInfor;
 import com.victor.myclient.ui.adapters.CaseAdapter;
 import com.victor.myclient.ui.base.BaseActivity;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.utils.RxUtil;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.widget.CustomLayoutManager;
 
@@ -22,8 +24,6 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -86,26 +86,13 @@ public class CaseListActivity extends BaseActivity {
     private void getInfo() {
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
+        String key = Utils.createAcacheKey("get-cases", patientId);
         Observable<List<CaseInfor>> observable = UserApi.getInstance().getCaseInfo(Integer
-                .valueOf(patientId));
-        mSubscription = observable.observeOn(AndroidSchedulers.mainThread())
+                .valueOf(patientId)).compose(RxUtil.<List<CaseInfor>>rxCacheBeanHelper(key));
+        mSubscription = Observable.concat(RxUtil.rxCreateDiskObservable(key, new TypeToken<List<CaseInfor>>() {
+        }.getType()), observable)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .doOnNext(new Action1<List<CaseInfor>>() {
-                    @Override
-                    public void call(List<CaseInfor> caseInfors) {
-                        Observable.from(caseInfors).subscribeOn(Schedulers.io())
-                                .map(new Func1<CaseInfor, Void>() {
-
-                                    @Override
-                                    public Void call(CaseInfor caseInfor) {
-                                        if (!caseInfor.isSaved()) {
-                                            caseInfor.save();
-                                        }
-                                        return null;
-                                    }
-                                }).subscribe();
-                    }
-                })
                 .subscribe(new Observer<List<CaseInfor>>() {
                     @Override
                     public void onCompleted() {
@@ -122,6 +109,40 @@ public class CaseListActivity extends BaseActivity {
                         adapter.addItems(caseInfors);
                     }
                 });
+//        mSubscription = observable.observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .doOnNext(new Action1<List<CaseInfor>>() {
+//                    @Override
+//                    public void call(List<CaseInfor> caseInfors) {
+//                        Observable.from(caseInfors).subscribeOn(Schedulers.io())
+//                                .map(new Func1<CaseInfor, Void>() {
+//
+//                                    @Override
+//                                    public Void call(CaseInfor caseInfor) {
+//                                        if (!caseInfor.isSaved()) {
+//                                            caseInfor.save();
+//                                        }
+//                                        return null;
+//                                    }
+//                                }).subscribe();
+//                    }
+//                })
+//                .subscribe(new Observer<List<CaseInfor>>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        progressDialog.dismiss();
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Utils.showShortToast(getActivity(), "获取信息失败");
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<CaseInfor> caseInfors) {
+//                        adapter.addItems(caseInfors);
+//                    }
+//                });
 
     }
 

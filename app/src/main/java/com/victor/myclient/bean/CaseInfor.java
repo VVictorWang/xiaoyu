@@ -8,7 +8,7 @@ import org.litepal.crud.DataSupport;
  * Created by victor on 17-4-30.
  */
 
-public class CaseInfor extends DataSupport {
+public class CaseInfor {
 
     /**
      * id : 1

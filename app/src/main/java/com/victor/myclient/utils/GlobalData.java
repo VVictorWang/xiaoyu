@@ -21,9 +21,7 @@ public class GlobalData {
     public static String CLIENT_ID = "clientId";
 
 
-    public static String GET_HOME_INFOR = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
-            "/homeinfo" +
-            ".php?patientId=";
+
 
 
     public static String GET_PATIENT_FAMILY_IMAGE =
@@ -31,12 +29,8 @@ public class GlobalData {
     public static String GET_ACTIVITIES = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
             "/getActivities" +
             ".php?patientId=";
-    public static String GET_ROOM_STATUS = "http://139.196.40.97/OSAdmin-master/uploads/interface" +
-            "/doorinfo" +
-            ".php?patientId=";
-    public static String GET_ONEKEY_WARNING =
-            "http://139.196.40.97/OSAdmin-master/uploads/interface" +
-            "/getOnekeyWaring.php?patientId=";
+
+
     public static String GET_CALLING_IMAGE =
             "http://139.196.40.97/OSAdmin-master/uploads/interface" +
             "/getCallingImage.php?xiaoyuNum=125";

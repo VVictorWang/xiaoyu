@@ -2,10 +2,10 @@ package com.victor.myclient.utils;
 
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.MyApplication;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import rx.Observable;
@@ -43,6 +43,23 @@ public class RxUtil {
         }).subscribeOn(Schedulers.io());
     }
 
+    public static <T> Observable rxCreateDiskObservable(final String key, final Type type) {
+        return Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                String json = ACache.get(MyApplication.getInstance()).getAsString(key);
+                if (!CheckUtils.isEmpty(json)) {
+                    subscriber.onNext(json);
+                }
+                subscriber.onCompleted();
+            }
+        }).map(new Func1<String, T>() {
+            @Override
+            public T call(String s) {
+                return new Gson().fromJson(s, type);
+            }
+        }).subscribeOn(Schedulers.io());
+    }
 
 
     public static <T> Observable.Transformer<T, T> rxCacheListHelper(final String key) {
@@ -104,7 +121,7 @@ public class RxUtil {
                                     public void call() {
                                         LogUtils.d("get data from network finish ,start cache...");
                                         ACache.get(MyApplication.getInstance())
-                                                .put(key, new Gson().toJson(data, data.getClass()));
+                                                .put(key, new Gson().toJson(data));
                                         LogUtils.d("cache finish");
                                     }
                                 });

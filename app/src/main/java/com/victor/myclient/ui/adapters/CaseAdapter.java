@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.victor.myclient.bean.CaseInfor;
 import com.victor.myclient.ui.activity.CaseDetailActivity;
+import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.widget.CircleImageView;
 
@@ -60,6 +61,7 @@ public class CaseAdapter extends RecyclerView.Adapter<CaseAdapter.ViewHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, CaseDetailActivity.class);
                 intent.putExtra("id", aCase.getId());
+                intent.putExtra(GlobalData.PATIENT_ID, Integer.valueOf(aCase.patientId));
                 context.startActivity(intent);
             }
         });

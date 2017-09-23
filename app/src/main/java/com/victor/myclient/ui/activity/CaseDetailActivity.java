@@ -9,16 +9,23 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.victor.myclient.utils.MyActivityManager;
+import com.google.gson.reflect.TypeToken;
 import com.victor.myclient.bean.CaseInfor;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyActivityManager;
+import com.victor.myclient.utils.RxUtil;
 import com.victor.myclient.utils.Utils;
 import com.victor.myclient.widget.CircleImageView;
 
-import org.litepal.crud.DataSupport;
+import java.util.List;
 
 import demo.animen.com.xiaoyutask.R;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 
 public class CaseDetailActivity extends BaseActivity {
@@ -33,12 +40,14 @@ public class CaseDetailActivity extends BaseActivity {
 
     private String doctor_id;
     private int id = 1;
+    private int patientId = -1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getIntent() != null) {
             id = getIntent().getIntExtra("id", 1);
+            patientId = getIntent().getIntExtra(GlobalData.PATIENT_ID, -1);
         }
         super.onCreate(savedInstanceState);
         initEvent();
@@ -103,11 +112,28 @@ public class CaseDetailActivity extends BaseActivity {
     }
 
     private void initData() {
-        if (DataSupport.isExist(CaseInfor.class)) {
-            CaseInfor caseInfor = DataSupport.find(CaseInfor.class, (long) id);
-            showData(caseInfor);
-        } else {
-            Utils.showShortToast(CaseDetailActivity.this, "没有数据");
-        }
+        String key = Utils.createAcacheKey("get-cases", patientId);
+        Observable observable = RxUtil.rxCreateDiskObservable(key, new
+                TypeToken<List<CaseInfor>>() {
+                }.getType());
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .map(new Func1<List<CaseInfor>, CaseInfor>() {
+                    @Override
+                    public CaseInfor call(List<CaseInfor> caseInfors) {
+                        for (CaseInfor caseInfor : caseInfors) {
+                            if (caseInfor.getId() == id) {
+                                return caseInfor;
+                            }
+                        }
+                        return null;
+                    }
+                })
+                .subscribe(new Action1<CaseInfor>() {
+                    @Override
+                    public void call(CaseInfor caseInfor) {
+                        showData(caseInfor);
+                    }
+                });
     }
 }

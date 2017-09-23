@@ -7,11 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.api.UserApi;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.CheckUtils;
 import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
 

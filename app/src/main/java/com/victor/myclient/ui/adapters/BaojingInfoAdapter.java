@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.victor.myclient.bean.OneKeyWarning;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import demo.animen.com.xiaoyutask.R;
@@ -21,9 +22,15 @@ public class BaojingInfoAdapter extends RecyclerView.Adapter<BaojingInfoAdapter.
     private Context context;
     private List<OneKeyWarning> oneKeyWarnings;
 
-    public BaojingInfoAdapter(Context context, List<OneKeyWarning> oneKeyWarnings) {
+    public BaojingInfoAdapter(Context context) {
         this.context = context;
-        this.oneKeyWarnings = oneKeyWarnings;
+        oneKeyWarnings = new ArrayList<>();
+    }
+
+    public void addItems(List<OneKeyWarning> list) {
+        oneKeyWarnings.clear();
+        oneKeyWarnings.addAll(list);
+        notifyDataSetChanged();
     }
 
     @Override
