@@ -10,9 +10,6 @@
         <mapping class="com.victor.myclient.bean.DoctorInfor"/>
         <mapping class="com.victor.myclient.bean.ContactListData"/>
         <mapping class="com.victor.myclient.bean.CallRecord"/>
-        <mapping class="com.victor.myclient.bean.HomeInfor"/>
-        <mapping class="com.victor.myclient.bean.UserAcitivityInfo"/>
-        <mapping class="com.victor.myclient.bean.OneKeyWarning"/>
         <mapping class="com.victor.myclient.bean.ServiceHistory"/>
     </list>
 </litepal>

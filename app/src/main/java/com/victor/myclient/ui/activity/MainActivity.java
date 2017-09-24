@@ -338,4 +338,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void setUserInfo(UserInfor myUserInfo) {
         userInfor = myUserInfo;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.unscibe();
+    }
 }

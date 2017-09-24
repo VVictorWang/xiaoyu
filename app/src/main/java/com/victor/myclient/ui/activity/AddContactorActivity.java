@@ -21,7 +21,7 @@ import demo.animen.com.xiaoyutask.R;
 
 
 //新建联系人Activity
-public class NewContactorActivity extends BaseActivity {
+public class AddContactorActivity extends BaseActivity {
     private RelativeLayout back;
     private Button finish;
     private TextInputEditText name;
@@ -47,7 +47,7 @@ public class NewContactorActivity extends BaseActivity {
 
     @Override
     protected Activity getActivity() {
-        return NewContactorActivity.this;
+        return AddContactorActivity.this;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class NewContactorActivity extends BaseActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyActivityManager.finishActivity(NewContactorActivity.this);
+                MyActivityManager.finishActivity(AddContactorActivity.this);
             }
         });
         finish.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +88,7 @@ public class NewContactorActivity extends BaseActivity {
                     contactListData.setNumber(number);
                     contactListData.setName(name_infor);
                     contactListData.save();
-                    MyActivityManager.finishActivity(NewContactorActivity.this);
+                    MyActivityManager.finishActivity(AddContactorActivity.this);
                 }
             }
 

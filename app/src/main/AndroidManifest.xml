@@ -107,7 +107,7 @@
             android:name="com.victor.myclient.ui.activity.DoctorActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.victor.myclient.ui.activity.NewContactorActivity"
+            android:name="com.victor.myclient.ui.activity.AddContactorActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.victor.myclient.ui.activity.VideoActivity"/>
         <activity android:name="com.victor.myclient.ui.activity.IncommingAcivity"/>

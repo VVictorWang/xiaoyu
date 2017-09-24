@@ -1,12 +1,10 @@
 package com.victor.myclient.bean;
 
-import org.litepal.crud.DataSupport;
-
 /**
  * Created by victor on 2017/5/31.
  */
 
-public class UserAcitivityInfo extends DataSupport {
+public class UserAcitivityInfo  {
     private String room;
     private String num;
 

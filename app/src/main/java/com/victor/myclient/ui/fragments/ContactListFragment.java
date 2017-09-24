@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.victor.myclient.bean.ContactListData;
-import com.victor.myclient.ui.activity.NewContactorActivity;
+import com.victor.myclient.ui.activity.AddContactorActivity;
 import com.victor.myclient.ui.adapters.ContactListAdapter;
 import com.victor.myclient.ui.base.BaseFragment;
 import com.victor.myclient.utils.MyActivityManager;
@@ -152,7 +152,7 @@ public class ContactListFragment extends BaseFragment {
         add_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyActivityManager.startActivity(activity, NewContactorActivity.class);
+                MyActivityManager.startActivity(activity, AddContactorActivity.class);
             }
         });
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {

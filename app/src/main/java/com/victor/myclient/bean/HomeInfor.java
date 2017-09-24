@@ -1,14 +1,12 @@
 package com.victor.myclient.bean;
 
-import org.litepal.crud.DataSupport;
-
 import java.util.List;
 
 /**
  * Created by victor on 17-5-16.
  */
 
-public class HomeInfor extends DataSupport {
+public class HomeInfor {
     /**
      * id：设备排序
      * model:设备类型 有以下几种 sensor_ht ： "温度传感器",

@@ -6,7 +6,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/my_background"
                 android:focusableInTouchMode="true"
-                tools:context="com.victor.myclient.ui.activity.NewContactorActivity">
+                tools:context="com.victor.myclient.ui.activity.AddContactorActivity">
 
     <RelativeLayout
         android:id="@+id/add_new_contact_toolbar"

@@ -4,6 +4,7 @@ import com.victor.myclient.MyApplication;
 import com.victor.myclient.api.UserApi;
 import com.victor.myclient.bean.UserInfor;
 import com.victor.myclient.ui.activity.SettingActivity;
+import com.victor.myclient.ui.base.RxPresenter;
 import com.victor.myclient.ui.contract.MainContract;
 import com.victor.myclient.utils.DataUtil;
 import com.victor.myclient.utils.GlobalData;
@@ -23,7 +24,8 @@ import rx.schedulers.Schedulers;
  * blog: www.victorwang.science                                            #
  */
 
-public class MainPresenter implements MainContract.Presenter, SettingActivity.OnAvatarChanged {
+public class MainPresenter extends RxPresenter implements MainContract.Presenter, SettingActivity
+        .OnAvatarChanged {
     private MainContract.View mView;
 
     public MainPresenter(MainContract.View view) {
@@ -68,6 +70,7 @@ public class MainPresenter implements MainContract.Presenter, SettingActivity.On
                         mView.startClientService();
                     }
                 });
+        addSubscribe(subscription);
     }
 
     @Override
@@ -96,5 +99,11 @@ public class MainPresenter implements MainContract.Presenter, SettingActivity.On
                         mView.showImage(GlobalData.GET_PATIENT_FAMILY_IMAGE + userInfor.image);
                     }
                 });
+        addSubscribe(subscription);
+    }
+
+    @Override
+    public void unscibe() {
+        unSubscribe();
     }
 }

@@ -1,12 +1,10 @@
 package com.victor.myclient.bean;
 
-import org.litepal.crud.DataSupport;
-
 /**
  * Created by victor on 2017/5/31.
  */
 
-public class OneKeyWarning extends DataSupport {
+public class OneKeyWarning {
     private String sid;
     private String add_date;
 
