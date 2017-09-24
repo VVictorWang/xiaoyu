@@ -113,8 +113,8 @@ public class CaseDetailActivity extends BaseActivity {
 
     private void initData() {
         String key = Utils.createAcacheKey("get-cases", patientId);
-        Observable observable = RxUtil.rxCreateDiskObservable(key, new
-                TypeToken<List<CaseInfor>>() {
+        Observable<List<CaseInfor>> observable = (Observable<List<CaseInfor>>) RxUtil
+                .rxCreateDiskObservable(key, new TypeToken<List<CaseInfor>>() {
                 }.getType());
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

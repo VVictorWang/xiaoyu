@@ -8,18 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 
-import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.api.UserApi;
 import com.victor.myclient.bean.UserInformation;
 import com.victor.myclient.ui.base.BaseActivity;
 import com.victor.myclient.utils.GlobalData;
+import com.victor.myclient.utils.MyActivityManager;
 import com.victor.myclient.utils.PrefUtils;
 import com.victor.myclient.utils.Utils;
 
 import demo.animen.com.xiaoyutask.R;
 import rx.Observable;
+import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 
@@ -108,17 +108,28 @@ public class RegisterLastActivity extends BaseActivity {
                 information.getEmail(), information.getPhone_number(), information.getSex());
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Action1<Integer>() {
+                .subscribe(new Observer<Integer>() {
                     @Override
-                    public void call(Integer integer) {
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Utils.showShortToast(getActivity(), "无网络或者发生错误");
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
                         String message;
                         switch (integer) {
                             case 1:
                                 message = "注册成功";
                                 PrefUtils.putValue(RegisterLastActivity.this, GlobalData.NAME,
                                         information.getUsername());
-                                MyActivityManager.startActivity(RegisterLastActivity.this, MainActivity
-                                        .class);
+                                MyActivityManager.startActivity(RegisterLastActivity.this,
+                                        MainActivity
+                                                .class);
                                 PrefUtils.putBooleanValue(RegisterLastActivity.this, GlobalData
                                         .Login_status, true);
                                 MyActivityManager.getInstance().popAllActivity();

@@ -7,6 +7,7 @@ import com.victor.myclient.bean.DoorInfor;
 import com.victor.myclient.bean.HomeInfor;
 import com.victor.myclient.bean.MessageResponse;
 import com.victor.myclient.bean.OneKeyWarning;
+import com.victor.myclient.bean.ServiceHistory;
 import com.victor.myclient.bean.UserAcitivityInfo;
 import com.victor.myclient.bean.UserInfor;
 import com.victor.myclient.utils.GlobalData;
@@ -149,5 +150,9 @@ public class UserApi {
 
     public Observable<List<UserAcitivityInfo>> getUserActivities(int patientId) {
         return mUserApiService.getUserActivities(patientId);
+    }
+
+    public Observable<List<ServiceHistory>> getSeachHistory(int patientId) {
+        return mUserApiService.getSearchHistory(patientId);
     }
 }

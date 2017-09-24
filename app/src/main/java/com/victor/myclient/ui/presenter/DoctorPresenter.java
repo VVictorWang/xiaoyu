@@ -12,7 +12,6 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -42,8 +41,9 @@ public class DoctorPresenter extends RxPresenter implements DoctorContract.Prese
             Observable<DoctorInfor> observable = UserApi.getInstance().getDoctorInfo(mView
                     .getDoctorId())
                     .compose(RxUtil.<DoctorInfor>rxCacheBeanHelper(key));
-            Subscription subscription = Observable.concat(RxUtil.rxCreateDiskObservable(key,
-                    DoctorInfor.class), observable)
+            Subscription subscription = Observable.concat((Observable<DoctorInfor>) RxUtil
+                    .rxCreateDiskObservable(key,
+                            DoctorInfor.class), observable)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(new Observer<DoctorInfor>() {
@@ -54,7 +54,7 @@ public class DoctorPresenter extends RxPresenter implements DoctorContract.Prese
 
                         @Override
                         public void onError(Throwable e) {
-
+                            mView.dimissDialog();
                         }
 
                         @Override
@@ -68,12 +68,22 @@ public class DoctorPresenter extends RxPresenter implements DoctorContract.Prese
             Observable<DoctorXiaoYu> doctorXiaoYuObservable = UserApi.getInstance()
                     .getDoctorXiaoyu(mView.getDoctorId())
                     .compose(RxUtil.<DoctorXiaoYu>rxCacheBeanHelper(xiaoYuKey));
-            Subscription subscription1 = Observable.concat(RxUtil.rxCreateDiskObservable
-                    (xiaoYuKey, DoctorXiaoYu.class), doctorXiaoYuObservable)
+            Subscription subscription1 = Observable.concat((Observable<DoctorXiaoYu>) RxUtil
+                    .rxCreateDiskObservable(xiaoYuKey, DoctorXiaoYu.class), doctorXiaoYuObservable)
                     .subscribeOn(Schedulers.io())
-                    .subscribe(new Action1<DoctorXiaoYu>() {
+                    .subscribe(new Observer<DoctorXiaoYu>() {
                         @Override
-                        public void call(DoctorXiaoYu doctorXiaoYu) {
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onNext(DoctorXiaoYu doctorXiaoYu) {
                             mView.setDoctorXiaoYu(doctorXiaoYu);
                         }
                     });

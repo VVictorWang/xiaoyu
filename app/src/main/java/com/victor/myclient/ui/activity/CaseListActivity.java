@@ -89,7 +89,8 @@ public class CaseListActivity extends BaseActivity {
         String key = Utils.createAcacheKey("get-cases", patientId);
         Observable<List<CaseInfor>> observable = UserApi.getInstance().getCaseInfo(Integer
                 .valueOf(patientId)).compose(RxUtil.<List<CaseInfor>>rxCacheBeanHelper(key));
-        mSubscription = Observable.concat(RxUtil.rxCreateDiskObservable(key, new TypeToken<List<CaseInfor>>() {
+        mSubscription = Observable.concat((Observable<List<CaseInfor>>) RxUtil
+                .rxCreateDiskObservable(key, new TypeToken<List<CaseInfor>>() {
         }.getType()), observable)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -101,7 +102,7 @@ public class CaseListActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Utils.showShortToast(getActivity(), "获取信息失败");
+                        progressDialog.dismiss();
                     }
 
                     @Override
@@ -109,40 +110,6 @@ public class CaseListActivity extends BaseActivity {
                         adapter.addItems(caseInfors);
                     }
                 });
-//        mSubscription = observable.observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .doOnNext(new Action1<List<CaseInfor>>() {
-//                    @Override
-//                    public void call(List<CaseInfor> caseInfors) {
-//                        Observable.from(caseInfors).subscribeOn(Schedulers.io())
-//                                .map(new Func1<CaseInfor, Void>() {
-//
-//                                    @Override
-//                                    public Void call(CaseInfor caseInfor) {
-//                                        if (!caseInfor.isSaved()) {
-//                                            caseInfor.save();
-//                                        }
-//                                        return null;
-//                                    }
-//                                }).subscribe();
-//                    }
-//                })
-//                .subscribe(new Observer<List<CaseInfor>>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        progressDialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Utils.showShortToast(getActivity(), "获取信息失败");
-//                    }
-//
-//                    @Override
-//                    public void onNext(List<CaseInfor> caseInfors) {
-//                        adapter.addItems(caseInfors);
-//                    }
-//                });
 
     }
 

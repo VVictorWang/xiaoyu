@@ -25,6 +25,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private android.widget.EditText loginid;
     private android.widget.EditText loginpassword;
+    private Subscription mSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void getResponse(final String username, final String password) {
 
         Observable<Integer> observable = UserApi.getInstance().login(username, password);
-        Subscription subscription = observable.observeOn(AndroidSchedulers.mainThread())
+        mSubscription = observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Integer>() {
                     @Override
@@ -138,6 +139,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         }
                     }
                 });
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mSubscription != null) {
+            mSubscription.unsubscribe();
+        }
     }
 }

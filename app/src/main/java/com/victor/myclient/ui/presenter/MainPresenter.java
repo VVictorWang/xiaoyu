@@ -45,8 +45,8 @@ public class MainPresenter extends RxPresenter implements MainContract.Presenter
         String key = Utils.createAcacheKey("getFamilyInfo", name);
         Observable<UserInfor> userInforObservable = UserApi.getInstance().getUserInfo(name, mView
                 .getType()).compose(RxUtil.<UserInfor>rxCacheBeanHelper(key));
-        Subscription subscription = Observable.concat(RxUtil.rxCreateDiskObservable(key,
-                UserInfor.class), userInforObservable)
+        Subscription subscription = Observable.concat((Observable<UserInfor>) RxUtil
+                .rxCreateDiskObservable(key, UserInfor.class), userInforObservable)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<UserInfor>() {
@@ -57,7 +57,6 @@ public class MainPresenter extends RxPresenter implements MainContract.Presenter
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.showToast("错误");
                     }
 
                     @Override
@@ -79,8 +78,8 @@ public class MainPresenter extends RxPresenter implements MainContract.Presenter
         String key = Utils.createAcacheKey("getFamilyInfo", name);
         Observable<UserInfor> userInforObservable = UserApi.getInstance().getUserInfo(name,
                 "username").compose(RxUtil.<UserInfor>rxCacheBeanHelper(key));
-        Subscription subscription = Observable.concat(RxUtil.rxCreateDiskObservable(key,
-                UserInfor.class), userInforObservable)
+        Subscription subscription = Observable.concat((Observable<UserInfor>) RxUtil
+                .rxCreateDiskObservable(key, UserInfor.class), userInforObservable)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<UserInfor>() {

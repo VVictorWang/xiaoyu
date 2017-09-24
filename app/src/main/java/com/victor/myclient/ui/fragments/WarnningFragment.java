@@ -91,7 +91,8 @@ public class WarnningFragment extends BaseFragment {
                 .getOneKeyWarnning(Integer.valueOf(patientId != null ? patientId : PrefUtils
                         .getValue(activity, GlobalData.PATIENT_ID))).compose(RxUtil
                         .<List<OneKeyWarning>>rxCacheBeanHelper(key));
-        Observable.concat(oneKeyWarningObservable, RxUtil.rxCreateDiskObservable(key, new
+        Observable.concat(oneKeyWarningObservable, (Observable<List<OneKeyWarning>>) RxUtil
+                .rxCreateDiskObservable(key, new
                 TypeToken<List<OneKeyWarning>>() {
                 }.getType())).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -103,8 +104,6 @@ public class WarnningFragment extends BaseFragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        no_data.setVisibility(View.VISIBLE);
-                        recyclerView.setVisibility(View.INVISIBLE);
                         Utils.showShortToast(activity, "设备不存在");
                     }
 

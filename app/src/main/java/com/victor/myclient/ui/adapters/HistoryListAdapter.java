@@ -18,6 +18,7 @@ import com.victor.myclient.bean.ServiceHistory;
 import com.victor.myclient.utils.GlobalData;
 import com.victor.myclient.widget.CircleImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import demo.animen.com.xiaoyutask.R;
@@ -30,23 +31,25 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
     private List<ServiceHistory> list;
     private Context myContext;
-    private LayoutInflater inflater;
-
     private MyClickListener myClickListener;
 
-    public HistoryListAdapter(List<ServiceHistory> list, Context myContext, MyClickListener
+    public HistoryListAdapter(Context myContext, MyClickListener
             clickListener) {
-        this.list = list;
+        this.list = new ArrayList<>();
         this.myContext = myContext;
-
-        inflater = LayoutInflater.from(myContext);
         this.myClickListener = clickListener;
+    }
+
+    public void addItems(List<ServiceHistory> serviceHistories) {
+        list.clear();
+        list.addAll(serviceHistories);
+        notifyDataSetChanged();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.item_image_adapter, null);
+        View view = LayoutInflater.from(myContext).inflate(R.layout.item_image_adapter, null);
         ViewHolder holder = new ViewHolder(view);
         return holder;
 

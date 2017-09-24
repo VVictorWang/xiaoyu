@@ -7,6 +7,7 @@ import com.victor.myclient.bean.DoorInfor;
 import com.victor.myclient.bean.HomeInfor;
 import com.victor.myclient.bean.MessageResponse;
 import com.victor.myclient.bean.OneKeyWarning;
+import com.victor.myclient.bean.ServiceHistory;
 import com.victor.myclient.bean.UserAcitivityInfo;
 import com.victor.myclient.bean.UserInfor;
 
@@ -28,51 +29,52 @@ import rx.Observable;
 public interface UserApiService {
 
 
-    @GET("uploads/interface/getPatientFamily.php")
+    @GET("getPatientFamily.php")
     Observable<UserInfor> getUserInfo(@Query("FamilyName") String name, @Query("type") String type);
 
 
-    @GET("uploads/interface/patientcases.php")
+    @GET("patientcases.php")
     Observable<List<CaseInfor>> getCaseInfo(@Query("patientId") int patientId);
 
 
-    @POST("uploads/interface/regloginpost.php")
+    @POST("regloginpost.php")
     Observable<Integer> register(@Body RequestBody requestBody);
 
-    @POST("uploads/interface/regloginpost.php")
+    @POST("regloginpost.php")
     Observable<Integer> login(@Body RequestBody requestBody);
 
-    @GET("uploads/interface/doctorinfo.php")
+    @GET("doctorinfo.php")
     Observable<DoctorInfor> getDoctorInfo(@Query("doctorId") int doctorId);
 
-    @GET("uploads/interface/getDoctorXiaoyuNum.php")
+    @GET("getDoctorXiaoyuNum.php")
     Observable<DoctorXiaoYu> getDoctorXiaoyu(@Query("doctorId") int doctorId);
 
 
-    @POST("uploads/interface/uploadPatientFamilyImage.php")
+    @POST("uploadPatientFamilyImage.php")
     Observable<MessageResponse> uploadImage(@Body RequestBody requestBody);
 
-    @POST("uploads/interface/userinfomgr.php")
+    @POST("userinfomgr.php")
     Observable<Integer> changeEmail(@Body RequestBody body);
 
-    @POST("uploads/interface/userinfomgr.php")
+    @POST("userinfomgr.php")
     Observable<Integer> changePwd(@Body RequestBody body);
 
-    @GET("uploads/interface/homeinfo.php")
+    @GET("homeinfo.php")
     Observable<HomeInfor> getHomeInfo(@Query("patientId") int patientId, @Query("date") String
             date);
 
-    @GET("uploads/interface/doorinfo.php")
+    @GET("doorinfo.php")
     Observable<DoorInfor> getDoorInfo(@Query("patientId") int patientId);
 
-    @GET("uploads/interface/send_password_mail.php")
+    @GET("send_password_mail.php")
     Observable<MessageResponse> sendEmail(@Query("id") int id);
 
-    @GET("uploads/interface/getOnekeyWaring.php")
+    @GET("getOnekeyWaring.php")
     Observable<List<OneKeyWarning>> getOneKeyWarnning(@Query("patientId") int patientId);
 
-    @GET("uploads/interface/getActivities.php")
+    @GET("getActivities.php")
     Observable<List<UserAcitivityInfo>> getUserActivities(@Query("patientId") int patientId);
 
-
+    @GET("getServiceHistory.php")
+    Observable<List<ServiceHistory>> getSearchHistory(@Query("patientId") int patienId);
 }
