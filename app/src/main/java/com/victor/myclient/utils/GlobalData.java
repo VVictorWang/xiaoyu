@@ -22,8 +22,7 @@ public class GlobalData {
             "http://139.196.40.97/upload/patientfamilyimage/";
 
     public static String GET_CALLING_IMAGE =
-            "http://139.196.40.97/OSAdmin-master/uploads/interface" +
-                    "/getCallingImage.php?xiaoyuNum=125";
+            BASE_URL + "/getCallingImage.php?xiaoyuNum=125";
 
     public static String GET_PATIENT_IMAGE = "http://139.196.40.97/upload/patientimage/";
     public static String GET_DOCTOR_IMAGE = "http://139.196.40.97/upload/doctorimage/";

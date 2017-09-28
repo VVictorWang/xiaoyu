@@ -51,7 +51,7 @@ dependencies {
     compile 'com.getui:sdk:2.10.2.0'
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'io.reactivex:rxjava:1.3.2'
     compile 'io.reactivex:rxandroid:1.2.1'

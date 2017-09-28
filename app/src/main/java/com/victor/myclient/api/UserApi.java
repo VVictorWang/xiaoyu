@@ -155,4 +155,5 @@ public class UserApi {
     public Observable<List<ServiceHistory>> getSeachHistory(int patientId) {
         return mUserApiService.getSearchHistory(patientId);
     }
+
 }

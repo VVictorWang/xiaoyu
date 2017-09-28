@@ -17,7 +17,6 @@ import com.victor.myclient.utils.Utils;
  */
 
 public class PostClientIdService extends Service {
-    private static final String TAG = "PostClientIdService";
     Handler mHandler;
     HandlerThread mHandlerThread;
     private String clientId;

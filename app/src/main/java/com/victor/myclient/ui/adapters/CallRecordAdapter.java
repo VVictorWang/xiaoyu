@@ -70,13 +70,11 @@ public class CallRecordAdapter extends RecyclerView.Adapter<CallRecordAdapter.Vi
         }
         holder.number.setText(num);
         holder.telephoneNum = num;
-//    if (holder.date.getText() == null || holder.date.getText().equals("")) {
         String dateString = "";
         if (null != callRecord.getDate()) {
             Calendar mCalender = Calendar.getInstance();
             SimpleDateFormat formater = new SimpleDateFormat("MM月dd日");
             Date curDate = new Date(System.currentTimeMillis());
-            Date yesterday = curDate;
             mCalender.setTime(curDate);
             int day = mCalender.get(Calendar.DATE);
             mCalender.set(Calendar.DATE, day - 1);

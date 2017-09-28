@@ -32,10 +32,8 @@ public interface UserApiService {
     @GET("getPatientFamily.php")
     Observable<UserInfor> getUserInfo(@Query("FamilyName") String name, @Query("type") String type);
 
-
     @GET("patientcases.php")
     Observable<List<CaseInfor>> getCaseInfo(@Query("patientId") int patientId);
-
 
     @POST("regloginpost.php")
     Observable<Integer> register(@Body RequestBody requestBody);
@@ -77,4 +75,5 @@ public interface UserApiService {
 
     @GET("getServiceHistory.php")
     Observable<List<ServiceHistory>> getSearchHistory(@Query("patientId") int patienId);
+
 }

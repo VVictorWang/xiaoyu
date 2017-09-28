@@ -61,7 +61,6 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         holder.nameAndAddress.setText(serviceHistory.getName());
 
         holder.time.setText(serviceHistory.getServiceDatetime());
-        holder.filePath = serviceHistory.getServiceContent();
         Glide.with(myContext).
                 load(GlobalData.GET_IMAGE + serviceHistory.getServiceContent()).
                 error(R.drawable.image_load_error).
@@ -120,7 +119,6 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         private TextView time;
         private ProgressBar progressBar;
 
-        private String filePath;
 
         public ViewHolder(View itemView) {
             super(itemView);
